@@ -3,10 +3,9 @@
 import React, { useRef, useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import { Zap, ArrowRight, Sun, Moon, Menu, X } from "lucide-react"
+import { Zap, ArrowRight, Sun, Moon, X } from "lucide-react"
 import { useTheme } from "next-themes"
 
-/* ─── tokens ────────────────────────────────────────────── */
 const F = "var(--font-montserrat,'Montserrat',sans-serif)"
 
 const LINKS = [
@@ -16,37 +15,24 @@ const LINKS = [
   { label: "Testimonials", href: "#testimonials" },
 ]
 
-/* ═══════════════════════════════════════════════════════════
-   21st.dev · abdulali254/nav-header — sliding pill mechanic
-═══════════════════════════════════════════════════════════ */
+/* ─── Sliding pill tab ──────────────────────────────────── */
 type Pos = { left: number; width: number; opacity: number }
 
-function Tab({
-  href, children, setPos,
-}: {
-  href: string
-  children: React.ReactNode
-  setPos: (p: Pos) => void
+function Tab({ href, children, setPos }: {
+  href: string; children: React.ReactNode; setPos: (p: Pos) => void
 }) {
   const ref = useRef<HTMLLIElement>(null)
-
   return (
-    <li
-      ref={ref}
-      onMouseEnter={() => {
-        if (!ref.current) return
-        const { width } = ref.current.getBoundingClientRect()
-        setPos({ width, opacity: 1, left: ref.current.offsetLeft })
-      }}
-      className="relative z-10 select-none"
-    >
-      <a
-        href={href}
-        style={{ fontFamily: F, color: "rgba(255,255,255,0.52)", fontSize: 13, fontWeight: 500, transition: "color .15s" }}
-        className="block px-4 py-2 whitespace-nowrap hover:text-white"
+    <li ref={ref} onMouseEnter={() => {
+      if (!ref.current) return
+      const { width } = ref.current.getBoundingClientRect()
+      setPos({ width, opacity: 1, left: ref.current.offsetLeft })
+    }} className="relative z-10 select-none">
+      <a href={href}
+        style={{ fontFamily: F, color: "rgba(255,255,255,0.5)", fontSize: 13, fontWeight: 500 }}
+        className="block px-4 py-2 whitespace-nowrap transition-colors duration-150"
         onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,.92)")}
-        onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,.52)")}
-      >
+        onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,.5)")}>
         {children}
       </a>
     </li>
@@ -55,180 +41,156 @@ function Tab({
 
 function PillNav() {
   const [pos, setPos] = useState<Pos>({ left: 0, width: 0, opacity: 0 })
-
   return (
-    /* exact pattern from 21st.dev — relative ul, w-fit, rounded-full, border, p-1 */
-    <ul
-      className="relative hidden md:flex w-fit items-center rounded-full p-1"
-      style={{ border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)" }}
-      onMouseLeave={() => setPos(p => ({ ...p, opacity: 0 }))}
-    >
-      {LINKS.map(l => (
-        <Tab key={l.href} href={l.href} setPos={setPos}>{l.label}</Tab>
-      ))}
-
-      {/* sliding cursor */}
-      <motion.li
-        animate={pos}
-        transition={{ type: "spring", stiffness: 420, damping: 36 }}
-        aria-hidden
-        className="absolute z-0 rounded-full pointer-events-none"
-        style={{ top: 4, bottom: 4, background: "rgba(255,255,255,0.11)", border: "1px solid rgba(255,255,255,0.15)" }}
-      />
+    <ul className="relative hidden md:flex w-fit items-center rounded-full p-1"
+      style={{ border: "1px solid rgba(255,255,255,0.09)", background: "rgba(255,255,255,0.03)" }}
+      onMouseLeave={() => setPos(p => ({ ...p, opacity: 0 }))}>
+      {LINKS.map(l => <Tab key={l.href} href={l.href} setPos={setPos}>{l.label}</Tab>)}
+      <motion.li animate={pos} transition={{ type: "spring", stiffness: 400, damping: 34 }}
+        aria-hidden className="absolute z-0 rounded-full pointer-events-none"
+        style={{ top: 4, bottom: 4, background: "rgba(255,255,255,0.09)", border: "1px solid rgba(255,255,255,0.13)" }} />
     </ul>
   )
 }
 
 /* ─── Theme toggle ──────────────────────────────────────── */
-function ThemeBtn() {
+function ThemeBtn({ size = 32 }: { size?: number }) {
   const { resolvedTheme, setTheme } = useTheme()
   const [ok, setOk] = useState(false)
   useEffect(() => setOk(true), [])
 
-  const base = "w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-150 hover:scale-110 active:scale-95"
-  const style = { background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)" } as React.CSSProperties
-
-  if (!ok) return <div className={base} style={style} />
+  const s = { width: size, height: size, borderRadius: 999, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.06)", flexShrink: 0 } as React.CSSProperties
+  if (!ok) return <div style={s} />
 
   const dark = resolvedTheme === "dark"
   return (
-    <button onClick={() => setTheme(dark ? "light" : "dark")}
-      aria-label="Toggle theme" className={base} style={style}>
+    <button onClick={() => setTheme(dark ? "light" : "dark")} aria-label="Toggle theme"
+      className="relative flex items-center justify-center transition-opacity duration-150 hover:opacity-80"
+      style={s}>
       <AnimatePresence mode="wait" initial={false}>
         <motion.span key={dark ? "sun" : "moon"}
-          initial={{ opacity: 0, y: 6, scale: .6 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: .6 }}
-          transition={{ duration: .18, ease: [.22,1,.36,1] }}
+          initial={{ opacity: 0, scale: 0.4, rotate: -45 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          exit={{ opacity: 0, scale: 0.4, rotate: 45 }}
+          transition={{ duration: .16 }}
           className="absolute flex items-center justify-center">
-          {dark ? <Sun size={14} className="text-amber-300" /> : <Moon size={14} className="text-blue-300" />}
+          {dark
+            ? <Sun size={13} className="text-amber-300" />
+            : <Moon size={13} style={{ color: "#60a5fa" }} />}
         </motion.span>
       </AnimatePresence>
     </button>
   )
 }
 
-/* ─── Hamburger ─────────────────────────────────────────── */
-function Burger({ open, toggle }: { open: boolean; toggle(): void }) {
-  return (
-    <button onClick={toggle} aria-label={open ? "Close" : "Menu"}
-      className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded-xl shrink-0"
-      style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)" }}>
-      {(["t","m","b"] as const).map(k => (
-        <motion.span key={k}
-          className="block h-[1.5px] rounded-full"
-          style={{ background: "rgba(255,255,255,0.9)", originX:.5, originY:.5,
-            ...(k === "m" ? { width: 11 } : { width: 16 }) }}
-          animate={
-            k === "t" ? (open ? { rotate:  45, y:  6.5, width: 16 } : { rotate: 0, y: 0, width: 16 }) :
-            k === "m" ? (open ? { opacity:  0, scaleX: 0 }          : { opacity: 1, scaleX: 1 })       :
-                        (open ? { rotate: -45, y: -6.5, width: 16 } : { rotate: 0, y: 0, width: 16 })
-          }
-          transition={k === "m" ? { duration:.16 } : { duration:.26, ease:[.22,1,.36,1] }}
-        />
-      ))}
-    </button>
-  )
-}
-
-/* ─── Mobile full-screen drawer ─────────────────────────── */
+/* ─── Mobile bottom-sheet drawer ───────────────────────── */
 function Drawer({ open, close }: { open: boolean; close(): void }) {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div key="drawer"
-          initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: .28, ease: [.16,1,.3,1] }}
-          className="fixed inset-0 z-[60] md:hidden flex flex-col overflow-hidden"
-          style={{ background: "#060606" }}>
+        <>
+          {/* backdrop */}
+          <motion.div key="bd" onClick={close}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: .22 }}
+            className="fixed inset-0 z-[58] md:hidden"
+            style={{ background: "rgba(0,0,0,0.65)", backdropFilter: "blur(6px)" }} />
 
-          {/* grid texture */}
-          <div aria-hidden className="absolute inset-0 pointer-events-none" style={{
-            backgroundImage: "radial-gradient(rgba(255,255,255,0.028) 1px,transparent 1px)",
-            backgroundSize: "28px 28px" }} />
-          {/* blue glow */}
-          <div aria-hidden className="absolute pointer-events-none" style={{
-            top:-180, left:"50%", transform:"translateX(-50%)",
-            width:640, height:440,
-            background:"radial-gradient(ellipse at top,rgba(0,56,255,0.22) 0%,transparent 65%)",
-            filter:"blur(56px)" }} />
+          {/* sheet */}
+          <motion.div key="sheet"
+            initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
+            transition={{ type: "spring", stiffness: 360, damping: 34, mass: 0.75 }}
+            className="fixed bottom-0 inset-x-0 z-[59] md:hidden"
+            style={{
+              borderRadius: "28px 28px 0 0",
+              background: "#080808",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderBottom: "none",
+              overflow: "hidden",
+            }}>
 
-          {/* top bar */}
-          <div className="relative z-10 flex items-center justify-between px-5 py-4 shrink-0"
-            style={{ borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
-            <Link href="/" onClick={close} className="flex items-center gap-2" style={{ textDecoration:"none" }}>
-              <div className="w-7 h-7 rounded-[9px] flex items-center justify-center"
-                style={{ background:"var(--brand)", boxShadow:"0 0 16px rgba(0,56,255,0.55)" }}>
-                <Zap className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
-              </div>
-              <span className="text-[15px] font-black" style={{ fontFamily:F, color:"#fff", letterSpacing:"-0.025em" }}>
-                Stealth<span style={{ color:"rgba(255,255,255,0.35)" }}>Connect</span>
-              </span>
-            </Link>
-            <div className="flex items-center gap-2">
-              <ThemeBtn />
-              <button onClick={close} aria-label="Close"
-                className="w-8 h-8 flex items-center justify-center rounded-xl"
-                style={{ background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.1)", color:"rgba(255,255,255,0.55)" }}>
-                <X size={15} />
-              </button>
+            {/* drag handle */}
+            <div className="flex justify-center pt-3 pb-2">
+              <div className="w-9 h-[3px] rounded-full" style={{ background: "rgba(255,255,255,0.18)" }} />
             </div>
-          </div>
 
-          {/* nav links */}
-          <nav className="relative z-10 flex-1 flex flex-col justify-center px-6 gap-0.5">
-            {LINKS.map((item, i) => (
-              <motion.a key={item.href} href={item.href} onClick={close}
-                className="group flex items-baseline gap-4 py-4"
-                style={{ borderBottom:"1px solid rgba(255,255,255,0.05)", textDecoration:"none" }}
-                initial={{ opacity:0, x:-20 }} animate={{ opacity:1, x:0 }}
-                transition={{ delay:.05 + i*.06, duration:.32, ease:[.22,1,.36,1] }}>
-                <span style={{ fontFamily:F, fontSize:10, fontWeight:700, letterSpacing:"0.1em",
-                  color:"rgba(0,56,255,0.65)", minWidth:20 }}>
-                  {String(i+1).padStart(2,"0")}
+            {/* header row */}
+            <div className="flex items-center justify-between px-5 py-3"
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              <Link href="/" onClick={close} className="flex items-center gap-2" style={{ textDecoration: "none" }}>
+                <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: "var(--brand)", boxShadow: "0 0 14px rgba(0,56,255,0.5)" }}>
+                  <Zap className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
+                </div>
+                <span className="text-[15px] font-black" style={{ fontFamily: F, color: "#fff", letterSpacing: "-0.03em" }}>
+                  Stealth<span style={{ color: "rgba(255,255,255,0.3)" }}>Connect</span>
                 </span>
-                <span className="text-[clamp(1.6rem,7vw,2.1rem)] font-bold leading-none transition-colors duration-150"
-                  style={{ fontFamily:F, color:"rgba(255,255,255,0.82)", letterSpacing:"-0.025em" }}
-                  onMouseEnter={e=>(e.currentTarget.style.color="#fff")}
-                  onMouseLeave={e=>(e.currentTarget.style.color="rgba(255,255,255,0.82)")}>
-                  {item.label}
-                </span>
-              </motion.a>
-            ))}
-          </nav>
+              </Link>
+              <div className="flex items-center gap-2">
+                <ThemeBtn />
+                <button onClick={close} aria-label="Close"
+                  className="w-8 h-8 flex items-center justify-center rounded-full"
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                  <X size={14} style={{ color: "rgba(255,255,255,0.6)" }} />
+                </button>
+              </div>
+            </div>
 
-          {/* footer CTAs */}
-          <motion.div className="relative z-10 px-5 pt-4 pb-10 flex flex-col gap-2.5 shrink-0"
-            style={{ borderTop:"1px solid rgba(255,255,255,0.06)" }}
-            initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
-            transition={{ delay:.28, duration:.28, ease:[.22,1,.36,1] }}>
-            <Link href="/signup" onClick={close}
-              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-white text-[14px] font-semibold"
-              style={{ background:"var(--brand)", fontFamily:F, textDecoration:"none",
-                boxShadow:"0 6px 24px rgba(0,56,255,0.45)" }}>
-              Get Started Free <ArrowRight size={15} strokeWidth={2.5} />
-            </Link>
-            <Link href="/login" onClick={close}
-              className="flex items-center justify-center w-full py-3.5 rounded-xl text-[14px] font-medium"
-              style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.09)",
-                color:"rgba(255,255,255,0.55)", fontFamily:F, textDecoration:"none" }}>
-              Sign In
-            </Link>
+            {/* nav links */}
+            <nav className="px-4 py-3 space-y-0.5">
+              {LINKS.map((item, i) => (
+                <motion.a key={item.href} href={item.href} onClick={close}
+                  className="flex items-center justify-between px-4 py-3.5 rounded-2xl group"
+                  style={{ textDecoration: "none", background: "transparent" }}
+                  initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: .04 + i * .04, duration: .22, ease: [.22, 1, .36, 1] }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "transparent"}>
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] font-bold tabular-nums" style={{ color: "rgba(0,56,255,0.7)", fontFamily: F }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[15px] font-600" style={{ fontFamily: F, color: "rgba(255,255,255,0.82)", letterSpacing: "-0.01em" }}>
+                      {item.label}
+                    </span>
+                  </div>
+                  <ArrowRight size={13} style={{ color: "rgba(255,255,255,0.2)" }} />
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* CTAs */}
+            <motion.div className="px-5 pt-3 pb-10 space-y-2.5"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: .2, duration: .24 }}>
+              <Link href="/signup" onClick={close}
+                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full text-[14px] font-semibold text-white"
+                style={{ background: "var(--brand)", fontFamily: F, textDecoration: "none", boxShadow: "0 6px 28px rgba(0,56,255,0.45)" }}>
+                Get Started Free <ArrowRight size={14} strokeWidth={2.5} />
+              </Link>
+              <Link href="/login" onClick={close}
+                className="flex items-center justify-center w-full py-3.5 rounded-full text-[14px] font-medium"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)", fontFamily: F, textDecoration: "none" }}>
+                Sign In
+              </Link>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </>
       )}
     </AnimatePresence>
   )
 }
 
 /* ═══════════════════════════════════════════════════════════
-   Navbar — 1fr [logo] | auto [pill nav] | 1fr [actions]
-   guarantees pill is always geometrically centred
+   Main Navbar — full capsule shape
 ═══════════════════════════════════════════════════════════ */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [open,     setOpen]     = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20)
+    const fn = () => setScrolled(window.scrollY > 24)
     window.addEventListener("scroll", fn, { passive: true })
     fn()
     return () => window.removeEventListener("scroll", fn)
@@ -241,71 +203,87 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 px-4 pt-3">
+      <header className="fixed top-0 inset-x-0 z-50 px-4 pt-4">
         <motion.nav
           animate={{
-            boxShadow: scrolled ? "0 8px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06)" : "0 2px 20px rgba(0,0,0,0.3)",
-            borderColor: scrolled ? "rgba(255,255,255,0.11)" : "rgba(255,255,255,0.07)",
+            boxShadow: scrolled
+              ? "0 8px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07)"
+              : "0 2px 16px rgba(0,0,0,0.2)",
+            borderColor: scrolled ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.07)",
           }}
-          transition={{ duration:.3, ease:[.16,1,.3,1] }}
-          className="mx-auto h-[54px] px-4"
+          transition={{ duration: .28 }}
+          className="mx-auto h-[52px] px-3"
           style={{
-            maxWidth: 1180,
-            borderRadius: 30,
+            maxWidth: 1100,
+            borderRadius: 999,
             border: "1px solid rgba(255,255,255,0.07)",
-            background: "rgba(7,7,7,0.85)",
+            background: "rgba(6,6,6,0.88)",
             backdropFilter: "blur(24px) saturate(160%)",
             WebkitBackdropFilter: "blur(24px) saturate(160%)",
-            /* 3-column grid: logo | nav | actions */
             display: "grid",
             gridTemplateColumns: "1fr auto 1fr",
             alignItems: "center",
-            gap: 16,
-          }}
-        >
-          {/* ── LEFT — Logo ──────────────────────────────── */}
-          <Link href="/" className="flex items-center gap-2 min-w-0" style={{ textDecoration:"none" }}>
-            <motion.div whileHover={{ scale:.9 }} whileTap={{ scale:.85 }}
-              className="w-[30px] h-[30px] rounded-[9px] flex items-center justify-center shrink-0"
-              style={{ background:"var(--brand)", boxShadow:"0 0 18px rgba(0,56,255,0.55)" }}>
-              <Zap className="w-[15px] h-[15px] text-white" strokeWidth={2.5} />
+            gap: 8,
+          }}>
+
+          {/* LEFT — Logo */}
+          <Link href="/" className="flex items-center gap-2 pl-2 min-w-0" style={{ textDecoration: "none" }}>
+            <motion.div whileHover={{ scale: .88 }} whileTap={{ scale: .82 }}
+              className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
+              style={{ background: "var(--brand)", boxShadow: "0 0 16px rgba(0,56,255,0.48)" }}>
+              <Zap className="w-[13px] h-[13px] text-white" strokeWidth={2.5} />
             </motion.div>
-            <span className="text-[14.5px] font-black hidden sm:block truncate"
-              style={{ fontFamily:F, letterSpacing:"-0.025em" }}>
-              <span style={{ color:"#fff" }}>Stealth</span>
-              <span style={{ color:"rgba(255,255,255,0.35)" }}>Connect</span>
+            <span className="text-[14px] font-black hidden sm:block truncate"
+              style={{ fontFamily: F, letterSpacing: "-0.03em" }}>
+              <span style={{ color: "#fff" }}>Stealth</span>
+              <span style={{ color: "rgba(255,255,255,0.3)" }}>Connect</span>
             </span>
           </Link>
 
-          {/* ── CENTER — Sliding pill nav (21st.dev) ─────── */}
+          {/* CENTER — Sliding pill nav */}
           <PillNav />
 
-          {/* ── RIGHT — Actions ──────────────────────────── */}
-          <div className="flex items-center justify-end gap-1.5">
+          {/* RIGHT — Actions */}
+          <div className="flex items-center justify-end gap-1.5 pr-2">
 
             {/* desktop */}
             <div className="hidden md:flex items-center gap-1.5">
               <ThemeBtn />
 
-              <div className="w-px h-4 mx-1" style={{ background:"rgba(255,255,255,0.1)" }} />
+              <div className="w-px h-4 mx-1" style={{ background: "rgba(255,255,255,0.1)" }} />
 
               <a href="/login"
-                className="px-3.5 py-[7px] rounded-lg text-[13px] font-medium transition-all duration-150"
-                style={{ color:"rgba(255,255,255,0.52)", fontFamily:F, textDecoration:"none" }}
-                onMouseEnter={e=>{e.currentTarget.style.color="rgba(255,255,255,.9)";e.currentTarget.style.background="rgba(255,255,255,.06)"}}
-                onMouseLeave={e=>{e.currentTarget.style.color="rgba(255,255,255,.52)";e.currentTarget.style.background="transparent"}}>
+                className="px-4 py-[6px] rounded-full text-[13px] font-medium transition-all duration-150"
+                style={{ color: "rgba(255,255,255,0.5)", fontFamily: F, textDecoration: "none", border: "1px solid transparent" }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.color = "rgba(255,255,255,.9)"
+                  e.currentTarget.style.background = "rgba(255,255,255,.06)"
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.color = "rgba(255,255,255,.5)"
+                  e.currentTarget.style.background = "transparent"
+                  e.currentTarget.style.borderColor = "transparent"
+                }}>
                 Sign In
               </a>
 
-              <motion.div whileHover={{ scale:1.04 }} whileTap={{ scale:.97 }}>
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: .96 }}>
                 <Link href="/signup"
-                  className="flex items-center gap-1.5 px-4 py-[8px] rounded-lg text-[13px] font-semibold text-white"
-                  style={{ background:"var(--brand)", fontFamily:F, textDecoration:"none",
-                    boxShadow:"0 4px 16px rgba(0,56,255,0.5), 0 1px 3px rgba(0,56,255,0.3)" }}
-                  onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.background="#002fee";el.style.boxShadow="0 6px 24px rgba(0,56,255,0.65)"}}
-                  onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.background="var(--brand)";el.style.boxShadow="0 4px 16px rgba(0,56,255,0.5), 0 1px 3px rgba(0,56,255,0.3)"}}>
+                  className="flex items-center gap-1.5 px-4 py-[6px] rounded-full text-[13px] font-semibold text-white"
+                  style={{ background: "var(--brand)", fontFamily: F, textDecoration: "none", boxShadow: "0 4px 16px rgba(0,56,255,0.45)" }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.background = "#002fee"
+                    el.style.boxShadow = "0 6px 24px rgba(0,56,255,0.65)"
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.background = "var(--brand)"
+                    el.style.boxShadow = "0 4px 16px rgba(0,56,255,0.45)"
+                  }}>
                   Get Started
-                  <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+                  <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
                 </Link>
               </motion.div>
             </div>
@@ -313,7 +291,22 @@ export default function Navbar() {
             {/* mobile */}
             <div className="md:hidden flex items-center gap-2">
               <ThemeBtn />
-              <Burger open={open} toggle={() => setOpen(v => !v)} />
+              <button onClick={() => setOpen(v => !v)} aria-label={open ? "Close menu" : "Open menu"}
+                className="w-8 h-8 flex flex-col items-center justify-center gap-[5px] rounded-full"
+                style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                <motion.span className="block h-[1.5px] rounded-full"
+                  style={{ background: "rgba(255,255,255,0.85)", originX: .5, originY: .5, width: 15 }}
+                  animate={open ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: .22, ease: [.22, 1, .36, 1] }} />
+                <motion.span className="block h-[1.5px] rounded-full"
+                  style={{ background: "rgba(255,255,255,0.45)", width: 10 }}
+                  animate={open ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                  transition={{ duration: .14 }} />
+                <motion.span className="block h-[1.5px] rounded-full"
+                  style={{ background: "rgba(255,255,255,0.85)", originX: .5, originY: .5, width: 15 }}
+                  animate={open ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: .22, ease: [.22, 1, .36, 1] }} />
+              </button>
             </div>
           </div>
         </motion.nav>
