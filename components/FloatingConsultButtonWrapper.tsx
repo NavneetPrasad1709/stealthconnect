@@ -18,7 +18,7 @@ export function FloatingConsultButtonWrapper() {
       popupDescription="Paste any LinkedIn profile URL and get a verified email or phone number in 30 minutes. No subscription — pay only per result. First lookup is on us."
       ctaButtonText="Claim Free Lookup"
       ctaButtonAction={() => router.push("/signup")}
-      position={{ bottom: "5.5rem", right: "1.5rem" }}
+      position={{ bottom: "116px", right: "1.5rem" }}
     />
   );
 }
