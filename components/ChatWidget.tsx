@@ -137,10 +137,10 @@ export function ChatWidget() {
             animate={{ opacity: 1, scale: 1,    y: 0  }}
             exit={{    opacity: 0, scale: 0.92, y: 12 }}
             transition={{ type: "spring", stiffness: 400, damping: 36 }}
-            className="fixed bottom-[88px] right-4 sm:right-6 z-50 flex flex-col"
+            className="fixed bottom-[100px] right-4 sm:right-6 z-50 flex flex-col"
             style={{
-              width:        "min(400px, calc(100vw - 32px))",
-              height:       minimized ? "auto" : "min(580px, calc(100dvh - 120px))",
+              width:        "min(440px, calc(100vw - 32px))",
+              height:       minimized ? "auto" : "min(620px, calc(100dvh - 120px))",
               borderRadius: 20,
               background:   "var(--surface)",
               border:       "1px solid var(--border)",
@@ -425,7 +425,7 @@ export function ChatWidget() {
         onClick={() => { setOpen((v) => !v); setMinimized(false); }}
         whileHover={{ scale: 1.06 }}
         whileTap={{   scale: 0.94 }}
-        className="fixed bottom-5 right-4 sm:right-6 z-50 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"
+        className="fixed bottom-5 right-4 sm:right-6 z-50 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg"
         style={{
           background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
           boxShadow:  "0 8px 28px rgba(139,92,246,0.45), 0 2px 8px rgba(0,0,0,0.2)",
@@ -441,7 +441,7 @@ export function ChatWidget() {
               exit={{    rotate: 90,  opacity: 0, scale: 0.6 }}
               transition={{ duration: 0.18 }}
             >
-              <X className="w-5 h-5 text-white" strokeWidth={2.5} />
+              <X className="w-6 h-6 text-white" strokeWidth={2.5} />
             </motion.span>
           ) : (
             <motion.span
@@ -452,7 +452,7 @@ export function ChatWidget() {
               transition={{ duration: 0.18 }}
               className="relative"
             >
-              <MessageCircle className="w-6 h-6 text-white" strokeWidth={2} />
+              <MessageCircle className="w-7 h-7 text-white" strokeWidth={2} />
               {/* unread dot */}
               {!open && (
                 <span

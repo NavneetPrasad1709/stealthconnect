@@ -7,18 +7,18 @@ import { motion } from "framer-motion"
 const FONT = "var(--font-montserrat,'Montserrat',sans-serif)"
 
 const LOGOS = [
-  { id: "salesforce", name: "Salesforce", src: "https://logo.clearbit.com/salesforce.com"  },
-  { id: "hubspot",    name: "HubSpot",    src: "https://logo.clearbit.com/hubspot.com"     },
-  { id: "linkedin",   name: "LinkedIn",   src: "https://logo.clearbit.com/linkedin.com"    },
-  { id: "slack",      name: "Slack",      src: "https://logo.clearbit.com/slack.com"       },
-  { id: "zapier",     name: "Zapier",     src: "https://logo.clearbit.com/zapier.com"      },
-  { id: "outreach",   name: "Outreach",   src: "https://logo.clearbit.com/outreach.io"     },
-  { id: "apollo",     name: "Apollo",     src: "https://logo.clearbit.com/apollo.io"       },
-  { id: "pipedrive",  name: "Pipedrive",  src: "https://logo.clearbit.com/pipedrive.com"   },
-  { id: "notion",     name: "Notion",     src: "https://logo.clearbit.com/notion.so"       },
-  { id: "zoominfo",   name: "ZoomInfo",   src: "https://logo.clearbit.com/zoominfo.com"    },
-  { id: "gong",       name: "Gong",       src: "https://logo.clearbit.com/gong.io"         },
-  { id: "salesloft",  name: "Salesloft",  src: "https://logo.clearbit.com/salesloft.com"   },
+  { id: "salesforce", name: "Salesforce" },
+  { id: "hubspot",    name: "HubSpot"    },
+  { id: "linkedin",   name: "LinkedIn"   },
+  { id: "slack",      name: "Slack"      },
+  { id: "zapier",     name: "Zapier"     },
+  { id: "outreach",   name: "Outreach"   },
+  { id: "apollo",     name: "Apollo.io"  },
+  { id: "pipedrive",  name: "Pipedrive"  },
+  { id: "notion",     name: "Notion"     },
+  { id: "zoominfo",   name: "ZoomInfo"   },
+  { id: "gong",       name: "Gong"       },
+  { id: "salesloft",  name: "Salesloft"  },
 ]
 
 const STATS = [
@@ -117,16 +117,18 @@ export default function TrustedBy() {
                 className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6 xl:basis-1/7 pl-0 flex items-center justify-center"
               >
                 <div className="px-8 py-3 flex items-center justify-center">
-                  <img
-                    src={logo.src}
-                    alt={logo.name}
-                    height={28}
-                    className="h-7 w-auto object-contain transition-all duration-300
-                      grayscale opacity-[0.38] hover:grayscale-0 hover:opacity-75
-                      dark:grayscale-0 dark:brightness-0 dark:invert dark:opacity-[0.28]
-                      dark:hover:brightness-100 dark:hover:invert-0 dark:hover:grayscale-0 dark:hover:opacity-70"
-                    draggable={false}
-                  />
+                  <span
+                    className="whitespace-nowrap transition-opacity duration-300 opacity-[0.38] hover:opacity-70 select-none"
+                    style={{
+                      fontFamily:    FONT,
+                      fontSize:      15,
+                      fontWeight:    700,
+                      letterSpacing: "-0.02em",
+                      color:         "var(--c-heading)",
+                    }}
+                  >
+                    {logo.name}
+                  </span>
                 </div>
               </CarouselItem>
             ))}
