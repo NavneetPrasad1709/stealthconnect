@@ -432,3 +432,4 @@ These are by design (manual fulfillment model):
 ---
 
 *Built with Next.js 16, Supabase, PayPal, Groq, and Resend.*
+# stealthconnect
