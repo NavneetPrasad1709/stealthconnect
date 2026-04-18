@@ -1,159 +1,197 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, Zap, Clock, Globe, CreditCard, TrendingUp } from "lucide-react";
+import { ShieldCheck, Zap, Mail, Phone } from "lucide-react";
 
 const F = "var(--font-montserrat,'Montserrat',sans-serif)";
 
-const STATS = [
-  { value: "97.2%",  label: "Verified accuracy" },
-  { value: "< 30m",  label: "Avg. delivery"     },
-  { value: "4,200+", label: "Sales teams"        },
-];
-
-const FEATURES = [
-  { icon: Zap,         text: "Email + direct phone — not just email like competitors"  },
-  { icon: CreditCard,  text: "Pay per result — zero subscriptions or monthly fees"     },
-  { icon: Clock,       text: "LinkedIn URL → verified contact in under 30 minutes"     },
-  { icon: Globe,       text: "190+ countries covered, any industry, any seniority"      },
-  { icon: ShieldCheck, text: "97.2% accuracy guaranteed — full refund if we miss"       },
-  { icon: TrendingUp,  text: "Used by 4,200+ SDRs, AEs and outbound teams worldwide"   },
-];
-
-const COMPARED = [
-  { feature: "Direct phone numbers",  us: true,  them: false },
-  { feature: "Pay per result",        us: true,  them: false },
-  { feature: "< 30 min delivery",     us: true,  them: false },
-  { feature: "No subscription lock",  us: true,  them: false },
+const TESTIMONIALS = [
+  {
+    quote: "Closed two deals the same week. Nothing else comes close.",
+    name: "Sarah Chen",
+    role: "SDR · TechCorp",
+    initials: "SC",
+    color: "linear-gradient(135deg,#3b5bdb,#7048e8)",
+  },
+  {
+    quote: "Replaced three tools with this one. Accuracy is unmatched.",
+    name: "Marcus Johnson",
+    role: "AE · GrowthLabs",
+    initials: "MJ",
+    color: "linear-gradient(135deg,#0f766e,#0891b2)",
+  },
 ];
 
 export function AuthRightPanel() {
   return (
     <section
-      className="hidden md:flex flex-col h-full overflow-hidden relative"
-      style={{ background: "#03030d" }}
+      className="flex flex-col w-full h-full overflow-hidden relative"
+      style={{ background: "#04040f" }}
       aria-hidden="true"
     >
-      {/* ── Animated blobs ─────────────────────────────────── */}
+      {/* ── Animated background ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div style={{
-          position:"absolute", top:"-20%", left:"-10%",
-          width:600, height:600, borderRadius:"50%",
-          background:"radial-gradient(circle,rgba(0,56,255,0.28) 0%,transparent 70%)",
-          animation:"blob1 14s ease-in-out infinite",
-          filter:"blur(40px)",
+          position:"absolute", top:"-20%", left:"-15%",
+          width:"70%", paddingTop:"70%", borderRadius:"50%",
+          background:"radial-gradient(circle,rgba(0,56,255,0.22) 0%,transparent 70%)",
+          animation:"blob1 16s ease-in-out infinite", filter:"blur(48px)",
         }}/>
         <div style={{
-          position:"absolute", bottom:"-15%", right:"-10%",
-          width:500, height:500, borderRadius:"50%",
-          background:"radial-gradient(circle,rgba(99,102,241,0.22) 0%,transparent 70%)",
-          animation:"blob2 18s ease-in-out infinite",
-          filter:"blur(50px)",
+          position:"absolute", bottom:"-20%", right:"-10%",
+          width:"60%", paddingTop:"60%", borderRadius:"50%",
+          background:"radial-gradient(circle,rgba(99,102,241,0.18) 0%,transparent 70%)",
+          animation:"blob2 20s ease-in-out infinite", filter:"blur(56px)",
         }}/>
         <div style={{
-          position:"absolute", top:"40%", right:"20%",
-          width:300, height:300, borderRadius:"50%",
-          background:"radial-gradient(circle,rgba(204,255,0,0.08) 0%,transparent 70%)",
-          animation:"blob3 10s ease-in-out infinite",
-          filter:"blur(60px)",
+          position:"absolute", top:"35%", right:"5%",
+          width:"40%", paddingTop:"40%", borderRadius:"50%",
+          background:"radial-gradient(circle,rgba(204,255,0,0.06) 0%,transparent 70%)",
+          animation:"blob3 12s ease-in-out infinite", filter:"blur(64px)",
         }}/>
-        {/* grid overlay */}
         <div style={{
           position:"absolute", inset:0,
-          backgroundImage:"linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px)",
-          backgroundSize:"48px 48px",
+          backgroundImage:"linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px)",
+          backgroundSize:"52px 52px",
         }}/>
       </div>
 
-      {/* ── Content ────────────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col h-full px-10 py-12 gap-8">
+      {/* ── Content ── */}
+      <div className="relative z-10 flex flex-col justify-center h-full px-8 xl:px-12 py-10 gap-6">
 
         {/* Logo */}
-        <div className="flex items-center gap-2.5" style={{ animation:"floatUp .5s ease both" }}>
-          <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
-            style={{ background:"var(--brand)", boxShadow:"0 0 20px rgba(0,56,255,0.5)" }}>
-            <Zap className="w-4 h-4 text-white" strokeWidth={2.5}/>
+        <div className="flex items-center gap-2" style={{ animation:"floatUp .4s ease both" }}>
+          <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
+            style={{ background:"var(--brand)", boxShadow:"0 0 18px rgba(0,56,255,0.55)" }}>
+            <Zap className="w-3.5 h-3.5 text-white" strokeWidth={2.5}/>
           </div>
-          <span style={{ fontFamily:F, fontSize:15, fontWeight:800, color:"#fff", letterSpacing:"-0.02em" }}>
-            Stealth<span style={{ color:"rgba(255,255,255,0.3)" }}>Connect AI</span>
+          <span style={{ fontFamily:F, fontSize:14, fontWeight:800, color:"#fff", letterSpacing:"-0.02em" }}>
+            Stealth<span style={{ color:"rgba(255,255,255,0.28)" }}>Connect AI</span>
           </span>
         </div>
 
         {/* Headline */}
-        <div style={{ animation:"floatUp .55s .1s ease both" }}>
-          <p style={{ fontFamily:F, fontSize:11, fontWeight:700, letterSpacing:"0.16em", textTransform:"uppercase", color:"rgba(0,56,255,0.9)", marginBottom:10 }}>
-            Why StealthConnect AI?
-          </p>
-          <h2 style={{ fontFamily:F, fontSize:"clamp(1.6rem,2.5vw,2.2rem)", fontWeight:900, lineHeight:1.1, letterSpacing:"-0.03em", color:"#fff" }}>
+        <div style={{ animation:"floatUp .45s .06s ease both" }}>
+          <h2 style={{ fontFamily:F, fontSize:"clamp(1.5rem,2.2vw,2rem)", fontWeight:900, lineHeight:1.12, letterSpacing:"-0.03em", color:"#fff", margin:0 }}>
             Find anyone's contact<br/>
             <span style={{ color:"#CCFF00" }}>in under 30 minutes.</span>
           </h2>
-          <p style={{ fontFamily:F, fontSize:13.5, color:"rgba(255,255,255,0.45)", marginTop:10, lineHeight:1.65, maxWidth:380 }}>
-            Paste any LinkedIn URL. Get a verified email and direct phone number delivered fast — or you don't pay.
+          <p style={{ fontFamily:F, fontSize:13, color:"rgba(255,255,255,0.38)", marginTop:8, lineHeight:1.6, maxWidth:340 }}>
+            Paste a LinkedIn URL. Get verified email + direct phone — or you don't pay.
           </p>
         </div>
 
-        {/* Stats row */}
-        <div className="flex gap-0" style={{ animation:"floatUp .55s .18s ease both" }}>
-          {STATS.map((s, i) => (
-            <div key={s.label} style={{
-              flex:1, textAlign:"center", padding:"16px 8px",
-              borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none",
-              borderRight: i < STATS.length-1 ? "none" : "none",
-            }}>
-              <p style={{ fontFamily:F, fontSize:"clamp(1.3rem,2vw,1.75rem)", fontWeight:900, letterSpacing:"-0.03em", color:"#CCFF00", lineHeight:1 }}>
-                {s.value}
-              </p>
-              <p style={{ fontFamily:F, fontSize:10.5, fontWeight:600, color:"rgba(255,255,255,0.35)", marginTop:4, textTransform:"uppercase", letterSpacing:"0.08em" }}>
-                {s.label}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Feature list */}
-        <div className="flex flex-col gap-3" style={{ animation:"floatUp .55s .26s ease both" }}>
-          {FEATURES.map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-start gap-3">
-              <div className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center mt-0.5"
-                style={{ background:"rgba(0,56,255,0.18)", border:"1px solid rgba(0,56,255,0.3)" }}>
-                <Icon className="w-3.5 h-3.5" style={{ color:"#6da8ff" }}/>
+        {/* ── Result card ── */}
+        <div style={{ animation:"floatUp .45s .12s ease both" }}>
+          <div style={{
+            background:"rgba(255,255,255,0.04)",
+            border:"1px solid rgba(255,255,255,0.09)",
+            borderRadius:18,
+            padding:"16px",
+            backdropFilter:"blur(12px)",
+          }}>
+            {/* Card header */}
+            <div className="flex items-center justify-between" style={{ marginBottom:12 }}>
+              <div className="flex items-center gap-2">
+                <div style={{
+                  width:28, height:28, borderRadius:8,
+                  background:"#0A66C2",
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="white">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                  </svg>
+                </div>
+                <span style={{ fontFamily:F, fontSize:12, fontWeight:700, color:"rgba(255,255,255,0.7)" }}>Contact Found</span>
               </div>
-              <p style={{ fontFamily:F, fontSize:13, color:"rgba(255,255,255,0.65)", lineHeight:1.55 }}>
-                {text}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Comparison mini-table */}
-        <div style={{ animation:"floatUp .55s .34s ease both", marginTop:"auto" }}>
-          <p style={{ fontFamily:F, fontSize:10, fontWeight:700, letterSpacing:"0.14em", textTransform:"uppercase", color:"rgba(255,255,255,0.25)", marginBottom:8 }}>
-            vs Apollo, Hunter, Lusha
-          </p>
-          <div className="flex flex-col gap-1.5">
-            {COMPARED.map(({ feature, us, them }) => (
-              <div key={feature} className="flex items-center gap-3">
-                <span style={{ fontFamily:F, fontSize:12, color:"rgba(255,255,255,0.5)", flex:1 }}>{feature}</span>
-                <span style={{
-                  fontSize:11, fontWeight:700, fontFamily:F,
-                  padding:"2px 10px", borderRadius:999,
-                  background: us ? "rgba(204,255,0,0.12)" : "rgba(255,255,255,0.05)",
-                  color: us ? "#CCFF00" : "rgba(255,255,255,0.2)",
-                  border: `1px solid ${us ? "rgba(204,255,0,0.25)" : "rgba(255,255,255,0.07)"}`,
-                  minWidth:40, textAlign:"center",
-                }}>Us</span>
-                <span style={{
-                  fontSize:11, fontWeight:700, fontFamily:F,
-                  padding:"2px 10px", borderRadius:999,
-                  background:"rgba(255,255,255,0.04)",
-                  color:"rgba(255,255,255,0.2)",
-                  border:"1px solid rgba(255,255,255,0.07)",
-                  minWidth:42, textAlign:"center",
-                }}>Them</span>
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full" style={{ background:"#CCFF00", display:"inline-block", boxShadow:"0 0 6px rgba(204,255,0,0.7)" }}/>
+                <span style={{ fontFamily:F, fontSize:10.5, color:"rgba(255,255,255,0.35)" }}>24 min</span>
               </div>
-            ))}
+            </div>
+
+            {/* Person row */}
+            <div className="flex items-center gap-3" style={{ marginBottom:12 }}>
+              <div style={{
+                width:38, height:38, borderRadius:"50%",
+                background:"linear-gradient(135deg,#3b5bdb,#7048e8)",
+                display:"flex", alignItems:"center", justifyContent:"center",
+                fontSize:11, fontWeight:900, color:"#fff", flexShrink:0,
+                fontFamily:F,
+              }}>SC</div>
+              <div>
+                <p style={{ fontFamily:F, fontSize:13, fontWeight:700, color:"#fff", margin:0, lineHeight:1.2 }}>Sarah Chen</p>
+                <p style={{ fontFamily:F, fontSize:11, color:"rgba(255,255,255,0.38)", margin:0 }}>CTO · Acme Corp</p>
+              </div>
+            </div>
+
+            {/* Contact details */}
+            <div className="flex flex-col gap-2">
+              {[
+                { Icon: Mail,  val: "s.chen@acmecorp.com", label:"Email" },
+                { Icon: Phone, val: "+1 (415) 555-0147",   label:"Phone" },
+              ].map(({ Icon, val, label }) => (
+                <div key={label} style={{
+                  display:"flex", alignItems:"center", gap:10,
+                  background:"rgba(0,56,255,0.08)",
+                  border:"1px solid rgba(0,56,255,0.18)",
+                  borderRadius:10, padding:"8px 12px",
+                }}>
+                  <Icon className="w-3.5 h-3.5 shrink-0" style={{ color:"#6da8ff" }}/>
+                  <span style={{ fontFamily:F, fontSize:12, color:"rgba(255,255,255,0.75)", flex:1, letterSpacing:"-0.01em" }}>{val}</span>
+                  <div className="flex items-center gap-1">
+                    <ShieldCheck className="w-3 h-3" style={{ color:"#CCFF00" }}/>
+                    <span style={{ fontFamily:F, fontSize:9.5, fontWeight:700, color:"#CCFF00" }}>Verified</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+        </div>
+
+        {/* ── Stats row ── */}
+        <div className="grid grid-cols-3 gap-3" style={{ animation:"floatUp .45s .18s ease both" }}>
+          {[
+            { v:"97.2%",  l:"Accuracy" },
+            { v:"< 30m",  l:"Delivery" },
+            { v:"4,200+", l:"Teams"    },
+          ].map(({ v, l }) => (
+            <div key={l} style={{
+              background:"rgba(255,255,255,0.03)",
+              border:"1px solid rgba(255,255,255,0.07)",
+              borderRadius:12, padding:"12px 8px", textAlign:"center",
+            }}>
+              <p style={{ fontFamily:F, fontSize:"clamp(1rem,1.6vw,1.4rem)", fontWeight:900, color:"#CCFF00", letterSpacing:"-0.02em", margin:0, lineHeight:1 }}>{v}</p>
+              <p style={{ fontFamily:F, fontSize:10, fontWeight:600, color:"rgba(255,255,255,0.3)", marginTop:4, textTransform:"uppercase", letterSpacing:"0.07em" }}>{l}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Testimonial cards ── */}
+        <div className="flex flex-col gap-3" style={{ animation:"floatUp .45s .24s ease both" }}>
+          {TESTIMONIALS.map((t) => (
+            <div key={t.name} style={{
+              background:"rgba(255,255,255,0.03)",
+              border:"1px solid rgba(255,255,255,0.07)",
+              borderRadius:14, padding:"14px",
+              display:"flex", gap:12, alignItems:"flex-start",
+            }}>
+              <div style={{
+                width:34, height:34, borderRadius:10, flexShrink:0,
+                background:t.color,
+                display:"flex", alignItems:"center", justifyContent:"center",
+                fontSize:11, fontWeight:800, color:"#fff", fontFamily:F,
+              }}>{t.initials}</div>
+              <div>
+                <p style={{ fontFamily:F, fontSize:12.5, color:"rgba(255,255,255,0.72)", lineHeight:1.5, margin:0 }}>
+                  "{t.quote}"
+                </p>
+                <p style={{ fontFamily:F, fontSize:11, color:"rgba(255,255,255,0.3)", marginTop:5 }}>
+                  {t.name} · <span style={{ color:"rgba(255,255,255,0.2)" }}>{t.role}</span>
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

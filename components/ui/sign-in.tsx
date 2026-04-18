@@ -274,7 +274,7 @@ export const SignInPage: React.FC<SignInPageProps> = ({
       </section>
 
       {/* ── Right: Animated product panel ───────────────────────────────── */}
-      <div className="hidden md:block flex-1">
+      <div className="hidden md:flex flex-1 min-h-0">
         <AuthRightPanel />
       </div>
     </div>
