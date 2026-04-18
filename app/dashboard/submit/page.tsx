@@ -2,7 +2,11 @@ import { createAdminClient } from "@/lib/supabase/server";
 import { headers } from "next/headers";
 import { SubmitWizard } from "@/components/dashboard/SubmitOrder/SubmitWizard";
 
-export const metadata = { title: "Submit Order" };
+export const metadata = {
+  title: "Submit Order",
+  description: "Submit a new LinkedIn contact lookup order on StealthConnect AI.",
+  robots: { index: false, follow: false },
+};
 
 export default async function SubmitOrderPage() {
   const headersList = await headers();

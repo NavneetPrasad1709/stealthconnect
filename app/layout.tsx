@@ -3,8 +3,14 @@ import "./globals.css";
 import { Montserrat } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { ChatWidgetLazy } from "@/components/ChatWidgetLazy";
-import { FloatingConsultButtonWrapper } from "@/components/FloatingConsultButtonWrapper";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import dynamic from "next/dynamic";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+const FloatingConsultButtonWrapper = dynamic(
+  () => import("@/components/FloatingConsultButtonWrapper").then(m => ({ default: m.FloatingConsultButtonWrapper })),
+  { ssr: false }
+);
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -101,6 +107,7 @@ export default function RootLayout({
       <body className="font-body antialiased" suppressHydrationWarning>
         <ThemeProvider>
           {children}
+          <SpeedInsights />
           <ChatWidgetLazy />
           <FloatingConsultButtonWrapper />
           <Toaster

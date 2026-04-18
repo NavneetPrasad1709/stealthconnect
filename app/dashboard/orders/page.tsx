@@ -2,7 +2,11 @@ import { createAdminClient } from "@/lib/supabase/server";
 import { headers } from "next/headers";
 import { OrdersView } from "@/components/dashboard/Orders/OrdersView";
 
-export const metadata = { title: "My Orders" };
+export const metadata = {
+  title: "My Orders",
+  description: "View and track all your StealthConnect AI contact lookup orders.",
+  robots: { index: false, follow: false },
+};
 
 type Order = {
   id:                    string;
