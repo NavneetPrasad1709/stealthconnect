@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6" style={{ background: "var(--bg)" }}>
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -28,7 +28,7 @@ export default function NotFound() {
         >
           Back to home
         </Link>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

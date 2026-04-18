@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export default function DashboardError({
   error,
@@ -16,7 +16,7 @@ export default function DashboardError({
 
   return (
     <div className="flex flex-1 items-center justify-center min-h-[60vh] px-6">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
@@ -43,7 +43,7 @@ export default function DashboardError({
         >
           Try again
         </button>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

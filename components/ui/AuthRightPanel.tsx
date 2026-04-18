@@ -35,31 +35,6 @@ export function AuthRightPanel() {
       aria-hidden="true"
     >
       {/* ── Animated blobs ─────────────────────────────────── */}
-      <style>{`
-        @keyframes blob1 {
-          0%,100% { transform: translate(0,0) scale(1); }
-          33%      { transform: translate(40px,-30px) scale(1.12); }
-          66%      { transform: translate(-20px,20px) scale(0.92); }
-        }
-        @keyframes blob2 {
-          0%,100% { transform: translate(0,0) scale(1); }
-          33%      { transform: translate(-30px,40px) scale(0.9); }
-          66%      { transform: translate(25px,-15px) scale(1.1); }
-        }
-        @keyframes blob3 {
-          0%,100% { transform: translate(0,0) scale(1); }
-          50%      { transform: translate(20px,30px) scale(1.08); }
-        }
-        @keyframes floatUp {
-          0%   { opacity:0; transform:translateY(20px); }
-          100% { opacity:1; transform:translateY(0); }
-        }
-        @keyframes ticker {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
-
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div style={{
           position:"absolute", top:"-20%", left:"-10%",
