@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { SectionBadge } from "@/components/ui/SectionBadge"
 
 const FONT = "var(--font-montserrat,'Montserrat',sans-serif)"
@@ -27,7 +27,7 @@ function AnimatedArrow({ delay, gen }: { delay: number; gen: number }) {
         fill="none"
         className="overflow-visible"
       >
-        <motion.path
+        <m.path
           key={gen}
           d="M4 18 C14 4, 42 4, 52 18"
           stroke="currentColor"
@@ -39,7 +39,7 @@ function AnimatedArrow({ delay, gen }: { delay: number; gen: number }) {
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ delay, duration: 0.6, ease: "easeInOut" }}
         />
-        <motion.path
+        <m.path
           key={`head-${gen}`}
           d="M44 12 L52 18 L44 24"
           stroke="currentColor"
@@ -94,7 +94,7 @@ function Step1Visual({ phase }: { phase: "in" | "hold" | "out" }) {
             JD
           </div>
           {/* Pulsing verified badge */}
-          <motion.div
+          <m.div
             animate={{ scale: [1, 1.04, 1], boxShadow: ["0 0 0 0 rgba(34,197,94,0.25)", "0 0 0 5px rgba(34,197,94,0)", "0 0 0 0 rgba(34,197,94,0)"] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold"
@@ -102,7 +102,7 @@ function Step1Visual({ phase }: { phase: "in" | "hold" | "out" }) {
           >
             <span className="size-1.5 rounded-full bg-green-500 inline-block" />
             Profile detected
-          </motion.div>
+          </m.div>
         </div>
         <p className="text-[12px] font-bold text-[#0D0D0D] dark:text-white leading-none" style={{ fontFamily: FONT }}>
           Jane Doe
@@ -172,7 +172,7 @@ function Step2Visual({ phase }: { phase: "in" | "hold" | "out" }) {
             />
           </div>
           <div className="h-1.5 w-full rounded-full bg-gray-100 overflow-hidden">
-            <motion.div
+            <m.div
               className="h-full rounded-full"
               style={{ background: bar.color }}
               initial={{ width: 0 }}
@@ -184,7 +184,7 @@ function Step2Visual({ phase }: { phase: "in" | "hold" | "out" }) {
       ))}
 
       {/* Pulsing accuracy pill */}
-      <motion.div
+      <m.div
         animate={{
           boxShadow: [
             "0 0 0 0 rgba(0,56,255,0)",
@@ -202,7 +202,7 @@ function Step2Visual({ phase }: { phase: "in" | "hold" | "out" }) {
         <span className="text-[15px] font-black text-white tabular-nums" style={{ fontFamily: FONT }}>
           {score.toFixed(1)}%
         </span>
-      </motion.div>
+      </m.div>
     </div>
   )
 }
@@ -314,7 +314,7 @@ function StepCard({ number, title, subtitle, visual, delay, phase, isMobile }: S
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 28 }}
       animate={
         phase === "out"
@@ -367,7 +367,7 @@ function StepCard({ number, title, subtitle, visual, delay, phase, isMobile }: S
 
       {/* Visual */}
       {visual}
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -420,7 +420,7 @@ export default function HowItWorks() {
       <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 20px" }}>
 
         {/* ── Header ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -455,7 +455,7 @@ export default function HowItWorks() {
             Three steps. No subscription. No guesswork.
             Just verified contacts in your dashboard.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ── Desktop animated cards ── */}
         <div key={gen} className="hidden lg:flex items-stretch gap-0">
@@ -482,7 +482,7 @@ export default function HowItWorks() {
         {/* ── Loop indicator (desktop only) ── */}
         <div className="hidden lg:flex items-center justify-center gap-2 mt-10">
           {[0, 1, 2].map((i) => (
-            <motion.div
+            <m.div
               key={`${gen}-${i}`}
               className="rounded-full"
               style={{ background: "#0038FF" }}

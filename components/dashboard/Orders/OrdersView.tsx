@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import {
   ChevronDown, ChevronRight, ExternalLink, PlusCircle,
   ClipboardList, Filter, Mail, Phone, Layers,
@@ -190,7 +190,7 @@ export function OrdersView({ orders }: { orders: Order[] }) {
 
               <AnimatePresence>
                 {filterOpen && (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: -6, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0,  scale: 1 }}
                     exit={{    opacity: 0, y: -4,  scale: 0.97 }}
@@ -220,7 +220,7 @@ export function OrdersView({ orders }: { orders: Order[] }) {
                         </button>
                       );
                     })}
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </div>
@@ -328,7 +328,7 @@ function TableRow({ order, index, expanded, onToggle }: {
   const ct  = CONTACT_CONFIG[order.contact_type];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.04, duration: 0.22 }}
@@ -383,7 +383,7 @@ function TableRow({ order, index, expanded, onToggle }: {
           </span>
 
           {/* Expand */}
-          <motion.span
+          <m.span
             animate={{ rotate: expanded ? 90 : 0 }}
             transition={{ duration: 0.18 }}
             className="flex items-center justify-center w-6 h-6 rounded-lg ml-auto transition-colors"
@@ -393,13 +393,13 @@ function TableRow({ order, index, expanded, onToggle }: {
             }}
           >
             <ChevronRight className="w-3.5 h-3.5" style={{ color: expanded ? "var(--brand)" : "var(--fg-subtle)" }} />
-          </motion.span>
+          </m.span>
         </button>
 
         {/* Expanded URLs */}
         <AnimatePresence>
           {expanded && (
-            <motion.div
+            <m.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{    height: 0, opacity: 0 }}
@@ -407,11 +407,11 @@ function TableRow({ order, index, expanded, onToggle }: {
               style={{ overflow: "hidden" }}
             >
               <ExpandedURLs urls={order.linkedin_urls} emailDraft={order.email_draft_requested} />
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -428,7 +428,7 @@ function MobileCard({ order, index, expanded, onToggle }: {
   const ct = CONTACT_CONFIG[order.contact_type];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.22 }}
@@ -486,9 +486,9 @@ function MobileCard({ order, index, expanded, onToggle }: {
 
         {/* Expand hint */}
         <div className="flex items-center gap-1 mt-3" style={{ color: "var(--brand)" }}>
-          <motion.span animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.18 }}>
+          <m.span animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.18 }}>
             <ChevronRight className="w-3.5 h-3.5" />
-          </motion.span>
+          </m.span>
           <span className="text-[12px] font-medium">
             {expanded ? "Hide" : "Show"} {order.linkedin_urls.length} URL{order.linkedin_urls.length !== 1 ? "s" : ""}
           </span>
@@ -497,7 +497,7 @@ function MobileCard({ order, index, expanded, onToggle }: {
 
       <AnimatePresence>
         {expanded && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{    height: 0, opacity: 0 }}
@@ -505,10 +505,10 @@ function MobileCard({ order, index, expanded, onToggle }: {
             style={{ overflow: "hidden", borderTop: "1px solid var(--border)" }}
           >
             <ExpandedURLs urls={order.linkedin_urls} emailDraft={order.email_draft_requested} />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -646,7 +646,7 @@ function Pagination({ page, total, count, perPage, onChange }: {
 ═══════════════════════════════════════════════════════════════ */
 function EmptyState() {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
@@ -683,6 +683,6 @@ function EmptyState() {
         <PlusCircle className="w-4 h-4" />
         Submit first order
       </Link>
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 
 // --- Custom SVG Components for Hand-Drawn Accents ---
 
@@ -141,7 +141,7 @@ export const Component = () => {
           <div className="absolute inset-0 w-full h-full pointer-events-none">
             
             {/* Floating Glass Card 1 (Bottom Left) */}
-            <motion.div 
+            <m.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute bottom-[10%] left-[5%] md:left-[20%] z-30 pointer-events-auto"
@@ -155,10 +155,10 @@ export const Component = () => {
                   <p className="text-[10px] md:text-xs text-white/80 mt-1">23 422 points</p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Floating Glass Card 2 (Top Right) */}
-            <motion.div 
+            <m.div 
               animate={{ y: [0, -20, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               className="absolute top-[15%] right-[5%] md:right-[22%] z-30 pointer-events-auto"
@@ -172,7 +172,7 @@ export const Component = () => {
                   <p className="text-[10px] md:text-xs text-white/80 mt-1">293 582 points</p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Decorative Arrow Left */}
             <div className="absolute bottom-[0%] left-[0%] md:left-[10%] w-24 h-24 md:w-32 md:h-32 z-20">

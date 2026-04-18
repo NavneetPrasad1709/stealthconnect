@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
 import {
   User, Mail, Phone, Link2, Shield, Zap,
@@ -115,7 +115,7 @@ export function AccountView({
 
   /* ── Render ───────────────────────────────────────────────── */
   return (
-    <motion.div
+    <m.div
       variants={stagger}
       initial="hidden"
       animate="show"
@@ -123,7 +123,7 @@ export function AccountView({
     >
 
       {/* ── Header ─────────────────────────────────────────── */}
-      <motion.div variants={fadeUp} className="mb-2">
+      <m.div variants={fadeUp} className="mb-2">
         <p className="text-[13px] mb-1" style={{ color: "var(--fg-muted)" }}>
           Manage your
         </p>
@@ -133,10 +133,10 @@ export function AccountView({
         >
           Account
         </h1>
-      </motion.div>
+      </m.div>
 
       {/* ── Profile card ───────────────────────────────────── */}
-      <motion.div
+      <m.div
         variants={fadeUp}
         className="rounded-2xl overflow-hidden"
         style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
@@ -192,10 +192,10 @@ export function AccountView({
             />
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* ── Credits summary ────────────────────────────────── */}
-      <motion.div
+      <m.div
         variants={fadeUp}
         className="rounded-2xl"
         style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
@@ -311,10 +311,10 @@ export function AccountView({
             </p>
           </div>
         )}
-      </motion.div>
+      </m.div>
 
       {/* ── Change password ────────────────────────────────── */}
-      <motion.div
+      <m.div
         variants={fadeUp}
         className="rounded-2xl"
         style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
@@ -377,9 +377,9 @@ export function AccountView({
             {pwBusy ? "Updating…" : "Update Password"}
           </button>
         </form>
-      </motion.div>
+      </m.div>
 
-    </motion.div>
+    </m.div>
   );
 }
 

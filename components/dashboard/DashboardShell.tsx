@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   PlusCircle,
@@ -81,7 +81,7 @@ export default function DashboardShell({ userName, userEmail, credits, isAdmin =
       {/* ── Mobile drawer ─────────────────────────────────────── */}
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             key="overlay"
             className="fixed inset-0 z-40 lg:hidden"
             initial={{ opacity: 0 }}
@@ -93,7 +93,7 @@ export default function DashboardShell({ userName, userEmail, credits, isAdmin =
           />
         )}
         {open && (
-          <motion.nav
+          <m.nav
             key="drawer"
             aria-label="Mobile sidebar"
             className="fixed inset-y-0 left-0 z-50 flex flex-col w-[260px] lg:hidden"
@@ -128,7 +128,7 @@ export default function DashboardShell({ userName, userEmail, credits, isAdmin =
               isAdmin={isAdmin}
               onNavClick={() => setOpen(false)}
             />
-          </motion.nav>
+          </m.nav>
         )}
       </AnimatePresence>
 

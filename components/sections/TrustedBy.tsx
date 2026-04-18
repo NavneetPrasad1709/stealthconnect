@@ -2,7 +2,7 @@
 
 import AutoScroll from "embla-carousel-auto-scroll"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 
 const FONT = "var(--font-montserrat,'Montserrat',sans-serif)"
 
@@ -39,7 +39,7 @@ export default function TrustedBy() {
       }}
     >
       {/* ── Header ──────────────────────────────────────── */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
@@ -96,10 +96,10 @@ export default function TrustedBy() {
         >
           From solo SDRs to Fortune 500 outbound teams — across every industry.
         </p>
-      </motion.div>
+      </m.div>
 
       {/* ── Logo carousel ────────────────────────────────── */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -144,10 +144,10 @@ export default function TrustedBy() {
           className="pointer-events-none absolute inset-y-0 right-0 w-32 z-10"
           style={{ background: "linear-gradient(to left, var(--c-section-bg-alt) 20%, transparent)" }}
         />
-      </motion.div>
+      </m.div>
 
       {/* ── Stats row ────────────────────────────────────── */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
@@ -190,7 +190,7 @@ export default function TrustedBy() {
             </p>
           </div>
         ))}
-      </motion.div>
+      </m.div>
     </section>
   )
 }

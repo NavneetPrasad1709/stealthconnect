@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { HTMLMotionProps, motion } from "motion/react"
+import { HTMLMotionProps, m } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
@@ -45,7 +45,7 @@ const CardSticky = React.forwardRef<HTMLDivElement, CardStickyProps>(
     const z = index * incrementZ
 
     return (
-      <motion.div
+      <m.div
         ref={ref}
         layout="position"
         style={{
@@ -58,7 +58,7 @@ const CardSticky = React.forwardRef<HTMLDivElement, CardStickyProps>(
         {...props}
       >
         {children}
-      </motion.div>
+      </m.div>
     )
   }
 )

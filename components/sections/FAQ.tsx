@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { HeadingAccent } from "@/components/ui/HeadingAccent";
@@ -45,7 +45,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -85,7 +85,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 
       <AnimatePresence initial={false}>
         {open && (
-          <motion.div
+          <m.div
             key="answer"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -103,10 +103,10 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             >
               {a}
             </p>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -118,7 +118,7 @@ export default function FAQ() {
     >
       <div className="max-w-3xl mx-auto px-5 md:px-8">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -150,7 +150,7 @@ export default function FAQ() {
               hello@stealthconnect.ai
             </a>
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Accordion */}
         <div>

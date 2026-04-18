@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { ArrowRight, X, Menu, Zap, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -33,7 +33,7 @@ function NavThemeToggle() {
       style={{ background: "var(--elevated)", border: "1px solid var(--border-strong)" }}
     >
       <AnimatePresence mode="wait" initial={false}>
-        <motion.span
+        <m.span
           key={dark ? "sun" : "moon"}
           initial={{ opacity: 0, rotate: -30, scale: 0.6 }}
           animate={{ opacity: 1, rotate: 0,   scale: 1   }}
@@ -45,7 +45,7 @@ function NavThemeToggle() {
             ? <Sun  size={14} style={{ color: "#f59e0b" }} />
             : <Moon size={14} style={{ color: "#0038FF" }} />
           }
-        </motion.span>
+        </m.span>
       </AnimatePresence>
     </button>
   );
@@ -70,7 +70,7 @@ export default function LandingNav() {
   return (
     <>
       {/* ══════════ NAVBAR ══════════ */}
-      <motion.header
+      <m.header
         initial={{ opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -152,12 +152,12 @@ export default function LandingNav() {
             </button>
           </div>
         </nav>
-      </motion.header>
+      </m.header>
 
       {/* ══════════ MOBILE MENU ══════════ */}
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             key="mob"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -194,7 +194,7 @@ export default function LandingNav() {
             {/* Nav Links */}
             <nav className="flex-1 flex flex-col px-6 justify-center gap-0 overflow-y-auto">
               {LINKS.map((l, i) => (
-                <motion.a
+                <m.a
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
@@ -212,12 +212,12 @@ export default function LandingNav() {
                     {l.label}
                   </span>
                   <ArrowRight size={18} className="shrink-0 group-hover:translate-x-1 transition-transform" style={{ color: "#CCFF00" }} />
-                </motion.a>
+                </m.a>
               ))}
             </nav>
 
             {/* Bottom CTAs */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
@@ -248,8 +248,8 @@ export default function LandingNav() {
               >
                 Sign in
               </Link>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

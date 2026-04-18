@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { HeadingAccent } from "@/components/ui/HeadingAccent";
 
@@ -85,7 +85,7 @@ const col3 = TESTIMONIALS.slice(6, 9);
 
 function TestimonialCard({ text, image, name, role, company, dupIndex, i }: Testimonial & { dupIndex: number; i: number }) {
   return (
-    <motion.li
+    <m.li
       key={`${dupIndex}-${i}`}
       aria-hidden={dupIndex === 1 ? "true" : "false"}
       tabIndex={dupIndex === 1 ? -1 : 0}
@@ -135,7 +135,7 @@ function TestimonialCard({ text, image, name, role, company, dupIndex, i }: Test
           </div>
         </footer>
       </blockquote>
-    </motion.li>
+    </m.li>
   );
 }
 
@@ -150,7 +150,7 @@ function TestimonialsColumn({
 }) {
   return (
     <div className={`overflow-hidden ${className ?? ""}`}>
-      <motion.ul
+      <m.ul
         animate={{ translateY: "-50%" }}
         transition={{ duration, repeat: Infinity, ease: "linear", repeatType: "loop" }}
         className="flex flex-col gap-5 pb-5 m-0 p-0"
@@ -162,7 +162,7 @@ function TestimonialsColumn({
             ))}
           </React.Fragment>
         ))}
-      </motion.ul>
+      </m.ul>
     </div>
   );
 }
@@ -187,7 +187,7 @@ export default function Testimonials() {
         }}
       />
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -231,7 +231,7 @@ export default function Testimonials() {
           <TestimonialsColumn testimonials={col2} duration={21} className="hidden md:block" />
           <TestimonialsColumn testimonials={col3} duration={19} className="hidden lg:block" />
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

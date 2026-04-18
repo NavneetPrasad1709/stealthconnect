@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   Zap,
   ClipboardList,
@@ -76,7 +76,7 @@ export default function DashboardAnimated({
   recentOrders,
 }: Props) {
   return (
-    <motion.div
+    <m.div
       variants={stagger}
       initial="hidden"
       animate="show"
@@ -84,7 +84,7 @@ export default function DashboardAnimated({
     >
 
       {/* ── Header ──────────────────────────────────────────── */}
-      <motion.div variants={fadeUp} className="mb-9">
+      <m.div variants={fadeUp} className="mb-9">
         <p
           className="text-[13px] mb-1"
           style={{ color: "var(--fg-muted)", fontFamily: "var(--font-body)" }}
@@ -100,10 +100,10 @@ export default function DashboardAnimated({
         >
           {firstName}
         </h1>
-      </motion.div>
+      </m.div>
 
       {/* ── Credits + CTA card ──────────────────────────────── */}
-      <motion.div variants={fadeUp} className="mb-5">
+      <m.div variants={fadeUp} className="mb-5">
         <div
           className="rounded-2xl overflow-hidden"
           style={{
@@ -217,10 +217,10 @@ export default function DashboardAnimated({
             </Link>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* ── Stats row ────────────────────────────────────────── */}
-      <motion.div
+      <m.div
         variants={fadeUp}
         className="grid grid-cols-3 gap-3 sm:gap-4 mb-5"
       >
@@ -280,10 +280,10 @@ export default function DashboardAnimated({
             </p>
           </div>
         ))}
-      </motion.div>
+      </m.div>
 
       {/* ── Recent Orders ─────────────────────────────────────── */}
-      <motion.div variants={fadeUp}>
+      <m.div variants={fadeUp}>
         <div
           className="rounded-2xl overflow-hidden"
           style={{
@@ -352,7 +352,7 @@ export default function DashboardAnimated({
                   {recentOrders.map((order, i) => {
                     const s = STATUS[order.status];
                     return (
-                      <motion.tr
+                      <m.tr
                         key={order.id}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -385,7 +385,7 @@ export default function DashboardAnimated({
                         <td className="hidden md:table-cell text-[12px]">
                           {fmt(order.created_at)}
                         </td>
-                      </motion.tr>
+                      </m.tr>
                     );
                   })}
                 </tbody>
@@ -393,9 +393,9 @@ export default function DashboardAnimated({
             </div>
           )}
         </div>
-      </motion.div>
+      </m.div>
 
-    </motion.div>
+    </m.div>
   );
 }
 

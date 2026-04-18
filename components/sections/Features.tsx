@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { ShieldCheck, Zap, CreditCard, Globe2, Inbox, Lock, ArrowRight } from "lucide-react"
 import { ContainerScroll, CardSticky } from "@/components/ui/cards-stack"
 import { SectionBadge } from "@/components/ui/SectionBadge"
@@ -207,7 +207,7 @@ export default function Features() {
             </div>
 
             {/* Heading */}
-            <motion.h2
+            <m.h2
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -236,10 +236,10 @@ export default function Features() {
               </em>
               <br />
               lead tool.
-            </motion.h2>
+            </m.h2>
 
             {/* Description */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -257,10 +257,10 @@ export default function Features() {
               No subscriptions. No guesswork. Just verified
               contact data delivered in under 30 minutes —
               or you pay nothing.
-            </motion.p>
+            </m.p>
 
             {/* CTA */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -285,10 +285,10 @@ export default function Features() {
                   className="group-hover:translate-x-0.5 transition-transform duration-200"
                 />
               </Link>
-            </motion.div>
+            </m.div>
 
             {/* Stats */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -327,7 +327,7 @@ export default function Features() {
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </m.div>
 
             {/* Scroll hint — visible on desktop */}
             <p

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { HeadingAccent } from "@/components/ui/HeadingAccent";
@@ -38,7 +38,7 @@ export default function CTA() {
         }}
       />
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -46,7 +46,7 @@ export default function CTA() {
         className="relative z-10 max-w-[640px] mx-auto text-center"
       >
         {/* Icon badge */}
-        <motion.div
+        <m.div
           initial={{ scale: 0.8, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true }}
@@ -59,7 +59,7 @@ export default function CTA() {
           >
             <Zap className="w-6 h-6 text-white" strokeWidth={2} />
           </div>
-        </motion.div>
+        </m.div>
 
         <SectionBadge variant="light" className="mb-6 mx-auto">Start Free Today</SectionBadge>
         <h2
@@ -109,7 +109,7 @@ export default function CTA() {
             Already have an account
           </Link>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

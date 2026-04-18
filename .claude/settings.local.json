@@ -52,7 +52,12 @@
       "Bash(find \"D:\\\\\\\\SConnectAI\" -type d -name \"components\")",
       "Bash(xargs grep *)",
       "Bash(git *)",
-      "WebFetch(domain:www.stealthconnect.ai)"
+      "WebFetch(domain:www.stealthconnect.ai)",
+      "Bash(sed -i \"s/import { motion, AnimatePresence } from \\\\\"framer-motion\\\\\"/import { m, AnimatePresence } from \\\\\"framer-motion\\\\\"/g\" components/floating-consult-button.tsx components/FloatingActions.tsx)",
+      "Bash(sed -i \"s/import { AnimatePresence, motion } from \\\\\"framer-motion\\\\\"/import { AnimatePresence, m } from \\\\\"framer-motion\\\\\"/g\" components/floating-consult-button.tsx components/FloatingActions.tsx)",
+      "Bash(sed -i 's/motion\\\\./m./g' components/floating-consult-button.tsx components/FloatingActions.tsx)",
+      "Bash(sed -i 's/import { HTMLMotionProps, motion } from \"motion\\\\/react\"/import { HTMLMotionProps, m } from \"motion\\\\/react\"/g' components/cards-stack.tsx)",
+      "Bash(sed -i 's/import { motion, AnimatePresence, useInView } from \"framer-motion\"/import { m, AnimatePresence, useInView } from \"framer-motion\"/g' components/sections/Pricing.tsx)"
     ]
   }
 }

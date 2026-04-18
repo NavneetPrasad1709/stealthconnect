@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 interface Testimonial {
   text: string;
@@ -82,7 +82,7 @@ function TestimonialsColumn({
 }) {
   return (
     <div className={className} style={{ overflow: "hidden" }}>
-      <motion.ul
+      <m.ul
         animate={{ translateY: "-50%" }}
         transition={{
           duration,
@@ -110,7 +110,7 @@ function TestimonialsColumn({
             ))}
           </React.Fragment>
         ))}
-      </motion.ul>
+      </m.ul>
     </div>
   );
 }
@@ -118,7 +118,7 @@ function TestimonialsColumn({
 export default function Testimonials() {
   return (
     <section id="testimonials" className="testimonials">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -149,7 +149,7 @@ export default function Testimonials() {
           <TestimonialsColumn testimonials={secondColumn} className="tcol-hide-md" duration={24} />
           <TestimonialsColumn testimonials={thirdColumn}  className="tcol-hide-lg" duration={22} />
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

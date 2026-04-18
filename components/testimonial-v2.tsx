@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Sun, Moon } from 'lucide-react';
 
 // --- Types ---
@@ -80,7 +80,7 @@ const TestimonialsColumn = (props: {
 }) => {
   return (
     <div className={props.className}>
-      <motion.ul
+      <m.ul
         animate={{
           translateY: "-50%",
         }}
@@ -96,7 +96,7 @@ const TestimonialsColumn = (props: {
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
               {props.testimonials.map(({ text, image, name, role }, i) => (
-                <motion.li 
+                <m.li 
                   key={`${index}-${i}`}
                   aria-hidden={index === 1 ? "true" : "false"}
                   tabIndex={index === 1 ? -1 : 0}
@@ -136,12 +136,12 @@ const TestimonialsColumn = (props: {
                       </div>
                     </footer>
                   </blockquote>
-                </motion.li>
+                </m.li>
               ))}
             </React.Fragment>
           )),
         ]}
-      </motion.ul>
+      </m.ul>
     </div>
   );
 };
@@ -152,7 +152,7 @@ const TestimonialsSection = () => {
       aria-labelledby="testimonials-heading"
       className="bg-transparent py-24 relative overflow-hidden"
     >
-      <motion.div 
+      <m.div 
         initial={{ opacity: 0, y: 50, rotate: -2 }}
         whileInView={{ opacity: 1, y: 0, rotate: 0 }}
         viewport={{ once: true, amount: 0.15 }}
@@ -187,7 +187,7 @@ const TestimonialsSection = () => {
           <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
           <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 };

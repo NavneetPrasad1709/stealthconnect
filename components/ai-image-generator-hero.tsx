@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect, useRef, useCallback } from "react"
-import { motion, useInView } from "framer-motion"
+import { m, useInView } from "framer-motion"
 import { ArrowRight, Mail, Phone, CheckCircle2, Sparkles } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -202,7 +202,7 @@ export function ImageCarouselHero({
 
         {/* Trust badge — design system pill */}
         {subtitle && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, ease: [0.22,1,0.36,1], delay: 0.05 }}
@@ -221,11 +221,11 @@ export function ImageCarouselHero({
           >
             <span style={{ fontSize: 7, lineHeight: 1 }}>●</span>
             {subtitle}
-          </motion.div>
+          </m.div>
         )}
 
         {/* Headline — Montserrat 800, #0D0D0D + #0038FF accent */}
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.22,1,0.36,1], delay: 0.15 }}
@@ -238,10 +238,10 @@ export function ImageCarouselHero({
           }}
         >
           {renderTitle(title, accentWords)}
-        </motion.h2>
+        </m.h2>
 
         {/* Description — Montserrat 400, #3D3D3D */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, ease: [0.22,1,0.36,1], delay: 0.25 }}
@@ -255,10 +255,10 @@ export function ImageCarouselHero({
           }}
         >
           {description}
-        </motion.p>
+        </m.p>
 
         {/* CTA */}
-        <motion.button
+        <m.button
           initial={{ opacity: 0, scale: 0.9 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.5, ease: [0.22,1,0.36,1], delay: 0.33 }}
@@ -277,10 +277,10 @@ export function ImageCarouselHero({
         >
           {ctaText}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-        </motion.button>
+        </m.button>
 
         {/* Social proof */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.42 }}
@@ -288,10 +288,10 @@ export function ImageCarouselHero({
           style={{ color: "#94a3b8", fontFamily: "var(--font-body)" }}
         >
           No credit card · First lookup free · Results in 30 min
-        </motion.p>
+        </m.p>
 
         {/* ── Orbit ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.7, ease: [0.22,1,0.36,1], delay: 0.18 }}
@@ -307,7 +307,7 @@ export function ImageCarouselHero({
 
           {/* Center hub */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
-            <motion.div
+            <m.div
               animate={{ boxShadow: [
                 "0 0 0 8px rgba(59,130,246,0.08),0 0 0 18px rgba(59,130,246,0.04)",
                 "0 0 0 14px rgba(59,130,246,0.11),0 0 0 26px rgba(59,130,246,0.05)",
@@ -321,7 +321,7 @@ export function ImageCarouselHero({
                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
                   fill="rgba(255,255,255,0.92)" />
               </svg>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Cards — positioned by RAF, no re-renders */}
@@ -349,13 +349,13 @@ export function ImageCarouselHero({
               </div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Stats */}
         {stats.length > 0 && (
           <div className="w-full max-w-3xl grid grid-cols-3 gap-6 mb-14">
             {stats.map((stat, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -366,7 +366,7 @@ export function ImageCarouselHero({
                   style={{ color: "#0f172a", fontFamily: "var(--font-display)" }}>{stat.value}</span>
                 <span className="text-xs sm:text-sm text-center"
                   style={{ color: "#64748b", fontFamily: "var(--font-body)" }}>{stat.label}</span>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         )}
@@ -375,7 +375,7 @@ export function ImageCarouselHero({
         {features.length > 0 && (
           <div className="w-full max-w-4xl grid grid-cols-1 sm:grid-cols-3 gap-5">
             {features.map((feature, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, y: 22 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -394,7 +394,7 @@ export function ImageCarouselHero({
                   style={{ color: "#0f172a", fontFamily: "var(--font-display)" }}>{feature.title}</h3>
                 <p className="text-sm leading-relaxed"
                   style={{ color: "#64748b", fontFamily: "var(--font-body)" }}>{feature.description}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         )}

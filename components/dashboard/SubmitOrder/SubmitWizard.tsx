@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import {
   Phone, Mail, Layers, FileText, Upload,
   Check, ChevronLeft, ArrowRight, Zap, AlertCircle, X,
@@ -147,7 +147,7 @@ export function SubmitWizard({ credits }: { credits: number }) {
 
           {/* thin progress track */}
           <div className="h-[2px] rounded-full overflow-hidden" style={{ background: "var(--border)" }}>
-            <motion.div
+            <m.div
               className="h-full rounded-full"
               style={{ background: "var(--brand)" }}
               animate={{ width: `${((step + 1) / 4) * 100}%` }}
@@ -159,7 +159,7 @@ export function SubmitWizard({ credits }: { credits: number }) {
         {/* Error */}
         <AnimatePresence>
           {err && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -6, height: 0 }}
               animate={{ opacity: 1, y: 0,  height: "auto" }}
               exit={{    opacity: 0,          height: 0 }}
@@ -175,14 +175,14 @@ export function SubmitWizard({ credits }: { credits: number }) {
               <button onClick={() => setErr(null)}>
                 <X className="w-3.5 h-3.5 opacity-50 hover:opacity-100" />
               </button>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
 
         {/* Step content */}
         <div className="relative">
           <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
+            <m.div
               key={step}
               custom={dir}
               variants={{
@@ -228,7 +228,7 @@ export function SubmitWizard({ credits }: { credits: number }) {
                   onBack={() => go(2)}
                 />
               )}
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
 
@@ -427,7 +427,7 @@ function StepLinkedIn({
           >
             {label}
             {mode === id && (
-              <motion.span
+              <m.span
                 layoutId="tab-ul"
                 className="absolute bottom-0 left-0 right-0 h-[2px] rounded-t-full"
                 style={{ background: "var(--brand)" }}
@@ -440,7 +440,7 @@ function StepLinkedIn({
 
       <AnimatePresence mode="wait">
         {mode === "single" && (
-          <motion.div key="single" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
+          <m.div key="single" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
             <label
               className="block text-[11px] font-semibold uppercase tracking-widest mb-2"
               style={{ color: "var(--fg-subtle)" }}
@@ -467,11 +467,11 @@ function StepLinkedIn({
                 Needs to be a valid linkedin.com/in/ URL
               </p>
             )}
-          </motion.div>
+          </m.div>
         )}
 
         {mode === "bulk" && (
-          <motion.div key="bulk" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
+          <m.div key="bulk" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
             <div className="flex items-center justify-between mb-2">
               <label
                 className="text-[11px] font-semibold uppercase tracking-widest"
@@ -504,11 +504,11 @@ function StepLinkedIn({
               onFocus={(e) => (e.currentTarget.style.borderColor = "var(--brand)")}
               onBlur={(e)  => (e.currentTarget.style.borderColor = "var(--border)")}
             />
-          </motion.div>
+          </m.div>
         )}
 
         {mode === "csv" && (
-          <motion.div key="csv" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
+          <m.div key="csv" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }}>
             {csvUrls.length === 0 ? (
               <>
                 <input
@@ -587,7 +587,7 @@ function StepLinkedIn({
                 </div>
               </div>
             )}
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
@@ -661,7 +661,7 @@ function StepAddons({
           className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 shrink-0 mt-1"
           style={{ background: emailDraft ? "var(--brand)" : "var(--border-strong)" }}
         >
-          <motion.span
+          <m.span
             layout
             className="inline-block h-4 w-4 rounded-full bg-white shadow-sm"
             animate={{ x: emailDraft ? 22 : 2 }}
@@ -780,12 +780,12 @@ function StepSummary({
 
   if (success) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         className="flex flex-col items-center justify-center py-14 text-center"
       >
-        <motion.span
+        <m.span
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 400, damping: 22, delay: 0.1 }}
@@ -793,7 +793,7 @@ function StepSummary({
           style={{ background: "rgba(16,185,129,0.1)", border: "2px solid #10b981" }}
         >
           <Check className="w-8 h-8" style={{ color: "#10b981" }} strokeWidth={2.5} />
-        </motion.span>
+        </m.span>
         <h3
           className="text-[20px] font-bold mb-2"
           style={{ color: "var(--fg)", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
@@ -803,7 +803,7 @@ function StepSummary({
         <p className="text-[13.5px]" style={{ color: "var(--fg-muted)" }}>
           Redirecting to your orders…
         </p>
-      </motion.div>
+      </m.div>
     );
   }
 

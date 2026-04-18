@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '@/components/menu-toggle-icon';
 import { useScroll } from '@/components/use-scroll';
@@ -41,7 +41,7 @@ function ThemeBtn() {
       style={{ background: 'var(--elevated)', border: '1px solid var(--border-strong)' }}
     >
       <AnimatePresence mode="wait" initial={false}>
-        <motion.span
+        <m.span
           key={dark ? 'sun' : 'moon'}
           initial={{ opacity: 0, rotate: -30, scale: 0.6 }}
           animate={{ opacity: 1, rotate: 0,   scale: 1   }}
@@ -53,7 +53,7 @@ function ThemeBtn() {
             ? <Sun  size={14} className="text-amber-400" />
             : <Moon size={14} style={{ color: '#0038FF' }} />
           }
-        </motion.span>
+        </m.span>
       </AnimatePresence>
     </button>
   );
@@ -174,7 +174,7 @@ export function Header() {
       {/* ── Mobile Full-Screen Menu ── */}
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             key="mob-menu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -207,7 +207,7 @@ export function Header() {
             {/* Nav links */}
             <nav className="flex-1 flex flex-col px-6 justify-center gap-0 overflow-y-auto relative z-10">
               {LINKS.map((l, i) => (
-                <motion.a
+                <m.a
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
@@ -228,12 +228,12 @@ export function Header() {
                     className="shrink-0 group-hover:translate-x-1 transition-transform"
                     style={{ color: '#CCFF00' }}
                   />
-                </motion.a>
+                </m.a>
               ))}
             </nav>
 
             {/* Bottom CTAs */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.26, duration: 0.24 }}
@@ -263,8 +263,8 @@ export function Header() {
               >
                 Sign in
               </Link>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

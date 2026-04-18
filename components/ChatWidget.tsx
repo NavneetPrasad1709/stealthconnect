@@ -3,7 +3,7 @@
 import {
   useState, useRef, useEffect, useCallback, KeyboardEvent,
 } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { X, Send, Minimize2, MessageCircle, RotateCcw } from "lucide-react";
 
 /* ── Types ─────────────────────────────────────────────────── */
@@ -131,7 +131,7 @@ export function ChatWidget() {
       {/* ── Chat panel ───────────────────────────────────────── */}
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             key="panel"
             initial={{ opacity: 0, scale: 0.92, y: 16, originX: 1, originY: 1 }}
             animate={{ opacity: 1, scale: 1,    y: 0  }}
@@ -221,7 +221,7 @@ export function ChatWidget() {
             {/* Body */}
             <AnimatePresence>
               {!minimized && (
-                <motion.div
+                <m.div
                   key="body"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1, flex: 1 }}
@@ -234,7 +234,7 @@ export function ChatWidget() {
 
                     {/* Welcome */}
                     {isEmpty && (
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
@@ -281,12 +281,12 @@ export function ChatWidget() {
                             </button>
                           ))}
                         </div>
-                      </motion.div>
+                      </m.div>
                     )}
 
                     {/* Messages */}
                     {messages.map((msg, i) => (
-                      <motion.div
+                      <m.div
                         key={msg.id}
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -331,12 +331,12 @@ export function ChatWidget() {
                             msg.content
                           )}
                         </div>
-                      </motion.div>
+                      </m.div>
                     ))}
 
                     {/* Error */}
                     {error && (
-                      <motion.p
+                      <m.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         className="text-center text-[12px] px-3 py-2 rounded-lg"
@@ -347,7 +347,7 @@ export function ChatWidget() {
                         }}
                       >
                         {error}
-                      </motion.p>
+                      </m.p>
                     )}
 
                     <div ref={bottomRef} />
@@ -414,15 +414,15 @@ export function ChatWidget() {
                       Press Enter to send · Shift+Enter for new line
                     </p>
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* ── FAB ──────────────────────────────────────────────── */}
-      <motion.button
+      <m.button
         onClick={() => { setOpen((v) => !v); setMinimized(false); }}
         whileHover={{ scale: 1.06 }}
         whileTap={{   scale: 0.94 }}
@@ -437,7 +437,7 @@ export function ChatWidget() {
       >
         <AnimatePresence mode="wait" initial={false}>
           {open ? (
-            <motion.span
+            <m.span
               key="close"
               initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
               animate={{ rotate: 0,   opacity: 1, scale: 1   }}
@@ -445,9 +445,9 @@ export function ChatWidget() {
               transition={{ duration: 0.18 }}
             >
               <X className="w-6 h-6 text-white" strokeWidth={2.5} />
-            </motion.span>
+            </m.span>
           ) : (
-            <motion.span
+            <m.span
               key="chat"
               initial={{ rotate: 90,  opacity: 0, scale: 0.6 }}
               animate={{ rotate: 0,   opacity: 1, scale: 1   }}
@@ -467,10 +467,10 @@ export function ChatWidget() {
                   }}
                 />
               )}
-            </motion.span>
+            </m.span>
           )}
         </AnimatePresence>
-      </motion.button>
+      </m.button>
     </>
   );
 }
@@ -480,7 +480,7 @@ function TypingDots() {
   return (
     <span className="flex items-center gap-1 py-0.5">
       {[0, 1, 2].map((i) => (
-        <motion.span
+        <m.span
           key={i}
           className="w-1.5 h-1.5 rounded-full"
           style={{ background: "var(--fg-subtle)" }}

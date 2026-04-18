@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 
 type Order = {
@@ -296,7 +296,7 @@ export function AdminDashboard() {
             </div>
           ) : (
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={`${page}-${search}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -441,7 +441,7 @@ export function AdminDashboard() {
                     </button>
                   </div>
                 )}
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           )}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { HeadingAccent } from "@/components/ui/HeadingAccent";
 import { Check, ArrowRight, Zap, Phone, Mail, Layers, TrendingDown } from "lucide-react";
@@ -123,7 +123,7 @@ function ProductCard({ card, index, active, onSelect }: {
 }) {
   const Icon = card.icon;
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -189,7 +189,7 @@ function ProductCard({ card, index, active, onSelect }: {
       >
         {active ? "Selected — see estimate ↓" : "Calculate price"}
       </button>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -217,7 +217,7 @@ function VolumeTiers() {
           const isTop = i === VOLUME_TIERS.length - 1;
           const barW = tier.savingsPct === 0 ? 8 : tier.savingsPct;
           return (
-            <motion.div
+            <m.div
               key={tier.label}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -269,7 +269,7 @@ function VolumeTiers() {
                   </span>
                 </div>
                 <div className="h-1 w-full rounded-full overflow-hidden" style={{ background: isTop ? "rgba(255,255,255,0.15)" : "rgba(0,56,255,0.1)" }}>
-                  <motion.div
+                  <m.div
                     className="h-full rounded-full"
                     style={{ background: isTop ? "#CCFF00" : "#0038FF" }}
                     initial={{ width: "0%" }}
@@ -278,7 +278,7 @@ function VolumeTiers() {
                   />
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>
@@ -312,7 +312,7 @@ export default function Pricing() {
       <div className="max-w-[1120px] mx-auto px-5 md:px-8">
 
         {/* ── Header ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -337,7 +337,7 @@ export default function Pricing() {
             One credit = one verified contact. No monthly fees, no wasted spend.
             Volume discounts apply automatically — the more you scale, the more you save.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ── Product Cards ── */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
@@ -353,7 +353,7 @@ export default function Pricing() {
         </div>
 
         {/* ── Live Calculator ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -465,7 +465,7 @@ export default function Pricing() {
               <div className="flex items-baseline gap-1.5 flex-wrap">
                 <span className="text-[20px] text-white/70 font-light">$</span>
                 <AnimatePresence mode="popLayout">
-                  <motion.span
+                  <m.span
                     key={Math.round(price * 100)}
                     initial={{ y: 8, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -475,7 +475,7 @@ export default function Pricing() {
                     style={{ fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)" }}
                   >
                     {fmt(price)}
-                  </motion.span>
+                  </m.span>
                 </AnimatePresence>
                 <span className="text-[13px] text-white/50 ml-1">
                   · ${perUnit.toFixed(2)} per {category === "combo" ? "lead" : category === "email" ? "email" : "number"}
@@ -491,13 +491,13 @@ export default function Pricing() {
               <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
             </Link>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ── Volume Discount Animated Tiers ── */}
         <VolumeTiers />
 
         {/* ── Guarantees ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -514,7 +514,7 @@ export default function Pricing() {
               {g.text}
             </div>
           ))}
-        </motion.div>
+        </m.div>
 
         <p className="text-[12.5px] text-center" style={{ color: "#9ca3af" }}>
           Need more than 10,000 contacts per month?{" "}

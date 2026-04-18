@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Check } from "lucide-react";
 
 const FONT_DISPLAY = "var(--font-montserrat, 'Montserrat', sans-serif)";
@@ -20,13 +20,13 @@ export function ContactCard({
   initials, gradient, name, title, company, delay = 0, floatDir = 1, className,
 }: Props) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20, scale: 0.9 }}
       animate={{ opacity: 1,  y: 0,  scale: 1 }}
       transition={{ delay: 0.9 + delay, duration: 0.6, ease: [0.22,1,0.36,1] }}
       className={`absolute hidden lg:block ${className ?? ""}`}
     >
-      <motion.div
+      <m.div
         animate={{ y: [0, floatDir * -9, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay }}
         className="w-52 rounded-2xl overflow-hidden"
@@ -81,7 +81,7 @@ export function ContactCard({
             <span className="text-[10px] font-bold" style={{ color: "#60a5fa" }}>Verified contact</span>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }

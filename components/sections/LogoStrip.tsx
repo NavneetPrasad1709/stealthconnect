@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const COMPANIES = [
   "Stripe", "Linear", "Notion", "Vercel", "Figma",
@@ -13,7 +13,7 @@ export default function LogoStrip() {
       className="relative py-12 overflow-hidden"
       style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", background: "var(--bg-secondary)" }}
     >
-      <motion.p
+      <m.p
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -22,7 +22,7 @@ export default function LogoStrip() {
         style={{ color: "var(--fg-subtle)" }}
       >
         Trusted by teams at
-      </motion.p>
+      </m.p>
 
       {/* Scrolling strip */}
       <div className="relative overflow-hidden">
