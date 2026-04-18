@@ -198,7 +198,7 @@ export default function Hero() {
       */}
       <main className="relative z-20 flex-1 w-full max-w-[1400px] mx-auto px-4 md:px-6">
 
-        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr_240px] xl:grid-cols-[270px_1fr_270px] items-center gap-6 xl:gap-10 pt-6 pb-10 lg:pt-10 lg:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr_240px] xl:grid-cols-[270px_1fr_270px] items-center gap-6 xl:gap-10 pt-24 pb-10 lg:pt-20 lg:pb-16">
 
           {/* ── LEFT: result card (desktop) ── */}
           <div className="hidden lg:flex flex-col items-center justify-center gap-6">

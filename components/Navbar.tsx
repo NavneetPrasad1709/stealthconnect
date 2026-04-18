@@ -229,7 +229,7 @@ export default function Navbar() {
               style={{ background: "var(--brand)", boxShadow: "0 0 16px rgba(0,56,255,0.48)" }}>
               <Zap className="w-[13px] h-[13px] text-white" strokeWidth={2.5} />
             </motion.div>
-            <span className="text-[14px] font-black hidden sm:block truncate"
+            <span className="text-[14px] font-black block truncate"
               style={{ fontFamily: F, letterSpacing: "-0.03em" }}>
               <span style={{ color: "#fff" }}>Stealth</span>
               <span style={{ color: "rgba(255,255,255,0.3)" }}>Connect</span>
