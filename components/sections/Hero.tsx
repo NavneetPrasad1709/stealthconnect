@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight, ShieldCheck, Zap } from "lucide-react";
 import { FONT_DISPLAY } from "@/lib/tokens";
 import { useTypewriter } from "@/lib/useTypewriter";
@@ -52,12 +52,12 @@ const SpinBadge = () => (
 /* ─── floating contact result card ─── */
 function ResultCard() {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: -24 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      <motion.div
+      <m.div
         animate={{ y: [0, -14, 0] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
         className="w-[200px] xl:w-[220px] rounded-[1.75rem] p-4 flex flex-col gap-3 rotate-[-6deg] hover:rotate-0 transition-[transform] duration-500 shadow-2xl"
@@ -110,8 +110,8 @@ function ResultCard() {
           <ShieldCheck className="w-3 h-3" style={{ color: "#4a7c00" }} />
           <span className="text-[8.5px] font-bold" style={{ color: "#4a7c00", fontFamily: GF }}>AI-verified · 97.2% accurate</span>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }
 
@@ -124,12 +124,12 @@ function StatsCard() {
     { val: "190+",  label: "Countries", highlight: false },
   ];
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: 24 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.65, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      <motion.div
+      <m.div
         animate={{ y: [0, -12, 0] }}
         transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         className="w-[186px] xl:w-[200px] rounded-[1.75rem] p-4 flex flex-col gap-2.5 rotate-[5deg] hover:rotate-0 transition-[transform] duration-500 shadow-2xl"
@@ -153,8 +153,8 @@ function StatsCard() {
             )}
           </div>
         ))}
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }
 
@@ -218,7 +218,7 @@ export default function Hero() {
             <div className="w-full flex flex-col items-center space-y-0 md:space-y-1 mb-8">
 
               {/* FIND */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 1, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
@@ -233,10 +233,10 @@ export default function Hero() {
                 >
                   FIND
                 </span>
-              </motion.div>
+              </m.div>
 
               {/* ANYONE'S */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 1, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -251,10 +251,10 @@ export default function Hero() {
                 >
                   ANYONE'S
                 </span>
-              </motion.div>
+              </m.div>
 
               {/* CONTACT */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 1, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}
@@ -269,11 +269,11 @@ export default function Hero() {
                 >
                   CONTACT
                 </span>
-              </motion.div>
+              </m.div>
             </div>
 
             {/* ── Hook ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 1, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.33 }}
@@ -299,10 +299,10 @@ export default function Hero() {
                 </span>
                 {" "}— or you don't pay.
               </p>
-            </motion.div>
+            </m.div>
 
             {/* ── Search bar ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 1, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.38, ease: [0.22, 1, 0.36, 1] }}
@@ -352,7 +352,7 @@ export default function Hero() {
                     aria-hidden
                   >
                     {typed}
-                    <motion.span
+                    <m.span
                       animate={{ opacity: [1, 0, 1] }}
                       transition={{ duration: 0.9, repeat: Infinity }}
                       className="inline-block w-[2px] h-[0.8em] ml-[2px] align-middle rounded-sm"
@@ -362,7 +362,7 @@ export default function Hero() {
                 </div>
 
                 {/* CTA */}
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="shrink-0">
+                <m.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="shrink-0">
                   <Link
                     href="/signup"
                     className="flex items-center gap-2 px-5 py-3 rounded-[14px] text-[13px] font-black text-black whitespace-nowrap"
@@ -376,7 +376,7 @@ export default function Hero() {
                     Find Contact
                     <ArrowRight className="w-4 h-4" strokeWidth={3} />
                   </Link>
-                </motion.div>
+                </m.div>
               </div>
 
               {/* Below bar hint */}
@@ -386,10 +386,10 @@ export default function Hero() {
                   linkedin.com/in/sarah-chen-cto
                 </span>
               </p>
-            </motion.div>
+            </m.div>
 
             {/* ── Badges row ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 1, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.48, duration: 0.45 }}
@@ -461,10 +461,10 @@ export default function Hero() {
               >
                 <span style={{ color: "#CCFF00", fontSize: 14 }}>✓</span> GDPR compliant
               </span>
-            </motion.div>
+            </m.div>
 
             {/* ── Mobile cards ── */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.55 }}
@@ -472,7 +472,7 @@ export default function Hero() {
             >
               <ResultCard />
               <StatsCard />
-            </motion.div>
+            </m.div>
           </div>
 
           {/* ── RIGHT: stats card (desktop) ── */}

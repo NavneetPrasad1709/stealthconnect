@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { ChatWidgetLazy } from "@/components/ChatWidgetLazy";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { MotionProvider } from "@/components/MotionProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FloatingConsultButtonLazy } from "@/components/FloatingConsultButtonLazy";
 
@@ -101,10 +102,12 @@ export default function RootLayout({
     >
       <body className="font-body antialiased" suppressHydrationWarning>
         <ThemeProvider>
+          <MotionProvider>
           {children}
           <SpeedInsights />
           <ChatWidgetLazy />
           <FloatingConsultButtonLazy />
+          </MotionProvider>
           <Toaster
           position="top-right"
           toastOptions={{

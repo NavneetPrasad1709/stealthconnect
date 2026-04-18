@@ -427,8 +427,9 @@ export function ChatWidget() {
         whileHover={{ scale: 1.06 }}
         whileTap={{   scale: 0.94 }}
         className="fixed z-50 rounded-2xl flex items-center justify-center shadow-lg w-[65px] h-[65px] sm:w-[76px] sm:h-[76px]"
-        style={{ bottom: "1.5rem", right: "1.5rem" }}
         style={{
+          bottom:     "1.5rem",
+          right:      "1.5rem",
           background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
           boxShadow:  "0 8px 28px rgba(139,92,246,0.45), 0 2px 8px rgba(0,0,0,0.2)",
         }}

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useRef, useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { Zap, ArrowRight, Sun, Moon, X } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -46,7 +46,7 @@ function PillNav() {
       style={{ border: "1px solid rgba(255,255,255,0.09)", background: "rgba(255,255,255,0.03)" }}
       onMouseLeave={() => setPos(p => ({ ...p, opacity: 0 }))}>
       {LINKS.map(l => <Tab key={l.href} href={l.href} setPos={setPos}>{l.label}</Tab>)}
-      <motion.li animate={pos} transition={{ type: "spring", stiffness: 400, damping: 34 }}
+      <m.li animate={pos} transition={{ type: "spring", stiffness: 400, damping: 34 }}
         aria-hidden className="absolute z-0 rounded-full pointer-events-none"
         style={{ top: 4, bottom: 4, background: "rgba(255,255,255,0.09)", border: "1px solid rgba(255,255,255,0.13)" }} />
     </ul>
@@ -68,7 +68,7 @@ function ThemeBtn({ size = 32 }: { size?: number }) {
       className="relative flex items-center justify-center transition-opacity duration-150 hover:opacity-80"
       style={s}>
       <AnimatePresence mode="wait" initial={false}>
-        <motion.span key={dark ? "sun" : "moon"}
+        <m.span key={dark ? "sun" : "moon"}
           initial={{ opacity: 0, scale: 0.4, rotate: -45 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           exit={{ opacity: 0, scale: 0.4, rotate: 45 }}
@@ -77,7 +77,7 @@ function ThemeBtn({ size = 32 }: { size?: number }) {
           {dark
             ? <Sun size={13} className="text-amber-300" />
             : <Moon size={13} style={{ color: "#60a5fa" }} />}
-        </motion.span>
+        </m.span>
       </AnimatePresence>
     </button>
   )
@@ -90,14 +90,14 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
       {open && (
         <>
           {/* backdrop */}
-          <motion.div key="bd" onClick={close}
+          <m.div key="bd" onClick={close}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: .22 }}
             className="fixed inset-0 z-[58] md:hidden"
             style={{ background: "rgba(0,0,0,0.65)", backdropFilter: "blur(6px)" }} />
 
           {/* sheet */}
-          <motion.div key="sheet"
+          <m.div key="sheet"
             initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
             transition={{ type: "spring", stiffness: 360, damping: 34, mass: 0.75 }}
             className="fixed bottom-0 inset-x-0 z-[59] md:hidden"
@@ -139,7 +139,7 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
             {/* nav links */}
             <nav className="px-4 py-3 space-y-0.5">
               {LINKS.map((item, i) => (
-                <motion.a key={item.href} href={item.href} onClick={close}
+                <m.a key={item.href} href={item.href} onClick={close}
                   className="flex items-center justify-between px-4 py-3.5 rounded-2xl group"
                   style={{ textDecoration: "none", background: "transparent" }}
                   initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
@@ -155,12 +155,12 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
                     </span>
                   </div>
                   <ArrowRight size={13} style={{ color: "rgba(255,255,255,0.2)" }} />
-                </motion.a>
+                </m.a>
               ))}
             </nav>
 
             {/* CTAs */}
-            <motion.div className="px-5 pt-3 pb-10 space-y-2.5"
+            <m.div className="px-5 pt-3 pb-10 space-y-2.5"
               style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
               initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: .2, duration: .24 }}>
@@ -174,8 +174,8 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)", fontFamily: F, textDecoration: "none" }}>
                 Sign In
               </Link>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>
@@ -204,7 +204,7 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed top-0 inset-x-0 z-50 px-4 pt-4">
-        <motion.nav
+        <m.nav
           animate={{
             boxShadow: scrolled
               ? "0 8px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07)"
@@ -224,11 +224,11 @@ export default function Navbar() {
 
           {/* LEFT — Logo */}
           <Link href="/" className="flex-1 flex items-center gap-2 pl-2 min-w-0" style={{ textDecoration: "none" }}>
-            <motion.div whileHover={{ scale: .88 }} whileTap={{ scale: .82 }}
+            <m.div whileHover={{ scale: .88 }} whileTap={{ scale: .82 }}
               className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
               style={{ background: "var(--brand)", boxShadow: "0 0 16px rgba(0,56,255,0.48)" }}>
               <Zap className="w-[13px] h-[13px] text-white" strokeWidth={2.5} />
-            </motion.div>
+            </m.div>
             <span className="text-[14px] font-black block truncate"
               style={{ fontFamily: F, letterSpacing: "-0.03em" }}>
               <span style={{ color: "#fff" }}>Stealth</span>
@@ -264,7 +264,7 @@ export default function Navbar() {
                 Sign In
               </a>
 
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: .96 }}>
+              <m.div whileHover={{ scale: 1.04 }} whileTap={{ scale: .96 }}>
                 <Link href="/signup"
                   className="flex items-center gap-1.5 px-4 py-[6px] rounded-full text-[13px] font-semibold text-white"
                   style={{ background: "var(--brand)", fontFamily: F, textDecoration: "none", boxShadow: "0 4px 16px rgba(0,56,255,0.45)" }}
@@ -281,7 +281,7 @@ export default function Navbar() {
                   Get Started
                   <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
                 </Link>
-              </motion.div>
+              </m.div>
             </div>
 
             {/* mobile */}
@@ -290,22 +290,22 @@ export default function Navbar() {
               <button onClick={() => setOpen(v => !v)} aria-label={open ? "Close menu" : "Open menu"}
                 className="w-8 h-8 flex flex-col items-center justify-center gap-[5px] rounded-full"
                 style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <motion.span className="block h-[1.5px] rounded-full"
+                <m.span className="block h-[1.5px] rounded-full"
                   style={{ background: "rgba(255,255,255,0.85)", originX: .5, originY: .5, width: 15 }}
                   animate={open ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
                   transition={{ duration: .22, ease: [.22, 1, .36, 1] }} />
-                <motion.span className="block h-[1.5px] rounded-full"
+                <m.span className="block h-[1.5px] rounded-full"
                   style={{ background: "rgba(255,255,255,0.45)", width: 10 }}
                   animate={open ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
                   transition={{ duration: .14 }} />
-                <motion.span className="block h-[1.5px] rounded-full"
+                <m.span className="block h-[1.5px] rounded-full"
                   style={{ background: "rgba(255,255,255,0.85)", originX: .5, originY: .5, width: 15 }}
                   animate={open ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
                   transition={{ duration: .22, ease: [.22, 1, .36, 1] }} />
               </button>
             </div>
           </div>
-        </motion.nav>
+        </m.nav>
       </header>
 
       <Drawer open={open} close={() => setOpen(false)} />
