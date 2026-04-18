@@ -200,13 +200,13 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
             style={{ borderTop:"1px solid rgba(255,255,255,0.06)" }}
             initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
             transition={{ delay:.28, duration:.28, ease:[.22,1,.36,1] }}>
-            <Link href="/auth/signup" onClick={close}
+            <Link href="/signup" onClick={close}
               className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-white text-[14px] font-semibold"
               style={{ background:"var(--brand)", fontFamily:F, textDecoration:"none",
                 boxShadow:"0 6px 24px rgba(0,56,255,0.45)" }}>
               Get Started Free <ArrowRight size={15} strokeWidth={2.5} />
             </Link>
-            <Link href="/auth/login" onClick={close}
+            <Link href="/login" onClick={close}
               className="flex items-center justify-center w-full py-3.5 rounded-xl text-[14px] font-medium"
               style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.09)",
                 color:"rgba(255,255,255,0.55)", fontFamily:F, textDecoration:"none" }}>
@@ -289,7 +289,7 @@ export default function Navbar() {
 
               <div className="w-px h-4 mx-1" style={{ background:"rgba(255,255,255,0.1)" }} />
 
-              <a href="/auth/login"
+              <a href="/login"
                 className="px-3.5 py-[7px] rounded-lg text-[13px] font-medium transition-all duration-150"
                 style={{ color:"rgba(255,255,255,0.52)", fontFamily:F, textDecoration:"none" }}
                 onMouseEnter={e=>{e.currentTarget.style.color="rgba(255,255,255,.9)";e.currentTarget.style.background="rgba(255,255,255,.06)"}}
@@ -298,7 +298,7 @@ export default function Navbar() {
               </a>
 
               <motion.div whileHover={{ scale:1.04 }} whileTap={{ scale:.97 }}>
-                <Link href="/auth/signup"
+                <Link href="/signup"
                   className="flex items-center gap-1.5 px-4 py-[8px] rounded-lg text-[13px] font-semibold text-white"
                   style={{ background:"var(--brand)", fontFamily:F, textDecoration:"none",
                     boxShadow:"0 4px 16px rgba(0,56,255,0.5), 0 1px 3px rgba(0,56,255,0.3)" }}

@@ -51,7 +51,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(find \"D:\\\\\\\\SConnectAI\" -type d -name \"components\")",
       "Bash(xargs grep *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "WebFetch(domain:www.stealthconnect.ai)"
     ]
   }
 }
