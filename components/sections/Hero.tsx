@@ -280,7 +280,7 @@ export default function Hero() {
               className="mb-8 max-w-[44ch] space-y-3"
             >
               <p
-                className="text-[20px] md:text-[23px] font-bold leading-snug text-white"
+                className="text-[20px] md:text-[21px] font-bold leading-snug text-white"
                 style={{ fontFamily: FONT_DISPLAY, letterSpacing: "-0.025em" }}
               >
                 Your next deal is one LinkedIn URL away.
