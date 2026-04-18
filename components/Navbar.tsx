@@ -212,7 +212,7 @@ export default function Navbar() {
             borderColor: scrolled ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.07)",
           }}
           transition={{ duration: .28 }}
-          className="mx-auto h-[52px] px-3"
+          className="mx-auto h-[52px] px-3 flex items-center"
           style={{
             maxWidth: 1100,
             borderRadius: 999,
@@ -220,14 +220,10 @@ export default function Navbar() {
             background: "rgba(6,6,6,0.88)",
             backdropFilter: "blur(24px) saturate(160%)",
             WebkitBackdropFilter: "blur(24px) saturate(160%)",
-            display: "grid",
-            gridTemplateColumns: "1fr auto 1fr",
-            alignItems: "center",
-            gap: 8,
           }}>
 
           {/* LEFT — Logo */}
-          <Link href="/" className="flex items-center gap-2 pl-2 min-w-0" style={{ textDecoration: "none" }}>
+          <Link href="/" className="flex-1 flex items-center gap-2 pl-2 min-w-0" style={{ textDecoration: "none" }}>
             <motion.div whileHover={{ scale: .88 }} whileTap={{ scale: .82 }}
               className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
               style={{ background: "var(--brand)", boxShadow: "0 0 16px rgba(0,56,255,0.48)" }}>
@@ -244,7 +240,7 @@ export default function Navbar() {
           <PillNav />
 
           {/* RIGHT — Actions */}
-          <div className="flex items-center justify-end gap-1.5 pr-2">
+          <div className="flex-1 flex items-center justify-end gap-1.5 pr-2">
 
             {/* desktop */}
             <div className="hidden md:flex items-center gap-1.5">
