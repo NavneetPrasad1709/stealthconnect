@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
+  <circle cx="48" cy="48" r="48" fill="url(#bg)"/>
+  <!-- Person silhouette -->
+  <circle cx="48" cy="36" r="14" fill="white" fill-opacity="0.9"/>
+  <path d="M20 76c0-15.464 12.536-28 28-28s28 12.536 28 28" fill="white" fill-opacity="0.9"/>
+  <!-- Magnifying glass -->
+  <circle cx="66" cy="62" r="10" stroke="#3b82f6" stroke-width="4" fill="none"/>
+  <line x1="73" y1="69" x2="80" y2="76" stroke="#3b82f6" stroke-width="4" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e3a5f"/>
+    </linearGradient>
+  </defs>
+</svg>
