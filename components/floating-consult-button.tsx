@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface FloatingConsultButtonProps {
   buttonSize?: number;
+  smButtonSize?: number;
   imageSize?: number;
   imageSrc?: string;
   imageAlt?: string;
@@ -23,6 +24,7 @@ interface FloatingConsultButtonProps {
 
 export const FloatingConsultButton = ({
   buttonSize,
+  smButtonSize: smButtonSizeProp,
   imageSize,
   imageSrc = "/consultant-avatar.jpg",
   imageAlt = "Consultant",
@@ -38,7 +40,7 @@ export const FloatingConsultButton = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const lgButtonSize = buttonSize || 72;
-  const smButtonSize = buttonSize ? Math.round(buttonSize * 0.8) : 58;
+  const smButtonSize = smButtonSizeProp ?? (buttonSize ? Math.round(buttonSize * 0.8) : 58);
   const lgImageSize = imageSize || 42;
   const smImageSize = imageSize ? Math.round(imageSize * 0.833) : 35;
 

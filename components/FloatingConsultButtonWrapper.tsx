@@ -8,7 +8,8 @@ export function FloatingConsultButtonWrapper() {
 
   return (
     <FloatingConsultButton
-      buttonSize={72}
+      buttonSize={76}
+      smButtonSize={65}
       imageSize={42}
       imageSrc="/consult-icon.svg"
       imageAlt="StealthConnect AI"
@@ -18,7 +19,7 @@ export function FloatingConsultButtonWrapper() {
       popupDescription="Paste any LinkedIn profile URL and get a verified email or phone number in 30 minutes. No subscription — pay only per result. First lookup is on us."
       ctaButtonText="Claim Free Lookup"
       ctaButtonAction={() => router.push("/signup")}
-      position={{ bottom: "116px", right: "1.5rem" }}
+      position={{ bottom: "105px", right: "1.5rem" }}
     />
   );
 }
