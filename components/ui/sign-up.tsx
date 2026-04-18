@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { AuthRightPanel } from "@/components/ui/AuthRightPanel";
 
 const FONT_DISPLAY = "var(--font-montserrat, 'Montserrat', sans-serif)";
 const FONT_BODY    = "var(--font-montserrat, 'Montserrat', sans-serif)";
@@ -304,42 +305,10 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
         </div>
       </section>
 
-      {/* ── Right: Hero image + testimonials ─────────────────────────────── */}
-      {heroImageSrc && (
-        <section className="hidden md:block flex-1 relative p-4">
-          <div
-            className="signin-slide-right absolute inset-4 rounded-3xl bg-cover bg-center"
-            style={{ backgroundImage: `url(${heroImageSrc})` }}
-          >
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          </div>
-
-          {testimonials.length > 0 && (
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 px-4 w-full justify-center flex-wrap">
-              <TestimonialCard
-                testimonial={testimonials[0]}
-                animClass="signin-testimonial signin-delay-t1"
-              />
-              {testimonials[1] && (
-                <div className="hidden xl:flex">
-                  <TestimonialCard
-                    testimonial={testimonials[1]}
-                    animClass="signin-testimonial signin-delay-t2"
-                  />
-                </div>
-              )}
-              {testimonials[2] && (
-                <div className="hidden 2xl:flex">
-                  <TestimonialCard
-                    testimonial={testimonials[2]}
-                    animClass="signin-testimonial signin-delay-t3"
-                  />
-                </div>
-              )}
-            </div>
-          )}
-        </section>
-      )}
+      {/* ── Right: Animated product panel ───────────────────────────────── */}
+      <div className="hidden md:block flex-1">
+        <AuthRightPanel />
+      </div>
     </div>
   );
 };
