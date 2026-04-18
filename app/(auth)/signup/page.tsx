@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 import { CheckCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -40,7 +40,7 @@ function SuccessScreen({ email }: { email: string }) {
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden>
         <div className="w-[480px] h-[480px] rounded-full blur-[120px]" style={{ background: "rgba(37,99,235,0.08)" }} />
       </div>
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.93 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -76,7 +76,7 @@ function SuccessScreen({ email }: { email: string }) {
         >
           Back to Sign In
         </Link>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

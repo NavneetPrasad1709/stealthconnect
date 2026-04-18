@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback, KeyboardEvent } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 
 /* ─── Types ─────────────────────────────────────────────────────────────── */
 interface Msg { id: string; role: "user" | "assistant"; content: string }
@@ -52,7 +52,7 @@ function TypingDots() {
   return (
     <span className="inline-flex items-center gap-[3px] py-0.5">
       {[0, 1, 2].map(i => (
-        <motion.span
+        <m.span
           key={i}
           className="block rounded-full"
           style={{ width: 5, height: 5, background: "rgba(0,0,0,0.2)" }}
@@ -162,7 +162,7 @@ export function FloatingActions() {
       {/* ── Chat panel ─────────────────────────────────────────── */}
       <AnimatePresence>
         {chatOpen && (
-          <motion.div
+          <m.div
             key="panel"
             initial={{ opacity: 0, y: 20, scale: 0.94 }}
             animate={{ opacity: 1, y: 0,  scale: 1    }}
@@ -247,7 +247,7 @@ export function FloatingActions() {
             {/* Body */}
             <AnimatePresence initial={false}>
               {!minimized && (
-                <motion.div
+                <m.div
                   key="body"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
@@ -262,7 +262,7 @@ export function FloatingActions() {
                   >
                     {/* Welcome state */}
                     {messages.length === 0 && (
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
@@ -320,12 +320,12 @@ export function FloatingActions() {
                             </button>
                           ))}
                         </div>
-                      </motion.div>
+                      </m.div>
                     )}
 
                     {/* Messages */}
                     {messages.map(msg => (
-                      <motion.div
+                      <m.div
                         key={msg.id}
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -355,7 +355,7 @@ export function FloatingActions() {
                         >
                           {msg.content === "" && msg.role === "assistant" ? <TypingDots /> : msg.content}
                         </div>
-                      </motion.div>
+                      </m.div>
                     ))}
 
                     {error && (
@@ -423,17 +423,17 @@ export function FloatingActions() {
                       Enter to send · Shift+Enter for new line
                     </p>
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* ── Floating action pills ───────────────────────────────── */}
       <AnimatePresence>
         {visible && (
-          <motion.div
+          <m.div
             key="pills"
             className="flex flex-col items-end gap-2"
             initial={{ opacity: 0 }}
@@ -441,7 +441,7 @@ export function FloatingActions() {
             exit={{ opacity: 0 }}
           >
             {/* Chat button */}
-            <motion.div
+            <m.div
               key="chat-pill"
               initial={{ opacity: 0, x: 24, scale: 0.9 }}
               animate={{ opacity: 1, x: 0,  scale: 1   }}
@@ -449,7 +449,7 @@ export function FloatingActions() {
               style={{ filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.4))" }}
             >
               {/* Main toggle button */}
-              <motion.button
+              <m.button
                 onClick={() => chatOpen ? setChatOpen(false) : openChat()}
                 whileHover={{ scale: 1.06 }}
                 whileTap={{   scale: 0.93 }}
@@ -472,7 +472,7 @@ export function FloatingActions() {
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {chatOpen ? (
-                    <motion.span
+                    <m.span
                       key="close"
                       initial={{ rotate: -90, opacity: 0 }}
                       animate={{ rotate: 0,   opacity: 1 }}
@@ -481,9 +481,9 @@ export function FloatingActions() {
                       className="flex"
                     >
                       <IcClose />
-                    </motion.span>
+                    </m.span>
                   ) : (
-                    <motion.span
+                    <m.span
                       key="chat"
                       initial={{ rotate: 90,  opacity: 0 }}
                       animate={{ rotate: 0,   opacity: 1 }}
@@ -492,7 +492,7 @@ export function FloatingActions() {
                       className="flex"
                     >
                       <IcChat />
-                    </motion.span>
+                    </m.span>
                   )}
                 </AnimatePresence>
 
@@ -509,9 +509,9 @@ export function FloatingActions() {
                     }}
                   />
                 )}
-              </motion.button>
-            </motion.div>
-          </motion.div>
+              </m.button>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

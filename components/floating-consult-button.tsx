@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 interface FloatingConsultButtonProps {
   buttonSize?: number;
@@ -49,7 +49,7 @@ export const FloatingConsultButton = ({
       {/* Backdrop */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -63,7 +63,7 @@ export const FloatingConsultButton = ({
       {/* Popup Modal — white card */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.88, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.88, y: 16 }}
@@ -161,13 +161,13 @@ export const FloatingConsultButton = ({
                 {ctaButtonText}
               </button>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* Floating Button */}
       <div className="fixed z-50" style={position}>
-        <motion.div
+        <m.div
           className="relative cursor-pointer group"
           style={{
             width: `clamp(${smButtonSize}px, 8vw, ${lgButtonSize}px)`,
@@ -178,7 +178,7 @@ export const FloatingConsultButton = ({
           onClick={() => setIsOpen(!isOpen)}
         >
           {/* Rotating text ring */}
-          <motion.div
+          <m.div
             className="absolute inset-0"
             animate={{ rotate: 360 }}
             transition={{ duration: revolvingSpeed, repeat: Infinity, ease: "linear" }}
@@ -196,7 +196,7 @@ export const FloatingConsultButton = ({
                 </textPath>
               </text>
             </svg>
-          </motion.div>
+          </m.div>
 
           {/* Center circle */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -218,7 +218,7 @@ export const FloatingConsultButton = ({
               />
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </>
   );
