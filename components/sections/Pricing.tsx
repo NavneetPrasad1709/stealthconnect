@@ -323,7 +323,7 @@ export default function Pricing() {
           <h2
             className="font-extrabold tracking-tight leading-[1.1] mb-4"
             style={{
-              fontSize: "clamp(1.85rem, 3.5vw, 2.75rem)",
+              fontSize: "clamp(1.5rem, 3.5vw, 2.75rem)",
               color: "var(--c-heading)",
               fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
               fontWeight: 800,
@@ -335,8 +335,8 @@ export default function Pricing() {
           </h2>
           <p className="leading-relaxed" style={{ fontSize: "clamp(15px,2.5vw,22px)", color: "var(--c-heading)" }}>
             Pay for <span style={{ color: "#0038FF", fontWeight: 700 }}>results</span>, not access.{" "} <br />
-            <span style={{ fontWeight: 700 }}>One credit = one verified contact</span> in your dashboard.{" "} <br />
-            Buy more, <span style={{ color: "#0038FF", fontWeight: 700 }}>spend less per contact</span> — automatically.{" "} <br />
+            <span style={{ fontWeight: 700 }}>One credit = one verified contact</span><br />
+            Buy more, <span style={{ color: "#0038FF", fontWeight: 700 }}>spend less per contact</span> <br />
             <span style={{ fontWeight: 700 }}>No contracts. No surprises.</span>{" "}
             <span style={{ color: "#0038FF", fontWeight: 800 }}>Ever.</span>
           </p>
