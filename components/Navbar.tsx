@@ -9,10 +9,10 @@ import { useTheme } from "next-themes"
 const F = "var(--font-montserrat,'Montserrat',sans-serif)"
 
 const LINKS = [
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Features",     href: "#features"     },
-  { label: "Pricing",      href: "#pricing"      },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "Features",     href: "/#features"     },
+  { label: "Pricing",      href: "/#pricing"      },
+  { label: "Testimonials", href: "/#testimonials" },
 ]
 
 /* ─── Sliding pill tab ──────────────────────────────────── */
@@ -29,7 +29,7 @@ function Tab({ href, children, setPos }: {
       setPos({ width, opacity: 1, left: ref.current.offsetLeft })
     }} className="relative z-10 select-none">
       <a href={href}
-        style={{ fontFamily: F, color: "rgba(255,255,255,0.5)", fontSize: 13, fontWeight: 500 }}
+        style={{ fontFamily: F, color: "white", fontSize: 15, fontWeight: 500 }}
         className="block px-4 py-2 whitespace-nowrap transition-colors duration-150"
         onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,.92)")}
         onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,.5)")}>
@@ -43,7 +43,6 @@ function PillNav() {
   const [pos, setPos] = useState<Pos>({ left: 0, width: 0, opacity: 0 })
   return (
     <ul className="relative hidden md:flex w-fit items-center rounded-full p-1"
-      style={{ border: "1px solid rgba(255,255,255,0.09)", background: "rgba(255,255,255,0.03)" }}
       onMouseLeave={() => setPos(p => ({ ...p, opacity: 0 }))}>
       {LINKS.map(l => <Tab key={l.href} href={l.href} setPos={setPos}>{l.label}</Tab>)}
       <m.li animate={pos} transition={{ type: "spring", stiffness: 400, damping: 34 }}
@@ -154,7 +153,7 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
                       {item.label}
                     </span>
                   </div>
-                  <ArrowRight size={13} style={{ color: "rgba(255,255,255,0.2)" }} />
+                  
                 </m.a>
               ))}
             </nav>
@@ -167,7 +166,7 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
               <Link href="/signup" onClick={close}
                 className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full text-[14px] font-semibold text-white"
                 style={{ background: "var(--brand)", fontFamily: F, textDecoration: "none", boxShadow: "0 6px 28px rgba(0,56,255,0.45)" }}>
-                Get Started Free <ArrowRight size={14} strokeWidth={2.5} />
+                Get Started Free 
               </Link>
               <Link href="/login" onClick={close}
                 className="flex items-center justify-center w-full py-3.5 rounded-full text-[14px] font-medium"
@@ -249,8 +248,8 @@ export default function Navbar() {
               <div className="w-px h-4 mx-1" style={{ background: "rgba(255,255,255,0.1)" }} />
 
               <a href="/login"
-                className="px-4 py-[6px] rounded-full text-[13px] font-medium transition-all duration-150"
-                style={{ color: "rgba(255,255,255,0.5)", fontFamily: F, textDecoration: "none", border: "1px solid transparent" }}
+                className="px-4 py-[6px] rounded-full text-[15px] font-medium transition-all duration-150"
+                style={{ color: "white", fontFamily: F, textDecoration: "none", border: "1px solid transparent" }}
                 onMouseEnter={e => {
                   e.currentTarget.style.color = "rgba(255,255,255,.9)"
                   e.currentTarget.style.background = "rgba(255,255,255,.06)"
@@ -266,7 +265,7 @@ export default function Navbar() {
 
               <m.div whileHover={{ scale: 1.04 }} whileTap={{ scale: .96 }}>
                 <Link href="/signup"
-                  className="flex items-center gap-1.5 px-4 py-[6px] rounded-full text-[13px] font-semibold text-white"
+                  className="flex items-center gap-1.5 px-4 py-[6px] rounded-full text-[15px] font-semibold text-white"
                   style={{ background: "var(--brand)", fontFamily: F, textDecoration: "none", boxShadow: "0 4px 16px rgba(0,56,255,0.45)" }}
                   onMouseEnter={e => {
                     const el = e.currentTarget as HTMLElement
@@ -279,7 +278,7 @@ export default function Navbar() {
                     el.style.boxShadow = "0 4px 16px rgba(0,56,255,0.45)"
                   }}>
                   Get Started
-                  <ArrowRight className="w-3 h-3" strokeWidth={2.5} />
+
                 </Link>
               </m.div>
             </div>

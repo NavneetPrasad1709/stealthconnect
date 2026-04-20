@@ -15,7 +15,7 @@ const GoogleIcon = () => (
   </svg>
 );
 
-export interface Testimonial { avatarSrc:string; name:string; handle:string; text:string; }
+export interface Testimonial { avatarSrc: string; name: string; handle: string; text: string; }
 
 export interface SignUpPageProps {
   title?: React.ReactNode;
@@ -32,167 +32,247 @@ export interface SignUpPageProps {
 
 export const SignUpPage: React.FC<SignUpPageProps> = ({
   onSignUp, onGoogleSignUp, onSignIn,
-  loading=false, oauthLoading=false, error,
+  loading = false, oauthLoading = false, error,
 }) => {
   const [showPw, setShowPw] = useState(false);
   const disabled = loading || oauthLoading;
 
   const inputStyle: React.CSSProperties = {
-    fontFamily:F, background:"rgba(255,255,255,0.05)",
-    border:"1px solid rgba(255,255,255,0.09)", caretColor:"var(--brand)",
+    fontFamily: F,
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.09)",
+    caretColor: "var(--brand)",
+    minHeight: 52,
   };
-  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor="rgba(0,56,255,0.5)");
-  const onBlur  = (e: React.FocusEvent<HTMLInputElement>) => (e.currentTarget.style.borderColor="rgba(255,255,255,0.09)");
-  const inputCls = "w-full text-sm py-3.5 px-4 rounded-2xl focus:outline-none text-white placeholder:text-white/20 transition-all duration-150";
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) =>
+    (e.currentTarget.style.borderColor = "rgba(0,56,255,0.55)");
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) =>
+    (e.currentTarget.style.borderColor = "rgba(255,255,255,0.09)");
+  const inputCls = "w-full text-[15px] py-3.5 px-4 rounded-2xl focus:outline-none text-white placeholder:text-white/25 transition-all duration-150";
+
+  const labelStyle: React.CSSProperties = {
+    fontFamily: F,
+    fontSize: 11,
+    fontWeight: 700,
+    color: "rgba(255,255,255,0.35)",
+    textTransform: "uppercase",
+    letterSpacing: "0.12em",
+    display: "block",
+    marginBottom: 6,
+  };
 
   return (
-    <div className="h-[100dvh] w-[100dvw] flex flex-col md:flex-row overflow-hidden"
-      style={{ background:"#000", fontFamily:F }}>
-
+    <div
+      className="min-h-[100dvh] w-full flex flex-col md:flex-row md:h-[100dvh] md:overflow-hidden"
+      style={{ background: "#000", fontFamily: F }}
+    >
       {/* ── LEFT ── */}
-      <section className="flex-1 flex items-center justify-center p-6 sm:p-10 relative overflow-y-auto">
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <section className="flex-1 flex flex-col justify-center md:overflow-y-auto relative">
+
+        {/* Radial glow */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <div style={{
-            position:"absolute", top:"10%", left:"50%", transform:"translateX(-50%)",
-            width:600, height:600, borderRadius:"50%",
-            background:"radial-gradient(circle,rgba(0,56,255,0.08) 0%,transparent 70%)",
-          }}/>
+            position: "absolute", top: "10%", left: "50%", transform: "translateX(-50%)",
+            width: 560, height: 560, borderRadius: "50%",
+            background: "radial-gradient(circle,rgba(0,56,255,0.09) 0%,transparent 70%)",
+          }} />
         </div>
 
-        <div className="w-full max-w-[400px] relative z-10 flex flex-col gap-5 py-6">
+        {/* Scrollable content */}
+        <div className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-10 py-10 md:py-14">
+          <div className="w-full max-w-[420px] flex flex-col gap-5">
 
-          {/* Logo */}
-          <div className="animate-element animate-delay-100 flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full flex items-center justify-center"
-              style={{ background:"var(--brand)", boxShadow:"0 0 16px rgba(0,56,255,0.6)" }}>
-              <Zap className="w-3.5 h-3.5 text-white" strokeWidth={2.5}/>
-            </div>
-            <span style={{ fontFamily:F, fontSize:13, fontWeight:800, color:"rgba(255,255,255,0.55)", letterSpacing:"-0.01em" }}>
-              StealthConnect AI
-            </span>
-          </div>
-
-          {/* Heading */}
-          <div className="animate-element animate-delay-200">
-            <div className="inline-flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full"
-              style={{ background:"rgba(204,255,0,0.08)", border:"1px solid rgba(204,255,0,0.2)" }}>
-              <span style={{ width:6, height:6, borderRadius:"50%", background:"#CCFF00", display:"inline-block" }}/>
-              <span style={{ fontFamily:F, fontSize:11, fontWeight:700, color:"#CCFF00" }}>1 free credit included — no card needed</span>
-            </div>
-            <h1 style={{ fontFamily:F, fontSize:"clamp(2.4rem,4.5vw,3.4rem)", fontWeight:300, lineHeight:1.05, letterSpacing:"-0.04em", color:"rgba(255,255,255,0.9)", margin:0 }}>
-              Start finding<br/>
-              <span style={{ fontWeight:900, color:"#fff" }}>contacts.</span>
-            </h1>
-          </div>
-
-          {/* Google */}
-          <button type="button" onClick={onGoogleSignUp} disabled={disabled}
-            className="animate-element animate-delay-300 w-full flex items-center justify-center gap-2.5 rounded-2xl py-3.5 text-sm font-medium text-white transition-all duration-150 disabled:opacity-50"
-            style={{ border:"1px solid rgba(255,255,255,0.1)", background:"rgba(255,255,255,0.04)", fontFamily:F }}
-            onMouseEnter={e=>(e.currentTarget.style.background="rgba(255,255,255,0.07)")}
-            onMouseLeave={e=>(e.currentTarget.style.background="rgba(255,255,255,0.04)")}>
-            {oauthLoading
-              ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"/>
-              : <GoogleIcon/>}
-            Continue with Google
-          </button>
-
-          {/* Divider */}
-          <div className="animate-element animate-delay-400 flex items-center gap-3">
-            <span className="flex-1 h-px" style={{ background:"rgba(255,255,255,0.06)" }}/>
-            <span style={{ fontFamily:F, fontSize:10, color:"rgba(255,255,255,0.2)", textTransform:"uppercase", letterSpacing:"0.12em" }}>or</span>
-            <span className="flex-1 h-px" style={{ background:"rgba(255,255,255,0.06)" }}/>
-          </div>
-
-          {/* Form */}
-          <form className="flex flex-col gap-3.5" onSubmit={onSignUp}>
-
-            <div className="animate-element animate-delay-400">
-              <label style={{ fontFamily:F, fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.35)", textTransform:"uppercase", letterSpacing:"0.1em", display:"block", marginBottom:6 }}>Full Name</label>
-              <input name="fullName" type="text" placeholder="John Doe"
-                autoComplete="name" minLength={2} required
-                className={inputCls} style={inputStyle}
-                onFocus={onFocus} onBlur={onBlur}/>
+            {/* Logo */}
+            <div className="animate-element animate-delay-100 flex items-center gap-2">
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                style={{ background: "var(--brand)", boxShadow: "0 0 20px rgba(0,56,255,0.6)" }}
+              >
+                <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
+              </div>
+              <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "rgba(255,255,255,0.55)", letterSpacing: "-0.01em" }}>
+                StealthConnect AI
+              </span>
             </div>
 
-            <div className="animate-element animate-delay-500">
-              <label style={{ fontFamily:F, fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.35)", textTransform:"uppercase", letterSpacing:"0.1em", display:"block", marginBottom:6 }}>Email</label>
-              <input name="email" type="email" placeholder="you@example.com"
-                autoComplete="email" required
-                className={inputCls} style={inputStyle}
-                onFocus={onFocus} onBlur={onBlur}/>
+            {/* Heading */}
+            <div className="animate-element animate-delay-200">
+              <div
+                className="inline-flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full"
+                style={{ background: "rgba(204,255,0,0.08)", border: "1px solid rgba(204,255,0,0.2)" }}
+              >
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#CCFF00", display: "inline-block", flexShrink: 0 }} />
+                <span style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "#CCFF00" }}>
+                  1 free credit — no card needed
+                </span>
+              </div>
+              <h1 style={{
+                fontFamily: F,
+                fontSize: "clamp(2.4rem,8vw,3.4rem)",
+                fontWeight: 300,
+                lineHeight: 1.05,
+                letterSpacing: "-0.04em",
+                color: "rgba(255,255,255,0.9)",
+                margin: 0,
+              }}>
+                Start finding<br />
+                <span style={{ fontWeight: 900, color: "#fff" }}>contacts.</span>
+              </h1>
             </div>
 
-            <div className="animate-element animate-delay-500 grid grid-cols-2 gap-3">
-              <div>
-                <label style={{ fontFamily:F, fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.35)", textTransform:"uppercase", letterSpacing:"0.1em", display:"block", marginBottom:6 }}>
-                  Phone <span style={{ color:"rgba(255,255,255,0.18)", fontWeight:400, textTransform:"none", letterSpacing:0 }}>(opt)</span>
-                </label>
-                <input name="phone" type="tel" placeholder="+1 555 0000"
+            {/* Google */}
+            <button
+              type="button" onClick={onGoogleSignUp} disabled={disabled}
+              className="animate-element animate-delay-300 w-full flex items-center justify-center gap-2.5 rounded-2xl text-[15px] font-medium text-white transition-all duration-150 disabled:opacity-50 active:scale-[0.98]"
+              style={{
+                border: "1px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.04)",
+                fontFamily: F,
+                minHeight: 52,
+                padding: "0 20px",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.04)")}
+            >
+              {oauthLoading
+                ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                : <GoogleIcon />}
+              Continue with Google
+            </button>
+
+            {/* Divider */}
+            <div className="animate-element animate-delay-400 flex items-center gap-3">
+              <span className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
+              <span style={{ fontFamily: F, fontSize: 10, color: "rgba(255,255,255,0.22)", textTransform: "uppercase", letterSpacing: "0.14em" }}>or</span>
+              <span className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
+            </div>
+
+            {/* Form */}
+            <form className="flex flex-col gap-4" onSubmit={onSignUp}>
+
+              {/* Full Name */}
+              <div className="animate-element animate-delay-400">
+                <label style={labelStyle}>Full Name</label>
+                <input
+                  name="fullName" type="text" placeholder="John Doe"
+                  autoComplete="name" minLength={2} required
                   className={inputCls} style={inputStyle}
-                  onFocus={onFocus} onBlur={onBlur}/>
+                  onFocus={onFocus} onBlur={onBlur}
+                />
               </div>
-              <div>
-                <label style={{ fontFamily:F, fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.35)", textTransform:"uppercase", letterSpacing:"0.1em", display:"block", marginBottom:6 }}>
-                  LinkedIn <span style={{ color:"rgba(255,255,255,0.18)", fontWeight:400, textTransform:"none", letterSpacing:0 }}>(opt)</span>
-                </label>
-                <input name="linkedinUrl" type="url" placeholder="linkedin.com/in/you"
+
+              {/* Email */}
+              <div className="animate-element animate-delay-450">
+                <label style={labelStyle}>Email</label>
+                <input
+                  name="email" type="email" placeholder="you@example.com"
+                  autoComplete="email" required
                   className={inputCls} style={inputStyle}
-                  onFocus={onFocus} onBlur={onBlur}/>
+                  onFocus={onFocus} onBlur={onBlur}
+                />
               </div>
-            </div>
 
-            <div className="animate-element animate-delay-600">
-              <label style={{ fontFamily:F, fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.35)", textTransform:"uppercase", letterSpacing:"0.1em", display:"block", marginBottom:6 }}>Password</label>
-              <div className="relative">
-                <input name="password" type={showPw?"text":"password"} placeholder="Min. 8 characters"
-                  autoComplete="new-password" minLength={8} required
-                  className={`${inputCls} pr-11`} style={inputStyle}
-                  onFocus={onFocus} onBlur={onBlur}/>
-                <button type="button" onClick={()=>setShowPw(v=>!v)}
-                  className="absolute inset-y-0 right-3.5 flex items-center transition-colors"
-                  style={{ color:"rgba(255,255,255,0.25)" }}
-                  onMouseEnter={e=>(e.currentTarget.style.color="rgba(255,255,255,0.6)")}
-                  onMouseLeave={e=>(e.currentTarget.style.color="rgba(255,255,255,0.25)")}>
-                  {showPw ? <EyeOff className="w-4 h-4"/> : <Eye className="w-4 h-4"/>}
-                </button>
+              {/* Phone + LinkedIn — stacked on mobile, side-by-side on sm+ */}
+              <div className="animate-element animate-delay-500 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label style={labelStyle}>
+                    Phone{" "}
+                    <span style={{ color: "rgba(255,255,255,0.18)", fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>(opt)</span>
+                  </label>
+                  <input
+                    name="phone" type="tel" placeholder="+1 555 0000"
+                    className={inputCls} style={inputStyle}
+                    onFocus={onFocus} onBlur={onBlur}
+                  />
+                </div>
+                <div>
+                  <label style={labelStyle}>
+                    LinkedIn{" "}
+                    <span style={{ color: "rgba(255,255,255,0.18)", fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>(opt)</span>
+                  </label>
+                  <input
+                    name="linkedinUrl" type="url" placeholder="linkedin.com/in/you"
+                    className={inputCls} style={inputStyle}
+                    onFocus={onFocus} onBlur={onBlur}
+                  />
+                </div>
               </div>
-            </div>
 
-            {error && (
-              <p role="alert" className="text-sm px-3.5 py-2.5 rounded-xl"
-                style={{ background:"rgba(239,68,68,0.07)", color:"#f87171", border:"1px solid rgba(239,68,68,0.15)", fontFamily:F }}>
-                {error}
+              {/* Password */}
+              <div className="animate-element animate-delay-550">
+                <label style={labelStyle}>Password</label>
+                <div className="relative">
+                  <input
+                    name="password" type={showPw ? "text" : "password"} placeholder="Min. 8 characters"
+                    autoComplete="new-password" minLength={8} required
+                    className={`${inputCls} pr-12`} style={inputStyle}
+                    onFocus={onFocus} onBlur={onBlur}
+                  />
+                  <button
+                    type="button" onClick={() => setShowPw(v => !v)}
+                    className="absolute inset-y-0 right-4 flex items-center transition-colors"
+                    style={{ color: "rgba(255,255,255,0.25)" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}
+                  >
+                    {showPw ? <EyeOff className="w-[18px] h-[18px]" /> : <Eye className="w-[18px] h-[18px]" />}
+                  </button>
+                </div>
+              </div>
+
+              {error && (
+                <p role="alert" className="text-sm px-4 py-3 rounded-xl"
+                  style={{ background: "rgba(239,68,68,0.07)", color: "#f87171", border: "1px solid rgba(239,68,68,0.15)", fontFamily: F }}>
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit" disabled={disabled}
+                className="animate-element animate-delay-600 w-full rounded-2xl text-[15px] font-bold text-white transition-all duration-150 disabled:opacity-50 active:scale-[0.98]"
+                style={{
+                  background: "var(--brand)",
+                  fontFamily: F,
+                  boxShadow: "0 4px 24px rgba(0,56,255,0.35)",
+                  minHeight: 52,
+                }}
+                onMouseEnter={e => !disabled && (e.currentTarget.style.boxShadow = "0 6px 32px rgba(0,56,255,0.55)")}
+                onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,56,255,0.35)")}
+              >
+                {loading
+                  ? <span className="flex items-center justify-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Creating account…
+                    </span>
+                  : "Create Free Account →"}
+              </button>
+
+              {/* Terms */}
+              <p style={{ fontFamily: F, fontSize: 11.5, color: "rgba(255,255,255,0.2)", lineHeight: 1.6, textAlign: "center" }}>
+                By signing up you agree to our{" "}
+                <a href="/terms" style={{ color: "rgba(100,140,255,0.8)", textDecoration: "underline" }}>Terms</a>
+                {" "}and{" "}
+                <a href="/privacy" style={{ color: "rgba(100,140,255,0.8)", textDecoration: "underline" }}>Privacy Policy</a>.
               </p>
-            )}
+            </form>
 
-            <button type="submit" disabled={disabled}
-              className="animate-element animate-delay-700 w-full rounded-2xl py-3.5 text-sm font-bold text-white transition-all duration-150 disabled:opacity-50 active:scale-[0.98]"
-              style={{ background:"var(--brand)", fontFamily:F, boxShadow:"0 4px 24px rgba(0,56,255,0.35)" }}
-              onMouseEnter={e=>!disabled&&(e.currentTarget.style.boxShadow="0 6px 32px rgba(0,56,255,0.55)")}
-              onMouseLeave={e=>(e.currentTarget.style.boxShadow="0 4px 24px rgba(0,56,255,0.35)")}>
-              {loading
-                ? <span className="flex items-center justify-center gap-2">
-                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"/>Creating account…
-                  </span>
-                : "Create Free Account →"}
-            </button>
-          </form>
+            <p className="animate-element animate-delay-700 text-center" style={{ fontSize: 13, color: "rgba(255,255,255,0.28)", fontFamily: F }}>
+              Already have an account?{" "}
+              <button
+                type="button" onClick={onSignIn}
+                className="font-semibold hover:underline transition-colors"
+                style={{ color: "rgba(80,130,255,0.9)" }}
+              >
+                Sign in
+              </button>
+            </p>
 
-          <p className="animate-element animate-delay-800 text-center text-xs" style={{ color:"rgba(255,255,255,0.25)", fontFamily:F }}>
-            Already have an account?{" "}
-            <button type="button" onClick={onSignIn}
-              className="font-semibold hover:underline"
-              style={{ color:"rgba(0,100,255,0.8)" }}>
-              Sign in
-            </button>
-          </p>
-
+          </div>
         </div>
       </section>
 
       {/* ── RIGHT ── */}
-      <div className="hidden md:flex flex-1 min-h-0">
+      <div className="hidden md:flex flex-1 min-h-0 h-[100dvh]">
         <AuthRightPanel />
       </div>
     </div>

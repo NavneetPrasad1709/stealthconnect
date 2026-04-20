@@ -107,7 +107,7 @@ function Step1Visual({ phase }: { phase: "in" | "hold" | "out" }) {
         <p className="text-[12px] font-bold text-[#0D0D0D] dark:text-white leading-none" style={{ fontFamily: FONT }}>
           Jane Doe
         </p>
-        <p className="text-[10px] text-[#6b7280] mt-0.5 mb-3" style={{ fontFamily: FONT }}>
+        <p className="text-[10px] text-[var(--c-heading)] mt-0.5 mb-3" style={{ fontFamily: FONT }}>
           CTO · Acme Corp · San Francisco
         </p>
         {/* Live counter pill */}
@@ -163,7 +163,7 @@ function Step2Visual({ phase }: { phase: "in" | "hold" | "out" }) {
       {bars.map((bar, i) => (
         <div key={bar.label}>
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] font-semibold text-[#6b7280]" style={{ fontFamily: FONT }}>
+            <span className="text-[10px] font-semibold text-[var(--c-heading)]" style={{ fontFamily: FONT }}>
               {bar.label}
             </span>
             <span
@@ -260,7 +260,7 @@ function Step3Visual({ phase }: { phase: "in" | "hold" | "out" }) {
         ].map((row) => (
           <div key={row.type} className="flex items-center justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-[8.5px] font-bold uppercase tracking-widest text-[#9ca3af]" style={{ fontFamily: FONT }}>
+              <p className="text-[8.5px] font-bold uppercase tracking-widest text-[var(--c-heading)]" style={{ fontFamily: FONT }}>
                 {row.type}
               </p>
               <p className="text-[11px] font-semibold text-[#0D0D0D] dark:text-white/90 truncate" style={{ fontFamily: FONT }}>
@@ -414,8 +414,8 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="dark:bg-[#080808]"
-      style={{ background: "var(--c-section-bg)", padding: "96px 0", scrollMarginTop: "80px" }}
+      className="py-12 md:py-16"
+      style={{ background: "var(--c-section-bg-alt)", scrollMarginTop: "80px" }}
     >
       <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 20px" }}>
 
@@ -450,7 +450,7 @@ export default function HowItWorks() {
 
           <p
             className="mt-4 mx-auto"
-            style={{ fontFamily: FONT, fontWeight: 400, fontSize: 15, lineHeight: 1.6, maxWidth: 440, color: "var(--c-body)" }}
+            style={{ fontFamily: FONT, fontWeight: 400, fontSize: "clamp(15px,2.5vw,20px)", lineHeight: 1.6, color: "var(--c-heading)" }}
           >
             Three steps. No subscription. No guesswork.
             Just verified contacts in your dashboard.

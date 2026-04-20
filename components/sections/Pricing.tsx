@@ -155,7 +155,7 @@ function ProductCard({ card, index, active, onSelect }: {
           <Icon className="w-5 h-5" style={{ color: card.accent }} strokeWidth={2} />
         </div>
         <div>
-          <p className="text-[12px] font-semibold uppercase tracking-widest" style={{ color: "#9ca3af" }}>
+          <p className="text-[12px] font-semibold uppercase tracking-widest" style={{ color: "var(--c-heading)" }}>
             {card.label}
           </p>
           <div className="flex items-baseline gap-1.5">
@@ -165,14 +165,14 @@ function ProductCard({ card, index, active, onSelect }: {
             >
               {card.price}
             </span>
-            <span className="text-[12px]" style={{ color: "#6b7280" }}>{card.unit}</span>
+            <span className="text-[12px]" style={{ color: "var(--c-heading)" }}>{card.unit}</span>
           </div>
         </div>
       </div>
 
       <ul className="flex flex-col gap-2 mb-5">
         {card.features.map((f) => (
-          <li key={f} className="flex items-start gap-2 text-[13px]" style={{ color: "var(--c-body)" }}>
+          <li key={f} className="flex items-start gap-2" style={{ fontSize: 14, color: "var(--c-heading)" }}>
             <Check className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: "#0038FF" }} strokeWidth={2.5} />
             {f}
           </li>
@@ -207,7 +207,7 @@ function VolumeTiers() {
         </div>
         <div>
           <p className="text-[13px] font-bold" style={{ color: "var(--c-heading)" }}>Volume Discounts — Applied Automatically</p>
-          <p className="text-[11px]" style={{ color: "#6b7280" }}>The more you buy, the less you pay. No code needed.</p>
+          <p className="text-[11px]" style={{ color: "var(--c-heading)" }}>The more you buy, the less you pay. No code needed.</p>
         </div>
       </div>
 
@@ -237,23 +237,23 @@ function VolumeTiers() {
               )}
 
               {/* Label */}
-              <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: isTop ? "rgba(255,255,255,0.6)" : "#9ca3af" }}>
+              <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: isTop ? "rgba(255,255,255,0.6)" : "#64748b" }}>
                 {tier.label}
               </p>
 
               {/* Quantity */}
-              <p className="text-[12px] font-bold" style={{ color: isTop ? "#ffffff" : "var(--c-heading)" }}>
+              <p className="text-[12px] font-bold" style={{ color: isTop ? "#ffffff" : "#0f172a" }}>
                 {tier.range}
               </p>
 
               {/* Prices */}
               <div className="flex flex-col gap-0.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#9ca3af" }}>Email</span>
+                  <span className="text-[10px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Email</span>
                   <span className="text-[13px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.email}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#9ca3af" }}>Phone</span>
+                  <span className="text-[10px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Phone</span>
                   <span className="text-[13px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.phone}</span>
                 </div>
               </div>
@@ -261,10 +261,10 @@ function VolumeTiers() {
               {/* Savings bar */}
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[9.5px] font-semibold" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#9ca3af" }}>
+                  <span className="text-[9.5px] font-semibold" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>
                     Savings
                   </span>
-                  <span className="text-[10.5px] font-black" style={{ color: isTop ? "#CCFF00" : (tier.savingsPct > 0 ? "#0038FF" : "#9ca3af") }}>
+                  <span className="text-[10.5px] font-black" style={{ color: isTop ? "#CCFF00" : (tier.savingsPct > 0 ? "#0038FF" : "#94a3b8") }}>
                     {tier.savingsPct > 0 ? `${tier.savingsPct}%` : "—"}
                   </span>
                 </div>
@@ -308,7 +308,7 @@ export default function Pricing() {
   };
 
   return (
-    <section id="pricing" style={{ background: "var(--c-section-bg)", padding: "96px 0", scrollMarginTop: "80px" }}>
+    <section id="pricing" className="py-14 md:py-24" style={{ background: "var(--c-section-bg-alt)", scrollMarginTop: "80px" }}>
       <div className="max-w-[1120px] mx-auto px-5 md:px-8">
 
         {/* ── Header ── */}
@@ -317,7 +317,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-14"
+          className="mb-14 text-center flex flex-col items-center"
         >
           <SectionBadge variant="light" className="mb-5">Pricing</SectionBadge>
           <h2
@@ -327,15 +327,18 @@ export default function Pricing() {
               color: "var(--c-heading)",
               fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
               fontWeight: 800,
-              maxWidth: 560,
+             
             }}
           >
             Pay only for <HeadingAccent>what you get.</HeadingAccent>
             <br />Not a penny more.
           </h2>
-          <p className="text-[15px] leading-relaxed" style={{ color: "var(--c-body)", maxWidth: 480 }}>
-            One credit = one verified contact. No monthly fees, no wasted spend.
-            Volume discounts apply automatically — the more you scale, the more you save.
+          <p className="leading-relaxed" style={{ fontSize: "clamp(15px,2.5vw,22px)", color: "var(--c-heading)" }}>
+            Pay for <span style={{ color: "#0038FF", fontWeight: 700 }}>results</span>, not access.{" "} <br />
+            <span style={{ fontWeight: 700 }}>One credit = one verified contact</span> in your dashboard.{" "} <br />
+            Buy more, <span style={{ color: "#0038FF", fontWeight: 700 }}>spend less per contact</span> — automatically.{" "} <br />
+            <span style={{ fontWeight: 700 }}>No contracts. No surprises.</span>{" "}
+            <span style={{ color: "#0038FF", fontWeight: 800 }}>Ever.</span>
           </p>
         </m.div>
 
@@ -377,7 +380,7 @@ export default function Pricing() {
                   className="px-3 py-1 rounded-full text-[11.5px] font-semibold capitalize transition-all"
                   style={{
                     background: category === cat ? "#0038FF" : "transparent",
-                    color: category === cat ? "#ffffff" : "#6b7280",
+                    color: category === cat ? "#ffffff" : "var(--c-heading)",
                     border: `1px solid ${category === cat ? "#0038FF" : "rgba(0,0,0,0.1)"}`,
                   }}
                 >
@@ -389,10 +392,10 @@ export default function Pricing() {
 
           <div className="p-6 sm:p-8" style={{ background: "var(--c-section-card)" }}>
             <div className="flex items-baseline justify-between mb-4">
-              <p className="text-[11.5px] font-semibold uppercase tracking-[0.15em]" style={{ color: "#9ca3af" }}>
+              <p className="text-[11.5px] font-semibold uppercase tracking-[0.15em]" style={{ color: "var(--c-heading)" }}>
                 Quantity
               </p>
-              <p className="text-[11.5px]" style={{ color: "#9ca3af" }}>
+              <p className="text-[11.5px]" style={{ color: "var(--c-heading)" }}>
                 Max {max.toLocaleString()}
               </p>
             </div>
@@ -444,7 +447,7 @@ export default function Pricing() {
                   style={{
                     borderColor: qty === p ? "#0038FF" : "rgba(0,0,0,0.1)",
                     background: qty === p ? "#0038FF" : "transparent",
-                    color: qty === p ? "#ffffff" : "#6b7280",
+                    color: qty === p ? "#ffffff" : "var(--c-heading)",
                   }}
                 >
                   {p.toLocaleString()}
@@ -478,7 +481,7 @@ export default function Pricing() {
                   </m.span>
                 </AnimatePresence>
                 <span className="text-[13px] text-white/50 ml-1">
-                  · ${perUnit.toFixed(2)} per {category === "combo" ? "lead" : category === "email" ? "email" : "number"}
+                  · ${perUnit.toFixed(2)} per {category === "combo" ? "contact" : category === "email" ? "email" : "number"}
                 </span>
               </div>
             </div>
@@ -516,7 +519,7 @@ export default function Pricing() {
           ))}
         </m.div>
 
-        <p className="text-[12.5px] text-center" style={{ color: "#9ca3af" }}>
+        <p className="text-[12.5px] text-center" style={{ color: "var(--c-heading)" }}>
           Need more than 10,000 contacts per month?{" "}
           <Link href="/contact" className="font-semibold underline underline-offset-2" style={{ color: "#0038FF" }}>
             Talk to us

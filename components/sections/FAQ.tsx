@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: "What counts as a 'verified' contact?",
-    a: "For emails, we confirm deliverability via SMTP handshake before charging. For phone numbers, we validate against live carrier records. If our system can't verify a contact to our 97.2% accuracy standard, you are not charged — period.",
+    a: "For emails, we confirm deliverability via SMTP handshake before charging. For phone numbers, we validate against live carrier records. If our system can't verify a contact to our 99.9% accuracy standard, you are not charged — period.",
   },
   {
     q: "How long does a lookup actually take?",
@@ -29,15 +29,15 @@ const FAQS = [
   },
   {
     q: "Is this legal and GDPR / CCPA compliant?",
-    a: "Yes. We only surface business contact information that professionals have made publicly available for professional outreach purposes — consistent with GDPR's legitimate interest basis and CCPA B2B exemptions. We do not scrape private messages, connections lists, or any non-public LinkedIn data.",
+    a: "Yes. We only surface business contact information that professionals have made publicly available for professional contact purposes — consistent with GDPR's legitimate interest basis and CCPA B2B exemptions. We do not scrape private messages, connections lists, or any non-public LinkedIn data.",
   },
   {
     q: "What if you can't find a contact for a profile I submitted?",
     a: "If we can't return a verified result, you are not charged. Your credit is automatically refunded to your wallet within minutes. We'd rather lose the transaction than send you unverified data.",
   },
   {
-    q: "Can I use StealthConnect AI at scale for my sales team?",
-    a: "Absolutely. We support team accounts, shared credit wallets, and bulk CSV imports. For teams needing 10,000+ contacts per month, contact us for custom volume pricing with dedicated SLA guarantees.",
+    q: "Can I use StealthConnect AI at scale or in bulk?",
+    a: "Absolutely. We support team accounts, shared credit wallets, and bulk CSV imports. For anyone needing 10,000+ contacts per month, contact us for custom volume pricing with dedicated SLA guarantees.",
   },
 ];
 
@@ -78,7 +78,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
           {open ? (
             <Minus className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
           ) : (
-            <Plus className="w-3.5 h-3.5" style={{ color: "#6b7280" }} strokeWidth={2.5} />
+            <Plus className="w-3.5 h-3.5" style={{ color: "var(--c-heading)" }} strokeWidth={2.5} />
           )}
         </span>
       </button>
@@ -114,7 +114,8 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      style={{ background: "var(--c-section-bg)", padding: "96px 0" }}
+      className="py-14 md:py-24"
+      style={{ background: "var(--c-section-bg)" }}
     >
       <div className="max-w-3xl mx-auto px-5 md:px-8">
         {/* Header */}
@@ -138,8 +139,8 @@ export default function FAQ() {
             Everything you need to <HeadingAccent>know.</HeadingAccent>
           </h2>
           <p
-            className="text-[15px] leading-relaxed"
-            style={{ color: "var(--c-body)", maxWidth: 480 }}
+            className="leading-relaxed"
+            style={{ fontSize: "clamp(15px,2.5vw,20px)", color: "var(--c-heading)", maxWidth: 480 }}
           >
             Still have questions? Reach out at{" "}
             <a

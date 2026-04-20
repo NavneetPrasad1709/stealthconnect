@@ -3,8 +3,6 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import Navbar from "@/components/Navbar";
 const HowItWorks = dynamic(() => import("@/components/sections/HowItWorks"));
-
-const TrustedBy      = dynamic(() => import("@/components/sections/TrustedBy"));
 const Features       = dynamic(() => import("@/components/sections/Features"));
 const StatsSection   = dynamic(() => import("@/components/sections/StatsSection").then(m => ({ default: m.StatsSection })));
 const Testimonials   = dynamic(() => import("@/components/sections/Testimonials"));
@@ -26,7 +24,6 @@ export default function HomePage() {
       <Navbar />
       <Hero />
       <HowItWorks />
-      <TrustedBy />
       <Features />
       <StatsSection />
       <Testimonials />

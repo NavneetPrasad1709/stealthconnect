@@ -15,17 +15,17 @@ interface Testimonial {
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    text: "I pasted a LinkedIn URL for a CRO I'd been trying to reach for 3 months. Had his verified mobile in 22 minutes. Closed the deal two weeks later.",
+    text: "I pasted a LinkedIn URL for a CTO I'd been trying to reach for 3 months. Had his verified mobile in 22 minutes. Signed the partnership two weeks later.",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150",
     name: "James Whitfield",
-    role: "Account Executive",
+    role: "Business Development",
     company: "Salesforce",
   },
   {
     text: "We replaced a $1,200/month data provider with StealthConnect. Same quality contacts, pay only when we need them. ROI was obvious in week one.",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150",
     name: "Priya Nair",
-    role: "VP of Sales",
+    role: "VP of Partnerships",
     company: "GrowthLabs",
   },
   {
@@ -46,28 +46,28 @@ const TESTIMONIALS: Testimonial[] = [
     text: "Tried 4 other LinkedIn contact tools. StealthConnect is the only one that gives me a direct number, not a switchboard. Worth every cent.",
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150",
     name: "Hannah Cole",
-    role: "SDR Manager",
+    role: "Talent Partner",
     company: "Stripe",
   },
   {
-    text: "Onboarded my whole BDR team in under an hour. They were submitting URLs and getting contacts before lunch. Zero learning curve.",
+    text: "Onboarded my whole recruiting team in under an hour. They were submitting URLs and getting contacts before lunch. Zero learning curve.",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150",
     name: "Daniel Park",
-    role: "Director of Sales",
+    role: "Head of Recruiting",
     company: "Notion",
   },
   {
     text: "I appreciate that they just don't charge if they can't verify. It builds real trust. I've never once disputed a charge in 8 months.",
     image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150&h=150",
     name: "Aisha Okonkwo",
-    role: "Revenue Operations",
+    role: "Operations Lead",
     company: "Intercom",
   },
   {
-    text: "We use StealthConnect for enterprise outbound. Decision-maker mobiles for Fortune 500 targets — delivered in under 30 minutes. Unreal.",
+    text: "We use StealthConnect for enterprise contact research. Direct mobiles for Fortune 500 decision-makers — delivered in under 30 minutes. Unreal.",
     image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150",
     name: "Tom Hassan",
-    role: "CRO",
+    role: "CTO",
     company: "DataStack",
   },
   {
@@ -128,7 +128,7 @@ function TestimonialCard({ text, image, name, role, company, dupIndex, i }: Test
             </cite>
             <span
               className="text-[12px] leading-5 mt-0.5"
-              style={{ color: "#6b7280", fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)" }}
+              style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)" }}
             >
               {role} · {company}
             </span>
@@ -195,7 +195,7 @@ export default function Testimonials() {
         className="relative z-10 container px-5 mx-auto"
       >
         {/* Header */}
-        <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto mb-14 text-center">
+        <div className="flex flex-col items-center justify-center mx-auto mb-14 text-center">
           <SectionBadge variant="light" className="mb-5">Testimonials</SectionBadge>
           <h2
             id="testimonials-heading"
@@ -207,19 +207,19 @@ export default function Testimonials() {
               fontWeight: 800,
             }}
           >
-            Trusted by 4,200+ <HeadingAccent>sales teams.</HeadingAccent>
+            Trusted by <HeadingAccent>users worldwide.</HeadingAccent>
           </h2>
           <p
-            className="text-[15px] leading-relaxed"
-            style={{ color: "var(--c-body)", maxWidth: 420 }}
+            className="leading-relaxed"
+            style={{ fontSize: "clamp(15px,2.5vw,20px)", color: "var(--c-heading)"}}
           >
-            Real results from real reps — from SDRs to CROs, across every industry.
+            Real results from real people — recruiters, founders, researchers, and more.
           </p>
         </div>
 
         {/* Scrolling columns */}
         <div
-          className="flex justify-center gap-5 mt-10 max-h-[720px] overflow-hidden"
+          className="flex justify-center gap-5 mt-10 overflow-hidden"
           role="region"
           aria-label="Scrolling testimonials"
           style={{

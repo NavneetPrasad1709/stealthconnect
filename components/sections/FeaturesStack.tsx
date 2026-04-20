@@ -14,7 +14,7 @@ function VisualURL() {
         <div className="rounded-2xl p-4 shadow-sm" style={{ background: "var(--c-section-card)", border: "1px solid var(--c-border-light)" }}>
           <p
             className="mb-2 text-[10px] font-semibold uppercase tracking-widest"
-            style={{ color: "#9ca3af", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
+            style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
           >
             LinkedIn Profile URL
           </p>
@@ -31,7 +31,7 @@ function VisualURL() {
             <span className="size-2 rounded-full bg-green-400" />
             <span
               className="text-xs"
-              style={{ color: "#9ca3af", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
+              style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
             >
               Valid profile detected
             </span>
@@ -48,7 +48,7 @@ function VisualURL() {
             </p>
             <p
               className="text-xs"
-              style={{ color: "#9ca3af", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
+              style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
             >
               CTO · Acme Corp
             </p>
@@ -108,7 +108,7 @@ function VisualVerify() {
               <div>
                 <p
                   className="text-[10px] font-semibold uppercase tracking-widest"
-                  style={{ color: "#9ca3af", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
+                  style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
                 >
                   {type}
                 </p>
@@ -130,7 +130,7 @@ function VisualVerify() {
         </div>
         <p
           className="text-center text-xs"
-          style={{ color: "#9ca3af", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
+          style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
         >
           Triple-verified before delivery
         </p>
@@ -214,7 +214,7 @@ const features = [
     icon: Link2,
     label: "Paste a LinkedIn URL",
     heading: "Any profile, anywhere in the world.",
-    body: "Drop any LinkedIn profile URL — sales targets, hiring prospects, investors. Works for profiles across 190+ countries. No browser extension or login needed.",
+    body: "Drop any LinkedIn profile URL — colleagues, collaborators, hiring managers, investors, anyone. Works for profiles across 190+ countries. No browser extension or login needed.",
     visual: <VisualURL />,
     dark: false,
     dividerCls: "border-gray-100",
@@ -259,7 +259,7 @@ const features = [
 
 export function FeaturesStack() {
   return (
-    <section style={{ background: "var(--c-section-bg)", padding: "80px 16px 80px" }}>
+    <section className="py-12 md:py-20 px-4 sm:px-5" style={{ background: "var(--c-section-bg)" }}>
       <div className="mx-auto max-w-5xl">
 
         {/* ── Header ── */}
@@ -305,7 +305,7 @@ export function FeaturesStack() {
                       style={{
                         fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)",
                         fontWeight: 700,
-                        color: isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.2)",
+                        color: isDark ? "#ffffff" : "var(--c-heading)",
                       }}
                     >
                       Step {f.step}
@@ -315,7 +315,7 @@ export function FeaturesStack() {
                       className="mb-5 flex items-center gap-2 text-sm font-semibold"
                       style={{
                         fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)",
-                        color: isDark ? "rgba(255,255,255,0.8)" : "#0038FF",
+                        color: isDark ? "#ffffff" : "#0038FF",
                       }}
                     >
                       <Icon className="size-4" />
@@ -341,7 +341,7 @@ export function FeaturesStack() {
                         fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)",
                         fontWeight: 400,
                         fontSize: 15,
-                        color: isDark ? "rgba(255,255,255,0.72)" : "var(--c-body)",
+                        color: isDark ? "#ffffff" : "var(--c-body)",
                         lineHeight: 1.65,
                       }}
                     >

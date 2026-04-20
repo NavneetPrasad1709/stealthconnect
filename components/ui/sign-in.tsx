@@ -15,7 +15,7 @@ const GoogleIcon = () => (
   </svg>
 );
 
-export interface Testimonial { avatarSrc:string; name:string; handle:string; text:string; }
+export interface Testimonial { avatarSrc: string; name: string; handle: string; text: string; }
 
 export interface SignInPageProps {
   title?: React.ReactNode;
@@ -33,151 +33,200 @@ export interface SignInPageProps {
 
 export const SignInPage: React.FC<SignInPageProps> = ({
   onSignIn, onGoogleSignIn, onResetPassword, onCreateAccount,
-  loading=false, oauthLoading=false, error,
+  loading = false, oauthLoading = false, error,
 }) => {
   const [showPw, setShowPw] = useState(false);
   const disabled = loading || oauthLoading;
 
-  return (
-    <div className="h-[100dvh] w-[100dvw] flex flex-col md:flex-row overflow-hidden"
-      style={{ background:"#000", fontFamily:F }}>
+  const inputCls = "w-full text-[15px] py-3.5 px-4 rounded-2xl focus:outline-none text-white placeholder:text-white/25 transition-all duration-150";
+  const inputStyle: React.CSSProperties = {
+    fontFamily: F,
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.09)",
+    caretColor: "var(--brand)",
+    minHeight: 52,
+  };
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) =>
+    (e.currentTarget.style.borderColor = "rgba(0,56,255,0.55)");
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) =>
+    (e.currentTarget.style.borderColor = "rgba(255,255,255,0.09)");
 
+  return (
+    <div
+      className="min-h-[100dvh] w-full flex flex-col md:flex-row md:h-[100dvh] md:overflow-hidden"
+      style={{ background: "#000", fontFamily: F }}
+    >
       {/* ── LEFT ── */}
-      <section className="flex-1 flex items-center justify-center p-6 sm:p-12 relative overflow-y-auto">
+      <section className="flex-1 flex flex-col justify-center md:overflow-y-auto relative">
 
         {/* Subtle radial glow */}
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
           <div style={{
-            position:"absolute", top:"20%", left:"50%", transform:"translateX(-50%)",
-            width:600, height:600, borderRadius:"50%",
-            background:"radial-gradient(circle,rgba(0,56,255,0.08) 0%,transparent 70%)",
-          }}/>
+            position: "absolute", top: "15%", left: "50%", transform: "translateX(-50%)",
+            width: 560, height: 560, borderRadius: "50%",
+            background: "radial-gradient(circle,rgba(0,56,255,0.09) 0%,transparent 70%)",
+          }} />
         </div>
 
-        <div className="w-full max-w-[380px] relative z-10 flex flex-col gap-6">
+        {/* Scrollable content */}
+        <div className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-12 py-10 md:py-14">
+          <div className="w-full max-w-[400px] flex flex-col gap-6">
 
-          {/* Logo */}
-          <div className="animate-element animate-delay-100 flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full flex items-center justify-center"
-              style={{ background:"var(--brand)", boxShadow:"0 0 16px rgba(0,56,255,0.6)" }}>
-              <Zap className="w-3.5 h-3.5 text-white" strokeWidth={2.5}/>
-            </div>
-            <span style={{ fontFamily:F, fontSize:13, fontWeight:800, color:"rgba(255,255,255,0.55)", letterSpacing:"-0.01em" }}>
-              StealthConnect AI
-            </span>
-          </div>
-
-          {/* Hero heading */}
-          <div className="animate-element animate-delay-200">
-            <h1 style={{ fontFamily:F, fontSize:"clamp(2.8rem,5vw,3.8rem)", fontWeight:300, lineHeight:1.05, letterSpacing:"-0.04em", color:"rgba(255,255,255,0.9)", margin:0 }}>
-              Welcome<br/>
-              <span style={{ fontWeight:900, color:"#fff" }}>back.</span>
-            </h1>
-            <p style={{ fontFamily:F, fontSize:13, color:"rgba(255,255,255,0.32)", marginTop:10, lineHeight:1.6 }}>
-              Sign in to find your next verified contact.
-            </p>
-          </div>
-
-          {/* Google */}
-          <button type="button" onClick={onGoogleSignIn} disabled={disabled}
-            className="animate-element animate-delay-300 w-full flex items-center justify-center gap-2.5 rounded-2xl py-3.5 text-sm font-medium text-white transition-all duration-150 disabled:opacity-50"
-            style={{ border:"1px solid rgba(255,255,255,0.1)", background:"rgba(255,255,255,0.04)", fontFamily:F }}
-            onMouseEnter={e => (e.currentTarget.style.background="rgba(255,255,255,0.07)")}
-            onMouseLeave={e => (e.currentTarget.style.background="rgba(255,255,255,0.04)")}>
-            {oauthLoading
-              ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"/>
-              : <GoogleIcon/>}
-            Continue with Google
-          </button>
-
-          {/* Divider */}
-          <div className="animate-element animate-delay-400 flex items-center gap-3">
-            <span className="flex-1 h-px" style={{ background:"rgba(255,255,255,0.06)" }}/>
-            <span style={{ fontFamily:F, fontSize:10, color:"rgba(255,255,255,0.2)", textTransform:"uppercase", letterSpacing:"0.12em" }}>or</span>
-            <span className="flex-1 h-px" style={{ background:"rgba(255,255,255,0.06)" }}/>
-          </div>
-
-          {/* Form */}
-          <form className="flex flex-col gap-4" onSubmit={onSignIn}>
-
-            {/* Email */}
-            <div className="animate-element animate-delay-400 flex flex-col gap-1.5">
-              <label style={{ fontFamily:F, fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.35)", textTransform:"uppercase", letterSpacing:"0.1em" }}>
-                Email
-              </label>
-              <input name="email" type="email" placeholder="you@example.com"
-                autoComplete="email" required
-                className="w-full text-sm py-3.5 px-4 rounded-2xl focus:outline-none text-white placeholder:text-white/20 transition-all duration-150"
-                style={{ fontFamily:F, background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.09)", caretColor:"var(--brand)" }}
-                onFocus={e => (e.currentTarget.style.borderColor="rgba(0,56,255,0.5)")}
-                onBlur={e  => (e.currentTarget.style.borderColor="rgba(255,255,255,0.09)")}
-              />
-            </div>
-
-            {/* Password */}
-            <div className="animate-element animate-delay-500 flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <label style={{ fontFamily:F, fontSize:11.5, fontWeight:600, color:"rgba(255,255,255,0.35)", textTransform:"uppercase", letterSpacing:"0.1em" }}>
-                  Password
-                </label>
-                <button type="button" onClick={onResetPassword}
-                  style={{ fontFamily:F, fontSize:11.5, color:"rgba(0,100,255,0.8)" }}
-                  className="hover:underline transition-colors">
-                  Forgot?
-                </button>
+            {/* Logo */}
+            <div className="animate-element animate-delay-100 flex items-center gap-2">
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                style={{ background: "var(--brand)", boxShadow: "0 0 20px rgba(0,56,255,0.6)" }}
+              >
+                <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
               </div>
-              <div className="relative">
-                <input name="password" type={showPw?"text":"password"} placeholder="••••••••"
-                  autoComplete="current-password" required
-                  className="w-full text-sm py-3.5 px-4 pr-11 rounded-2xl focus:outline-none text-white placeholder:text-white/20 transition-all duration-150"
-                  style={{ fontFamily:F, background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.09)", caretColor:"var(--brand)" }}
-                  onFocus={e => (e.currentTarget.style.borderColor="rgba(0,56,255,0.5)")}
-                  onBlur={e  => (e.currentTarget.style.borderColor="rgba(255,255,255,0.09)")}
-                />
-                <button type="button" onClick={() => setShowPw(v=>!v)}
-                  className="absolute inset-y-0 right-3.5 flex items-center transition-colors"
-                  style={{ color:"rgba(255,255,255,0.25)" }}
-                  onMouseEnter={e=>(e.currentTarget.style.color="rgba(255,255,255,0.6)")}
-                  onMouseLeave={e=>(e.currentTarget.style.color="rgba(255,255,255,0.25)")}>
-                  {showPw ? <EyeOff className="w-4 h-4"/> : <Eye className="w-4 h-4"/>}
-                </button>
-              </div>
+              <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "rgba(255,255,255,0.55)", letterSpacing: "-0.01em" }}>
+                StealthConnect AI
+              </span>
             </div>
 
-            {error && (
-              <p role="alert" className="text-sm px-3.5 py-2.5 rounded-xl"
-                style={{ background:"rgba(239,68,68,0.07)", color:"#f87171", border:"1px solid rgba(239,68,68,0.15)", fontFamily:F }}>
-                {error}
+            {/* Hero heading */}
+            <div className="animate-element animate-delay-200">
+              <h1 style={{
+                fontFamily: F,
+                fontSize: "clamp(2.6rem,8vw,3.8rem)",
+                fontWeight: 300,
+                lineHeight: 1.05,
+                letterSpacing: "-0.04em",
+                color: "rgba(255,255,255,0.9)",
+                margin: 0,
+              }}>
+                Welcome<br />
+                <span style={{ fontWeight: 900, color: "#fff" }}>back.</span>
+              </h1>
+              <p style={{ fontFamily: F, fontSize: 14, color: "rgba(255,255,255,0.35)", marginTop: 10, lineHeight: 1.6 }}>
+                Sign in to find your next verified contact.
               </p>
-            )}
+            </div>
 
-            <button type="submit" disabled={disabled}
-              className="animate-element animate-delay-600 w-full rounded-2xl py-3.5 text-sm font-bold text-white transition-all duration-150 disabled:opacity-50 active:scale-[0.98]"
-              style={{ background:"var(--brand)", fontFamily:F, boxShadow:"0 4px 24px rgba(0,56,255,0.35)" }}
-              onMouseEnter={e => !disabled && (e.currentTarget.style.boxShadow="0 6px 32px rgba(0,56,255,0.55)")}
-              onMouseLeave={e => (e.currentTarget.style.boxShadow="0 4px 24px rgba(0,56,255,0.35)")}>
-              {loading
-                ? <span className="flex items-center justify-center gap-2">
-                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"/>Signing in…
-                  </span>
-                : "Sign In →"}
+            {/* Google */}
+            <button
+              type="button"
+              onClick={onGoogleSignIn}
+              disabled={disabled}
+              className="animate-element animate-delay-300 w-full flex items-center justify-center gap-2.5 rounded-2xl text-[15px] font-medium text-white transition-all duration-150 disabled:opacity-50 active:scale-[0.98]"
+              style={{
+                border: "1px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.04)",
+                fontFamily: F,
+                minHeight: 52,
+                padding: "0 20px",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
+              onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.04)")}
+            >
+              {oauthLoading
+                ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                : <GoogleIcon />}
+              Continue with Google
             </button>
-          </form>
 
-          <p className="animate-element animate-delay-700 text-center text-xs" style={{ color:"rgba(255,255,255,0.25)", fontFamily:F }}>
-            Don't have an account?{" "}
-            <button type="button" onClick={onCreateAccount}
-              className="font-semibold transition-colors hover:underline"
-              style={{ color:"rgba(0,100,255,0.8)" }}>
-              Sign up free
-            </button>
-          </p>
+            {/* Divider */}
+            <div className="animate-element animate-delay-400 flex items-center gap-3">
+              <span className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
+              <span style={{ fontFamily: F, fontSize: 10, color: "rgba(255,255,255,0.22)", textTransform: "uppercase", letterSpacing: "0.14em" }}>or</span>
+              <span className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.07)" }} />
+            </div>
 
+            {/* Form */}
+            <form className="flex flex-col gap-4" onSubmit={onSignIn}>
+
+              {/* Email */}
+              <div className="animate-element animate-delay-400 flex flex-col gap-1.5">
+                <label style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "0.12em" }}>
+                  Email
+                </label>
+                <input
+                  name="email" type="email" placeholder="you@example.com"
+                  autoComplete="email" required
+                  className={inputCls} style={inputStyle}
+                  onFocus={onFocus} onBlur={onBlur}
+                />
+              </div>
+
+              {/* Password */}
+              <div className="animate-element animate-delay-500 flex flex-col gap-1.5">
+                <div className="flex items-center justify-between">
+                  <label style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "0.12em" }}>
+                    Password
+                  </label>
+                  <button
+                    type="button" onClick={onResetPassword}
+                    style={{ fontFamily: F, fontSize: 12, color: "rgba(80,120,255,0.9)" }}
+                    className="hover:underline transition-colors"
+                  >
+                    Forgot?
+                  </button>
+                </div>
+                <div className="relative">
+                  <input
+                    name="password" type={showPw ? "text" : "password"} placeholder="••••••••"
+                    autoComplete="current-password" required
+                    className={`${inputCls} pr-12`} style={inputStyle}
+                    onFocus={onFocus} onBlur={onBlur}
+                  />
+                  <button
+                    type="button" onClick={() => setShowPw(v => !v)}
+                    className="absolute inset-y-0 right-4 flex items-center transition-colors"
+                    style={{ color: "rgba(255,255,255,0.25)" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}
+                  >
+                    {showPw ? <EyeOff className="w-[18px] h-[18px]" /> : <Eye className="w-[18px] h-[18px]" />}
+                  </button>
+                </div>
+              </div>
+
+              {error && (
+                <p role="alert" className="text-sm px-4 py-3 rounded-xl"
+                  style={{ background: "rgba(239,68,68,0.07)", color: "#f87171", border: "1px solid rgba(239,68,68,0.15)", fontFamily: F }}>
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit" disabled={disabled}
+                className="animate-element animate-delay-600 w-full rounded-2xl text-[15px] font-bold text-white transition-all duration-150 disabled:opacity-50 active:scale-[0.98]"
+                style={{
+                  background: "var(--brand)",
+                  fontFamily: F,
+                  boxShadow: "0 4px 24px rgba(0,56,255,0.35)",
+                  minHeight: 52,
+                }}
+                onMouseEnter={e => !disabled && (e.currentTarget.style.boxShadow = "0 6px 32px rgba(0,56,255,0.55)")}
+                onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,56,255,0.35)")}
+              >
+                {loading
+                  ? <span className="flex items-center justify-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Signing in…
+                    </span>
+                  : "Sign In →"}
+              </button>
+            </form>
+
+            <p className="animate-element animate-delay-700 text-center" style={{ fontSize: 13, color: "rgba(255,255,255,0.28)", fontFamily: F }}>
+              Don't have an account?{" "}
+              <button
+                type="button" onClick={onCreateAccount}
+                className="font-semibold transition-colors hover:underline"
+                style={{ color: "rgba(80,130,255,0.9)" }}
+              >
+                Sign up free
+              </button>
+            </p>
+
+          </div>
         </div>
       </section>
 
       {/* ── RIGHT ── */}
-      <div className="hidden md:flex flex-1 min-h-0">
+      <div className="hidden md:flex flex-1 min-h-0 h-[100dvh]">
         <AuthRightPanel />
       </div>
     </div>

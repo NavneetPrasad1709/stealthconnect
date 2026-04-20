@@ -70,13 +70,13 @@
   --c-section-card-inner: rgba(255,255,255,0.05);
 
   /* ── text ── */
-  --c-heading:  #f1f5f9;
-  --c-body:     #8892a4;
-  --c-muted:    #5a6576;
+  --c-heading:  #ffffff;
+  --c-body:     #ffffff;
+  --c-muted:    #ffffff;
 
   /* ── lines ── */
-  --c-border-light: rgba(255,255,255,0.08);
-  --c-divider:      rgba(255,255,255,0.08);
+  --c-border-light: rgba(255,255,255,0.12);
+  --c-divider:      rgba(255,255,255,0.12);
 }
 
 .dark {
@@ -84,11 +84,11 @@
   --c-section-bg-alt:  #080808;
   --c-section-card:    #1a1a1a;
   --c-section-card-inner: rgba(255,255,255,0.05);
-  --c-heading:  #f1f5f9;
-  --c-body:     #8892a4;
-  --c-muted:    #5a6576;
-  --c-border-light: rgba(255,255,255,0.08);
-  --c-divider:      rgba(255,255,255,0.08);
+  --c-heading:  #ffffff;
+  --c-body:     #ffffff;
+  --c-muted:    #ffffff;
+  --c-border-light: rgba(255,255,255,0.12);
+  --c-divider:      rgba(255,255,255,0.12);
 }
 
 /* ─── Light mode overrides ────────────────────────────────── */
@@ -128,8 +128,8 @@
   --c-section-card:    #ffffff;
   --c-section-card-inner: rgba(0,56,255,0.04);
   --c-heading:  #0D0D0D;
-  --c-body:     #3D3D3D;
-  --c-muted:    #6b7280;
+  --c-body:     #0D0D0D;
+  --c-muted:    #0D0D0D;
   --c-border-light: rgba(0,0,0,0.08);
   --c-divider:      rgba(0,0,0,0.08);
 
@@ -1069,28 +1069,14 @@ input[type='range'] { -webkit-appearance: none; appearance: none; }
   100% { opacity:1; transform:translateY(0); }
 }
 
-@theme inline {
-  @keyframes fadeSlideIn {
-  to {
-    opacity:           1;
-    filter:           blur(0px);
-    transform:           translateY(0px);
-    }
-  }
-  @keyframes slideRightIn {
-  to {
-    opacity:           1;
-    filter:           blur(0px);
-    transform:           translateX(0px);
-    }
-  }
-  @keyframes testimonialIn {
-  to {
-    opacity:           1;
-    filter:           blur(0px);
-    transform:           translateY(0px) scale(1);
-    }
-  }
+@keyframes fadeSlideIn {
+  to { opacity: 1; filter: blur(0px); transform: translateY(0px); }
+}
+@keyframes slideRightIn {
+  to { opacity: 1; filter: blur(0px); transform: translateX(0px); }
+}
+@keyframes testimonialIn {
+  to { opacity: 1; filter: blur(0px); transform: translateY(0px) scale(1); }
 }
 /* ── 21st.dev sign-in animation utilities ── */
 .animate-element {

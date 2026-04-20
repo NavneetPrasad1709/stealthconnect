@@ -5,9 +5,10 @@ interface SectionBadgeProps {
   /** "light" = dark border on light bg (default) | "dark" = white border on dark bg */
   variant?: "light" | "dark"
   className?: string
+  style?: React.CSSProperties
 }
 
-export function SectionBadge({ children, variant = "light", className = "" }: SectionBadgeProps) {
+export function SectionBadge({ children, variant = "light", className = "", style }: SectionBadgeProps) {
   const isDark = variant === "dark"
   return (
     <div
@@ -17,15 +18,16 @@ export function SectionBadge({ children, variant = "light", className = "" }: Se
         borderRadius: 999,
         border: `1.5px solid ${isDark ? "rgba(255,255,255,0.35)" : "var(--c-heading)"}`,
         fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
-        fontSize: 11.5,
-        fontWeight: 600,
-        letterSpacing: "0.12em",
-        textTransform: "uppercase" as const,
-        color: isDark ? "rgba(255,255,255,0.65)" : "var(--c-heading)",
+        fontSize: 24,
+        fontWeight: 700,
+        letterSpacing: "normal",
+        textTransform: "none" as const,
+        color: isDark ? "#ffffff" : "var(--c-heading)",
         userSelect: "none" as const,
+        ...style,
       }}
     >
-      <span style={{ fontSize: 7, lineHeight: 1, color: isDark ? "rgba(255,255,255,0.65)" : "var(--c-heading)" }}>●</span>
+      <span style={{ fontSize: 7, lineHeight: 1, color: isDark ? "#ffffff" : "var(--c-heading)" }}>●</span>
       {children}
     </div>
   )

@@ -9,7 +9,7 @@ import { HeadingAccent } from "@/components/ui/HeadingAccent";
 export default function CTA() {
   return (
     <section
-      className="relative px-5 py-28 overflow-hidden"
+      className="relative px-5 py-16 md:py-28 overflow-hidden"
       style={{ background: "var(--c-section-bg)" }}
     >
       {/* Background glow */}
@@ -71,15 +71,15 @@ export default function CTA() {
             fontWeight: 800,
           }}
         >
-          Your next deal starts with{" "}
-          <HeadingAccent>one LinkedIn URL.</HeadingAccent>
+          Anyone on LinkedIn.{" "}
+          <HeadingAccent>Find their contact.</HeadingAccent>
         </h2>
 
         <p
-          className="text-[15px] mb-10 max-w-sm mx-auto leading-relaxed"
-          style={{ color: "var(--c-body)" }}
+          className="mb-10 max-w-sm mx-auto leading-relaxed"
+          style={{ fontSize: "clamp(15px,2.5vw,20px)", color: "var(--c-heading)" }}
         >
-          Join 4,200+ sales teams. Get your first contact verified free — no card required.
+          Join 4,200+ users. Get your first contact verified free — no card required.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

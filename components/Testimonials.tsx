@@ -135,7 +135,7 @@ export default function Testimonials() {
             <span className="accent">done overpaying.</span>
           </h2>
           <p className="testimonials__lede">
-            Founders, recruiters, and sales teams ditched their bloated
+            Founders, recruiters, professionals, and more ditched their bloated
             subscriptions for StealthConnect. Here's what they have to say.
           </p>
         </div>

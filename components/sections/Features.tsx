@@ -22,7 +22,7 @@ const CARDS = [
     icon: Zap,
     number: "02",
     title: "30-minute turnaround",
-    desc: "Our average delivery time is 28 minutes. Fast enough to action on a live sales call without missing a beat.",
+    desc: "Our average delivery time is 28 minutes. Fast enough to act on any opportunity without missing a beat.",
     tag: "FAST DELIVERY",
     dark: false,
   },
@@ -54,7 +54,7 @@ const CARDS = [
     icon: Lock,
     number: "06",
     title: "GDPR-conscious by design",
-    desc: "We operate within compliant data practices. No protected sources, no scraped private data — your outreach stays clean.",
+    desc: "We operate within compliant data practices. No protected sources, no scraped private data — your contact lookups stay clean.",
     tag: "GDPR COMPLIANT",
     dark: true,
   },
@@ -166,15 +166,13 @@ function FeatureCard({ card }: { card: (typeof CARDS)[number] }) {
         style={{
           display: "inline-flex",
           alignItems: "center",
-          padding: isDark ? "6px 16px" : "5px 14px",
-          borderRadius: 999,
-          border: isDark ? "none" : "1.5px solid var(--c-heading)",
-          background: isDark ? "#C8FF00" : "transparent",
+          gap: 6,
+          padding: "4px 0",
           fontFamily: FONT,
-          fontWeight: isDark ? 700 : 600,
+          fontWeight: 600,
           fontSize: 11,
           letterSpacing: "0.1em",
-          color: isDark ? "#0D0D0D" : "var(--c-heading)",
+          color: isDark ? "rgba(200,255,0,0.65)" : "var(--c-muted)",
           textTransform: "uppercase",
         }}
       >
@@ -189,8 +187,8 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="dark:bg-[#0A0A0A]"
-      style={{ background: "var(--c-section-bg)", padding: "96px 0", scrollMarginTop: "80px" }}
+      className="dark:bg-[#0A0A0A] py-14 md:py-24"
+      style={{ background: "var(--c-section-bg)", scrollMarginTop: "80px" }}
     >
       <div
         className="mx-auto"
@@ -235,7 +233,7 @@ export default function Features() {
                 every other
               </em>
               <br />
-              lead tool.
+              contact tool.
             </m.h2>
 
             {/* Description */}
@@ -247,8 +245,8 @@ export default function Features() {
               style={{
                 fontFamily: FONT,
                 fontWeight: 400,
-                fontSize: 15,
-                color: "var(--c-body)",
+                fontSize: "clamp(15px,2.5vw,20px)",
+                color: "var(--c-heading)",
                 lineHeight: 1.65,
                 maxWidth: "36ch",
                 marginBottom: 32,
@@ -273,17 +271,13 @@ export default function Features() {
                   background: "#0038FF",
                   fontFamily: FONT,
                   fontWeight: 700,
-                  fontSize: 14,
+                  fontSize: 16,
                   padding: "12px 24px",
                   boxShadow: "0 6px 24px rgba(0,56,255,0.28)",
                   textDecoration: "none",
                 }}
               >
-                Start free — 1 lookup on us
-                <ArrowRight
-                  size={15}
-                  className="group-hover:translate-x-0.5 transition-transform duration-200"
-                />
+                Start free - 1 lookup on us
               </Link>
             </m.div>
 
@@ -296,9 +290,9 @@ export default function Features() {
               className="mt-10 grid grid-cols-3 gap-4 sm:flex sm:flex-wrap sm:gap-8"
             >
               {[
-                { val: "97.2%", label: "Verification rate" },
+                { val: "99.9%", label: "Verification rate" },
                 { val: "28 min", label: "Avg. delivery" },
-                { val: "2.4M+", label: "Contacts found" },
+                { val: "800M+", label: "Contacts found" },
               ].map((s) => (
                 <div key={s.label}>
                   <div
@@ -315,9 +309,9 @@ export default function Features() {
                   <div
                     style={{
                       fontFamily: FONT,
-                      fontWeight: 500,
-                      fontSize: 11,
-                      color: "#888",
+                      fontWeight: 600,
+                      fontSize: 12,
+                      color: "#000000",
                       marginTop: 5,
                       letterSpacing: "0.06em",
                       textTransform: "uppercase",
@@ -334,7 +328,7 @@ export default function Features() {
               className="hidden md:block mt-12"
               style={{
                 fontFamily: FONT,
-                fontSize: 11,
+                fontSize: 14,
                 fontWeight: 500,
                 color: "#888",
                 letterSpacing: "0.06em",

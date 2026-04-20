@@ -112,7 +112,7 @@ const STYLES = `
 
 .footer-link {
   color: rgba(255,255,255,0.38);
-  font-size: 13px;
+  font-size: 20px;
   font-weight: 500;
   transition: color 0.2s ease;
   text-decoration: none;
@@ -120,13 +120,16 @@ const STYLES = `
   padding: 4px 0;
 }
 .footer-link:hover { color: rgba(255,255,255,0.85); }
+@media (max-width: 640px) {
+  .footer-link { font-size: 18px; }
+}
 
 .footer-col-heading {
-  font-size: 10px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.22);
+  color: white;
   margin-bottom: 18px;
 }
 
@@ -217,23 +220,12 @@ const NAV = [
       { label: "Features",      href: "/#features" },
       { label: "Pricing",       href: "/#pricing" },
       { label: "Free Trial",    href: "/signup" },
-      { label: "API Access",    href: "/api" },
-    ],
-  },
-  {
-    heading: "Resources",
-    links: [
-      { label: "Documentation", href: "/docs" },
-      { label: "Blog",          href: "/blog" },
-      { label: "Changelog",     href: "/changelog" },
-      { label: "Status",        href: "/status" },
       { label: "FAQ",           href: "/#faq" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "About",         href: "/about" },
       { label: "Contact",       href: "/contact" },
       { label: "Privacy Policy",href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },
@@ -352,26 +344,26 @@ export default function CinematicFooter() {
           </div>
 
           {/* ── Main content ── */}
-          <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12 pt-20 pb-10">
+          <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 md:px-12 pt-10 sm:pt-16 md:pt-20 pb-10">
 
             {/* Headline + CTA */}
             <div ref={headingRef} className="text-center mb-16">
               <h2
-                className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-4"
+                className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-4"
                 style={{ fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)", color: "#ffffff" }}
               >
                 Find anyone.
                 <br />
-                <span style={{ color: "#CCFF00" }}>Close faster.</span>
+                <span style={{ color: "#CCFF00" }}>Connect faster.</span>
               </h2>
-              <p className="text-[15px] mb-8 mx-auto" style={{ color: "rgba(255,255,255,0.45)", maxWidth: "38ch", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}>
+              <p className="text-[15px] sm:text-[18px] mb-8 mx-auto" style={{ color: "white", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}>
                 One LinkedIn URL. One verified contact. Zero subscriptions.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <MagneticButton
                   as={Link}
                   href="/signup"
-                  className="footer-glass-pill inline-flex items-center gap-3 px-9 py-4 rounded-full font-bold text-sm"
+                  className="footer-glass-pill inline-flex items-center gap-3 px-6 sm:px-9 py-3 sm:py-4 rounded-full font-bold text-sm"
                   style={{ color: "#ffffff" }}
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -382,12 +374,9 @@ export default function CinematicFooter() {
                 <MagneticButton
                   as={Link}
                   href="/#pricing"
-                  className="footer-glass-pill inline-flex items-center gap-3 px-9 py-4 rounded-full font-bold text-sm"
-                  style={{ color: "rgba(255,255,255,0.6)" }}
+                  className="footer-glass-pill inline-flex items-center gap-3 px-6 sm:px-9 py-3 sm:py-4 rounded-full font-bold text-sm"
+                  style={{ color: "white" }}
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                  </svg>
                   View Pricing
                 </MagneticButton>
               </div>
@@ -397,10 +386,10 @@ export default function CinematicFooter() {
             <div className="footer-divider mb-14" />
 
             {/* ── Nav grid ── */}
-            <div ref={bodyRef} className="grid grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 md:gap-8 mb-14">
+            <div ref={bodyRef} className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr] gap-10 md:gap-12 mb-14">
 
               {/* Brand column */}
-              <div className="col-span-2 md:col-span-1">
+              <div className="col-span-2 md:col-span-1 md:pr-8">
                 {/* Wordmark */}
                 <div className="flex items-center gap-2 mb-4">
                   <div
@@ -418,8 +407,8 @@ export default function CinematicFooter() {
                 </div>
 
                 <p
-                  className="text-sm leading-relaxed mb-6"
-                  style={{ color: "rgba(255,255,255,0.35)", maxWidth: "28ch", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
+                  className="text-lg leading-relaxed mb-6"
+                  style={{ color: "white", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
                 >
                   Verified LinkedIn contacts in 30 minutes. Pay only per result — no subscriptions.
                 </p>
@@ -472,18 +461,21 @@ export default function CinematicFooter() {
               <div className="footer-glass-pill px-5 py-2.5 rounded-full flex items-center gap-2 order-1 md:order-2 cursor-default">
                 <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>Built for</span>
                 <span className="animate-footer-heartbeat text-sm">❤</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>sales teams worldwide</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>everyone worldwide</span>
               </div>
 
               <MagneticButton
                 as="button"
                 onClick={scrollToTop}
-                className="w-10 h-10 rounded-full footer-glass-pill flex items-center justify-center group order-3"
-                style={{ color: "rgba(255,255,255,0.4)" }}
+                className="flex flex-col items-center gap-1.5 group order-3 cursor-pointer bg-transparent border-none"
+                style={{ color: "#ffffff" }}
               >
-                <svg className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                </svg>
+                <div className="w-14 h-14 rounded-full footer-glass-pill flex items-center justify-center">
+                  <svg className="w-6 h-6 group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.45)" }}>Back to Top</span>
               </MagneticButton>
             </div>
 

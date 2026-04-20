@@ -19,7 +19,7 @@ const mapPoints = map.getPoints()
 const MapView = () => (
   <svg viewBox="0 0 120 60" style={{ background: 'var(--c-section-bg)' }}>
     {mapPoints.map((point, i) => (
-      <circle key={i} cx={point.x} cy={point.y} r={0.15} fill="#94a3b8" />
+      <circle key={i} cx={point.x} cy={point.y} r={0.15} fill="var(--c-heading)" />
     ))}
   </svg>
 )
@@ -86,12 +86,12 @@ const FONT = "var(--font-montserrat,'Montserrat',sans-serif)"
 // ── Main component ────────────────────────────────────────────────────────────
 export function StatsSection() {
   return (
-    <section style={{ background: 'var(--c-section-bg)', padding: '96px 0' }}>
+    <section className="py-14 md:py-24" style={{ background: 'var(--c-section-bg-alt)' }}>
       <div className="mx-auto max-w-[1120px] px-5 md:px-8">
 
         {/* Section label + heading */}
         <div className="text-center mb-14">
-          <SectionBadge variant="light" className="mb-5">By the numbers</SectionBadge>
+          <SectionBadge variant="light" className="mb-5">Proof - not promises.</SectionBadge>
           <h2
             style={{
               fontFamily: FONT,
@@ -106,8 +106,8 @@ export function StatsSection() {
             Results that{' '}
             <HeadingAccent>speak for themselves.</HeadingAccent>
           </h2>
-          <p style={{ fontFamily: FONT, fontSize: 16, color: 'var(--c-muted)', maxWidth: 420, margin: '0 auto', lineHeight: 1.6 }}>
-            Real numbers from real teams using StealthConnect every day.
+          <p style={{ fontFamily: FONT, fontSize: "clamp(15px,2.5vw,20px)", color: 'var(--c-heading)', margin: '0 auto', lineHeight: 1.6 }}>
+            Real numbers from real people using StealthConnect every day.
           </p>
         </div>
 
@@ -125,8 +125,8 @@ export function StatsSection() {
                 </span>
               </div>
               <p
-                className="text-4xl font-black mb-2"
-                style={{ fontFamily: FONT, color: 'var(--c-heading)', letterSpacing: '-0.03em' }}
+                className="font-black mb-2"
+                style={{ fontFamily: FONT, color: 'var(--c-heading)', letterSpacing: '-0.03em', fontSize: 'clamp(1.5rem,5vw,2.25rem)' }}
               >
                 190+ countries.
               </p>
@@ -169,8 +169,8 @@ export function StatsSection() {
                 </span>
               </div>
               <p
-                className="text-4xl font-black mb-2"
-                style={{ fontFamily: FONT, color: 'var(--c-heading)', letterSpacing: '-0.03em' }}
+                className="font-black mb-2"
+                style={{ fontFamily: FONT, color: 'var(--c-heading)', letterSpacing: '-0.03em', fontSize: 'clamp(1.5rem,5vw,2.25rem)' }}
               >
                 30 minutes.
               </p>
@@ -187,26 +187,26 @@ export function StatsSection() {
                   <span className="flex justify-center items-center size-5 rounded-full" style={{ border: '1px solid var(--c-border-light)', background: 'var(--c-section-card)' }}>
                     <span className="size-2.5 rounded-full bg-blue-600" />
                   </span>
-                  <span className="text-xs" style={{ color: '#9ca3af', fontFamily: FONT }}>You · just now</span>
+                  <span className="text-xs" style={{ color: 'var(--c-heading)', fontFamily: FONT }}>You · just now</span>
                 </div>
                 <div
-                  className="rounded-xl p-3 text-xs w-4/5 shadow-sm"
+                  className="rounded-xl p-3 text-xs w-full sm:w-4/5 shadow-sm"
                   style={{ background: 'var(--c-section-card)', border: '1px solid var(--c-border-light)', color: 'var(--c-body)', fontFamily: FONT }}
                 >
-                  linkedin.com/in/john-smith-vp-sales
+                  linkedin.com/in/john-smith-founder
                 </div>
               </div>
 
               <div>
                 <div
-                  className="rounded-xl mb-1 p-3 text-xs text-white w-4/5 ml-auto shadow-sm"
+                  className="rounded-xl mb-1 p-3 text-xs text-white w-full sm:w-4/5 ml-auto shadow-sm"
                   style={{ background: '#0038FF', fontFamily: FONT }}
                 >
                   <p className="font-bold mb-1.5">✓ Contact verified — ready in 28 min</p>
                   <p className="opacity-80">john.smith@company.com</p>
                   <p className="opacity-80">+1 (415) 555-0182</p>
                 </div>
-                <span className="text-xs block text-right" style={{ color: '#9ca3af', fontFamily: FONT }}>
+                <span className="text-xs block text-right" style={{ color: 'var(--c-heading)', fontFamily: FONT }}>
                   Delivered in 28 min · 1 credit used
                 </span>
               </div>
@@ -219,7 +219,7 @@ export function StatsSection() {
               <div className="text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
                   <ShieldCheck className="w-5 h-5 text-[#CCFF00]" />
-                  <span className="text-[12px] font-bold uppercase tracking-widest text-white/60" style={{ fontFamily: FONT }}>
+                  <span className="text-[12px] font-bold uppercase tracking-widest text-white" style={{ fontFamily: FONT }}>
                     Verification Rate
                   </span>
                 </div>
@@ -227,23 +227,23 @@ export function StatsSection() {
                   className="text-6xl md:text-7xl lg:text-8xl font-black text-white"
                   style={{ fontFamily: FONT, letterSpacing: '-0.04em', lineHeight: 1 }}
                 >
-                  97.2%
+                  99.9%
                 </p>
-                <p className="mt-2 text-[15px] text-white/70 font-medium" style={{ fontFamily: FONT }}>
+                <p className="mt-2 text-[15px] text-white font-medium" style={{ fontFamily: FONT }}>
                   Every email and phone is triple-verified before delivery
                 </p>
               </div>
               <div className="flex flex-col gap-4 shrink-0">
                 {[
-                  { val: "2.4M+", label: "Total contacts found" },
+                  { val: "800M+", label: "Total contacts found" },
                   { val: "28 min", label: "Average delivery time" },
-                  { val: "4,200+", label: "Active sales teams" },
+                  { val: "4,200+", label: "Active users" },
                 ].map(s => (
                   <div key={s.label} className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
                     <div>
                       <span className="text-[20px] font-black text-white" style={{ fontFamily: FONT }}>{s.val} </span>
-                      <span className="text-[13px] text-white/60" style={{ fontFamily: FONT }}>{s.label}</span>
+                      <span className="text-[15px] text-white" style={{ fontFamily: FONT }}>{s.label}</span>
                     </div>
                   </div>
                 ))}
@@ -270,7 +270,7 @@ export function StatsSection() {
               </p>
               <p className="text-[14px] leading-relaxed" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
                 4,400+ verified contacts delivered in April alone.
-                Join the sales teams closing more with less effort.
+                Join thousands finding contacts faster, with less effort.
               </p>
             </div>
             <GrowthChart />
