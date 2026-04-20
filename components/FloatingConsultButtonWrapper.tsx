@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { m, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -11,6 +12,7 @@ const GF = '"Arial Black", Impact, sans-serif';
 const BOTTOM_PX = 24 + 46 + 10; // 80px
 
 export function FloatingConsultButtonWrapper() {
+  const pathname = usePathname();
   const [inHero,    setInHero]    = useState(true);
   const [isDesktop, setIsDesktop] = useState(false);
   const [mounted,   setMounted]   = useState(false);
@@ -33,6 +35,7 @@ export function FloatingConsultButtonWrapper() {
   }, []);
 
   if (!mounted) return null;
+  if (pathname.startsWith("/dashboard")) return null;
 
   const heroSize  = isDesktop ? 96 : 80;
   const smallSize = 46;
