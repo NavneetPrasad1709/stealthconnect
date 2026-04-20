@@ -13,6 +13,16 @@ export default function ContactPage() {
   return (
     <div className="min-h-[100dvh]" style={{ background: "#000", fontFamily: F, color: "#fff" }}>
 
+      <style>{`
+        .contact-card {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          text-decoration: none;
+          transition: border-color 0.2s ease;
+        }
+        .contact-card:hover { border-color: rgba(0,56,255,0.45); }
+      `}</style>
+
       {/* Top accent */}
       <div className="w-full h-[3px]" style={{ background: "linear-gradient(90deg,#0038FF 0%,#CCFF00 50%,#0038FF 100%)" }} />
 
@@ -46,12 +56,7 @@ export default function ContactPage() {
 
         {/* Contact cards */}
         <div className="flex flex-col gap-4 mb-12">
-          <a href="mailto:support@stealthconnect.ai"
-            className="flex items-center gap-4 p-5 rounded-2xl transition-all"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", textDecoration: "none" }}
-            onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,56,255,0.4)"}
-            onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)"}
-          >
+          <a href="mailto:support@stealthconnect.ai" className="contact-card flex items-center gap-4 p-5 rounded-2xl">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(0,56,255,0.12)", border: "1px solid rgba(0,56,255,0.2)" }}>
               <Mail className="w-5 h-5" style={{ color: "#0038FF" }} />
             </div>
@@ -61,12 +66,7 @@ export default function ContactPage() {
             </div>
           </a>
 
-          <a href="mailto:sales@stealthconnect.ai"
-            className="flex items-center gap-4 p-5 rounded-2xl transition-all"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", textDecoration: "none" }}
-            onMouseEnter={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,56,255,0.4)"}
-            onMouseLeave={e => (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)"}
-          >
+          <a href="mailto:sales@stealthconnect.ai" className="contact-card flex items-center gap-4 p-5 rounded-2xl">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(0,56,255,0.12)", border: "1px solid rgba(0,56,255,0.2)" }}>
               <MessageSquare className="w-5 h-5" style={{ color: "#0038FF" }} />
             </div>
@@ -77,7 +77,7 @@ export default function ContactPage() {
           </a>
         </div>
 
-        {/* Placeholder notice */}
+        {/* Notice */}
         <div className="p-5 rounded-2xl" style={{ background: "rgba(204,255,0,0.05)", border: "1px solid rgba(204,255,0,0.15)" }}>
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.7, margin: 0 }}>
             <span style={{ color: "#CCFF00", fontWeight: 700 }}>Response time:</span> We typically respond within 24 hours on business days. For urgent issues, email support directly.
