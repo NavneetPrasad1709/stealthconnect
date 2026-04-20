@@ -140,7 +140,7 @@ function ProductCard({ card, index, active, onSelect }: {
     >
       {card.popular && (
         <div
-          className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest text-white"
+          className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[13px] font-bold uppercase tracking-widest text-white"
           style={{ background: "#0038FF" }}
         >
           Most Popular
@@ -155,24 +155,24 @@ function ProductCard({ card, index, active, onSelect }: {
           <Icon className="w-5 h-5" style={{ color: card.accent }} strokeWidth={2} />
         </div>
         <div>
-          <p className="text-[12px] font-semibold uppercase tracking-widest" style={{ color: "var(--c-heading)" }}>
+          <p className="text-[14px] font-semibold uppercase tracking-widest" style={{ color: "var(--c-heading)" }}>
             {card.label}
           </p>
           <div className="flex items-baseline gap-1.5">
             <span
-              className="text-[28px] font-black tracking-tight leading-none"
+              className="text-[32px] font-black tracking-tight leading-none"
               style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)" }}
             >
               {card.price}
             </span>
-            <span className="text-[12px]" style={{ color: "var(--c-heading)" }}>{card.unit}</span>
+            <span className="text-[13px]" style={{ color: "var(--c-heading)" }}>{card.unit}</span>
           </div>
         </div>
       </div>
 
       <ul className="flex flex-col gap-2 mb-5">
         {card.features.map((f) => (
-          <li key={f} className="flex items-start gap-2" style={{ fontSize: 14, color: "var(--c-heading)" }}>
+          <li key={f} className="flex items-start gap-2" style={{ fontSize: 15, color: "var(--c-heading)" }}>
             <Check className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: "#0038FF" }} strokeWidth={2.5} />
             {f}
           </li>
@@ -180,7 +180,7 @@ function ProductCard({ card, index, active, onSelect }: {
       </ul>
 
       <button
-        className="mt-auto w-full py-2.5 rounded-xl text-[13px] font-semibold transition-all"
+        className="mt-auto w-full py-2.5 rounded-xl text-[15px] font-semibold transition-all"
         style={{
           background: active ? "#0038FF" : "var(--c-section-card-inner)",
           color: active ? "#ffffff" : "var(--c-body)",
@@ -206,8 +206,8 @@ function VolumeTiers() {
           <TrendingDown className="w-4 h-4" style={{ color: "#0038FF" }} />
         </div>
         <div>
-          <p className="text-[13px] font-bold" style={{ color: "var(--c-heading)" }}>Volume Discounts — Applied Automatically</p>
-          <p className="text-[11px]" style={{ color: "var(--c-heading)" }}>The more you buy, the less you pay. No code needed.</p>
+          <p className="text-[15px] font-bold" style={{ color: "var(--c-heading)" }}>Volume Discounts — Applied Automatically</p>
+          <p className="text-[13px]" style={{ color: "var(--c-heading)" }}>The more you buy, the less you pay. No code needed.</p>
         </div>
       </div>
 
@@ -237,34 +237,34 @@ function VolumeTiers() {
               )}
 
               {/* Label */}
-              <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: isTop ? "rgba(255,255,255,0.6)" : "#64748b" }}>
+              <p className="text-[12px] font-bold uppercase tracking-widest" style={{ color: isTop ? "rgba(255,255,255,0.6)" : "#64748b" }}>
                 {tier.label}
               </p>
 
               {/* Quantity */}
-              <p className="text-[12px] font-bold" style={{ color: isTop ? "#ffffff" : "#0f172a" }}>
+              <p className="text-[14px] font-bold" style={{ color: isTop ? "#ffffff" : "#0f172a" }}>
                 {tier.range}
               </p>
 
               {/* Prices */}
               <div className="flex flex-col gap-0.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Email</span>
-                  <span className="text-[13px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.email}</span>
+                  <span className="text-[12px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Email</span>
+                  <span className="text-[15px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.email}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Phone</span>
-                  <span className="text-[13px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.phone}</span>
+                  <span className="text-[12px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Phone</span>
+                  <span className="text-[15px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.phone}</span>
                 </div>
               </div>
 
               {/* Savings bar */}
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[9.5px] font-semibold" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>
+                  <span className="text-[11px] font-semibold" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>
                     Savings
                   </span>
-                  <span className="text-[10.5px] font-black" style={{ color: isTop ? "#CCFF00" : (tier.savingsPct > 0 ? "#0038FF" : "#94a3b8") }}>
+                  <span className="text-[12px] font-black" style={{ color: isTop ? "#CCFF00" : (tier.savingsPct > 0 ? "#0038FF" : "#94a3b8") }}>
                     {tier.savingsPct > 0 ? `${tier.savingsPct}%` : "—"}
                   </span>
                 </div>
@@ -369,7 +369,7 @@ export default function Pricing() {
             className="px-6 sm:px-8 py-4 flex items-center justify-between"
             style={{ background: "var(--c-section-card)", borderBottom: "1px solid var(--c-border-light)" }}
           >
-            <p className="text-[12px] font-bold uppercase tracking-[0.15em]" style={{ color: "#0038FF" }}>
+            <p className="text-[14px] font-bold uppercase tracking-[0.15em]" style={{ color: "#0038FF" }}>
               Live Price Estimator
             </p>
             <div className="flex gap-2">
@@ -377,7 +377,7 @@ export default function Pricing() {
                 <button
                   key={cat}
                   onClick={() => handleCard(cat)}
-                  className="px-3 py-1 rounded-full text-[11.5px] font-semibold capitalize transition-all"
+                  className="px-3 py-1 rounded-full text-[13px] font-semibold capitalize transition-all"
                   style={{
                     background: category === cat ? "#0038FF" : "transparent",
                     color: category === cat ? "#ffffff" : "var(--c-heading)",
@@ -392,10 +392,10 @@ export default function Pricing() {
 
           <div className="p-6 sm:p-8" style={{ background: "var(--c-section-card)" }}>
             <div className="flex items-baseline justify-between mb-4">
-              <p className="text-[11.5px] font-semibold uppercase tracking-[0.15em]" style={{ color: "var(--c-heading)" }}>
+              <p className="text-[13px] font-semibold uppercase tracking-[0.15em]" style={{ color: "var(--c-heading)" }}>
                 Quantity
               </p>
-              <p className="text-[11.5px]" style={{ color: "var(--c-heading)" }}>
+              <p className="text-[13px]" style={{ color: "var(--c-heading)" }}>
                 Max {max.toLocaleString()}
               </p>
             </div>
@@ -443,7 +443,7 @@ export default function Pricing() {
                 <button
                   key={p}
                   onClick={() => setQty(p)}
-                  className="px-3 py-1.5 rounded-full text-[12px] font-semibold border transition-all active:scale-95"
+                  className="px-3 py-1.5 rounded-full text-[14px] font-semibold border transition-all active:scale-95"
                   style={{
                     borderColor: qty === p ? "#0038FF" : "rgba(0,0,0,0.1)",
                     background: qty === p ? "#0038FF" : "transparent",
@@ -462,7 +462,7 @@ export default function Pricing() {
             style={{ background: "#0038FF" }}
           >
             <div className="flex-1">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-white/60 mb-1">
+              <p className="text-[13px] font-semibold uppercase tracking-widest text-white/60 mb-1">
                 Estimated Total
               </p>
               <div className="flex items-baseline gap-1.5 flex-wrap">
@@ -480,14 +480,14 @@ export default function Pricing() {
                     {fmt(price)}
                   </m.span>
                 </AnimatePresence>
-                <span className="text-[13px] text-white/50 ml-1">
+                <span className="text-[14px] text-white/50 ml-1">
                   · ${perUnit.toFixed(2)} per {category === "combo" ? "contact" : category === "email" ? "email" : "number"}
                 </span>
               </div>
             </div>
             <Link
               href="/signup"
-              className="h-12 px-7 rounded-2xl text-[13.5px] font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.03] active:scale-[0.97] whitespace-nowrap shrink-0"
+              className="h-12 px-7 rounded-2xl text-[15px] font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.03] active:scale-[0.97] whitespace-nowrap shrink-0"
               style={{ background: "var(--c-section-card)", color: "#0038FF" }}
             >
               Get {qty.toLocaleString()} contacts
@@ -510,7 +510,7 @@ export default function Pricing() {
           {GUARANTEES.map((g) => (
             <div
               key={g.text}
-              className="flex items-center gap-2 px-4 py-3 rounded-xl text-[12.5px] font-medium"
+              className="flex items-center gap-2 px-4 py-3 rounded-xl text-[14px] font-medium"
               style={{ background: "rgba(0,56,255,0.04)", border: "1px solid rgba(0,56,255,0.1)", color: "var(--c-body)" }}
             >
               <Check className="w-3.5 h-3.5 shrink-0" style={{ color: "#0038FF" }} strokeWidth={2.5} />
@@ -519,7 +519,7 @@ export default function Pricing() {
           ))}
         </m.div>
 
-        <p className="text-[12.5px] text-center" style={{ color: "var(--c-heading)" }}>
+        <p className="text-[14px] text-center" style={{ color: "var(--c-heading)" }}>
           Need more than 10,000 contacts per month?{" "}
           <Link href="/contact" className="font-semibold underline underline-offset-2" style={{ color: "#0038FF" }}>
             Talk to us

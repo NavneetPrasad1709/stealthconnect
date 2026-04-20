@@ -120,7 +120,7 @@ export function StatsSection() {
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(0,56,255,0.08)" }}>
                   <Globe className="size-4" style={{ color: '#0038FF' }} />
                 </div>
-                <span className="text-[12px] font-bold uppercase tracking-widest" style={{ color: '#0038FF', fontFamily: FONT }}>
+                <span className="text-[14px] font-bold uppercase tracking-widest" style={{ color: '#0038FF', fontFamily: FONT }}>
                   Global Coverage
                 </span>
               </div>
@@ -164,7 +164,7 @@ export function StatsSection() {
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(0,56,255,0.08)" }}>
                   <Zap className="size-4" style={{ color: '#0038FF' }} />
                 </div>
-                <span className="text-[12px] font-bold uppercase tracking-widest" style={{ color: '#0038FF', fontFamily: FONT }}>
+                <span className="text-[14px] font-bold uppercase tracking-widest" style={{ color: '#0038FF', fontFamily: FONT }}>
                   Speed Guarantee
                 </span>
               </div>
@@ -187,10 +187,10 @@ export function StatsSection() {
                   <span className="flex justify-center items-center size-5 rounded-full" style={{ border: '1px solid var(--c-border-light)', background: 'var(--c-section-card)' }}>
                     <span className="size-2.5 rounded-full bg-blue-600" />
                   </span>
-                  <span className="text-xs" style={{ color: 'var(--c-heading)', fontFamily: FONT }}>You · just now</span>
+                  <span className="text-[14px]" style={{ color: 'var(--c-heading)', fontFamily: FONT }}>You · just now</span>
                 </div>
                 <div
-                  className="rounded-xl p-3 text-xs w-full sm:w-4/5 shadow-sm"
+                  className="rounded-xl p-3 text-[14px] w-full sm:w-4/5 shadow-sm"
                   style={{ background: 'var(--c-section-card)', border: '1px solid var(--c-border-light)', color: 'var(--c-body)', fontFamily: FONT }}
                 >
                   linkedin.com/in/john-smith-founder
@@ -199,14 +199,14 @@ export function StatsSection() {
 
               <div>
                 <div
-                  className="rounded-xl mb-1 p-3 text-xs text-white w-full sm:w-4/5 ml-auto shadow-sm"
+                  className="rounded-xl mb-1 p-3 text-[14px] text-white w-full sm:w-4/5 ml-auto shadow-sm"
                   style={{ background: '#0038FF', fontFamily: FONT }}
                 >
                   <p className="font-bold mb-1.5">✓ Contact verified — ready in 28 min</p>
                   <p className="opacity-80">john.smith@company.com</p>
                   <p className="opacity-80">+1 (415) 555-0182</p>
                 </div>
-                <span className="text-xs block text-right" style={{ color: 'var(--c-heading)', fontFamily: FONT }}>
+                <span className="text-[13px] block text-right" style={{ color: 'var(--c-heading)', fontFamily: FONT }}>
                   Delivered in 28 min · 1 credit used
                 </span>
               </div>
@@ -219,7 +219,7 @@ export function StatsSection() {
               <div className="text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
                   <ShieldCheck className="w-5 h-5 text-[#CCFF00]" />
-                  <span className="text-[12px] font-bold uppercase tracking-widest text-white" style={{ fontFamily: FONT }}>
+                  <span className="text-[14px] font-bold uppercase tracking-widest text-white" style={{ fontFamily: FONT }}>
                     Verification Rate
                   </span>
                 </div>
@@ -258,7 +258,7 @@ export function StatsSection() {
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(0,56,255,0.08)" }}>
                   <Activity className="size-4" style={{ color: '#0038FF' }} />
                 </div>
-                <span className="text-[12px] font-bold uppercase tracking-widest" style={{ color: '#0038FF', fontFamily: FONT }}>
+                <span className="text-[14px] font-bold uppercase tracking-widest" style={{ color: '#0038FF', fontFamily: FONT }}>
                   Growth
                 </span>
               </div>
@@ -268,7 +268,7 @@ export function StatsSection() {
               >
                 Growing every month.
               </p>
-              <p className="text-[14px] leading-relaxed" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
+              <p className="text-[15px] leading-relaxed" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
                 4,400+ verified contacts delivered in April alone.
                 Join thousands finding contacts faster, with less effort.
               </p>

@@ -105,7 +105,7 @@ function TestimonialCard({ text, image, name, role, company, dupIndex, i }: Test
     >
       <blockquote className="m-0 p-0">
         <p
-          className="leading-relaxed font-normal m-0 text-[14px]"
+          className="leading-relaxed font-normal m-0 text-[16px]"
           style={{ color: "var(--c-body)", fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)" }}
         >
           &ldquo;{text}&rdquo;
@@ -121,13 +121,13 @@ function TestimonialCard({ text, image, name, role, company, dupIndex, i }: Test
           />
           <div className="flex flex-col">
             <cite
-              className="font-semibold not-italic leading-5 text-[13.5px]"
+              className="font-semibold not-italic leading-5 text-[15px]"
               style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)" }}
             >
               {name}
             </cite>
             <span
-              className="text-[12px] leading-5 mt-0.5"
+              className="text-[14px] leading-5 mt-0.5"
               style={{ color: "var(--c-heading)", fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)" }}
             >
               {role} · {company}

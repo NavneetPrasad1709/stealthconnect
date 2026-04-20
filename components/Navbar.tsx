@@ -146,10 +146,10 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
                   onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)"}
                   onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "transparent"}>
                   <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-bold tabular-nums" style={{ color: "rgba(0,56,255,0.7)", fontFamily: F }}>
+                    <span className="text-[13px] font-bold tabular-nums" style={{ color: "rgba(0,56,255,0.7)", fontFamily: F }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-[15px] font-600" style={{ fontFamily: F, color: "rgba(255,255,255,0.82)", letterSpacing: "-0.01em" }}>
+                    <span className="text-[16px] font-600" style={{ fontFamily: F, color: "rgba(255,255,255,0.82)", letterSpacing: "-0.01em" }}>
                       {item.label}
                     </span>
                   </div>
@@ -164,12 +164,12 @@ function Drawer({ open, close }: { open: boolean; close(): void }) {
               initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: .2, duration: .24 }}>
               <Link href="/signup" onClick={close}
-                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full text-[14px] font-semibold text-white"
+                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full text-[15px] font-semibold text-white"
                 style={{ background: "var(--brand)", fontFamily: F, textDecoration: "none", boxShadow: "0 6px 28px rgba(0,56,255,0.45)" }}>
                 Get Started Free 
               </Link>
               <Link href="/login" onClick={close}
-                className="flex items-center justify-center w-full py-3.5 rounded-full text-[14px] font-medium"
+                className="flex items-center justify-center w-full py-3.5 rounded-full text-[15px] font-medium"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)", fontFamily: F, textDecoration: "none" }}>
                 Sign In
               </Link>

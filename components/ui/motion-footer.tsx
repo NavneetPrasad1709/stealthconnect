@@ -336,7 +336,7 @@ export default function CinematicFooter() {
             }}
           >
             <div
-              className="flex w-max animate-footer-scroll-marquee text-xs font-bold tracking-[0.28em] uppercase"
+              className="flex w-max animate-footer-scroll-marquee text-[13px] font-bold tracking-[0.28em] uppercase"
               style={{ color: "rgba(255,255,255,0.32)" }}
             >
               <MarqueeItem /><MarqueeItem />
@@ -452,16 +452,16 @@ export default function CinematicFooter() {
             {/* ── Bottom bar ── */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-5">
               <p
-                className="text-[11px] font-semibold tracking-widest uppercase order-2 md:order-1"
+                className="text-[13px] font-semibold tracking-widest uppercase order-2 md:order-1"
                 style={{ color: "rgba(255,255,255,0.25)" }}
               >
                 © {new Date().getFullYear()} StealthConnect AI · All rights reserved.
               </p>
 
               <div className="footer-glass-pill px-5 py-2.5 rounded-full flex items-center gap-2 order-1 md:order-2 cursor-default">
-                <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>Built for</span>
+                <span className="text-[12px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>Built for</span>
                 <span className="animate-footer-heartbeat text-sm">❤</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>everyone worldwide</span>
+                <span className="text-[12px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>everyone worldwide</span>
               </div>
 
               <MagneticButton
@@ -475,7 +475,7 @@ export default function CinematicFooter() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
                   </svg>
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.45)" }}>Back to Top</span>
+                <span className="text-[13px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.45)" }}>Back to Top</span>
               </MagneticButton>
             </div>
 

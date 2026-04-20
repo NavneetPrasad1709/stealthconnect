@@ -170,7 +170,7 @@ function FeatureCard({ card }: { card: (typeof CARDS)[number] }) {
           padding: "4px 0",
           fontFamily: FONT,
           fontWeight: 600,
-          fontSize: 11,
+          fontSize: 13,
           letterSpacing: "0.1em",
           color: isDark ? "rgba(200,255,0,0.65)" : "var(--c-muted)",
           textTransform: "uppercase",
@@ -310,7 +310,7 @@ export default function Features() {
                     style={{
                       fontFamily: FONT,
                       fontWeight: 600,
-                      fontSize: 12,
+                      fontSize: 14,
                       color: "#000000",
                       marginTop: 5,
                       letterSpacing: "0.06em",

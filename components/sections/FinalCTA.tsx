@@ -46,24 +46,24 @@ function ContactCard({ card }: { card: typeof CARDS[0] }) {
 
       <div className="flex flex-col items-center px-3 pt-6 pb-3 gap-[3px] flex-1">
         <div className="flex items-center gap-1">
-          <span className="text-[10px] font-semibold leading-tight text-center" style={{ color: "var(--c-heading)", fontFamily: FONT }}>
+          <span className="text-[11px] font-semibold leading-tight text-center" style={{ color: "var(--c-heading)", fontFamily: FONT }}>
             {card.name}
           </span>
           <CheckCircle2 size={8} style={{ color: "#22c55e", flexShrink: 0 }} />
         </div>
-        <p className="text-[7.5px] text-center leading-tight" style={{ color: "var(--c-body)", fontFamily: FONT }}>{card.title}</p>
-        <p className="text-[7.5px] font-semibold text-center" style={{ color: "#0038FF", fontFamily: FONT }}>{card.company}</p>
+        <p className="text-[8.5px] text-center leading-tight" style={{ color: "var(--c-body)", fontFamily: FONT }}>{card.title}</p>
+        <p className="text-[8.5px] font-semibold text-center" style={{ color: "#0038FF", fontFamily: FONT }}>{card.company}</p>
         <div className="w-full my-1.5" style={{ height: 1, background: "var(--c-border-light)" }} />
         <div className="flex items-center gap-1 w-full">
           <Mail size={7} style={{ color: "#0038FF", flexShrink: 0 }} />
-          <span className="text-[7px] truncate" style={{ color: "var(--c-body)", fontFamily: FONT }}>{card.email}</span>
+          <span className="text-[8px] truncate" style={{ color: "var(--c-body)", fontFamily: FONT }}>{card.email}</span>
         </div>
         <div className="flex items-center gap-1 w-full">
           <Phone size={7} style={{ color: "#0038FF", flexShrink: 0 }} />
-          <span className="text-[7px] truncate" style={{ color: "var(--c-body)", fontFamily: FONT }}>{card.phone}</span>
+          <span className="text-[8px] truncate" style={{ color: "var(--c-body)", fontFamily: FONT }}>{card.phone}</span>
         </div>
         <div className="mt-1.5 px-2 py-[3px] rounded-full" style={{ background: "rgba(34,197,94,0.10)", border: "1px solid rgba(34,197,94,0.25)" }}>
-          <span className="text-[6.5px] font-bold tracking-wide" style={{ color: "#16a34a" }}>✓ VERIFIED</span>
+          <span className="text-[8px] font-bold tracking-wide" style={{ color: "#16a34a" }}>✓ VERIFIED</span>
         </div>
       </div>
     </div>
@@ -153,7 +153,7 @@ export function FinalCTA() {
           transition={{ duration: 0.5, ease: [0.22,1,0.36,1] }}
           className="mb-6"
         >
-          <SectionBadge variant="light">Trusted by Users Worldwide</SectionBadge>
+          <SectionBadge variant="light">Find Anyone. Fast.</SectionBadge>
         </m.div>
 
         {/* Heading */}
@@ -164,16 +164,15 @@ export function FinalCTA() {
           style={{
             fontFamily: FONT,
             fontWeight: 800,
-            fontSize: "clamp(2rem,4vw,3.25rem)",
+            fontSize: "clamp(2rem,4vw,3.1rem)",
             lineHeight: 1.08,
             letterSpacing: "-0.025em",
             color: "var(--c-heading)",
             marginBottom: 20,
           }}
         >
-          Find Anyone&apos;s{" "}
-          <HeadingAccent>Verified Contact</HeadingAccent>
-          <br />Behind Any LinkedIn Profile.
+          Turn Any LinkedIn{" "}
+          <HeadingAccent>Into a Direct Line.</HeadingAccent>
         </m.h2>
 
         {/* CTA button */}
@@ -205,7 +204,7 @@ export function FinalCTA() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.38 }}
-          style={{ fontFamily: FONT, fontSize: 12, color: "var(--c-muted)", marginBottom: 56 }}
+          style={{ fontFamily: FONT, fontSize: 14, color: "var(--c-muted)", marginBottom: 56 }}
         >
           No credit card · First lookup free · Results in 30 min
         </m.p>
@@ -275,7 +274,7 @@ export function FinalCTA() {
               >
                 {stat.value}
               </span>
-              <span style={{ fontFamily: FONT, fontSize: 14, color: "var(--c-muted)", textAlign: "center" }}>
+              <span style={{ fontFamily: FONT, fontSize: 15, color: "var(--c-muted)", textAlign: "center" }}>
                 {stat.label}
               </span>
             </m.div>

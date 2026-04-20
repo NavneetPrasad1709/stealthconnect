@@ -59,7 +59,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
         aria-expanded={open}
       >
         <span
-          className="text-[15px] font-semibold leading-snug flex-1 transition-colors"
+          className="text-[17px] font-semibold leading-snug flex-1 transition-colors"
           style={{
             color: open ? "var(--c-heading)" : "var(--c-body)",
             fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
@@ -94,7 +94,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             style={{ overflow: "hidden" }}
           >
             <p
-              className="pb-5 text-[14.5px] leading-relaxed"
+              className="pb-5 text-[16px] leading-relaxed"
               style={{
                 color: "var(--c-body)",
                 fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",

@@ -19,22 +19,22 @@ const T_RESET   = T_HOLD + T_FADE + 200  // ms — remount
 /* ─── SVG Arrow between steps ──────────────────────────────────────────── */
 function AnimatedArrow({ delay, gen }: { delay: number; gen: number }) {
   return (
-    <div className="hidden lg:flex items-center justify-center w-14 shrink-0 pb-6">
+    <div className="hidden lg:flex items-center justify-center w-14 shrink-0 pb-6 text-[#0D0D0D] dark:text-[#0038FF]">
       <svg
         width="56"
         height="36"
         viewBox="0 0 56 36"
         fill="none"
         className="overflow-visible"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <m.path
           key={gen}
           d="M4 18 C14 4, 42 4, 52 18"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
           fill="none"
-          className="text-[#0D0D0D] dark:text-white/40"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ delay, duration: 0.6, ease: "easeInOut" }}
@@ -42,12 +42,7 @@ function AnimatedArrow({ delay, gen }: { delay: number; gen: number }) {
         <m.path
           key={`head-${gen}`}
           d="M44 12 L52 18 L44 24"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
           fill="none"
-          className="text-[#0D0D0D] dark:text-white/40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: delay + 0.55, duration: 0.2 }}
@@ -97,17 +92,17 @@ function Step1Visual({ phase }: { phase: "in" | "hold" | "out" }) {
           <m.div
             animate={{ scale: [1, 1.04, 1], boxShadow: ["0 0 0 0 rgba(34,197,94,0.25)", "0 0 0 5px rgba(34,197,94,0)", "0 0 0 0 rgba(34,197,94,0)"] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[12px] font-bold"
             style={{ background: "rgba(34,197,94,0.12)", color: "#15803d", border: "1px solid rgba(34,197,94,0.3)" }}
           >
             <span className="size-1.5 rounded-full bg-green-500 inline-block" />
             Profile detected
           </m.div>
         </div>
-        <p className="text-[12px] font-bold text-[#0D0D0D] dark:text-white leading-none" style={{ fontFamily: FONT }}>
+        <p className="text-[14px] font-bold text-[#0D0D0D] dark:text-white leading-none" style={{ fontFamily: FONT }}>
           Jane Doe
         </p>
-        <p className="text-[10px] text-[var(--c-heading)] mt-0.5 mb-3" style={{ fontFamily: FONT }}>
+        <p className="text-[12px] text-[var(--c-heading)] mt-0.5 mb-3" style={{ fontFamily: FONT }}>
           CTO · Acme Corp · San Francisco
         </p>
         {/* Live counter pill */}
@@ -115,11 +110,11 @@ function Step1Visual({ phase }: { phase: "in" | "hold" | "out" }) {
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl w-full"
           style={{ background: "rgba(0,56,255,0.06)", border: "1px solid rgba(0,56,255,0.14)" }}
         >
-          <span className="text-[10px] text-[#0038FF] font-semibold" style={{ fontFamily: FONT }}>
+          <span className="text-[12px] text-[#0038FF] font-semibold" style={{ fontFamily: FONT }}>
             LOOKUPS TODAY
           </span>
           <span
-            className="ml-auto text-[13px] font-black text-[#0038FF] tabular-nums"
+            className="ml-auto text-[15px] font-black text-[#0038FF] tabular-nums"
             style={{ fontFamily: FONT }}
           >
             {count.toLocaleString()}
@@ -163,7 +158,7 @@ function Step2Visual({ phase }: { phase: "in" | "hold" | "out" }) {
       {bars.map((bar, i) => (
         <div key={bar.label}>
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] font-semibold text-[var(--c-heading)]" style={{ fontFamily: FONT }}>
+            <span className="text-[12px] font-semibold text-[var(--c-heading)]" style={{ fontFamily: FONT }}>
               {bar.label}
             </span>
             <span
@@ -196,10 +191,10 @@ function Step2Visual({ phase }: { phase: "in" | "hold" | "out" }) {
         className="flex items-center justify-between px-3 py-2 rounded-xl mt-1"
         style={{ background: "#0038FF", border: "1px solid rgba(0,56,255,0.3)" }}
       >
-        <span className="text-[10px] font-bold text-white/80 uppercase tracking-wider" style={{ fontFamily: FONT }}>
+        <span className="text-[12px] font-bold text-white/80 uppercase tracking-wider" style={{ fontFamily: FONT }}>
           Verified accuracy
         </span>
-        <span className="text-[15px] font-black text-white tabular-nums" style={{ fontFamily: FONT }}>
+        <span className="text-[17px] font-black text-white tabular-nums" style={{ fontFamily: FONT }}>
           {score.toFixed(1)}%
         </span>
       </m.div>
@@ -229,7 +224,7 @@ function Step3Visual({ phase }: { phase: "in" | "hold" | "out" }) {
         style={{ background: "#CCFF00", boxShadow: "0 4px 20px rgba(204,255,0,0.25)" }}
       >
         <p
-          className="text-[9px] font-bold uppercase tracking-widest text-[#0D0D0D]/60 mb-0.5"
+          className="text-[11px] font-bold uppercase tracking-widest text-[#0D0D0D]/60 mb-0.5"
           style={{ fontFamily: FONT }}
         >
           Est. Delivery Time
@@ -240,7 +235,7 @@ function Step3Visual({ phase }: { phase: "in" | "hold" | "out" }) {
         >
           {mm}:{ss}
         </p>
-        <p className="text-[10px] font-semibold text-[#0D0D0D]/60 mt-0.5" style={{ fontFamily: FONT }}>
+        <p className="text-[12px] font-semibold text-[#0D0D0D]/60 mt-0.5" style={{ fontFamily: FONT }}>
           avg. 28 minutes · live
         </p>
       </div>
@@ -260,15 +255,15 @@ function Step3Visual({ phase }: { phase: "in" | "hold" | "out" }) {
         ].map((row) => (
           <div key={row.type} className="flex items-center justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-[8.5px] font-bold uppercase tracking-widest text-[var(--c-heading)]" style={{ fontFamily: FONT }}>
+              <p className="text-[11px] font-bold uppercase tracking-widest text-[var(--c-heading)]" style={{ fontFamily: FONT }}>
                 {row.type}
               </p>
-              <p className="text-[11px] font-semibold text-[#0D0D0D] dark:text-white/90 truncate" style={{ fontFamily: FONT }}>
+              <p className="text-[13px] font-semibold text-[#0D0D0D] dark:text-white/90 truncate" style={{ fontFamily: FONT }}>
                 {row.val}
               </p>
             </div>
             <span
-              className="shrink-0 px-2 py-0.5 rounded-full text-[9.5px] font-bold text-white"
+              className="shrink-0 px-2 py-0.5 rounded-full text-[11px] font-bold text-white"
               style={{ background: row.color, fontFamily: FONT }}
             >
               {row.price}
@@ -306,8 +301,8 @@ function StepCard({ number, title, subtitle, visual, delay, phase, isMobile }: S
           <div className="w-8 h-8 rounded-xl flex items-center justify-center text-[11px] font-black text-white shrink-0" style={{ background: "#0038FF", fontFamily: FONT }}>{number}</div>
           <div className="h-px flex-1 rounded-full" style={{ background: "linear-gradient(90deg,rgba(0,56,255,0.3),transparent)" }} />
         </div>
-        <h3 className="uppercase mb-1.5" style={{ fontFamily: FONT, fontWeight: 800, fontSize: "clamp(14px,1.5vw,17px)", letterSpacing: "0.01em", lineHeight: 1.2, color: "var(--c-heading)" }}>{title}</h3>
-        <p className="mb-5" style={{ fontFamily: FONT, fontWeight: 400, fontSize: 13, lineHeight: 1.5, color: "var(--c-body)" }}>{subtitle}</p>
+        <h3 className="uppercase mb-1.5" style={{ fontFamily: FONT, fontWeight: 800, fontSize: "clamp(16px,1.5vw,19px)", letterSpacing: "0.01em", lineHeight: 1.2, color: "var(--c-heading)" }}>{title}</h3>
+        <p className="mb-5" style={{ fontFamily: FONT, fontWeight: 400, fontSize: 15, lineHeight: 1.5, color: "var(--c-body)" }}>{subtitle}</p>
         {visual}
       </div>
     );
@@ -331,7 +326,7 @@ function StepCard({ number, title, subtitle, visual, delay, phase, isMobile }: S
       {/* Step number */}
       <div className="flex items-center gap-2.5 mb-4">
         <div
-          className="w-8 h-8 rounded-xl flex items-center justify-center text-[11px] font-black text-white shrink-0"
+          className="w-8 h-8 rounded-xl flex items-center justify-center text-[13px] font-black text-white shrink-0"
           style={{ background: "#0038FF", fontFamily: FONT }}
         >
           {number}
@@ -348,7 +343,7 @@ function StepCard({ number, title, subtitle, visual, delay, phase, isMobile }: S
         style={{
           fontFamily: FONT,
           fontWeight: 800,
-          fontSize: "clamp(14px,1.5vw,17px)",
+          fontSize: "clamp(16px,1.5vw,19px)",
           letterSpacing: "0.01em",
           lineHeight: 1.2,
           color: "var(--c-heading)",
@@ -360,7 +355,7 @@ function StepCard({ number, title, subtitle, visual, delay, phase, isMobile }: S
       {/* Subtitle */}
       <p
         className="mb-5"
-        style={{ fontFamily: FONT, fontWeight: 400, fontSize: 13, lineHeight: 1.5, color: "var(--c-body)" }}
+        style={{ fontFamily: FONT, fontWeight: 400, fontSize: 15, lineHeight: 1.5, color: "var(--c-body)" }}
       >
         {subtitle}
       </p>

@@ -153,7 +153,7 @@ export default function Hero() {
   return (
     <section
       className="relative flex flex-col overflow-hidden selection:bg-[#CCFF00] selection:text-black"
-      style={{ background: "#0038FF", minHeight: "100svh" }}
+      style={{ background: "#0038FF", height: "100svh", minHeight: 600 }}
     >
       {/* ── grid texture ── */}
       <div
@@ -180,9 +180,9 @@ export default function Hero() {
         3-col grid on lg+:  [left card zone] [center] [right card zone]
         Single col on mobile: center content only, cards stack below
       */}
-      <main className="relative z-20 flex-1 w-full max-w-[1400px] mx-auto px-4 md:px-6">
+      <main className="relative z-20 flex-1 w-full max-w-[1400px] mx-auto px-4 md:px-6 flex items-center">
 
-        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr_240px] xl:grid-cols-[270px_1fr_270px] items-center gap-6 xl:gap-10 pt-24 pb-10 lg:pt-20 lg:pb-16">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-[240px_1fr_240px] xl:grid-cols-[270px_1fr_270px] items-center gap-6 xl:gap-10 pt-28 pb-16 lg:pt-0 lg:pb-0">
 
           {/* ── LEFT: result card (desktop) ── */}
           <div className="hidden lg:flex flex-col items-center justify-center gap-6">
@@ -206,7 +206,7 @@ export default function Hero() {
                 initial={{ opacity: 1, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full flex justify-start pl-[8%] md:pl-[12%]"
+                className="w-full flex justify-center"
               >
                 <span
                   className="text-[clamp(3rem,7.5vw,5.5rem)] font-black leading-[0.88] tracking-tighter uppercase text-[#CCFF00]"
@@ -242,7 +242,7 @@ export default function Hero() {
                 initial={{ opacity: 1, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full flex justify-end pr-[8%] md:pr-[12%]"
+                className="w-full flex justify-center"
               >
                 <span
                   className="text-[clamp(2.8rem,7vw,5rem)] font-black leading-[0.88] tracking-tighter uppercase text-white"
@@ -264,17 +264,17 @@ export default function Hero() {
               className="mb-8 space-y-3"
             >
               <p
-                className="text-[18px] md:text-[16px] leading-relaxed font-medium"
+                className="text-[20px] md:text-[16px] leading-relaxed font-medium"
                 style={{ color: "white", fontFamily: FONT_DISPLAY }}
               >
-                Find their contact information in&nbsp;
+                Real contacts, delivered in<br className="block md:hidden" />&nbsp;
                 <span
                   className="font-black px-1.5 py-0.5 rounded-md"
                   style={{ color: "#000", background: "#CCFF00" }}
                 >
                   less than 30 minutes
                 </span>
-                {" "}— or you don't pay.
+                <br className="block md:hidden" />Guaranteed or it's free.
               </p>
             </m.div>
 
@@ -439,17 +439,33 @@ export default function Hero() {
 
             </m.div>
 
-
-            {/* ── Mobile cards ── */}
+            {/* ── Mobile stats strip (hidden on lg+) ── */}
             <m.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.55 }}
-              className="flex lg:hidden gap-4 justify-center mt-10 w-full overflow-x-auto pb-2"
+              transition={{ delay: 0.55, duration: 0.45 }}
+              className="lg:hidden grid grid-cols-2 gap-3 mt-8 w-full"
             >
-              <ResultCard />
-              <StatsCard />
+              {[
+                { val: "800M+", label: "Contacts found" },
+                { val: "99.9%", label: "Verified accuracy" },
+                { val: "28 min", label: "Avg. delivery" },
+                { val: "190+",  label: "Countries" },
+              ].map((s) => (
+                <div
+                  key={s.label}
+                  className="flex flex-col items-center justify-center py-4 rounded-2xl"
+                  style={{
+                    background: "rgba(255,255,255,0.1)",
+                    border: "1px solid rgba(255,255,255,0.18)",
+                  }}
+                >
+                  <span className="text-[1.6rem] font-black leading-none" style={{ color: "#CCFF00", fontFamily: GF }}>{s.val}</span>
+                  <span className="text-[11px] font-semibold mt-1" style={{ color: "rgba(255,255,255,0.75)", fontFamily: FONT_DISPLAY }}>{s.label}</span>
+                </div>
+              ))}
             </m.div>
+
           </div>
 
           {/* ── RIGHT: stats card (desktop) ── */}
