@@ -79,7 +79,7 @@ export default function CTA() {
           className="mb-10 max-w-sm mx-auto leading-relaxed"
           style={{ fontSize: "clamp(15px,2.5vw,20px)", color: "var(--c-heading)" }}
         >
-          Join 4,200+ users. Get your first contact verified free — no card required.
+          Get your first contact verified free — no card required.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">

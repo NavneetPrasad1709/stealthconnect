@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | StealthConnect AI",
   },
   description:
-    "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes. Pay only per result — no subscription, no contracts. Trusted by 4,200+ sales teams.",
+    "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes. Pay only per result — no subscription, no contracts.",
   keywords: [
     "linkedin contact finder",
     "email finder",

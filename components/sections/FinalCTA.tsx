@@ -19,7 +19,7 @@ const CARDS = [
 ]
 
 const STATS = [
-  { value: "4,200+", label: "Users trust us"          },
+  
   { value: "800M+",  label: "Contacts delivered"       },
   { value: "99.9%",  label: "Verification accuracy"    },
 ]
@@ -153,7 +153,7 @@ export function FinalCTA() {
           transition={{ duration: 0.5, ease: [0.22,1,0.36,1] }}
           className="mb-6"
         >
-          <SectionBadge variant="light">Trusted by 4,200+ Users Worldwide</SectionBadge>
+          <SectionBadge variant="light">Trusted by Users Worldwide</SectionBadge>
         </m.div>
 
         {/* Heading */}

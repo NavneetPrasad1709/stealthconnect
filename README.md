@@ -35,7 +35,7 @@ A user pastes LinkedIn profile URLs, chooses what contact data they need (email,
 
 | Metric | Value |
 |---|---|
-| Sales teams using the platform | 4,200+ |
+| Sales teams using the platform 
 | Contacts delivered | 2.4M+ |
 | Average delivery time | 28 minutes |
 | Verification rate | 97.2% |

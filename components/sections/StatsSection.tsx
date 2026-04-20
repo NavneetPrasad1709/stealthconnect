@@ -237,7 +237,7 @@ export function StatsSection() {
                 {[
                   { val: "800M+", label: "Total contacts found" },
                   { val: "28 min", label: "Average delivery time" },
-                  { val: "4,200+", label: "Active users" },
+                  
                 ].map(s => (
                   <div key={s.label} className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
