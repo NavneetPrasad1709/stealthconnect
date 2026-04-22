@@ -302,7 +302,7 @@ function StepCard({ number, title, subtitle, visual, delay, phase, isMobile }: S
           <div className="h-px flex-1 rounded-full" style={{ background: "linear-gradient(90deg,rgba(0,56,255,0.3),transparent)" }} />
         </div>
         <h3 className="uppercase mb-1.5" style={{ fontFamily: FONT, fontWeight: 800, fontSize: "clamp(16px,1.5vw,19px)", letterSpacing: "0.01em", lineHeight: 1.2, color: "var(--c-heading)" }}>{title}</h3>
-        <p className="mb-5" style={{ fontFamily: FONT, fontWeight: 400, fontSize: 15, lineHeight: 1.5, color: "var(--c-body)" }}>{subtitle}</p>
+        <p className="mb-5" style={{ fontFamily: FONT, fontWeight: 400, fontSize: 16, lineHeight: 1.5, color: "var(--c-body)" }}>{subtitle}</p>
         {visual}
       </div>
     );
@@ -355,7 +355,7 @@ function StepCard({ number, title, subtitle, visual, delay, phase, isMobile }: S
       {/* Subtitle */}
       <p
         className="mb-5"
-        style={{ fontFamily: FONT, fontWeight: 400, fontSize: 15, lineHeight: 1.5, color: "var(--c-body)" }}
+        style={{ fontFamily: FONT, fontWeight: 400, fontSize: 16, lineHeight: 1.5, color: "var(--c-body)" }}
       >
         {subtitle}
       </p>
