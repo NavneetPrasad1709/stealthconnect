@@ -1131,3 +1131,9 @@ input[type='range'] { -webkit-appearance: none; appearance: none; }
 .animate-float-stats   { animation: sc-float-alt 6.5s ease-in-out 1s infinite; }
 .animate-cursor-blink  { animation: sc-blink 0.9s ease-in-out infinite; }
 .animate-hub-pulse     { animation: sc-hub-pulse 2.8s ease-in-out infinite; }
+
+/* Testimonials column infinite scroll — compositor-only */
+@keyframes sc-scroll-col {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
