@@ -86,7 +86,7 @@ const FONT = "var(--font-montserrat,'Montserrat',sans-serif)"
 // ── Main component ────────────────────────────────────────────────────────────
 export function StatsSection() {
   return (
-    <section className="py-14 md:py-24 mt-10 md:mt-0" style={{ background: 'var(--c-section-bg-alt)' }}>
+    <section className="py-14 md:py-24 mt-14 md:mt-0" style={{ background: 'var(--c-section-bg-alt)' }}>
       <div className="mx-auto max-w-[1120px] px-5 md:px-8">
 
         {/* Section label + heading */}
