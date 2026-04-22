@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Eye, EyeOff, Zap } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, Eye, EyeOff, Zap } from "lucide-react";
 import { AuthRightPanel } from "@/components/ui/AuthRightPanel";
 
 const F = "var(--font-montserrat,'Montserrat',sans-serif)";
@@ -82,17 +83,27 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
         <div className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-10 py-10 md:py-14">
           <div className="w-full max-w-[420px] flex flex-col gap-5">
 
-            {/* Logo */}
-            <div className="animate-element animate-delay-100 flex items-center gap-2">
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
-                style={{ background: "var(--brand)", boxShadow: "0 0 20px rgba(0,56,255,0.6)" }}
-              >
-                <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
+            {/* Logo + back to home */}
+            <div className="animate-element animate-delay-100 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                  style={{ background: "var(--brand)", boxShadow: "0 0 20px rgba(0,56,255,0.6)" }}
+                >
+                  <Zap className="w-4 h-4 text-white" strokeWidth={2.5} />
+                </div>
+                <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "rgba(255,255,255,0.55)", letterSpacing: "-0.01em" }}>
+                  StealthConnect AI
+                </span>
               </div>
-              <span style={{ fontFamily: F, fontSize: 13, fontWeight: 800, color: "rgba(255,255,255,0.55)", letterSpacing: "-0.01em" }}>
-                StealthConnect AI
-              </span>
+              <Link
+                href="/"
+                className="flex items-center gap-1 text-[12px] font-medium transition-colors hover:text-white"
+                style={{ color: "rgba(255,255,255,0.35)", fontFamily: F, textDecoration: "none" }}
+              >
+                <ArrowLeft className="w-3 h-3" />
+                Home
+              </Link>
             </div>
 
             {/* Heading */}
