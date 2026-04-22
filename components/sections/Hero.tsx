@@ -318,13 +318,13 @@ export default function Hero() {
                     ref={inputRef}
                     type="text"
                     aria-label="LinkedIn profile URL"
-                    className="absolute inset-0 w-full bg-transparent outline-none text-[11px] md:text-[14px] z-10 text-black dark:text-white"
+                    className="absolute inset-0 w-full bg-transparent outline-none text-[16px] md:text-[14px] z-10 text-black dark:text-white"
                     style={{ fontFamily: FONT_DISPLAY, caretColor: "#0038FF" }}
                     onFocus={() => setFocused(true)}
                     onBlur={() => setFocused(false)}
                   />
                   <span
-                    className="absolute inset-0 flex items-center pointer-events-none select-none text-[11px] md:text-[14px] text-black/30 dark:text-white/40"
+                    className="absolute inset-0 flex items-center pointer-events-none select-none text-[16px] md:text-[14px] text-black/30 dark:text-white/40"
                     style={{ fontFamily: FONT_DISPLAY }}
                     aria-hidden
                   >
@@ -340,7 +340,7 @@ export default function Hero() {
                 <m.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="shrink-0">
                   <Link
                     href="/signup"
-                    className="flex items-center gap-2 px-5 py-3 rounded-[14px] text-[14px] md:text-[16px] font-black text-black whitespace-nowrap"
+                    className="flex items-center gap-2 px-5 py-3 rounded-[14px] text-[16px] font-black text-black whitespace-nowrap"
                     style={{
                       background: "#CCFF00",
                       fontFamily: GF,
@@ -355,7 +355,7 @@ export default function Hero() {
               </div>
 
               {/* Below bar hint */}
-              <p className="mt-2.5 text-center text-[11px] md:text-[14px] font-semibold" style={{ color: "#ffffff", fontFamily: FONT_DISPLAY }}>
+              <p className="mt-2.5 text-center text-[16px] md:text-[14px] font-semibold" style={{ color: "#ffffff", fontFamily: FONT_DISPLAY }}>
                 e.g.{" "}
                 <span className="font-bold" style={{ color: "#CCFF00" }}>
                   linkedin.com/in/sarah-chen-cto
@@ -373,7 +373,7 @@ export default function Hero() {
               {/* Try it free — primary lime badge */}
               <Link
                 href="/signup"
-                className="flex items-center gap-2 px-4 py-2 rounded-full text-[11px] md:text-[14px] font-black text-black transition-all duration-200 hover:scale-105 active:scale-95"
+                className="flex items-center gap-2 px-4 py-2 rounded-full text-[16px] md:text-[14px] font-black text-black transition-all duration-200 hover:scale-105 active:scale-95"
                 style={{
                   background: "#CCFF00",
                   fontFamily: GF,
@@ -386,7 +386,7 @@ export default function Hero() {
 
               {/* No subscription */}
               <span
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] md:text-[14px] font-semibold"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[16px] md:text-[14px] font-semibold"
                 style={{
                   color: "#fff",
                   background: "rgba(255,255,255,0.12)",
@@ -399,7 +399,7 @@ export default function Hero() {
 
               {/* Pay per result */}
               <span
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] md:text-[14px] font-semibold"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[16px] md:text-[14px] font-semibold"
                 style={{
                   color: "#fff",
                   background: "rgba(255,255,255,0.12)",
@@ -410,9 +410,9 @@ export default function Hero() {
                 <span style={{ color: "#CCFF00", fontSize: 14 }}>✓</span> Pay per result
               </span>
 
-              {/* 97.2% verified */}
+              {/* 99.9% verified */}
               <span
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] md:text-[14px] font-semibold"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[16px] md:text-[14px] font-semibold"
                 style={{
                   color: "#fff",
                   background: "rgba(255,255,255,0.12)",
@@ -424,7 +424,7 @@ export default function Hero() {
                 99.9% verified
               </span>
               <span
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] md:text-[14px] font-semibold"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[16px] md:text-[14px] font-semibold"
                 style={{
                   color: "#fff",
                   background: "rgba(255,255,255,0.12)",
