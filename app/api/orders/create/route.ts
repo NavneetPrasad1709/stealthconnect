@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { adminDb, deductCredits, getProfile } from "@/lib/admin-db";
+import { adminDb, deductCredits, getProfile, getPayPalToken, PAYPAL_BASE } from "@/lib/admin-db";
 import { sendOrderConfirmation, sendTeamNotification } from "@/lib/email";
 
 interface OrderPayload {
@@ -49,6 +49,31 @@ export async function POST(req: NextRequest) {
         { error: `Amount mismatch. Expected $${expectedAmount.toFixed(2)}` },
         { status: 400 }
       );
+    }
+
+    /* ── Verify PayPal payment server-side (non-credits path) ── */
+    if (!use_credits && paypal_order_id) {
+      try {
+        const token   = await getPayPalToken();
+        const ppRes   = await fetch(`${PAYPAL_BASE}/v2/checkout/orders/${paypal_order_id}`, {
+          headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        });
+        const ppOrder = await ppRes.json() as {
+          status: string;
+          purchase_units?: Array<{ amount: { value: string } }>;
+        };
+        if (ppOrder.status !== "COMPLETED") {
+          return NextResponse.json({ error: "Payment not completed" }, { status: 402 });
+        }
+        const paidAmt = parseFloat(ppOrder.purchase_units?.[0]?.amount?.value ?? "0");
+        if (Math.abs(paidAmt - expectedAmount) > tolerance) {
+          return NextResponse.json({ error: "Payment amount mismatch" }, { status: 402 });
+        }
+      } catch {
+        return NextResponse.json({ error: "Could not verify payment" }, { status: 502 });
+      }
+    } else if (!use_credits && !paypal_order_id) {
+      return NextResponse.json({ error: "Payment required" }, { status: 402 });
     }
 
     /* ── Fetch profile for emails ────────────────────────────── */

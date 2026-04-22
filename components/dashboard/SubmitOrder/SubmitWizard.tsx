@@ -742,8 +742,9 @@ function StepSummary({
       headers: { "Content-Type": "application/json" },
       body:    JSON.stringify({ amount: total }),
     });
-    const { id } = await res.json() as { id: string };
-    return id;
+    const data = await res.json() as { id?: string; error?: string };
+    if (!res.ok || !data.id) throw new Error(data.error ?? "Failed to create PayPal order");
+    return data.id;
   }
 
   async function onApprove(data: { orderID: string }) {
