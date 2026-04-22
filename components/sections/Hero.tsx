@@ -267,14 +267,14 @@ export default function Hero() {
                 className="text-[20px] md:text-[16px] leading-relaxed font-medium"
                 style={{ color: "white", fontFamily: FONT_DISPLAY }}
               >
-                Real contacts, delivered in<br className="block md:hidden" />&nbsp;
+                Verified contacts. Delivered in{" "}
                 <span
                   className="font-black px-1.5 py-0.5 rounded-md"
                   style={{ color: "#000", background: "#CCFF00" }}
                 >
-                  less than 30 minutes
+                  30 minutes.
                 </span>
-                <br className="block md:hidden" />Guaranteed or it's free.
+                {" "}No excuses.
               </p>
             </m.div>
 
