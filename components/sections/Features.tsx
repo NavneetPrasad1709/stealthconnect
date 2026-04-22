@@ -286,7 +286,7 @@ export default function Features() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.26, duration: 0.5 }}
-              className="mt-10 mb-12 md:mb-0 grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:gap-8 justify-center md:justify-start"
+              className="mt-10 mb-14 md:mb-0 grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:gap-8 justify-center md:justify-start"
             >
               {[
                 { val: "99.9%", label: "Verification rate" },
@@ -339,7 +339,7 @@ export default function Features() {
           </div>
 
           {/* ══ Right — stacking cards ══ */}
-          <ContainerScroll className="min-h-[420vh] space-y-6 py-10 pb-[55vh]">
+          <ContainerScroll className="md:min-h-[420vh] space-y-6 py-10 md:pb-[55vh]">
             {CARDS.map((card, i) => (
               <CardSticky
                 key={card.number}
