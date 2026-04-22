@@ -127,7 +127,7 @@ function Step1Visual({ phase }: { phase: "in" | "hold" | "out" }) {
 
 /* ─── Step 2 visual: Verification progress ──────────────────────────────── */
 function Step2Visual({ phase }: { phase: "in" | "hold" | "out" }) {
-  const [score, setScore] = useState(97.4)
+  const [score, setScore] = useState(99.1)
   const running = phase !== "out"
   const bars = [
     { label: "Corporate Directories", width: 82, color: "#0038FF" },
@@ -136,11 +136,11 @@ function Step2Visual({ phase }: { phase: "in" | "hold" | "out" }) {
   ]
 
   useEffect(() => {
-    if (!running) { setScore(97.4); return }
+    if (!running) { setScore(99.1); return }
     const id = setInterval(() => {
       setScore(s => {
         const next = s + (Math.random() * 0.04 - 0.01)
-        return Math.min(99.4, Math.max(97.2, parseFloat(next.toFixed(2))))
+        return Math.min(99.9, Math.max(99.0, parseFloat(next.toFixed(2))))
       })
     }, 350)
     return () => clearInterval(id)

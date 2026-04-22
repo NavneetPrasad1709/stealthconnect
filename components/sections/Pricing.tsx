@@ -11,8 +11,7 @@ import { useMemo, useState, useRef } from "react";
 type Category = "email" | "phone" | "combo";
 
 const PHONE_TIERS: [number, number][] = [
-  [1, 1], [10, 9], [100, 80], [500, 350],
-  [1000, 700], [5000, 3200], [10000, 5000],
+  [1, 1], [10, 9], [100, 75], [1000, 650], [5000, 2500], [10000, 5000],
 ];
 const EMAIL_TIERS: [number, number][] = [
   [1, 0.2], [10, 2], [100, 18], [1000, 150], [5000, 800],
