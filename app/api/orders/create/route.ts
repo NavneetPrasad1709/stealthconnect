@@ -76,6 +76,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Payment required" }, { status: 402 });
     }
 
+    /* ── Idempotency: if this PayPal order already created a DB row, return it */
+    if (paypal_order_id) {
+      const { data: existing } = await db
+        .from("orders")
+        .select("id, user_id")
+        .eq("paypal_order_id", paypal_order_id as never)
+        .maybeSingle();
+      if (existing) {
+        const ex = existing as { id: string; user_id: string };
+        if (ex.user_id !== userId) {
+          return NextResponse.json({ error: "Order already claimed" }, { status: 409 });
+        }
+        return NextResponse.json({ orderId: ex.id, idempotent: true });
+      }
+    }
+
     /* ── Fetch profile for emails ────────────────────────────── */
     const profile = await getProfile(userId);
     if (!profile) return NextResponse.json({ error: "Profile not found" }, { status: 404 });
@@ -98,6 +114,35 @@ export async function POST(req: NextRequest) {
       .single();
 
     if (error) {
+      // CRITICAL: if PayPal payment captured but DB insert failed, money is in limbo.
+      // Log prominently so admin can reconcile, and notify team.
+      if (paypal_order_id) {
+        console.error(
+          "CRITICAL: PayPal captured but order insert FAILED.",
+          "paypal_order_id=", paypal_order_id,
+          "user_id=", userId,
+          "amount=", amount_paid,
+          "error=", error
+        );
+        void sendTeamNotification({
+          orderId:      `ORPHAN-${paypal_order_id}`,
+          userEmail:    profile.email,
+          userName:     profile.full_name ?? profile.email,
+          contactType:  contact_type,
+          quantity,
+          amountPaid:   amount_paid,
+          usedCredits:  false,
+          linkedinUrls: linkedin_urls,
+          emailDraft:   email_draft_requested,
+        }).catch((e) => console.error("Orphan alert email failed:", e));
+        return NextResponse.json(
+          {
+            error:           "Payment received but order could not be saved. Our team has been notified. Please contact support with this reference.",
+            paypal_order_id,
+          },
+          { status: 500 }
+        );
+      }
       console.error("Order insert error:", error);
       return NextResponse.json({ error: "Failed to create order" }, { status: 500 });
     }

@@ -1,34 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const BASE =
-  process.env.PAYPAL_MODE === "sandbox"
-    ? "https://api-m.sandbox.paypal.com"
-    : "https://api-m.paypal.com";
-
-async function getAccessToken() {
-  const res = await fetch(`${BASE}/v1/oauth2/token`, {
-    method:  "POST",
-    headers: {
-      "Content-Type":  "application/x-www-form-urlencoded",
-      Authorization:
-        "Basic " +
-        Buffer.from(
-          `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`
-        ).toString("base64"),
-    },
-    body: "grant_type=client_credentials",
-  });
-  const data = await res.json();
-  return data.access_token as string;
-}
+import { headers } from "next/headers";
+import { getPayPalToken, PAYPAL_BASE } from "@/lib/admin-db";
 
 export async function POST(req: NextRequest) {
   try {
+    const h      = await headers();
+    const userId = h.get("x-user-id");
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
     const { orderID } = await req.json() as { orderID: string };
+    if (!orderID) return NextResponse.json({ error: "orderID required" }, { status: 400 });
 
-    const token = await getAccessToken();
+    const token = await getPayPalToken();
 
-    const res = await fetch(`${BASE}/v2/checkout/orders/${orderID}/capture`, {
+    const res = await fetch(`${PAYPAL_BASE}/v2/checkout/orders/${orderID}/capture`, {
       method:  "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,11 +24,16 @@ export async function POST(req: NextRequest) {
     const data = await res.json();
 
     if (data.status !== "COMPLETED") {
-      return NextResponse.json({ error: "Payment not completed" }, { status: 400 });
+      console.error("PayPal capture not completed:", orderID, JSON.stringify(data));
+      return NextResponse.json(
+        { error: data.message ?? "Payment not completed", status: data.status },
+        { status: 400 }
+      );
     }
 
     return NextResponse.json({ status: "COMPLETED", orderID });
-  } catch {
+  } catch (err) {
+    console.error("PayPal capture-order exception:", err);
     return NextResponse.json({ error: "Failed to capture PayPal order" }, { status: 500 });
   }
 }

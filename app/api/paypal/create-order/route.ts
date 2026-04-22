@@ -1,34 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const BASE =
-  process.env.PAYPAL_MODE === "sandbox"
-    ? "https://api-m.sandbox.paypal.com"
-    : "https://api-m.paypal.com";
-
-async function getAccessToken() {
-  const res = await fetch(`${BASE}/v1/oauth2/token`, {
-    method:  "POST",
-    headers: {
-      "Content-Type":  "application/x-www-form-urlencoded",
-      Authorization:
-        "Basic " +
-        Buffer.from(
-          `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`
-        ).toString("base64"),
-    },
-    body: "grant_type=client_credentials",
-  });
-  const data = await res.json();
-  return data.access_token as string;
-}
+import { headers } from "next/headers";
+import { getPayPalToken, PAYPAL_BASE } from "@/lib/admin-db";
 
 export async function POST(req: NextRequest) {
   try {
+    const h      = await headers();
+    const userId = h.get("x-user-id");
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
     const { amount } = await req.json() as { amount: number };
 
-    const token = await getAccessToken();
+    if (typeof amount !== "number" || !isFinite(amount) || amount <= 0) {
+      return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
+    }
 
-    const res = await fetch(`${BASE}/v2/checkout/orders`, {
+    const token = await getPayPalToken();
+
+    const res = await fetch(`${PAYPAL_BASE}/v2/checkout/orders`, {
       method:  "POST",
       headers: {
         "Content-Type":  "application/json",

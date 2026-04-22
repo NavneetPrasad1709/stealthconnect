@@ -755,25 +755,49 @@ function StepSummary({
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ orderID: data.orderID }),
       });
-      if (!cap.ok) throw new Error("Capture failed");
+      if (!cap.ok) {
+        const capData = await cap.json().catch(() => ({})) as { error?: string };
+        throw new Error(capData.error ?? "Capture failed");
+      }
 
-      const ord = await fetch("/api/orders/create", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({
-          contact_type:          contactType,
-          linkedin_urls:         urls,
-          email_draft_requested: emailDraft,
-          amount_paid:           total,
-          paypal_order_id:       data.orderID,
-          use_credits:           false,
-          input_type:            inputType,
-        }),
+      // Payment captured. Retry order creation up to 3x — server is idempotent
+      // on paypal_order_id so retries are safe.
+      const orderPayload = JSON.stringify({
+        contact_type:          contactType,
+        linkedin_urls:         urls,
+        email_draft_requested: emailDraft,
+        amount_paid:           total,
+        paypal_order_id:       data.orderID,
+        use_credits:           false,
+        input_type:            inputType,
       });
-      const d = await ord.json() as { orderId?: string; error?: string };
-      if (!ord.ok) throw new Error(d.error ?? "Order failed");
-      setSuccess(true);
-      setTimeout(() => router.push("/dashboard/orders"), 1800);
+
+      let lastError = "Order failed";
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          const ord = await fetch("/api/orders/create", {
+            method:  "POST",
+            headers: { "Content-Type": "application/json" },
+            body:    orderPayload,
+          });
+          const d = await ord.json() as { orderId?: string; error?: string };
+          if (ord.ok && d.orderId) {
+            setSuccess(true);
+            setTimeout(() => router.push("/dashboard/orders"), 1800);
+            return;
+          }
+          lastError = d.error ?? "Order failed";
+        } catch (e) {
+          lastError = (e as Error).message;
+        }
+        if (attempt < 2) await new Promise((r) => setTimeout(r, 800 * (attempt + 1)));
+      }
+
+      // All retries failed. Payment is captured but order is not saved.
+      // Server-side orphan alert has already fired; show user a support ref.
+      setPayErr(
+        `${lastError}. Your payment was received — please contact support with PayPal reference: ${data.orderID}`
+      );
     } catch (e) {
       setPayErr((e as Error).message);
     } finally { setBusy(false); }
