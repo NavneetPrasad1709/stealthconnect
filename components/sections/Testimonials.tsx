@@ -172,8 +172,8 @@ export default function Testimonials() {
     <section
       id="testimonials"
       aria-labelledby="testimonials-heading"
-      className="relative overflow-hidden"
-      style={{ background: "var(--c-section-bg)", padding: "96px 0" }}
+      className="relative overflow-hidden py-14 md:py-24"
+      style={{ background: "var(--c-section-bg)" }}
     >
       <div
         className="absolute inset-0 pointer-events-none"
