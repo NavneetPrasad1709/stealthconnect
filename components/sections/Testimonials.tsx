@@ -150,7 +150,7 @@ function TestimonialsColumn({
   className?: string;
 }) {
   return (
-    <div className={`overflow-hidden ${className ?? ""}`}>
+    <div className={`overflow-hidden h-[480px] md:h-[560px] ${className ?? ""}`}>
       <ul
         className="flex flex-col gap-5 pb-5 m-0 p-0"
         style={{ animation: `sc-scroll-col ${duration}s linear infinite` }}
