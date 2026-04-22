@@ -286,7 +286,7 @@ export default function Features() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.26, duration: 0.5 }}
-              className="mt-10 grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:gap-8 justify-center md:justify-start"
+              className="mt-10 mb-12 md:mb-0 grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:gap-8 justify-center md:justify-start"
             >
               {[
                 { val: "99.9%", label: "Verification rate" },
