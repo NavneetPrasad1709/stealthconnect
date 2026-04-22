@@ -254,7 +254,7 @@ export function FinalCTA() {
         </m.div>
 
         {/* Stats */}
-        <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {STATS.map((stat, i) => (
             <m.div
               key={i}
