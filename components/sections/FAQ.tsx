@@ -140,7 +140,7 @@ export default function FAQ() {
           </h2>
           <p
             className="leading-relaxed"
-            style={{ fontSize: "clamp(15px,2.5vw,20px)", color: "var(--c-heading)", maxWidth: 480 }}
+            style={{ fontSize: "clamp(16px,2.5vw,20px)", color: "var(--c-heading)", maxWidth: 480 }}
           >
             Still have questions? Reach out at{" "}
             <a

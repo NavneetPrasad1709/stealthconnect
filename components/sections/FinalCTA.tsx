@@ -188,7 +188,7 @@ export function FinalCTA() {
             background: "#0038FF",
             color: "#ffffff",
             fontFamily: FONT,
-            fontSize: 15,
+            fontSize: 16,
             fontWeight: 700,
             border: "none",
             cursor: "pointer",
@@ -268,7 +268,7 @@ export function FinalCTA() {
               >
                 {stat.value}
               </span>
-              <span style={{ fontFamily: FONT, fontSize: 15, color: "var(--c-muted)", textAlign: "center" }}>
+              <span style={{ fontFamily: FONT, fontSize: 16, color: "var(--c-muted)", textAlign: "center" }}>
                 {stat.label}
               </span>
             </m.div>

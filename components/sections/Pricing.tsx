@@ -171,7 +171,7 @@ function ProductCard({ card, index, active, onSelect }: {
 
       <ul className="flex flex-col gap-2 mb-5">
         {card.features.map((f) => (
-          <li key={f} className="flex items-start gap-2" style={{ fontSize: 15, color: "var(--c-heading)" }}>
+          <li key={f} className="flex items-start gap-2" style={{ fontSize: 16, color: "var(--c-heading)" }}>
             <Check className="w-3.5 h-3.5 shrink-0 mt-0.5" style={{ color: "#0038FF" }} strokeWidth={2.5} />
             {f}
           </li>
@@ -179,7 +179,7 @@ function ProductCard({ card, index, active, onSelect }: {
       </ul>
 
       <button
-        className="mt-auto w-full py-2.5 rounded-xl text-[15px] font-semibold transition-all"
+        className="mt-auto w-full py-2.5 rounded-xl text-[16px] font-semibold transition-all"
         style={{
           background: active ? "#0038FF" : "var(--c-section-card-inner)",
           color: active ? "#ffffff" : "var(--c-body)",
@@ -205,7 +205,7 @@ function VolumeTiers() {
           <TrendingDown className="w-4 h-4" style={{ color: "#0038FF" }} />
         </div>
         <div>
-          <p className="text-[15px] font-bold" style={{ color: "var(--c-heading)" }}>Volume Discounts — Applied Automatically</p>
+          <p className="text-[16px] font-bold" style={{ color: "var(--c-heading)" }}>Volume Discounts — Applied Automatically</p>
           <p className="text-[13px]" style={{ color: "var(--c-heading)" }}>The more you buy, the less you pay. No code needed.</p>
         </div>
       </div>
@@ -249,11 +249,11 @@ function VolumeTiers() {
               <div className="flex flex-col gap-0.5">
                 <div className="flex items-center justify-between">
                   <span className="text-[12px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Email</span>
-                  <span className="text-[15px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.email}</span>
+                  <span className="text-[16px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.email}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[12px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Phone</span>
-                  <span className="text-[15px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.phone}</span>
+                  <span className="text-[16px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.phone}</span>
                 </div>
               </div>
 
@@ -332,7 +332,7 @@ export default function Pricing() {
             Pay only for <HeadingAccent>what you get.</HeadingAccent>
             <br />Not a penny more.
           </h2>
-          <p className="leading-relaxed" style={{ fontSize: "clamp(15px,2.5vw,22px)", color: "var(--c-heading)" }}>
+          <p className="leading-relaxed" style={{ fontSize: "clamp(16px,2.5vw,22px)", color: "var(--c-heading)" }}>
             Pay for <span style={{ color: "#0038FF", fontWeight: 700 }}>results</span>, not access.{" "} <br />
             <span style={{ fontWeight: 700 }}>One credit = one verified contact</span><br />
             Buy more, <span style={{ color: "#0038FF", fontWeight: 700 }}>spend less per contact</span> <br />
@@ -488,7 +488,7 @@ export default function Pricing() {
             </div>
             <Link
               href="/signup"
-              className="h-12 px-7 rounded-2xl text-[15px] font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.03] active:scale-[0.97] whitespace-nowrap shrink-0"
+              className="h-12 px-7 rounded-2xl text-[16px] font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.03] active:scale-[0.97] whitespace-nowrap shrink-0"
               style={{ background: "var(--c-section-card)", color: "#0038FF" }}
             >
               Get {qty.toLocaleString()} contacts

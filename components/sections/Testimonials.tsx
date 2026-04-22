@@ -122,7 +122,7 @@ function TestimonialCard({
           />
           <div className="flex flex-col">
             <cite
-              className="font-semibold not-italic leading-5 text-[15px]"
+              className="font-semibold not-italic leading-5 text-[16px]"
               style={{ color: "var(--c-heading)", fontFamily: FONT }}
             >
               {name}
@@ -203,7 +203,7 @@ export default function Testimonials() {
           </h2>
           <p
             className="leading-relaxed"
-            style={{ fontSize: "clamp(15px,2.5vw,20px)", color: "var(--c-heading)" }}
+            style={{ fontSize: "clamp(16px,2.5vw,20px)", color: "var(--c-heading)" }}
           >
             Real results from real people — recruiters, founders, researchers, and more.
           </p>

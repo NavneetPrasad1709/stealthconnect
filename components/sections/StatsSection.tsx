@@ -106,7 +106,7 @@ export function StatsSection() {
             Results that{' '}
             <HeadingAccent>speak for themselves.</HeadingAccent>
           </h2>
-          <p style={{ fontFamily: FONT, fontSize: "clamp(15px,2.5vw,20px)", color: 'var(--c-heading)', margin: '0 auto', lineHeight: 1.6 }}>
+          <p style={{ fontFamily: FONT, fontSize: "clamp(16px,2.5vw,20px)", color: 'var(--c-heading)', margin: '0 auto', lineHeight: 1.6 }}>
             Real numbers from real people using StealthConnect every day.
           </p>
         </div>
@@ -130,7 +130,7 @@ export function StatsSection() {
               >
                 190+ countries.
               </p>
-              <p className="text-[15px] leading-relaxed" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
+              <p className="text-[16px] leading-relaxed" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
                 Find verified contacts behind any LinkedIn profile —
                 no matter where in the world they are.
               </p>
@@ -174,7 +174,7 @@ export function StatsSection() {
               >
                 30 minutes.
               </p>
-              <p className="text-[15px] leading-relaxed mb-6" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
+              <p className="text-[16px] leading-relaxed mb-6" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
                 Paste a LinkedIn URL. Receive a verified email and
                 direct phone number — or you don&apos;t pay.
               </p>
@@ -229,7 +229,7 @@ export function StatsSection() {
                 >
                   99.9%
                 </p>
-                <p className="mt-2 text-[15px] text-white font-medium" style={{ fontFamily: FONT }}>
+                <p className="mt-2 text-[16px] text-white font-medium" style={{ fontFamily: FONT }}>
                   Every email and phone is triple-verified before delivery
                 </p>
               </div>
@@ -243,7 +243,7 @@ export function StatsSection() {
                     <div className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
                     <div>
                       <span className="text-[20px] font-black text-white" style={{ fontFamily: FONT }}>{s.val} </span>
-                      <span className="text-[15px] text-white" style={{ fontFamily: FONT }}>{s.label}</span>
+                      <span className="text-[16px] text-white" style={{ fontFamily: FONT }}>{s.label}</span>
                     </div>
                   </div>
                 ))}
@@ -268,7 +268,7 @@ export function StatsSection() {
               >
                 Growing every month.
               </p>
-              <p className="text-[15px] leading-relaxed" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
+              <p className="text-[16px] leading-relaxed" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
                 4,400+ verified contacts delivered in April alone.
                 Join thousands finding contacts faster, with less effort.
               </p>

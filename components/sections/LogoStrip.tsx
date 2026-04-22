@@ -40,7 +40,7 @@ export default function LogoStrip() {
           {[...COMPANIES, ...COMPANIES].map((name, i) => (
             <span
               key={`${name}-${i}`}
-              className="text-[15px] font-semibold whitespace-nowrap select-none"
+              className="text-[16px] font-semibold whitespace-nowrap select-none"
               style={{
                 color: "var(--fg-subtle)",
                 fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",

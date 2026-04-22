@@ -114,7 +114,7 @@ function Step1Visual({ phase }: { phase: "in" | "hold" | "out" }) {
             LOOKUPS TODAY
           </span>
           <span
-            className="ml-auto text-[15px] font-black text-[#0038FF] tabular-nums"
+            className="ml-auto text-[16px] font-black text-[#0038FF] tabular-nums"
             style={{ fontFamily: FONT }}
           >
             {count.toLocaleString()}
@@ -445,7 +445,7 @@ export default function HowItWorks() {
 
           <p
             className="mt-4 mx-auto"
-            style={{ fontFamily: FONT, fontWeight: 400, fontSize: "clamp(15px,2.5vw,20px)", lineHeight: 1.6, color: "var(--c-heading)" }}
+            style={{ fontFamily: FONT, fontWeight: 400, fontSize: "clamp(16px,2.5vw,20px)", lineHeight: 1.6, color: "var(--c-heading)" }}
           >
             Three steps. No subscription. No guesswork.
             Just verified contacts in your dashboard.

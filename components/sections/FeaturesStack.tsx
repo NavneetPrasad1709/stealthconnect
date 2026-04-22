@@ -340,7 +340,7 @@ export function FeaturesStack() {
                       style={{
                         fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)",
                         fontWeight: 400,
-                        fontSize: 15,
+                        fontSize: 16,
                         color: isDark ? "#ffffff" : "var(--c-body)",
                         lineHeight: 1.65,
                       }}

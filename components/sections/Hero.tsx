@@ -129,7 +129,7 @@ function StatsCard() {
           <div key={s.label}>
             <div className="flex items-center justify-between">
               <span className="text-[9px] font-semibold" style={{ color: "var(--c-heading)", fontFamily: FONT_DISPLAY }}>{s.label}</span>
-              <span className="text-[15px] font-black leading-none" style={{ color: s.highlight ? "#0038FF" : "var(--c-heading)", fontFamily: GF }}>{s.val}</span>
+              <span className="text-[16px] font-black leading-none" style={{ color: s.highlight ? "#0038FF" : "var(--c-heading)", fontFamily: GF }}>{s.val}</span>
             </div>
             {i < stats.length - 1 && (
               <div className="mt-2.5 h-px" style={{ background: "var(--c-border-light)" }} />

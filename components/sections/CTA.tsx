@@ -77,7 +77,7 @@ export default function CTA() {
 
         <p
           className="mb-10 max-w-sm mx-auto leading-relaxed"
-          style={{ fontSize: "clamp(15px,2.5vw,20px)", color: "var(--c-heading)" }}
+          style={{ fontSize: "clamp(16px,2.5vw,20px)", color: "var(--c-heading)" }}
         >
           Get your first contact verified free — no card required.
         </p>

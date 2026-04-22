@@ -234,7 +234,7 @@ export default function LandingNav() {
               <Link
                 href="/signup"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 w-full py-[14px] rounded-full text-black text-[15px] font-black transition-all active:scale-[0.98]"
+                className="flex items-center justify-center gap-2 w-full py-[14px] rounded-full text-black text-[16px] font-black transition-all active:scale-[0.98]"
                 style={{ background: "#CCFF00", boxShadow: "0 4px 20px rgba(204,255,0,0.3)" }}
               >
                 Get started free
@@ -243,7 +243,7 @@ export default function LandingNav() {
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center w-full py-[14px] rounded-full text-[15px] font-medium transition-all"
+                className="flex items-center justify-center w-full py-[14px] rounded-full text-[16px] font-medium transition-all"
                 style={{ border: "1.5px solid var(--border-strong)", color: "var(--fg-muted)", background: "var(--elevated)" }}
               >
                 Sign in
