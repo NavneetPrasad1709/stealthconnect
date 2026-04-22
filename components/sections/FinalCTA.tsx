@@ -46,7 +46,7 @@ function ContactCard({ card }: { card: typeof CARDS[0] }) {
 
       <div className="flex flex-col items-center px-3 pt-6 pb-3 gap-[3px] flex-1">
         <div className="flex items-center gap-1">
-          <span className="text-[11px] font-semibold leading-tight text-center" style={{ color: "var(--c-heading)", fontFamily: FONT }}>
+          <span className="text-[14px] font-semibold leading-tight text-center" style={{ color: "var(--c-heading)", fontFamily: FONT }}>
             {card.name}
           </span>
           <CheckCircle2 size={8} style={{ color: "#22c55e", flexShrink: 0 }} />

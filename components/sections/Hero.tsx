@@ -460,7 +460,7 @@ export default function Hero() {
                   }}
                 >
                   <span className="text-[1.6rem] font-black leading-none" style={{ color: "#CCFF00", fontFamily: GF }}>{s.val}</span>
-                  <span className="text-[11px] font-semibold mt-1" style={{ color: "rgba(255,255,255,0.75)", fontFamily: FONT_DISPLAY }}>{s.label}</span>
+                  <span className="text-[14px] font-semibold mt-1" style={{ color: "rgba(255,255,255,0.75)", fontFamily: FONT_DISPLAY }}>{s.label}</span>
                 </div>
               ))}
             </m.div>
