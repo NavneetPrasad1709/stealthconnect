@@ -151,7 +151,7 @@ function FeatureCard({ card }: { card: (typeof CARDS)[number] }) {
         style={{
           fontFamily: FONT,
           fontWeight: 400,
-          fontSize: 15,
+          fontSize: 16,
           color: isDark ? "#AAAAAA" : "var(--c-body)",
           lineHeight: 1.6,
           marginBottom: 22,
@@ -197,7 +197,7 @@ export default function Features() {
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-10 xl:gap-16 items-start">
 
           {/* ══ Left — sticky header ══ */}
-          <div className="md:sticky md:top-32 md:self-start">
+          <div className="md:sticky md:top-32 md:self-start flex flex-col items-center md:items-start text-center md:text-left">
 
             {/* Badge */}
             <div className="mb-6">
@@ -245,7 +245,7 @@ export default function Features() {
               style={{
                 fontFamily: FONT,
                 fontWeight: 400,
-                fontSize: "clamp(15px,2.5vw,20px)",
+                fontSize: "clamp(16px,2.5vw,20px)",
                 color: "var(--c-heading)",
                 lineHeight: 1.65,
                 maxWidth: "36ch",
@@ -253,8 +253,7 @@ export default function Features() {
               }}
             >
               No subscriptions. No guesswork. Just verified
-              contact data delivered in under 30 minutes —
-              or you pay nothing.
+              contact data delivered in under 30 minutes.
             </m.p>
 
             {/* CTA */}
@@ -287,12 +286,12 @@ export default function Features() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.26, duration: 0.5 }}
-              className="mt-10 grid grid-cols-3 gap-4 sm:flex sm:flex-wrap sm:gap-8"
+              className="mt-10 grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:gap-8 justify-center md:justify-start"
             >
               {[
                 { val: "99.9%", label: "Verification rate" },
                 { val: "28 min", label: "Avg. delivery" },
-                { val: "800M+", label: "Contacts found" },
+                
               ].map((s) => (
                 <div key={s.label}>
                   <div
