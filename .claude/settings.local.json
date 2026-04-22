@@ -57,7 +57,20 @@
       "Bash(sed -i \"s/import { AnimatePresence, motion } from \\\\\"framer-motion\\\\\"/import { AnimatePresence, m } from \\\\\"framer-motion\\\\\"/g\" components/floating-consult-button.tsx components/FloatingActions.tsx)",
       "Bash(sed -i 's/motion\\\\./m./g' components/floating-consult-button.tsx components/FloatingActions.tsx)",
       "Bash(sed -i 's/import { HTMLMotionProps, motion } from \"motion\\\\/react\"/import { HTMLMotionProps, m } from \"motion\\\\/react\"/g' components/cards-stack.tsx)",
-      "Bash(sed -i 's/import { motion, AnimatePresence, useInView } from \"framer-motion\"/import { m, AnimatePresence, useInView } from \"framer-motion\"/g' components/sections/Pricing.tsx)"
+      "Bash(sed -i 's/import { motion, AnimatePresence, useInView } from \"framer-motion\"/import { m, AnimatePresence, useInView } from \"framer-motion\"/g' components/sections/Pricing.tsx)",
+      "Bash(kill %1)",
+      "Bash(taskkill //F //IM node.exe)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(grep -rn \"background.*#[0-9a-fA-F]\\\\{3,6\\\\}\\\\|background.*\\\\\"white\\\\\"\\\\|background.*'white'\" /d/SConnectAI/components/sections/)",
+      "Bash(vercel --prod)",
+      "WebFetch(domain:carconciergepro.com)",
+      "Bash(grep -oE \"elementor-element-ee40a3b[^}]{0,500}\" ccp.html)",
+      "Bash(grep -oE \"elementor-element-ee40a3b::before[^}]{0,600}\" ccp.html)",
+      "Bash(grep -oE \"elementor-element-ee40a3b::before[^}]{0,1200}\" ccp.html)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in {**d.get\\('dependencies',{}\\),**d.get\\('devDependencies',{}\\)}.items\\(\\)]\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('browserslist','not set'\\)\\)\")",
+      "Bash(xargs cat *)",
+      "Bash(echo \"EXIT=$?\")"
     ]
   }
 }
