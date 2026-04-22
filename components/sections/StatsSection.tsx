@@ -252,8 +252,8 @@ export function StatsSection() {
           </div>
 
           {/* ── Growth chart ── */}
-          <div className="relative col-span-full" style={{ background: "var(--c-section-card)" }}>
-            <div className="absolute z-10 max-w-lg px-6 pr-12 pt-6 md:px-10 md:pt-10">
+          <div className="col-span-full flex flex-col md:relative md:block" style={{ background: "var(--c-section-card)" }}>
+            <div className="relative md:absolute z-10 max-w-lg px-6 pr-12 pt-6 md:px-10 md:pt-10">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(0,56,255,0.08)" }}>
                   <Activity className="size-4" style={{ color: '#0038FF' }} />
