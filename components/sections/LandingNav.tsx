@@ -178,7 +178,7 @@ export default function LandingNav() {
                 <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "#0038FF" }}>
                   <Zap size={15} className="text-white" strokeWidth={2.5} />
                 </div>
-                <span className="text-[15px] font-bold tracking-tight" style={{ color: "var(--fg)" }}>
+                <span className="text-[16px] font-bold tracking-tight" style={{ color: "var(--fg)" }}>
                   Stealth<span style={{ color: "#CCFF00" }}>Connect</span>
                 </span>
               </Link>

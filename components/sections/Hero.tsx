@@ -90,8 +90,8 @@ function ResultCard() {
 
         {/* Verified */}
         <div className="flex items-center justify-center gap-1.5 pt-0.5 px-2 py-1 rounded-lg" style={{ background: "rgba(204,255,0,0.15)", border: "1px solid rgba(204,255,0,0.4)" }}>
-          <ShieldCheck className="w-3 h-3" style={{ color: "#4a7c00" }} />
-          <span className="text-[8.5px] font-bold" style={{ color: "#4a7c00", fontFamily: GF }}>AI-verified · 99.9% accurate</span>
+          <ShieldCheck className="w-3 h-3" style={{ color: "#98ff00" }} />
+          <span className="text-[8.5px] font-bold" style={{ color: "#98ff00", fontFamily: GF }}>AI-verified · 99.9% accurate</span>
         </div>
       </div>
       </div>
@@ -459,8 +459,8 @@ export default function Hero() {
                     border: "1px solid rgba(255,255,255,0.18)",
                   }}
                 >
-                  <span className="text-[1.6rem] font-black leading-none" style={{ color: "#CCFF00", fontFamily: GF }}>{s.val}</span>
-                  <span className="text-[14px] font-semibold mt-1" style={{ color: "rgba(255,255,255,0.75)", fontFamily: FONT_DISPLAY }}>{s.label}</span>
+                  <span className="text-[1.3rem] font-black leading-none whitespace-nowrap" style={{ color: "#CCFF00", fontFamily: GF }}>{s.val}</span>
+                  <span className="text-[12px] font-semibold mt-1 text-center px-1" style={{ color: "rgba(255,255,255,0.75)", fontFamily: FONT_DISPLAY }}>{s.label}</span>
                 </div>
               ))}
             </m.div>
