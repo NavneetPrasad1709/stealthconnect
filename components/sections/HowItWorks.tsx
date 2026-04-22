@@ -251,7 +251,7 @@ function Step3Visual({ phase }: { phase: "in" | "hold" | "out" }) {
       >
         {[
           { type: "Email",   val: "jane.doe@acmecorp.com", price: "$0.20", color: "#0038FF" },
-          { type: "Phone",   val: "+1 (415) 555-0182",     price: "$1.00", color: "#8B5CF6" },
+          { type: "Phone",   val: "+1 (415) 555-0182",     price: "$1.00", color: "#6D28D9" },
         ].map((row) => (
           <div key={row.type} className="flex items-center justify-between gap-2">
             <div className="min-w-0">
@@ -480,15 +480,15 @@ export default function HowItWorks() {
             <m.div
               key={`${gen}-${i}`}
               className="rounded-full"
-              style={{ background: "#0038FF" }}
-              initial={{ width: 6, height: 6, opacity: 0.25 }}
+              style={{ background: "#0038FF", width: 6, height: 6, transformOrigin: "center" }}
+              initial={{ scaleX: 1, opacity: 0.25 }}
               animate={
                 phase !== "out"
                   ? {
-                      width: [6, i === Math.floor(((Date.now() / (T_HOLD / 3)) % 3)) ? 20 : 6, 6],
+                      scaleX: [1, i === Math.floor(((Date.now() / (T_HOLD / 3)) % 3)) ? 10 / 3 : 1, 1],
                       opacity: [0.25, i === 0 && phase === "in" ? 1 : i === 1 && phase === "hold" ? 1 : 0.25, 0.25],
                     }
-                  : { opacity: 0.15, width: 6, height: 6 }
+                  : { opacity: 0.15, scaleX: 1 }
               }
               transition={{ delay: i * (T_HOLD / 3 / 1000) * 0.3, duration: 1, ease: "easeInOut" }}
             />

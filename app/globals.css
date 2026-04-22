@@ -1109,3 +1109,25 @@ input[type='range'] { -webkit-appearance: none; appearance: none; }
 .animate-delay-1000 { animation-delay: 1000ms; }
 .animate-delay-1200 { animation-delay: 1200ms; }
 .animate-delay-1400 { animation-delay: 1400ms; }
+
+/* ─── Hero CSS animations (replace framer-motion repeat:Infinity) ─── */
+@keyframes sc-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+@keyframes sc-float-alt {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes sc-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes sc-hub-pulse {
+  0%, 100% { box-shadow: 0 0 0 8px rgba(0,56,255,0.08), 0 0 0 18px rgba(0,56,255,0.04); }
+  50%       { box-shadow: 0 0 0 14px rgba(0,56,255,0.12), 0 0 0 28px rgba(0,56,255,0.05); }
+}
+.animate-float-result { animation: sc-float 5.5s ease-in-out 0.2s infinite; }
+.animate-float-stats   { animation: sc-float-alt 6.5s ease-in-out 1s infinite; }
+.animate-cursor-blink  { animation: sc-blink 0.9s ease-in-out infinite; }
+.animate-hub-pulse     { animation: sc-hub-pulse 2.8s ease-in-out infinite; }

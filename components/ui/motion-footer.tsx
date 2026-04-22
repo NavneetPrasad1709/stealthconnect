@@ -42,9 +42,9 @@ const STYLES = `
 }
 
 @keyframes footer-heartbeat {
-  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 5px rgba(239,68,68,0.5)); }
-  15%, 45% { transform: scale(1.28); filter: drop-shadow(0 0 10px rgba(239,68,68,0.8)); }
-  30%      { transform: scale(1); }
+  0%, 100% { transform: scale(1);    opacity: 0.75; }
+  15%, 45% { transform: scale(1.28); opacity: 1; }
+  30%      { transform: scale(1);    opacity: 0.85; }
 }
 
 .animate-footer-breathe        { animation: footer-breathe 8s ease-in-out infinite alternate; }

@@ -412,6 +412,7 @@ export default function Pricing() {
               </button>
               <input
                 type="number"
+                aria-label="Number of lookups"
                 value={qty}
                 onChange={(e) => setQty(Math.max(1, Math.min(max, parseInt(e.target.value) || 1)))}
                 className="flex-1 text-[32px] sm:text-[48px] font-black tracking-tight bg-transparent outline-none text-center"
@@ -430,6 +431,7 @@ export default function Pricing() {
             {/* Slider */}
             <input
               type="range" min={1} max={max} step={step} value={qty}
+              aria-label="Lookup quantity slider"
               onChange={(e) => setQty(parseInt(e.target.value))}
               className="pricing-slider w-full mb-4"
               style={{

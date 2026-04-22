@@ -39,11 +39,10 @@ function ResultCard() {
     <m.div
       initial={{ opacity: 0, x: -24 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
     >
-      <m.div
-        animate={{ y: [0, -14, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+      <div className="animate-float-result">
+      <div
         className="w-[200px] xl:w-[220px] rounded-[1.75rem] p-4 flex flex-col gap-3 rotate-[-6deg] hover:rotate-0 transition-[transform] duration-500 shadow-2xl"
         style={{
           background: "var(--c-section-card)",
@@ -94,7 +93,8 @@ function ResultCard() {
           <ShieldCheck className="w-3 h-3" style={{ color: "#4a7c00" }} />
           <span className="text-[8.5px] font-bold" style={{ color: "#4a7c00", fontFamily: GF }}>AI-verified · 99.9% accurate</span>
         </div>
-      </m.div>
+      </div>
+      </div>
     </m.div>
   );
 }
@@ -111,11 +111,10 @@ function StatsCard() {
     <m.div
       initial={{ opacity: 0, x: 24 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.65, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: 0.65, duration: 0.7, ease: "easeOut" }}
     >
-      <m.div
-        animate={{ y: [0, -12, 0] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      <div className="animate-float-stats">
+      <div
         className="w-[186px] xl:w-[200px] rounded-[1.75rem] p-4 flex flex-col gap-2.5 rotate-[5deg] hover:rotate-0 transition-[transform] duration-500 shadow-2xl"
         style={{
           background: "var(--c-section-card)",
@@ -137,7 +136,8 @@ function StatsCard() {
             )}
           </div>
         ))}
-      </m.div>
+      </div>
+      </div>
     </m.div>
   );
 }
@@ -205,7 +205,7 @@ export default function Hero() {
               <m.div
                 initial={{ opacity: 1, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, delay: 0.14, ease: "easeOut" }}
                 className="w-full flex justify-center"
               >
                 <span
@@ -223,7 +223,7 @@ export default function Hero() {
               <m.div
                 initial={{ opacity: 1, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                 className="w-full flex justify-center"
               >
                 <span
@@ -241,7 +241,7 @@ export default function Hero() {
               <m.div
                 initial={{ opacity: 1, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, delay: 0.26, ease: "easeOut" }}
                 className="w-full flex justify-center"
               >
                 <span
@@ -282,7 +282,7 @@ export default function Hero() {
             <m.div
               initial={{ opacity: 1, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.55, delay: 0.38, ease: "easeOut" }}
               className="relative w-full "
             >
               {/* Always-on lime ambient glow */}
@@ -317,6 +317,7 @@ export default function Hero() {
                   <input
                     ref={inputRef}
                     type="text"
+                    aria-label="LinkedIn profile URL"
                     className="absolute inset-0 w-full bg-transparent outline-none text-[14px] z-10 text-black dark:text-white"
                     style={{ fontFamily: FONT_DISPLAY, caretColor: "#0038FF" }}
                     onFocus={() => setFocused(true)}
@@ -328,10 +329,8 @@ export default function Hero() {
                     aria-hidden
                   >
                     {typed}
-                    <m.span
-                      animate={{ opacity: [1, 0, 1] }}
-                      transition={{ duration: 0.9, repeat: Infinity }}
-                      className="inline-block w-[2px] h-[0.8em] ml-[2px] align-middle rounded-sm"
+                    <span
+                      className="inline-block w-[2px] h-[0.8em] ml-[2px] align-middle rounded-sm animate-cursor-blink"
                       style={{ background: "#0038FF" }}
                     />
                   </span>

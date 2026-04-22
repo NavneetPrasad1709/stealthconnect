@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { HTMLMotionProps, m } from "motion/react"
+import { HTMLMotionProps, m } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 

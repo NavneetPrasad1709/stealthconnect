@@ -13,7 +13,7 @@ import { SectionBadge } from '@/components/ui/SectionBadge'
 import { HeadingAccent } from '@/components/ui/HeadingAccent'
 
 // ── Map setup ─────────────────────────────────────────────────────────────────
-const map = new DottedMap({ height: 55, grid: 'diagonal' })
+const map = new DottedMap({ height: 30, grid: 'diagonal' })
 const mapPoints = map.getPoints()
 
 const MapView = () => (

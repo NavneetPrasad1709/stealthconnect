@@ -227,21 +227,15 @@ export function FinalCTA() {
 
           {/* Center hub */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
-            <m.div
-              animate={{ boxShadow: [
-                "0 0 0 8px rgba(0,56,255,0.08),0 0 0 18px rgba(0,56,255,0.04)",
-                "0 0 0 14px rgba(0,56,255,0.12),0 0 0 28px rgba(0,56,255,0.05)",
-                "0 0 0 8px rgba(0,56,255,0.08),0 0 0 18px rgba(0,56,255,0.04)",
-              ]}}
-              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-              className="w-16 h-16 rounded-full flex items-center justify-center"
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center animate-hub-pulse"
               style={{ background: "linear-gradient(135deg,#0038FF,#6366f1)" }}
             >
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
                   fill="rgba(255,255,255,0.92)" />
               </svg>
-            </m.div>
+            </div>
           </div>
 
           {/* Cards */}
