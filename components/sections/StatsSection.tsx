@@ -13,13 +13,36 @@ import { SectionBadge } from '@/components/ui/SectionBadge'
 import { HeadingAccent } from '@/components/ui/HeadingAccent'
 
 // ── Map setup ─────────────────────────────────────────────────────────────────
-const map = new DottedMap({ height: 30, grid: 'diagonal' })
+const map = new DottedMap({ height: 55, grid: 'diagonal' })
 const mapPoints = map.getPoints()
 
+const CITY_PINGS = [
+  { cx: 34, cy: 18 },   // New York
+  { cx: 58, cy: 13 },   // London
+  { cx: 83, cy: 26 },   // Mumbai
+  { cx: 108, cy: 43 },  // Sydney
+  { cx: 43, cy: 40 },   // São Paulo
+  { cx: 76, cy: 22 },   // Dubai
+  { cx: 106, cy: 19 },  // Tokyo
+]
+
 const MapView = () => (
-  <svg viewBox="0 0 120 60" style={{ background: 'var(--c-section-bg)' }}>
+  <svg
+    viewBox="0 0 120 60"
+    className="w-full"
+    style={{ background: 'transparent', display: 'block' }}
+  >
+    {/* Base dots */}
     {mapPoints.map((point, i) => (
-      <circle key={i} cx={point.x} cy={point.y} r={0.15} fill="var(--c-heading)" />
+      <circle key={i} cx={point.x} cy={point.y} r={0.22} fill="#94a3b8" opacity={0.55} />
+    ))}
+    {/* City pings */}
+    {CITY_PINGS.map((pin, i) => (
+      <g key={i}>
+        <circle cx={pin.cx} cy={pin.cy} r={2.4} fill="#0038FF" opacity={0.1} />
+        <circle cx={pin.cx} cy={pin.cy} r={1.2} fill="#0038FF" opacity={0.28} />
+        <circle cx={pin.cx} cy={pin.cy} r={0.6} fill="#0038FF" />
+      </g>
     ))}
   </svg>
 )
@@ -137,23 +160,27 @@ export function StatsSection() {
             </div>
 
             {/* Map with tooltip */}
-            <div aria-hidden className="relative">
-              <div className="absolute inset-0 z-10 m-auto size-fit flex flex-col items-center justify-center">
+            <div aria-hidden className="relative overflow-hidden" style={{ minHeight: 200 }}>
+              {/* Edge fade overlays */}
+              <div className="absolute inset-x-0 bottom-0 h-1/2 z-[2] pointer-events-none"
+                style={{ background: 'linear-gradient(to bottom, transparent, var(--c-section-bg))' }} />
+              <div className="absolute inset-y-0 left-0 w-1/5 z-[2] pointer-events-none"
+                style={{ background: 'linear-gradient(to right, var(--c-section-bg), transparent)' }} />
+              <div className="absolute inset-y-0 right-0 w-1/5 z-[2] pointer-events-none"
+                style={{ background: 'linear-gradient(to left, var(--c-section-bg), transparent)' }} />
+
+              {/* Tooltip card — pinned bottom-center */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[3] flex flex-col items-center gap-1">
                 <div
-                  className="rounded-xl relative flex items-center gap-2 px-3 py-1.5 text-xs font-semibold shadow-md"
+                  className="rounded-xl flex items-center gap-2 px-3 py-1.5 text-xs font-semibold shadow-lg whitespace-nowrap"
                   style={{ background: 'var(--c-section-card)', border: '1px solid var(--c-border-light)', color: 'var(--c-heading)', fontFamily: FONT }}
                 >
-                  <span className="text-base">🇺🇸</span> Contact found in United States
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse inline-block" />
+                  <span className="text-sm">🇺🇸</span> Contact found in United States
                 </div>
-                <div className="rounded-xl absolute inset-2 -bottom-2 mx-auto px-3 py-4 shadow-sm" style={{ background: 'var(--c-section-card)', border: '1px solid var(--c-border-light)', opacity: 0.7 }} />
               </div>
-              <div className="relative overflow-hidden">
-                <div
-                  className="absolute inset-0 z-[1]"
-                  style={{ background: 'radial-gradient(ellipse at 50% 100%, var(--c-section-bg) 60%, transparent 100%)' }}
-                />
-                <MapView />
-              </div>
+
+              <MapView />
             </div>
           </div>
 
