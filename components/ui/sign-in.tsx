@@ -58,7 +58,7 @@ export const SignInPage: React.FC<SignInPageProps> = ({
       style={{ background: "#000", fontFamily: F }}
     >
       {/* ── LEFT ── */}
-      <section className="flex-1 flex flex-col justify-center md:overflow-y-auto relative">
+      <section className="flex-1 flex flex-col justify-start md:justify-center md:overflow-y-auto relative">
 
         {/* Subtle radial glow */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
@@ -70,7 +70,7 @@ export const SignInPage: React.FC<SignInPageProps> = ({
         </div>
 
         {/* Scrollable content */}
-        <div className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-12 py-10 md:py-14">
+        <div className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-12 py-6 md:py-14">
           <div className="w-full max-w-[400px] flex flex-col gap-6">
 
             {/* Logo + back to home */}
@@ -88,10 +88,20 @@ export const SignInPage: React.FC<SignInPageProps> = ({
               </div>
               <Link
                 href="/"
-                className="flex items-center gap-1 text-[12px] font-medium transition-colors hover:text-white"
-                style={{ color: "rgba(255,255,255,0.35)", fontFamily: F, textDecoration: "none" }}
+                className="inline-flex items-center gap-1.5 text-[12px] font-semibold transition-all hover:text-white active:scale-95"
+                style={{
+                  color: "rgba(255,255,255,0.65)",
+                  fontFamily: F,
+                  textDecoration: "none",
+                  padding: "8px 14px",
+                  borderRadius: 999,
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.09)")}
+                onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.05)")}
               >
-                <ArrowLeft className="w-3 h-3" />
+                <ArrowLeft className="w-3.5 h-3.5" />
                 Home
               </Link>
             </div>
