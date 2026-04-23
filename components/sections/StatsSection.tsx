@@ -254,7 +254,7 @@ export function StatsSection() {
                   className="text-6xl md:text-7xl lg:text-8xl font-black text-white"
                   style={{ fontFamily: FONT, letterSpacing: '-0.04em', lineHeight: 1 }}
                 >
-                  99.9%
+                  97.2%
                 </p>
                 <p className="mt-2 text-[16px] text-white font-medium" style={{ fontFamily: FONT }}>
                   Every email and phone is triple-verified before delivery

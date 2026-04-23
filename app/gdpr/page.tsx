@@ -4,7 +4,8 @@ import { ArrowLeft, Zap, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "GDPR Compliance",
-  description: "StealthConnect AI GDPR compliance — your rights under the General Data Protection Regulation.",
+  description: "StealthConnect AI's GDPR approach — legal basis for processing, your data rights (access, erasure, portability), how to file a request, and our contact for privacy matters.",
+  alternates: { canonical: "/gdpr" },
 };
 
 const rights = [

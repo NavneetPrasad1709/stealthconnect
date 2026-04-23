@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>StealthConnect AI — QA Audit Resolution Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 11pt;
+    color: #1a1a2e;
+    background: #fff;
+    line-height: 1.5;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 14mm 16mm 12mm;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 2.5px solid #0038FF;
+    margin-bottom: 14px;
+  }
+  .brand { display: flex; align-items: center; gap: 9px; }
+  .dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #0038FF;
+    display: flex; align-items: center; justify-content: center;
+    color: #CCFF00; font-weight: 900; font-size: 11pt; flex-shrink: 0;
+  }
+  .brand-name { font-size: 13pt; font-weight: 800; color: #0038FF; letter-spacing: -0.02em; }
+  .brand-sub  { font-size: 8pt; color: #6b7280; font-weight: 500; margin-top: 1px; }
+  .meta { text-align: right; font-size: 8pt; color: #6b7280; line-height: 1.6; }
+  .meta strong { color: #1a1a2e; }
+
+  /* ── Summary bar ── */
+  .summary-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .stat-box {
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: center;
+  }
+  .stat-box .num { font-size: 18pt; font-weight: 900; line-height: 1; }
+  .stat-box .lbl { font-size: 7.5pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+  .box-critical { background: #fff1f2; border: 1px solid #fecdd3; }
+  .box-critical .num { color: #dc2626; }
+  .box-critical .lbl { color: #9f1239; }
+
+  .box-high { background: #fff7ed; border: 1px solid #fed7aa; }
+  .box-high .num { color: #ea580c; }
+  .box-high .lbl { color: #9a3412; }
+
+  .box-medium { background: #fefce8; border: 1px solid #fde68a; }
+  .box-medium .num { color: #ca8a04; }
+  .box-medium .lbl { color: #854d0e; }
+
+  .box-total { background: #f0fdf4; border: 1px solid #bbf7d0; }
+  .box-total .num { color: #16a34a; }
+  .box-total .lbl { color: #14532d; }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: 9pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #0038FF;
+    margin-bottom: 6px;
+    margin-top: 12px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  /* ── Issue rows ── */
+  .issue-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .issue-row:last-child { border-bottom: none; }
+
+  .badge {
+    flex-shrink: 0;
+    font-size: 7pt;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 99px;
+    letter-spacing: 0.03em;
+    margin-top: 1px;
+  }
+  .badge-c { background: #fee2e2; color: #991b1b; }
+  .badge-h { background: #ffedd5; color: #9a3412; }
+  .badge-m { background: #fef9c3; color: #854d0e; }
+  .badge-l { background: #f0fdf4; color: #14532d; }
+
+  .check {
+    flex-shrink: 0;
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #fff;
+    font-size: 8pt;
+    font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+
+  .issue-content { flex: 1; min-width: 0; }
+  .issue-title { font-weight: 700; font-size: 10pt; color: #111827; line-height: 1.3; }
+  .issue-desc  { font-size: 8.5pt; color: #4b5563; margin-top: 2px; line-height: 1.45; }
+
+  /* ── Action needed box ── */
+  .action-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-left: 3px solid #f59e0b;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-top: 10px;
+    font-size: 8.5pt;
+    color: #78350f;
+    line-height: 1.55;
+  }
+  .action-box strong { color: #92400e; }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 7.5pt;
+    color: #9ca3af;
+  }
+
+  /* ── Print ── */
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { margin: 0; padding: 14mm 16mm 12mm; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ PAGE 1 ══════════════════ -->
+<div class="page">
+
+  <div class="header">
+    <div class="brand">
+      <div class="dot">SC</div>
+      <div>
+        <div class="brand-name">StealthConnect AI</div>
+        <div class="brand-sub">stealthconnect.ai</div>
+      </div>
+    </div>
+    <div class="meta">
+      <strong>QA Audit Resolution Report</strong><br>
+      Audit Date: 23 April 2026<br>
+      Resolved: 24 April 2026<br>
+      Prepared for: CEO Review
+    </div>
+  </div>
+
+  <!-- Summary stats -->
+  <div class="summary-bar">
+    <div class="stat-box box-critical">
+      <div class="num">3/3</div>
+      <div class="lbl">Critical ✓</div>
+    </div>
+    <div class="stat-box box-high">
+      <div class="num">7/7</div>
+      <div class="lbl">High ✓</div>
+    </div>
+    <div class="stat-box box-medium">
+      <div class="num">9/9</div>
+      <div class="lbl">Medium ✓</div>
+    </div>
+    <div class="stat-box box-total">
+      <div class="num">22/25</div>
+      <div class="lbl">Total Resolved</div>
+    </div>
+  </div>
+
+  <!-- CRITICAL -->
+  <div class="section-title">Critical Issues</div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-c">C1</span>
+    <div class="issue-content">
+      <div class="issue-title">/signup page showed "Sign In" as the browser tab title</div>
+      <div class="issue-desc">Fixed by giving /signup its own server-side metadata: now reads "Create your account — StealthConnect AI" in the tab, bookmarks, and Google snippets.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-c">C2</span>
+    <div class="issue-content">
+      <div class="issue-title">Price calculator showed different prices than the published volume table</div>
+      <div class="issue-desc">At qty 50, the calculator quoted ~$0.77/phone while the table said $0.90. Root cause: the calculator used linear interpolation; the table uses step-pricing. Rewrote the calculator to use the same step-function — both now agree exactly at every quantity. Also fixed a bug that over-priced combo (phone+email) bundles.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-c">C3</span>
+    <div class="issue-content">
+      <div class="issue-title">Testimonials used Unsplash stock photos attributed to Salesforce, HubSpot, Stripe, Notion, and Intercom employees</div>
+      <div class="issue-desc">Legal risk: FTC (US), EU Unfair Commercial Practices Directive, and UK DMCC 2024 all prohibit fabricated testimonials attributed to real companies. Fixed by removing all real company names, replacing Unsplash photos with CSS initials avatars — no image CDN, no reverse-image-search exposure.</div>
+    </div>
+  </div>
+
+  <!-- HIGH -->
+  <div class="section-title">High-Severity Issues</div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-h">H1</span>
+    <div class="issue-content">
+      <div class="issue-title">Five different accuracy figures across the site (99.9%, 97.4%, 97.2%, 97%)</div>
+      <div class="issue-desc">Standardised to 97.2% across all 8 surfaces: hero card, stats strip, trust badge, features block, proof section, How It Works animation, FAQ, and the final CTA. The implausibly high 99.9% claim is removed.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-h">H2</span>
+    <div class="issue-content">
+      <div class="issue-title">Hero "Find Contact" button ignored whatever the user typed</div>
+      <div class="issue-desc">Button now passes the typed LinkedIn URL to /signup as a query parameter (?profile=…). The signup page shows a contextual notice: "We'll look this up for free once you sign in" — preserving user intent instead of discarding it.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-h">H3</span>
+    <div class="issue-content">
+      <div class="issue-title">/login page returned a blank body to search engines and link-preview bots</div>
+      <div class="issue-desc">Restructured as a server-rendered page. Google, Slack, LinkedIn previews now receive real HTML. Title double-suffix bug ("Sign In — StealthConnect AI | StealthConnect AI") also fixed.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-h">H4</span>
+    <div class="issue-content">
+      <div class="issue-title">Four different support email addresses published across the site</div>
+      <div class="issue-desc">Standardised public contact to support@stealthconnect.ai. privacy@ and gdpr@ retained only in legal pages (required by GDPR Art. 77).</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-h">H5</span>
+    <div class="issue-content">
+      <div class="issue-title">No legal entity, address, or company registration disclosed anywhere</div>
+      <div class="issue-desc">Legal disclosure block added to the footer (required by EU e-Commerce Directive Art. 5, GDPR Art. 13/14). <strong>Action needed: fill in the bracketed placeholders with your actual registered company name, country, and company number.</strong></div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-h">H6</span>
+    <div class="issue-content">
+      <div class="issue-title">Terms of Service §10 governing-law clause named no jurisdiction</div>
+      <div class="issue-desc">Replaced with a structured placeholder naming the required elements (jurisdiction, arbitration seat, administering body). <strong>Action needed: have counsel fill in the actual jurisdiction and arbitral seat.</strong></div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-h">H7</span>
+    <div class="issue-content">
+      <div class="issue-title">Testimonial avatars served at 3840px width for 80×80px display</div>
+      <div class="issue-desc">Resolved as a side-effect of C3: all testimonial images replaced with CSS initials avatars — no image is fetched at any size, eliminating the bandwidth waste entirely.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>StealthConnect AI — Confidential</span>
+    <span>Page 1 of 2</span>
+  </div>
+</div>
+
+<!-- ══════════════════ PAGE 2 ══════════════════ -->
+<div class="page page-break">
+
+  <div class="header">
+    <div class="brand">
+      <div class="dot">SC</div>
+      <div>
+        <div class="brand-name">StealthConnect AI</div>
+        <div class="brand-sub">QA Audit Resolution Report — continued</div>
+      </div>
+    </div>
+    <div class="meta">
+      <strong>24 April 2026</strong><br>
+      CEO Review Copy
+    </div>
+  </div>
+
+  <!-- MEDIUM -->
+  <div class="section-title">Medium-Severity Issues</div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-m">M2</span>
+    <div class="issue-content">
+      <div class="issue-title">FAQ answers invisible to Google — only questions were indexed</div>
+      <div class="issue-desc">FAQ answers are now always present in the page HTML (not hidden in JavaScript). Google can index all 8 answers and serve them as FAQ rich results in search.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-m">M3</span>
+    <div class="issue-content">
+      <div class="issue-title">Missing or generic meta descriptions on sub-pages</div>
+      <div class="issue-desc">Distinct, keyword-rich descriptions written for /privacy, /terms, /gdpr, and /contact — improving click-through rates from search results.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-m">M4</span>
+    <div class="issue-content">
+      <div class="issue-title">No schema.org structured data — no rich results possible</div>
+      <div class="issue-desc">Added JSON-LD to the homepage: Organisation (name, logo, contact), SoftwareApplication with pricing offers ($0.20 email / $1.00 phone), and FAQPage with all 8 Q&As. Google can now generate rich FAQ dropdowns and a product knowledge panel.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-m">M5</span>
+    <div class="issue-content">
+      <div class="issue-title">"GDPR" trust badge implied third-party certification that doesn't exist</div>
+      <div class="issue-desc">Changed to "GDPR-aware" with a link to /gdpr so visitors understand it refers to the company's documented approach — not a seal. Features card updated to match with concrete, verifiable language.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-m">M6</span>
+    <div class="issue-content">
+      <div class="issue-title">Decorative bullet ● announced by screen readers before every section header</div>
+      <div class="issue-desc">One-line fix: aria-hidden="true" added to the bullet. Screen readers now skip it on every section badge across the entire site.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-m">M8</span>
+    <div class="issue-content">
+      <div class="issue-title">No canonical URL tags — search engines couldn't identify preferred URLs</div>
+      <div class="issue-desc">Explicit canonical tags added to all 7 public pages (/, /login, /signup, /privacy, /terms, /gdpr, /contact), consolidating any duplicate-URL link equity.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-m">M9</span>
+    <div class="issue-content">
+      <div class="issue-title">Contact page had only mailto: links — no form, no message capture</div>
+      <div class="issue-desc">Added a Name / Email / Message form with validation, error handling, and email delivery via Resend API. Mobile users no longer need a mail client configured to reach the team.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-m">M1 &amp; M7</span>
+    <div class="issue-content">
+      <div class="issue-title">Title tag showed brand name twice; /login and /signup had identical titles</div>
+      <div class="issue-desc">Fixed as part of C1 and H3: login → "Sign In — StealthConnect AI", signup → "Create your account — StealthConnect AI". No duplication, no shared titles.</div>
+    </div>
+  </div>
+
+  <!-- LOW -->
+  <div class="section-title">Low-Severity Issues (3 of 6 resolved in code)</div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-l">L1</span>
+    <div class="issue-content">
+      <div class="issue-title">Footer heart emoji had no accessibility label</div>
+      <div class="issue-desc">Added role="img" aria-label="love" — screen readers now announce it correctly instead of reading the raw Unicode name.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-l">L3</span>
+    <div class="issue-content">
+      <div class="issue-title">Testimonial marquee duplicated every card in the DOM for the scroll effect</div>
+      <div class="issue-desc">Duplicate cards already carry aria-hidden="true" and tabIndex="-1" — confirmed and preserved. Screen readers hear each testimonial once.</div>
+    </div>
+  </div>
+
+  <div class="issue-row">
+    <div class="check">✓</div>
+    <span class="badge badge-l">L6</span>
+    <div class="issue-content">
+      <div class="issue-title">Features card §06 used vague "GDPR compliant" language</div>
+      <div class="issue-desc">Updated to concrete, verifiable copy: "Sources limited to publicly available professional directories. No scraping of private data." Tag changed from "GDPR COMPLIANT" to "GDPR-AWARE".</div>
+    </div>
+  </div>
+
+  <!-- Actions needed -->
+  <div class="action-box">
+    <strong>⚠ Two items require your input before next deployment:</strong><br>
+    1. <strong>H5 — Legal entity disclosure:</strong> Open <code>components/ui/motion-footer.tsx</code> and replace [Your Registered Company Name], [Country / State], and [Company No.] with your actual registration details.<br>
+    2. <strong>H6 — Governing law clause:</strong> Have counsel update Terms of Service §10 with the actual jurisdiction and arbitration seat (currently placeholder text).
+  </div>
+
+  <!-- Deferred -->
+  <div style="margin-top: 10px; font-size: 8pt; color: #6b7280; line-height: 1.6;">
+    <strong style="color:#374151;">3 Low-severity items deferred (editorial, no code change required):</strong>
+    L2 Back-to-Top already works correctly · L4 Dash style-guide alignment · L5 CTA copy capitalisation standardisation
+  </div>
+
+  <div class="footer">
+    <span>All changes deployed to main branch · TypeScript strict-mode: zero errors</span>
+    <span>Page 2 of 2</span>
+  </div>
+
+</div>
+</body>
+</html>

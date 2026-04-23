@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    default: "Sign In — StealthConnect AI",
-    template: "%s | StealthConnect AI",
+    absolute: "Sign In — StealthConnect AI",
+    template: "%s — StealthConnect AI",
   },
   description:
     "Sign in or create your StealthConnect AI account to find verified emails and phone numbers behind any LinkedIn profile.",

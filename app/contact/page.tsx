@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Mail, MessageSquare, Zap } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Get in touch with the StealthConnect AI team.",
+  description: "Contact StealthConnect AI — reach our support team at support@stealthconnect.ai, or enquire about enterprise pricing and partnerships.",
+  alternates: { canonical: "/contact" },
 };
 
 const F = "var(--font-montserrat,'Montserrat',sans-serif)";
@@ -77,8 +79,17 @@ export default function ContactPage() {
           </a>
         </div>
 
+        {/* Divider */}
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", margin: "8px 0 28px" }} />
+
+        {/* Contact form */}
+        <h2 style={{ fontSize: 18, fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", margin: "0 0 16px", fontFamily: F }}>
+          Send us a message
+        </h2>
+        <ContactForm />
+
         {/* Notice */}
-        <div className="p-5 rounded-2xl" style={{ background: "rgba(204,255,0,0.05)", border: "1px solid rgba(204,255,0,0.15)" }}>
+        <div className="p-5 rounded-2xl mt-6" style={{ background: "rgba(204,255,0,0.05)", border: "1px solid rgba(204,255,0,0.15)" }}>
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.7, margin: 0 }}>
             <span style={{ color: "#CCFF00", fontWeight: 700 }}>Response time:</span> We typically respond within 24 hours on business days. For urgent issues, email support directly.
           </p>

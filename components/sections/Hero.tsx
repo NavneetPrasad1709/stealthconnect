@@ -91,7 +91,7 @@ function ResultCard() {
         {/* Verified */}
         <div className="flex items-center justify-center gap-1.5 pt-0.5 px-2 py-1 rounded-lg" style={{ background: "rgba(204,255,0,0.15)", border: "1px solid rgba(204,255,0,0.4)" }}>
           <ShieldCheck className="w-3 h-3" style={{ color: "#98ff00" }} />
-          <span className="text-[8.5px] font-bold" style={{ color: "#98ff00", fontFamily: GF }}>AI-verified · 99.9% accurate</span>
+          <span className="text-[8.5px] font-bold" style={{ color: "#98ff00", fontFamily: GF }}>AI-verified · 97.2% accurate</span>
         </div>
       </div>
       </div>
@@ -103,7 +103,7 @@ function ResultCard() {
 function StatsCard() {
   const stats = [
     { val: "800M+", label: "Contacts found", highlight: true },
-    { val: "99.9%", label: "Verified accuracy", highlight: false },
+    { val: "97.2%", label: "Verified accuracy", highlight: false },
     { val: "28 min", label: "Avg. delivery", highlight: false },
     { val: "190+",  label: "Countries", highlight: false },
   ];
@@ -149,6 +149,7 @@ export default function Hero() {
   const typed = useTypewriter(PHRASES, 2800);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
+  const [inputVal, setInputVal] = useState("");
 
   return (
     <section
@@ -318,6 +319,8 @@ export default function Hero() {
                     ref={inputRef}
                     type="text"
                     aria-label="LinkedIn profile URL"
+                    value={inputVal}
+                    onChange={(e) => setInputVal(e.target.value)}
                     className="absolute inset-0 w-full bg-transparent outline-none text-[16px] md:text-[14px] z-10 text-black dark:text-white"
                     style={{ fontFamily: FONT_DISPLAY, caretColor: "#0038FF" }}
                     onFocus={() => setFocused(true)}
@@ -339,7 +342,7 @@ export default function Hero() {
                 {/* CTA */}
                 <m.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="shrink-0">
                   <Link
-                    href="/signup"
+                    href={inputVal.trim() ? `/signup?profile=${encodeURIComponent(inputVal.trim())}` : "/signup"}
                     className="flex items-center gap-2 px-5 py-3 rounded-[14px] text-[16px] font-black text-black whitespace-nowrap"
                     style={{
                       background: "#CCFF00",
@@ -349,7 +352,6 @@ export default function Hero() {
                     }}
                   >
                     Find Contact
-                    
                   </Link>
                 </m.div>
               </div>
@@ -421,10 +423,11 @@ export default function Hero() {
                 }}
               >
                 <ShieldCheck className="w-3.5 h-3.5" style={{ color: "#CCFF00" }} strokeWidth={2.5} />
-                99.9% verified
+                97.2% verified
               </span>
-              <span
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[16px] md:text-[14px] font-semibold"
+              <Link
+                href="/gdpr"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[16px] md:text-[14px] font-semibold transition-opacity hover:opacity-80"
                 style={{
                   color: "#fff",
                   background: "rgba(255,255,255,0.12)",
@@ -433,8 +436,8 @@ export default function Hero() {
                 }}
               >
                 <ShieldCheck className="w-3.5 h-3.5" style={{ color: "#CCFF00" }} strokeWidth={2.5} />
-                GDPR
-              </span>
+                GDPR-aware
+              </Link>
 
             </m.div>
 
@@ -447,7 +450,7 @@ export default function Hero() {
             >
               {[
                 { val: "800M+", label: "Contacts found" },
-                { val: "99.9%", label: "Verified accuracy" },
+                { val: "97.2%", label: "Verified accuracy" },
                 { val: "28 min", label: "Avg. delivery" },
                 { val: "190+",  label: "Countries" },
               ].map((s) => (

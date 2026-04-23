@@ -10,29 +10,26 @@ import { useMemo, useState, useRef } from "react";
 // ── Pricing logic ─────────────────────────────────────────────────────────────
 type Category = "email" | "phone" | "combo";
 
+// Format: [minQty, pricePerUnit] — matches VOLUME_TIERS step-function exactly
 const PHONE_TIERS: [number, number][] = [
-  [1, 1], [10, 9], [100, 75], [1000, 650], [5000, 2500], [10000, 5000],
+  [1, 1.00], [10, 0.90], [100, 0.75], [1000, 0.65], [5000, 0.50],
 ];
 const EMAIL_TIERS: [number, number][] = [
-  [1, 0.2], [10, 2], [100, 18], [1000, 150], [5000, 800],
+  [1, 0.20], [10, 0.18], [100, 0.15], [1000, 0.12], [5000, 0.10],
 ];
 
 function priceFromTiers(qty: number, tiers: [number, number][]): number {
-  if (qty <= tiers[0][0]) return qty * (tiers[0][1] / tiers[0][0]);
-  for (let i = 0; i < tiers.length - 1; i++) {
-    const [q1, p1] = tiers[i];
-    const [q2, p2] = tiers[i + 1];
-    if (qty >= q1 && qty <= q2)
-      return p1 + ((qty - q1) / (q2 - q1)) * (p2 - p1);
+  let rate = tiers[0][1];
+  for (const [minQty, unitPrice] of tiers) {
+    if (qty >= minQty) rate = unitPrice;
   }
-  const [lastQ, lastP] = tiers[tiers.length - 1];
-  return qty * (lastP / lastQ);
+  return qty * rate;
 }
 
 function calcPrice(qty: number, cat: Category): number {
   if (cat === "email") return priceFromTiers(qty, EMAIL_TIERS);
   if (cat === "phone") return priceFromTiers(qty, PHONE_TIERS);
-  return (priceFromTiers(qty, PHONE_TIERS) + priceFromTiers(qty * 5, EMAIL_TIERS)) * 0.9;
+  return (priceFromTiers(qty, PHONE_TIERS) + priceFromTiers(qty, EMAIL_TIERS)) * 0.9;
 }
 
 // ── Static data ───────────────────────────────────────────────────────────────

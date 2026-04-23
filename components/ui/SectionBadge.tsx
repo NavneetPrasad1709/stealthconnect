@@ -27,7 +27,7 @@ export function SectionBadge({ children, variant = "light", className = "", styl
         ...style,
       }}
     >
-      <span style={{ fontSize: 7, lineHeight: 1, color: isDark ? "#ffffff" : "var(--c-heading)" }}>●</span>
+      <span aria-hidden="true" style={{ fontSize: 7, lineHeight: 1, color: isDark ? "#ffffff" : "var(--c-heading)" }}>●</span>
       {children}
     </div>
   )

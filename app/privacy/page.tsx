@@ -4,7 +4,8 @@ import { ArrowLeft, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "StealthConnect AI Privacy Policy — how we collect, use, and protect your data.",
+  description: "Read StealthConnect AI's Privacy Policy — what data we collect, how we use it, your rights under GDPR and CCPA, and how to contact us about your data.",
+  alternates: { canonical: "/privacy" },
 };
 
 const sections = [

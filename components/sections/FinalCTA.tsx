@@ -21,7 +21,7 @@ const CARDS = [
 const STATS = [
   
   { value: "800M+",  label: "Contacts delivered"       },
-  { value: "99.9%",  label: "Verification accuracy"    },
+  { value: "97.2%",  label: "Verification accuracy"    },
 ]
 
 /* ─── Contact card ──────────────────────────────────────────────────────────── */

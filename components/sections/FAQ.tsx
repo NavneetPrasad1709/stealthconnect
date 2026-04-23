@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { m, AnimatePresence } from "framer-motion";
+import { m } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { HeadingAccent } from "@/components/ui/HeadingAccent";
@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: "What counts as a 'verified' contact?",
-    a: "For emails, we confirm deliverability via SMTP handshake before charging. For phone numbers, we validate against live carrier records. If our system can't verify a contact to our 99.9% accuracy standard, you are not charged — period.",
+    a: "For emails, we confirm deliverability via SMTP handshake before charging. For phone numbers, we validate against live carrier records. If our system can't verify a contact to our 97.2% accuracy standard, you are not charged — period.",
   },
   {
     q: "How long does a lookup actually take?",
@@ -83,29 +83,26 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <m.div
-            key="answer"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            style={{ overflow: "hidden" }}
-          >
-            <p
-              className="pb-5 text-[16px] leading-relaxed"
-              style={{
-                color: "var(--c-body)",
-                fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
-                maxWidth: 620,
-              }}
-            >
-              {a}
-            </p>
-          </m.div>
-        )}
-      </AnimatePresence>
+      {/* Answer always in DOM for SSR/SEO — collapsed via CSS transition */}
+      <div
+        style={{
+          overflow: "hidden",
+          maxHeight: open ? "600px" : "0",
+          opacity: open ? 1 : 0,
+          transition: "max-height 0.32s ease, opacity 0.22s ease",
+        }}
+      >
+        <p
+          className="pb-5 text-[16px] leading-relaxed"
+          style={{
+            color: "var(--c-body)",
+            fontFamily: "var(--font-montserrat, 'Montserrat', sans-serif)",
+            maxWidth: 620,
+          }}
+        >
+          {a}
+        </p>
+      </div>
     </m.div>
   );
 }
@@ -144,7 +141,7 @@ export default function FAQ() {
           >
             Still have questions? Reach out at{" "}
             <a
-              href="mailto:hello@stealthconnect.ai"
+              href="mailto:support@stealthconnect.ai"
               className="font-semibold underline underline-offset-2"
               style={{ color: "#0038FF" }}
             >

@@ -4,7 +4,8 @@ import { ArrowLeft, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "StealthConnect AI Terms of Service — rules and conditions for using our platform.",
+  description: "StealthConnect AI Terms of Service — acceptable use, credits and billing, data accuracy, governing law, and your rights as a user of our B2B contact enrichment platform.",
+  alternates: { canonical: "/terms" },
 };
 
 const sections = [
@@ -46,7 +47,7 @@ const sections = [
   },
   {
     title: "10. Governing Law",
-    body: `These terms are governed by the laws of the jurisdiction in which StealthConnect AI is incorporated. Disputes shall be resolved through binding arbitration unless prohibited by law.`,
+    body: `These terms are governed by the laws of [JURISDICTION — to be confirmed by counsel, e.g. "the State of Delaware, United States"]. Any dispute arising under these terms shall be resolved through binding arbitration seated in [ARBITRATION SEAT], administered under the rules of [ARBITRAL BODY], unless prohibited by applicable law. Nothing herein prevents either party from seeking injunctive relief in a court of competent jurisdiction.`,
   },
   {
     title: "11. Changes",

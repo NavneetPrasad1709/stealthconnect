@@ -53,9 +53,9 @@ const CARDS = [
   {
     icon: Lock,
     number: "06",
-    title: "GDPR-conscious by design",
-    desc: "We operate within compliant data practices. No protected sources, no scraped private data — your contact lookups stay clean.",
-    tag: "GDPR COMPLIANT",
+    title: "GDPR-aware by design",
+    desc: "Sources limited to publicly available professional directories. No scraping of private data or messages. Processing on GDPR legitimate-interests basis — see our GDPR page for full detail.",
+    tag: "GDPR-AWARE",
     dark: true,
   },
 ]
@@ -289,7 +289,7 @@ export default function Features() {
               className="mt-10 mb-14 md:mb-0 grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:gap-8 justify-center md:justify-start"
             >
               {[
-                { val: "99.9%", label: "Verification rate" },
+                { val: "97.2%", label: "Verification rate" },
                 { val: "28 min", label: "Avg. delivery" },
                 
               ].map((s) => (

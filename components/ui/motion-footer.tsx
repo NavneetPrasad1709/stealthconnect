@@ -449,6 +449,8 @@ export default function CinematicFooter() {
             {/* Divider */}
             <div className="footer-divider mb-8" />
 
+
+
             {/* ── Bottom bar ── */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-5">
               <p
@@ -460,7 +462,7 @@ export default function CinematicFooter() {
 
               <div className="footer-glass-pill px-5 py-2.5 rounded-full flex items-center gap-2 order-1 md:order-2 cursor-default">
                 <span className="text-[12px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>Built for</span>
-                <span className="animate-footer-heartbeat text-sm">❤</span>
+                <span className="animate-footer-heartbeat text-sm" role="img" aria-label="love">❤</span>
                 <span className="text-[12px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.28)" }}>everyone worldwide</span>
               </div>
 

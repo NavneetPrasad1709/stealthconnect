@@ -29,11 +29,12 @@ export interface SignUpPageProps {
   loading?: boolean;
   oauthLoading?: boolean;
   error?: string | null;
+  profileUrl?: string;
 }
 
 export const SignUpPage: React.FC<SignUpPageProps> = ({
   onSignUp, onGoogleSignUp, onSignIn,
-  loading = false, oauthLoading = false, error,
+  loading = false, oauthLoading = false, error, profileUrl,
 }) => {
   const [showPw, setShowPw] = useState(false);
   const disabled = loading || oauthLoading;
@@ -140,6 +141,19 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                 <span style={{ fontWeight: 900, color: "#fff" }}>contacts.</span>
               </h1>
             </div>
+
+            {/* Profile URL notice — shown when user came from hero search */}
+            {profileUrl && (
+              <div
+                className="animate-element animate-delay-200 px-4 py-3 rounded-2xl flex items-start gap-3"
+                style={{ background: "rgba(0,56,255,0.12)", border: "1px solid rgba(0,56,255,0.3)" }}
+              >
+                <span style={{ color: "#6b9eff", fontSize: 16, lineHeight: 1, flexShrink: 0 }}>🔍</span>
+                <p style={{ fontFamily: F, fontSize: 12.5, color: "rgba(255,255,255,0.65)", lineHeight: 1.55, margin: 0 }}>
+                  We&apos;ll look up <span style={{ color: "#fff", fontWeight: 700, wordBreak: "break-all" }}>{profileUrl}</span> for free once you sign in.
+                </p>
+              </div>
+            )}
 
             {/* Google */}
             <button

@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { HeadingAccent } from "@/components/ui/HeadingAccent";
 
 interface Testimonial {
   text: string;
-  image: string;
+  initials: string;
+  color: string;
   name: string;
   role: string;
   company: string;
@@ -16,66 +16,75 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     text: "I pasted a LinkedIn URL for a CTO I'd been trying to reach for 3 months. Had his verified mobile in 22 minutes. Signed the partnership two weeks later.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "James Whitfield",
+    initials: "JW",
+    color: "#0038FF",
+    name: "James W.",
     role: "Business Development",
-    company: "Salesforce",
+    company: "Enterprise Software Co.",
   },
   {
     text: "We replaced a $1,200/month data provider with StealthConnect. Same quality contacts, pay only when we need them. ROI was obvious in week one.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "Priya Nair",
+    initials: "PN",
+    color: "#6366f1",
+    name: "Priya N.",
     role: "VP of Partnerships",
-    company: "GrowthLabs",
+    company: "B2B Growth Agency",
   },
   {
     text: "97% accuracy isn't marketing fluff — I've tested it. Out of 200 emails purchased, 194 delivered. That's better than any tool we've tried.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "Marcus Webb",
+    initials: "MW",
+    color: "#0891b2",
+    name: "Marcus W.",
     role: "Head of Demand Gen",
-    company: "HubSpot",
+    company: "SaaS Marketing Platform",
   },
   {
     text: "The no-subscription model is a game changer for our agency. We scale up during campaigns and pay nothing in quiet months. Pure flexibility.",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "Sofia Reyes",
+    initials: "SR",
+    color: "#7c3aed",
+    name: "Sofia R.",
     role: "Founder",
-    company: "Apex Growth Co.",
+    company: "Digital Marketing Agency",
   },
   {
     text: "Tried 4 other LinkedIn contact tools. StealthConnect is the only one that gives me a direct number, not a switchboard. Worth every cent.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "Hannah Cole",
+    initials: "HC",
+    color: "#0d9488",
+    name: "Hannah C.",
     role: "Talent Partner",
-    company: "Stripe",
+    company: "Fintech Scale-up",
   },
   {
     text: "Onboarded my whole recruiting team in under an hour. They were submitting URLs and getting contacts before lunch. Zero learning curve.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "Daniel Park",
+    initials: "DP",
+    color: "#0038FF",
+    name: "Daniel P.",
     role: "Head of Recruiting",
-    company: "Notion",
+    company: "Productivity SaaS",
   },
   {
     text: "I appreciate that they just don't charge if they can't verify. It builds real trust. I've never once disputed a charge in 8 months.",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "Aisha Okonkwo",
+    initials: "AO",
+    color: "#be185d",
+    name: "Aisha O.",
     role: "Operations Lead",
-    company: "Intercom",
+    company: "Customer Success Platform",
   },
   {
     text: "We use StealthConnect for enterprise contact research. Direct mobiles for Fortune 500 decision-makers — delivered in under 30 minutes. Unreal.",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "Tom Hassan",
+    initials: "TH",
+    color: "#1d4ed8",
+    name: "Tom H.",
     role: "CTO",
-    company: "DataStack",
+    company: "Data Analytics Startup",
   },
   {
     text: "The free first lookup sold me instantly. Got the CFO's email I needed, signed up, and I've been a customer ever since. Best freemium hook in B2B.",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=80&h=80",
-    name: "Ryan Cho",
+    initials: "RC",
+    color: "#0369a1",
+    name: "Ryan C.",
     role: "CEO",
-    company: "Venture.io",
+    company: "Venture-Backed SaaS",
   },
 ];
 
@@ -86,7 +95,7 @@ const col3 = TESTIMONIALS.slice(6, 9);
 const FONT = "var(--font-montserrat, 'Montserrat', sans-serif)";
 
 function TestimonialCard({
-  text, image, name, role, company, dupIndex,
+  text, initials, color, name, role, company, dupIndex,
 }: Testimonial & { dupIndex: number }) {
   return (
     <li
@@ -110,16 +119,13 @@ function TestimonialCard({
           &ldquo;{text}&rdquo;
         </p>
         <footer className="flex items-center gap-3 mt-5">
-          <Image
-            width={40}
-            height={40}
-            src={image}
-            alt={`Avatar of ${name}`}
-            className="h-10 w-10 rounded-full object-cover shrink-0"
-            style={{ border: "2px solid #0038FF" }}
-            loading="lazy"
-            sizes="40px"
-          />
+          <div
+            aria-hidden="true"
+            className="h-10 w-10 rounded-full shrink-0 flex items-center justify-center text-white text-[13px] font-bold select-none"
+            style={{ background: color, border: "2px solid rgba(255,255,255,0.15)" }}
+          >
+            {initials}
+          </div>
           <div className="flex flex-col">
             <cite
               className="font-semibold not-italic leading-5 text-[16px]"
