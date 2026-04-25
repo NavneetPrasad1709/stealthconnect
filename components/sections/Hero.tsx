@@ -186,11 +186,13 @@ export default function Hero() {
         <div className="w-full grid grid-cols-1 lg:grid-cols-[240px_1fr_240px] xl:grid-cols-[270px_1fr_270px] items-center gap-6 xl:gap-10 pt-20 pb-16 lg:pt-0 lg:pb-0">
 
           {/* ── LEFT: result card (desktop) ── */}
-          <div className="hidden lg:flex flex-col items-center justify-center gap-6">
-            <ResultCard />
-            {/* arrow pointing right toward center */}
-            <div className="w-24 h-14 self-end mr-4 mt-2 opacity-80">
-              <ArrowCurvedLeft />
+          <div className="hidden lg:flex flex-col items-center justify-center">
+            <div className="relative">
+              <ResultCard />
+              {/* arrow attached to bottom-right of card, pointing toward center */}
+              <div className="absolute -bottom-10 -right-6 w-24 h-14 opacity-80">
+                <ArrowCurvedLeft />
+              </div>
             </div>
           </div>
 
