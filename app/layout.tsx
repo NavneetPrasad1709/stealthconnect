@@ -61,12 +61,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "StealthConnect AI",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "StealthConnect AI — LinkedIn Contact Finder",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "StealthConnect AI — LinkedIn Contact Finder",
     description:
       "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes.",
+    images: ["/og-image.png"],
   },
   icons: {
     icon: [
