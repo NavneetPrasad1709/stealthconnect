@@ -85,11 +85,18 @@ export async function POST(req: NextRequest) {
         expected_cents:  expectedCents,
       });
     } catch (e) {
-      console.error("CRITICAL: failed to record paypal_intent for order", order.id, e);
+      const errMsg = (e as Error)?.message ?? String(e);
+      console.error("CRITICAL: failed to record paypal_intent for order", order.id, errMsg);
       // Reject the PayPal order so the user can retry cleanly rather than
       // ending up with an unverifiable charge.
+      const isMissingTable = /paypal_intents/.test(errMsg) && /(could not find|does not exist|relation)/i.test(errMsg);
       return NextResponse.json(
-        { error: "Could not start payment session — please retry" },
+        {
+          error: isMissingTable
+            ? "Server not fully configured (paypal_intents table missing) — run migration 004 in Supabase."
+            : "Could not start payment session — please retry.",
+          detail: errMsg,
+        },
         { status: 500 }
       );
     }

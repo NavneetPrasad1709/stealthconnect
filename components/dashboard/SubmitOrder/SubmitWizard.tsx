@@ -743,6 +743,7 @@ function StepSummary({
   async function createPayPalOrder() {
     // Server recalculates amount from contact_type + quantity + email_draft.
     // Client cannot tamper with the price.
+    setPayErr(null);
     const res  = await fetch("/api/paypal/create-order", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
@@ -752,8 +753,12 @@ function StepSummary({
         email_draft_requested: emailDraft,
       }),
     });
-    const data = await res.json() as { id?: string; error?: string };
-    if (!res.ok || !data.id) throw new Error(data.error ?? "Failed to create PayPal order");
+    const data = await res.json().catch(() => ({})) as { id?: string; error?: string };
+    if (!res.ok || !data.id) {
+      const msg = data.error ?? `Failed to create PayPal order (HTTP ${res.status})`;
+      setPayErr(msg);
+      throw new Error(msg);
+    }
     return data.id;
   }
 
@@ -948,7 +953,11 @@ function StepSummary({
           createOrder={createPayPalOrder}
           onApprove={onApprove}
           onCancel={onPayPalCancel}
-          onError={() => setPayErr("PayPal error — please try again.")}
+          onError={(e) => {
+            const msg = (e as { message?: string } | undefined)?.message;
+            // Don't overwrite a more specific error already set by createPayPalOrder
+            setPayErr((prev) => prev ?? (msg ? `PayPal: ${msg}` : "PayPal error — please try again."));
+          }}
         />
       )}
     </div>
