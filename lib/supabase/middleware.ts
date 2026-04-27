@@ -39,10 +39,25 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Forward verified user to page components via headers (avoids second getUser() call)
+  // Forward verified user ID via REQUEST headers so API route handlers can read it.
+  // Response headers are sent to the browser, not to route handlers — must use request headers.
   if (user) {
-    supabaseResponse.headers.set("x-user-id", user.id);
-    supabaseResponse.headers.set("x-user-email", user.email ?? "");
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-user-id",    user.id);
+    requestHeaders.set("x-user-email", user.email ?? "");
+
+    const newResponse = NextResponse.next({ request: { headers: requestHeaders } });
+
+    // Copy any refreshed auth cookies from supabaseResponse so tokens stay valid
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      newResponse.cookies.set(
+        cookie.name,
+        cookie.value,
+        cookie as Parameters<typeof newResponse.cookies.set>[2]
+      );
+    });
+
+    supabaseResponse = newResponse;
   }
 
   const { pathname } = request.nextUrl;

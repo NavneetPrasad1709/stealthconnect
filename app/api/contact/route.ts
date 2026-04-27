@@ -23,6 +23,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const from = process.env.EMAIL_FROM ?? "StealthConnect AI <onboarding@resend.dev>";
+    const to = process.env.TEAM_EMAIL ?? "stealthconnectai@gmail.com";
+
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -30,8 +33,8 @@ export async function POST(req: NextRequest) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "StealthConnect Contact Form <noreply@stealthconnect.ai>",
-        to: ["support@stealthconnect.ai"],
+        from,
+        to: [to],
         reply_to: email.trim(),
         subject: `Contact form: ${name.trim()}`,
         text: `Name: ${name.trim()}\nEmail: ${email.trim()}\n\n${message.trim()}`,
@@ -39,6 +42,8 @@ export async function POST(req: NextRequest) {
     });
 
     if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      console.error("[contact] resend failed", res.status, detail);
       return NextResponse.json({ error: "Failed to send. Please email us directly." }, { status: 502 });
     }
 

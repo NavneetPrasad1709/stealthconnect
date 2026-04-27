@@ -400,7 +400,10 @@ function StepLinkedIn({
 
   function readFile(file: File) {
     const r = new FileReader();
-    r.onload = (ev) => onChange({ csvUrls: parseCSVText(ev.target?.result as string) });
+    r.onload = (ev) => {
+      onChange({ csvUrls: parseCSVText(ev.target?.result as string) });
+      if (fileRef.current) fileRef.current.value = "";
+    };
     r.readAsText(file);
   }
 
@@ -512,7 +515,7 @@ function StepLinkedIn({
             {csvUrls.length === 0 ? (
               <>
                 <input
-                  ref={fileRef} type="file" accept=".csv,text/csv" className="sr-only"
+                  ref={fileRef} type="file" accept=".csv,text/csv,application/vnd.ms-excel,application/csv" className="sr-only"
                   onChange={(e) => { const f = e.target.files?.[0]; if (f) readFile(f); }}
                 />
                 <button
@@ -730,6 +733,7 @@ function StepSummary({
       const data = await res.json() as { orderId?: string; error?: string };
       if (!res.ok) throw new Error(data.error ?? "Failed");
       setSuccess(true);
+      router.refresh();
       setTimeout(() => router.push("/dashboard/orders"), 1800);
     } catch (e) {
       setPayErr((e as Error).message);
@@ -737,10 +741,16 @@ function StepSummary({
   }
 
   async function createPayPalOrder() {
+    // Server recalculates amount from contact_type + quantity + email_draft.
+    // Client cannot tamper with the price.
     const res  = await fetch("/api/paypal/create-order", {
       method:  "POST",
       headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify({ amount: total }),
+      body:    JSON.stringify({
+        contact_type:          contactType,
+        quantity:              qty,
+        email_draft_requested: emailDraft,
+      }),
     });
     const data = await res.json() as { id?: string; error?: string };
     if (!res.ok || !data.id) throw new Error(data.error ?? "Failed to create PayPal order");
@@ -783,6 +793,7 @@ function StepSummary({
           const d = await ord.json() as { orderId?: string; error?: string };
           if (ord.ok && d.orderId) {
             setSuccess(true);
+            router.refresh();
             setTimeout(() => router.push("/dashboard/orders"), 1800);
             return;
           }
@@ -801,6 +812,11 @@ function StepSummary({
     } catch (e) {
       setPayErr((e as Error).message);
     } finally { setBusy(false); }
+  }
+
+  function onPayPalCancel() {
+    setBusy(false);
+    setPayErr("Payment canceled. You weren't charged.");
   }
 
   if (success) {
@@ -931,6 +947,7 @@ function StepSummary({
         <PPButtons
           createOrder={createPayPalOrder}
           onApprove={onApprove}
+          onCancel={onPayPalCancel}
           onError={() => setPayErr("PayPal error — please try again.")}
         />
       )}
@@ -956,10 +973,11 @@ function LineItem({ label, sub, amount }: { label: string; sub: string; amount: 
 }
 
 function PPButtons({
-  createOrder, onApprove, onError,
+  createOrder, onApprove, onCancel, onError,
 }: {
   createOrder: () => Promise<string>;
   onApprove:   (d: { orderID: string }) => Promise<void>;
+  onCancel:    () => void;
   onError:     (e: unknown) => void;
 }) {
   const [{ isPending }] = usePayPalScriptReducer();
@@ -976,6 +994,7 @@ function PPButtons({
       style={{ layout: "vertical", color: "blue", shape: "rect", label: "pay", height: 48 }}
       createOrder={createOrder}
       onApprove={onApprove}
+      onCancel={onCancel}
       onError={onError}
     />
   );
