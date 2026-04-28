@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "How do I submit a data request?",
-    a: "Email gdpr@stealthconnect.ai with your registered email address and the nature of your request. We will acknowledge within 72 hours and respond fully within 30 days.",
+    a: "Email support@stealthconnect.ai with your registered email address and the nature of your request. We will acknowledge within 72 hours and respond fully within 30 days.",
   },
 ];
 
@@ -98,7 +98,7 @@ export default function GdprPage() {
           <p style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginBottom: 6 }}>Data Protection Contact</p>
           <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.4)", lineHeight: 1.65, margin: 0 }}>
             To exercise your rights or submit a GDPR request, email{" "}
-            <a href="mailto:gdpr@stealthconnect.ai" style={{ color: "#5b8ff9" }}>gdpr@stealthconnect.ai</a>.
+            <a href="mailto:support@stealthconnect.ai" style={{ color: "#5b8ff9" }}>support@stealthconnect.ai</a>.
             You also have the right to lodge a complaint with your local supervisory authority.
           </p>
         </div>

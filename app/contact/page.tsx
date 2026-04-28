@@ -68,13 +68,13 @@ export default function ContactPage() {
             </div>
           </a>
 
-          <a href="mailto:sales@stealthconnect.ai" className="contact-card flex items-center gap-4 p-5 rounded-2xl">
+          <a href="mailto:support@stealthconnect.ai" className="contact-card flex items-center gap-4 p-5 rounded-2xl">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(0,56,255,0.12)", border: "1px solid rgba(0,56,255,0.2)" }}>
               <MessageSquare className="w-5 h-5" style={{ color: "#0038FF" }} />
             </div>
             <div>
               <p style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", margin: 0 }}>Enterprise & Sales</p>
-              <p style={{ fontSize: 15, fontWeight: 600, color: "#fff", margin: "2px 0 0" }}>sales@stealthconnect.ai</p>
+              <p style={{ fontSize: 15, fontWeight: 600, color: "#fff", margin: "2px 0 0" }}>support@stealthconnect.ai</p>
             </div>
           </a>
         </div>

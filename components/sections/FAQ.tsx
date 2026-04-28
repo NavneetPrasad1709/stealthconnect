@@ -145,7 +145,7 @@ export default function FAQ() {
               className="font-semibold underline underline-offset-2"
               style={{ color: "#0038FF" }}
             >
-              hello@stealthconnect.ai
+              support@stealthconnect.ai
             </a>
           </p>
         </m.div>

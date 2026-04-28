@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     }
 
     const from = process.env.EMAIL_FROM ?? "StealthConnect AI <onboarding@resend.dev>";
-    const to = process.env.TEAM_EMAIL ?? "stealthconnectai@gmail.com";
+    const to = process.env.TEAM_EMAIL ?? "support@stealthconnect.ai";
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",

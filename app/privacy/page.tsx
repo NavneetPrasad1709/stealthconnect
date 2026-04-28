@@ -43,7 +43,7 @@ const sections = [
   },
   {
     title: "9. Contact",
-    body: `Questions about this policy? Email us at privacy@stealthconnect.ai.`,
+    body: `Questions about this policy? Email us at support@stealthconnect.ai.`,
   },
 ];
 

@@ -6,9 +6,9 @@ import TeamNotification   from "@/emails/TeamNotification";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM         = process.env.EMAIL_FROM     ?? "StealthConnect AI <onboarding@resend.dev>";
-const TEAM         = process.env.TEAM_EMAIL     ?? "navneetprasad1709@gmail.com";
+const TEAM         = process.env.TEAM_EMAIL     ?? "support@stealthconnect.ai";
 const APP          = process.env.NEXT_PUBLIC_APP_URL ?? "https://stealthconnect.ai";
-const SUPPORT      = process.env.TEAM_EMAIL     ?? "navneetprasad1709@gmail.com";
+const SUPPORT      = process.env.SUPPORT_EMAIL  ?? "support@stealthconnect.ai";
 
 /* ── Shared payload type ────────────────────────────────────── */
 export interface OrderEmailData {
