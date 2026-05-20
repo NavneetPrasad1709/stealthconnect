@@ -6,6 +6,18 @@ export const metadata: Metadata = {
   title: "GDPR Compliance",
   description: "StealthConnect AI's GDPR approach — legal basis for processing, your data rights (access, erasure, portability), how to file a request, and our contact for privacy matters.",
   alternates: { canonical: "/gdpr" },
+  openGraph: {
+    title: "GDPR Compliance — StealthConnect AI",
+    description: "Legal basis for processing, your data rights, and how to file a GDPR request.",
+    url: "/gdpr",
+    type: "website",
+    siteName: "StealthConnect AI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GDPR Compliance — StealthConnect AI",
+    description: "Your data rights and how to file a GDPR request.",
+  },
 };
 
 const rights = [
@@ -75,7 +87,7 @@ export default function GdprPage() {
             <div key={r.title} className="flex items-start gap-4 p-4 rounded-2xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "#0038FF" }} />
               <div>
-                <p style={{ fontSize: 14, fontWeight: 700, color: "#fff", margin: "0 0 4px" }}>{r.title}</p>
+                <h3 style={{ fontSize: 14, fontWeight: 700, color: "#fff", margin: "0 0 4px" }}>{r.title}</h3>
                 <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.4)", lineHeight: 1.65, margin: 0 }}>{r.body}</p>
               </div>
             </div>
@@ -87,7 +99,7 @@ export default function GdprPage() {
         <div className="flex flex-col gap-5 mb-12">
           {faqs.map((f) => (
             <div key={f.q}>
-              <p style={{ fontSize: 14, fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: 6 }}>{f.q}</p>
+              <h3 style={{ fontSize: 14, fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: 6 }}>{f.q}</h3>
               <p style={{ fontSize: 14, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, margin: 0 }}>{f.a}</p>
             </div>
           ))}

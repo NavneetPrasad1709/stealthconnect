@@ -6,6 +6,18 @@ export const metadata: Metadata = {
   title: "Terms of Service",
   description: "StealthConnect AI Terms of Service — acceptable use, credits and billing, data accuracy, governing law, and your rights as a user of our B2B contact enrichment platform.",
   alternates: { canonical: "/terms" },
+  openGraph: {
+    title: "Terms of Service — StealthConnect AI",
+    description: "Acceptable use, credits and billing, data accuracy, governing law, and your rights as a user.",
+    url: "/terms",
+    type: "website",
+    siteName: "StealthConnect AI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Service — StealthConnect AI",
+    description: "Acceptable use, credits and billing, data accuracy, and your rights as a user.",
+  },
 };
 
 const sections = [

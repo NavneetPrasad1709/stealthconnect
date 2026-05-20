@@ -23,24 +23,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://stealthconnect.ai"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://www.stealthconnect.ai"),
   title: {
     default: "StealthConnect AI — LinkedIn Contact Finder",
     template: "%s | StealthConnect AI",
   },
   description:
     "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes. Pay only per result — no subscription, no contracts.",
-  keywords: [
-    "linkedin contact finder",
-    "email finder",
-    "phone number finder",
-    "b2b leads",
-    "linkedin scraper",
-    "sales prospecting",
-    "contact enrichment",
-    "lead generation",
-    "verified contacts",
-  ],
   authors: [{ name: "StealthConnect AI" }],
   creator: "StealthConnect AI",
   publisher: "StealthConnect AI",
@@ -61,21 +50,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "StealthConnect AI",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1918,
-        height: 905,
-        alt: "StealthConnect AI — LinkedIn Contact Finder",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "StealthConnect AI — LinkedIn Contact Finder",
     description:
       "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes.",
-    images: ["/og-image.png"],
   },
   icons: {
     icon: [

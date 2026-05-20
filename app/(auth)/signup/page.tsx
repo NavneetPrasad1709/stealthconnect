@@ -3,7 +3,9 @@ import { Suspense } from "react";
 import SignupClient from "./SignupClient";
 
 export const metadata: Metadata = {
-  title: "Create your account",
+  title: { absolute: "Create Your Free Account — StealthConnect AI" },
+  description:
+    "Create your free StealthConnect AI account and get 1 free verified LinkedIn contact lookup. No credit card, no subscription, pay-per-result.",
   alternates: { canonical: "/signup" },
 };
 

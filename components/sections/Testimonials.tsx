@@ -33,7 +33,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     text: "97% accuracy isn't marketing fluff — I've tested it. Out of 200 emails purchased, 194 delivered. That's better than any tool we've tried.",
     initials: "MW",
-    color: "#0891b2",
+    color: "#0e7490",
     name: "Marcus W.",
     role: "Head of Demand Gen",
     company: "SaaS Marketing Platform",

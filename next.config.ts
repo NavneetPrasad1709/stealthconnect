@@ -51,6 +51,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   compress: true,
+  productionBrowserSourceMaps: false,
+  reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
@@ -60,6 +62,12 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "randomuser.me" },
     ],
+  },
+  modularizeImports: {
+    "lucide-react": {
+      transform: "lucide-react/dist/esm/icons/{{kebabCase member}}",
+      preventFullImport: true,
+    },
   },
   experimental: {
     optimizePackageImports: [
@@ -71,6 +79,8 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-slot",
       "@radix-ui/react-switch",
       "recharts",
+      "embla-carousel-react",
+      "embla-carousel-auto-scroll",
     ],
   },
 

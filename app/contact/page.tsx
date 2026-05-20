@@ -7,6 +7,18 @@ export const metadata: Metadata = {
   title: "Contact Us",
   description: "Contact StealthConnect AI — reach our support team at support@stealthconnect.ai, or enquire about enterprise pricing and partnerships.",
   alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact StealthConnect AI",
+    description: "Reach our support team at support@stealthconnect.ai for help, enterprise pricing, or partnership enquiries.",
+    url: "/contact",
+    type: "website",
+    siteName: "StealthConnect AI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact StealthConnect AI",
+    description: "Reach our support team or enquire about enterprise pricing.",
+  },
 };
 
 const F = "var(--font-montserrat,'Montserrat',sans-serif)";

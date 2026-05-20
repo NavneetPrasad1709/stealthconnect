@@ -202,10 +202,14 @@ export default function Hero() {
 
 
             {/* ── Giant stacked type ── */}
-            <div className="w-full flex flex-col items-center space-y-0 md:space-y-1 mb-8">
+            <h1
+              className="w-full flex flex-col items-center space-y-0 md:space-y-1 mb-8 m-0"
+              aria-label="Find verified LinkedIn contacts in 30 minutes"
+            >
+              <span className="sr-only">Find verified LinkedIn contacts in 30 minutes — </span>
 
               {/* LOOKING FOR */}
-              <m.div
+              <m.span
                 initial={{ opacity: 1, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.14, ease: "easeOut" }}
@@ -220,10 +224,10 @@ export default function Hero() {
                 >
                   LOOKING FOR
                 </span>
-              </m.div>
+              </m.span>
 
               {/* SOMEONE */}
-              <m.div
+              <m.span
                 initial={{ opacity: 1, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
@@ -238,10 +242,10 @@ export default function Hero() {
                 >
                   SOMEONE
                 </span>
-              </m.div>
+              </m.span>
 
               {/* ON LINKEDIN? */}
-              <m.div
+              <m.span
                 initial={{ opacity: 1, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.26, ease: "easeOut" }}
@@ -256,8 +260,8 @@ export default function Hero() {
                 >
                   ON LINKEDIN?
                 </span>
-              </m.div>
-            </div>
+              </m.span>
+            </h1>
 
             {/* ── Hook ── */}
             <m.div

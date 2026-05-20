@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 import Navbar from "@/components/Navbar";
 import HowItWorks from "@/components/sections/HowItWorks";
+import { LazyOnView } from "@/components/LazyOnView";
 
 const ph = (h: number) => () => <div style={{ minHeight: h, background: "var(--c-section-bg)" }} />;
 const phAlt = (h: number) => () => <div style={{ minHeight: h, background: "var(--c-section-bg-alt)" }} />;
@@ -123,12 +124,12 @@ export default function HomePage() {
         <Hero />
         <HowItWorks />
         <Features />
-        <StatsSection />
-        <Pricing />
-        <Testimonials />
-        <FAQ />
-        <FinalCTA />
-        <CinematicFooter />
+        <LazyOnView minHeight={600}><StatsSection /></LazyOnView>
+        <LazyOnView minHeight={600}><Pricing /></LazyOnView>
+        <LazyOnView minHeight={500}><Testimonials /></LazyOnView>
+        <LazyOnView minHeight={500}><FAQ /></LazyOnView>
+        <LazyOnView minHeight={400}><FinalCTA /></LazyOnView>
+        <LazyOnView minHeight={300}><CinematicFooter /></LazyOnView>
       </main>
     </>
   );
