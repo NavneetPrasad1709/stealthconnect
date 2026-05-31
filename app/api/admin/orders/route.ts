@@ -50,14 +50,21 @@ export async function PATCH(req: NextRequest) {
   const db = adminDb();
   const { id, status } = await req.json() as { id: string; status: string };
 
-  const allowed = ["pending", "processing", "delivered", "failed", "refunded"];
+  // FP-02: must match the DB `order_status` enum exactly (pending|processing|
+  // completed|failed|refunded). "delivered" is NOT a valid enum value and was
+  // silently failing every fulfilment update.
+  const allowed = ["pending", "processing", "completed", "failed", "refunded"];
   if (!allowed.includes(status)) {
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
   }
 
+  // Stamp delivery time when an order reaches the terminal "completed" state.
+  const patch: Record<string, unknown> = { status };
+  if (status === "completed") patch.delivered_at = new Date().toISOString();
+
   const { error } = await (db as any)
     .from("orders")
-    .update({ status })
+    .update(patch)
     .eq("id", id);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });

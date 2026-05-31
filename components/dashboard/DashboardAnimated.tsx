@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 /* ── Types ───────────────────────────────────────────────────── */
-type OrderStatus = "pending" | "processing" | "delivered" | "failed" | "refunded";
+type OrderStatus = "pending" | "processing" | "completed" | "failed" | "refunded";
 type ContactType = "email" | "phone" | "both";
 
 type Order = {
@@ -38,7 +38,7 @@ interface Props {
 const STATUS: Record<OrderStatus, { label: string; dot: string; text: string; bg: string }> = {
   pending:    { label: "Pending",    dot: "#f59e0b", text: "#92400e", bg: "rgba(245,158,11,0.09)" },
   processing: { label: "Processing", dot: "#3b82f6", text: "#1e40af", bg: "rgba(59,130,246,0.09)"  },
-  delivered:  { label: "Delivered",  dot: "#10b981", text: "#065f46", bg: "rgba(16,185,129,0.09)"  },
+  completed:  { label: "Delivered",  dot: "#10b981", text: "#065f46", bg: "rgba(16,185,129,0.09)"  },
   failed:     { label: "Failed",     dot: "#ef4444", text: "#991b1b", bg: "rgba(239,68,68,0.09)"   },
   refunded:   { label: "Refunded",   dot: "#8b5cf6", text: "#4c1d95", bg: "rgba(139,92,246,0.09)"  },
 };

@@ -7,6 +7,8 @@
  * an edge rate-limiter on top.
  */
 
+import type { NextRequest } from "next/server";
+
 type Bucket = { tokens: number; lastRefill: number };
 const buckets = new Map<string, Bucket>();
 
@@ -52,4 +54,16 @@ export function rateLimit(
   if (bucket.tokens < 1) return false;
   bucket.tokens -= 1;
   return true;
+}
+
+/**
+ * Best-effort client IP from proxy headers (Vercel sets `x-forwarded-for`).
+ * Used as a rate-limit key for unauthenticated public endpoints.
+ */
+export function clientIp(req: NextRequest): string {
+  return (
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown"
+  );
 }

@@ -4,6 +4,7 @@ import {
   getPayPalToken, PAYPAL_BASE, fetchWithTimeout, recordPayPalIntent,
 } from "@/lib/admin-db";
 import { rateLimit } from "@/lib/rate-limit";
+import { quoteCents } from "@/lib/pricing";
 
 interface CreateOrderPayload {
   contact_type:           "email" | "phone" | "both";
@@ -11,7 +12,6 @@ interface CreateOrderPayload {
   email_draft_requested?: boolean;
 }
 
-const BASE_CENTS: Record<string, number> = { email: 20, phone: 100, both: 120 };
 const MAX_QUANTITY = 1000;
 
 export async function POST(req: NextRequest) {
@@ -34,10 +34,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid quantity" }, { status: 400 });
     }
 
-    /* Server-authoritative price calculation (integer cents) */
-    const expectedCents =
-      quantity * BASE_CENTS[contact_type] +
-      (email_draft_requested ? quantity * 100 : 0);
+    /* Server-authoritative price calculation (integer cents) — canonical pricing */
+    const expectedCents = quoteCents({
+      contactType: contact_type,
+      qty: quantity,
+      emailDraft: email_draft_requested,
+    });
     const amount = (expectedCents / 100).toFixed(2);
 
     const token = await getPayPalToken();

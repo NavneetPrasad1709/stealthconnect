@@ -6,6 +6,7 @@ import {
 } from "@/lib/admin-db";
 import { sendOrderConfirmation, sendTeamNotification } from "@/lib/email";
 import { rateLimit } from "@/lib/rate-limit";
+import { quoteCents } from "@/lib/pricing";
 
 interface OrderPayload {
   contact_type:          "email" | "phone" | "both";
@@ -16,8 +17,6 @@ interface OrderPayload {
   use_credits?:          boolean;
   input_type?:           "single" | "csv";
 }
-
-const BASE_CENTS: Record<string, number> = { email: 20, phone: 100, both: 120 };
 
 export async function POST(req: NextRequest) {
   try {
@@ -65,10 +64,10 @@ export async function POST(req: NextRequest) {
     const db       = adminDb();
     const quantity = linkedin_urls.length;
 
-    /* ── Server-authoritative price (integer cents) ── */
+    /* ── Server-authoritative price (integer cents) — canonical pricing ── */
     const expectedCents = use_credits
       ? 0
-      : quantity * BASE_CENTS[contact_type] + (email_draft_requested ? quantity * 100 : 0);
+      : quoteCents({ contactType: contact_type, qty: quantity, emailDraft: email_draft_requested });
     const paidCents = Math.round(amount_paid * 100);
 
     if (!use_credits && Math.abs(paidCents - expectedCents) > 2) {
@@ -237,9 +236,23 @@ export async function POST(req: NextRequest) {
       emailDraft:   email_draft_requested,
     };
 
-    sendOrderConfirmation(emailData).catch((e) =>
-      console.error("Order confirmation email failed:", e)
-    );
+    /* Customer order confirmation — AWAITED so a Resend failure is captured as a
+       pending_alert. Serverless can freeze the instance after the response is sent,
+       so fire-and-forget could silently drop the customer's receipt. */
+    try {
+      const conf = (await sendOrderConfirmation(emailData)) as { error?: unknown } | null;
+      if (conf?.error) {
+        throw new Error(typeof conf.error === "string" ? conf.error : JSON.stringify(conf.error));
+      }
+    } catch (e) {
+      console.error("Order confirmation email failed for order", orderId, e);
+      await recordPendingAlert({
+        order_id: orderId,
+        user_id:  userId,
+        reason:   "Order confirmation email failed",
+        details:  { error: String((e as Error)?.message ?? e) },
+      }).catch((err) => console.error("pending_alerts insert failed:", err));
+    }
 
     /* Team notification: if it fails, the order would otherwise sit unprocessed.
        Surface it as a pending alert so admin dashboard catches it. */

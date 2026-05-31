@@ -46,8 +46,19 @@ export async function deductCredits(userId: string, amount: number): Promise<boo
     return rpcData === true;
   }
 
-  // RPC failed — log and try optimistic-lock fallback for resilience
-  console.error("deduct_credit RPC failed, using fallback:", rpcErr);
+  // RPC failed. The optimistic-lock fallback below is itself race-safe (a CAS on the
+  // current credit value), but a PERSISTENT failure usually means migration 004 — the
+  // deduct_credit(uuid,int) function — was never applied. Surface that loudly via a
+  // pending_alert instead of silently degrading on every single deduction (FP-08).
+  const rpcMsg = (rpcErr as { message?: string })?.message ?? String(rpcErr);
+  console.error("deduct_credit RPC failed, using CAS fallback:", rpcErr);
+  if (/deduct_credit/i.test(rpcMsg) && /(does not exist|could not find|pgrst202|function)/i.test(rpcMsg)) {
+    await recordPendingAlert({
+      user_id: userId,
+      reason:  "deduct_credit RPC missing — apply migration 004 (credit deductions are on the fallback path)",
+      details: { error: rpcMsg },
+    }).catch((e) => console.error("pending_alerts insert failed:", e));
+  }
 
   const profile = await getProfile(userId);
   if (!profile || profile.credits < amount) return false;

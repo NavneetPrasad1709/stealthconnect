@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 /* ── Types ─────────────────────────────────────────────────── */
-type OrderStatus  = "pending" | "processing" | "delivered" | "failed" | "refunded";
+type OrderStatus  = "pending" | "processing" | "completed" | "failed" | "refunded";
 type ContactType  = "email" | "phone" | "both";
 
 export type Order = {
@@ -31,7 +31,8 @@ const PER_PAGE = 10;
 const STATUS_CONFIG: Record<OrderStatus, { label: string; dot: string; fg: string; bg: string }> = {
   pending:    { label: "Pending",    dot: "#f59e0b", fg: "#b45309", bg: "rgba(245,158,11,0.09)"  },
   processing: { label: "Processing", dot: "#3b82f6", fg: "#1d4ed8", bg: "rgba(59,130,246,0.09)"  },
-  delivered:  { label: "Delivered",  dot: "#10b981", fg: "#065f46", bg: "rgba(16,185,129,0.09)"  },
+  // DB enum value is "completed"; shown to customers as "Delivered".
+  completed:  { label: "Delivered",  dot: "#10b981", fg: "#065f46", bg: "rgba(16,185,129,0.09)"  },
   failed:     { label: "Failed",     dot: "#ef4444", fg: "#991b1b", bg: "rgba(239,68,68,0.09)"   },
   refunded:   { label: "Refunded",   dot: "#8b5cf6", fg: "#4c1d95", bg: "rgba(139,92,246,0.09)"  },
 };
@@ -43,7 +44,7 @@ const CONTACT_CONFIG: Record<ContactType, { label: string; Icon: typeof Mail }> 
 };
 
 const ALL_STATUSES: (OrderStatus | "all")[] = [
-  "all", "pending", "processing", "delivered", "failed", "refunded",
+  "all", "pending", "processing", "completed", "failed", "refunded",
 ];
 
 /* ── Helpers ─────────────────────────────────────────────────── */

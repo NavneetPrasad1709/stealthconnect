@@ -15,13 +15,23 @@ type Order = {
   profiles: { email: string; full_name: string } | null;
 };
 
-const STATUS_OPTIONS = ["pending", "processing", "delivered", "failed", "refunded"] as const;
+// FP-02: values must match the DB `order_status` enum. Display label for
+// "completed" is mapped to "Delivered" in the dropdown for customer-friendliness.
+const STATUS_OPTIONS = ["pending", "processing", "completed", "failed", "refunded"] as const;
 type Status = (typeof STATUS_OPTIONS)[number];
+
+const STATUS_LABELS: Record<Status, string> = {
+  pending:    "Pending",
+  processing: "Processing",
+  completed:  "Delivered",
+  failed:     "Failed",
+  refunded:   "Refunded",
+};
 
 const STATUS_COLORS: Record<Status, string> = {
   pending:    "#f59e0b",
   processing: "#3b82f6",
-  delivered:  "#22c55e",
+  completed:  "#22c55e",
   failed:     "#ef4444",
   refunded:   "#8b5cf6",
 };
@@ -357,7 +367,7 @@ export function AdminDashboard() {
                       >
                         {STATUS_OPTIONS.map((s) => (
                           <option key={s} value={s} style={{ background: "var(--surface)", color: "var(--fg)" }}>
-                            {s.charAt(0).toUpperCase() + s.slice(1)}
+                            {STATUS_LABELS[s]}
                           </option>
                         ))}
                       </select>
@@ -394,7 +404,7 @@ export function AdminDashboard() {
                         >
                           {STATUS_OPTIONS.map((s) => (
                             <option key={s} value={s} style={{ background: "var(--surface)", color: "var(--fg)" }}>
-                              {s.charAt(0).toUpperCase() + s.slice(1)}
+                              {STATUS_LABELS[s]}
                             </option>
                           ))}
                         </select>

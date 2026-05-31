@@ -1,12 +1,17 @@
 import { NextRequest } from "next/server";
 import Groq from "groq-sdk";
+import { rateLimit, clientIp } from "@/lib/rate-limit";
 
 const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+// Abuse / cost guards for this unauthenticated, LLM-backed endpoint.
+const MAX_MESSAGES   = 30;
+const MAX_TOTAL_CHARS = 6000;
 
 const SYSTEM = `You are the StealthConnect AI support assistant — friendly, concise, and precise.
 
 ONLY answer questions about these topics:
-• Pricing: Email contacts $0.20 each · Phone numbers $1.00 each · Email+Phone $1.20 each · AI Email Draft add-on +$1.00/profile
+• Pricing: Email contacts $0.20 each · Phone numbers $1.00 each · Email+Phone $1.08 each (10% bundle discount) · AI Email Draft add-on +$1.00/profile
 • Credits: New users get 1 free credit. Credits never expire. Buy more via PayPal.
 • How it works: User pastes LinkedIn profile URLs → our team manually researches and delivers verified contact info within 30 minutes.
 • Order process: Submit URL(s) → choose contact type → optional AI draft add-on → pay via PayPal or use free credit → receive results.
@@ -24,12 +29,35 @@ RULES:
 
 export async function POST(req: NextRequest) {
   try {
+    // FP-04: per-IP rate limit — caps Groq cost/quota abuse on this public endpoint.
+    if (!rateLimit(`chatbot:${clientIp(req)}`, 20, 0.5)) {
+      return new Response(
+        JSON.stringify({ error: "Too many requests. Please slow down." }),
+        { status: 429, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     const { messages } = await req.json() as {
       messages: { role: "user" | "assistant"; content: string }[];
     };
 
     if (!messages?.length) {
       return new Response(JSON.stringify({ error: "No messages" }), { status: 400 });
+    }
+
+    // Bound conversation size to prevent runaway token cost.
+    if (messages.length > MAX_MESSAGES) {
+      return new Response(
+        JSON.stringify({ error: "Conversation too long — please start a new chat." }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const totalChars = messages.reduce((n, m) => n + (m?.content?.length ?? 0), 0);
+    if (totalChars > MAX_TOTAL_CHARS) {
+      return new Response(
+        JSON.stringify({ error: "Message too long." }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
     }
 
     // Streaming response

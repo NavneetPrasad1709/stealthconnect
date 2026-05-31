@@ -3,7 +3,19 @@ import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/types/database";
 
 export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request });
+  // SECURITY (FP-03): the x-user-id / x-user-email identity headers must be
+  // SERVER-CONTROLLED only. Strip any client-supplied values up front so a forged
+  // header can NEVER reach a route handler on any code path (authenticated,
+  // unauthenticated, or pass-through). They are re-set below only for a verified
+  // session. Without this, an unauthenticated caller could send
+  // `x-user-id: <victim>` and be treated as that user by every /api route.
+  const sanitizedHeaders = new Headers(request.headers);
+  sanitizedHeaders.delete("x-user-id");
+  sanitizedHeaders.delete("x-user-email");
+
+  let supabaseResponse = NextResponse.next({
+    request: { headers: sanitizedHeaders },
+  });
 
   const supabase = createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -18,8 +30,10 @@ export async function updateSession(request: NextRequest) {
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           );
-          // Step 2: rebuild the response with the updated cookies
-          supabaseResponse = NextResponse.next({ request });
+          // Step 2: rebuild the response with the updated cookies (sanitized headers)
+          supabaseResponse = NextResponse.next({
+            request: { headers: sanitizedHeaders },
+          });
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(
               name,
@@ -39,14 +53,14 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Forward verified user ID via REQUEST headers so API route handlers can read it.
-  // Response headers are sent to the browser, not to route handlers — must use request headers.
+  // Forward the VERIFIED user identity via REQUEST headers so API route handlers
+  // can read it. These were stripped above, so only a real session can set them —
+  // a client-supplied value is never honoured.
   if (user) {
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set("x-user-id",    user.id);
-    requestHeaders.set("x-user-email", user.email ?? "");
+    sanitizedHeaders.set("x-user-id",    user.id);
+    sanitizedHeaders.set("x-user-email", user.email ?? "");
 
-    const newResponse = NextResponse.next({ request: { headers: requestHeaders } });
+    const newResponse = NextResponse.next({ request: { headers: sanitizedHeaders } });
 
     // Copy any refreshed auth cookies from supabaseResponse so tokens stay valid
     supabaseResponse.cookies.getAll().forEach((cookie) => {

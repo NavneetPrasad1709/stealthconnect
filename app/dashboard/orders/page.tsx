@@ -15,7 +15,7 @@ type Order = {
   quantity:              number;
   amount_paid:           number;
   email_draft_requested: boolean;
-  status:                "pending" | "processing" | "delivered" | "failed" | "refunded";
+  status:                "pending" | "processing" | "completed" | "failed" | "refunded";
   created_at:            string;
   delivered_at:          string | null;
   linkedin_urls:         string[];

@@ -1,35 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { m, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { HeadingAccent } from "@/components/ui/HeadingAccent";
-import { Check, ArrowRight, Zap, Phone, Mail, Layers, TrendingDown } from "lucide-react";
-import { useMemo, useState, useRef } from "react";
+import { Check, ArrowRight, Zap, Phone, Mail, Layers } from "lucide-react";
+import { useMemo, useState } from "react";
+import { UNIT_DOLLARS } from "@/lib/pricing";
 
-// ── Pricing logic ─────────────────────────────────────────────────────────────
+// ── Pricing logic (canonical source: lib/pricing) ──────────────────────────────
 type Category = "email" | "phone" | "combo";
 
-// Format: [minQty, pricePerUnit] — matches VOLUME_TIERS step-function exactly
-const PHONE_TIERS: [number, number][] = [
-  [1, 1.00], [10, 0.90], [100, 0.75], [1000, 0.65], [5000, 0.50],
-];
-const EMAIL_TIERS: [number, number][] = [
-  [1, 0.20], [10, 0.18], [100, 0.15], [1000, 0.12], [5000, 0.10],
-];
-
-function priceFromTiers(qty: number, tiers: [number, number][]): number {
-  let rate = tiers[0][1];
-  for (const [minQty, unitPrice] of tiers) {
-    if (qty >= minQty) rate = unitPrice;
-  }
-  return qty * rate;
-}
-
+// FP-01: flat per-unit pricing with a 10% combo bundle discount. No volume tiers.
 function calcPrice(qty: number, cat: Category): number {
-  if (cat === "email") return priceFromTiers(qty, EMAIL_TIERS);
-  if (cat === "phone") return priceFromTiers(qty, PHONE_TIERS);
-  return (priceFromTiers(qty, PHONE_TIERS) + priceFromTiers(qty, EMAIL_TIERS)) * 0.9;
+  const t = cat === "combo" ? "both" : cat;
+  return qty * UNIT_DOLLARS[t];
 }
 
 // ── Static data ───────────────────────────────────────────────────────────────
@@ -85,14 +70,6 @@ const PRODUCT_CARDS = [
       "Charged only on success",
     ],
   },
-];
-
-const VOLUME_TIERS = [
-  { range: "1 – 9",       email: "$0.20", phone: "$1.00", savingsPct: 0,  label: "Standard" },
-  { range: "10 – 99",     email: "$0.18", phone: "$0.90", savingsPct: 10, label: "Starter"  },
-  { range: "100 – 999",   email: "$0.15", phone: "$0.75", savingsPct: 25, label: "Growth"   },
-  { range: "1,000 – 4,999", email: "$0.12", phone: "$0.65", savingsPct: 40, label: "Scale"  },
-  { range: "5,000+",      email: "$0.10", phone: "$0.50", savingsPct: 50, label: "Enterprise" },
 ];
 
 const GUARANTEES = [
@@ -189,99 +166,6 @@ function ProductCard({ card, index, active, onSelect }: {
   );
 }
 
-// ── Animated Volume Tiers ─────────────────────────────────────────────────────
-function VolumeTiers() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <div ref={ref} className="mb-6">
-      {/* Header */}
-      <div className="flex items-center gap-2 mb-5">
-        <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "rgba(0,56,255,0.08)" }}>
-          <TrendingDown className="w-4 h-4" style={{ color: "#0038FF" }} />
-        </div>
-        <div>
-          <p className="text-[16px] font-bold" style={{ color: "var(--c-heading)" }}>Volume Discounts — Applied Automatically</p>
-          <p className="text-[13px]" style={{ color: "var(--c-heading)" }}>The more you buy, the less you pay. No code needed.</p>
-        </div>
-      </div>
-
-      {/* Tier cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
-        {VOLUME_TIERS.map((tier, i) => {
-          const isTop = i === VOLUME_TIERS.length - 1;
-          const barW = tier.savingsPct === 0 ? 8 : tier.savingsPct;
-          return (
-            <m.div
-              key={tier.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="relative rounded-2xl p-4 flex flex-col gap-2"
-              style={{
-                background: isTop ? "#0038FF" : "#f8fafc",
-                border: isTop ? "none" : "1px solid rgba(0,56,255,0.1)",
-                boxShadow: isTop ? "0 8px 32px rgba(0,56,255,0.2)" : "none",
-              }}
-            >
-              {isTop && (
-                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider text-[#0038FF]"
-                  style={{ background: "#CCFF00" }}>
-                  Best Value
-                </div>
-              )}
-
-              {/* Label */}
-              <p className="text-[12px] font-bold uppercase tracking-widest" style={{ color: isTop ? "rgba(255,255,255,0.6)" : "#64748b" }}>
-                {tier.label}
-              </p>
-
-              {/* Quantity */}
-              <p className="text-[14px] font-bold" style={{ color: isTop ? "#ffffff" : "#0f172a" }}>
-                {tier.range}
-              </p>
-
-              {/* Prices */}
-              <div className="flex flex-col gap-0.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-[12px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Email</span>
-                  <span className="text-[16px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.email}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-[12px]" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>Phone</span>
-                  <span className="text-[16px] font-black" style={{ color: isTop ? "#CCFF00" : "#0038FF" }}>{tier.phone}</span>
-                </div>
-              </div>
-
-              {/* Savings bar */}
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-[11px] font-semibold" style={{ color: isTop ? "rgba(255,255,255,0.5)" : "#64748b" }}>
-                    Savings
-                  </span>
-                  <span className="text-[12px] font-black" style={{ color: isTop ? "#CCFF00" : (tier.savingsPct > 0 ? "#0038FF" : "#94a3b8") }}>
-                    {tier.savingsPct > 0 ? `${tier.savingsPct}%` : "—"}
-                  </span>
-                </div>
-                <div className="h-1 w-full rounded-full overflow-hidden" style={{ background: isTop ? "rgba(255,255,255,0.15)" : "rgba(0,56,255,0.1)" }}>
-                  <m.div
-                    className="h-full rounded-full"
-                    style={{ background: isTop ? "#CCFF00" : "#0038FF" }}
-                    initial={{ width: "0%" }}
-                    animate={inView ? { width: `${barW}%` } : {}}
-                    transition={{ duration: 0.8, delay: 0.3 + i * 0.1, ease: "easeOut" }}
-                  />
-                </div>
-              </div>
-            </m.div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
 // ── Main Section ──────────────────────────────────────────────────────────────
 export default function Pricing() {
   const [category, setCategory] = useState<Category>("phone");
@@ -332,7 +216,6 @@ export default function Pricing() {
           <p className="leading-relaxed" style={{ fontSize: "clamp(16px,2.5vw,22px)", color: "var(--c-heading)" }}>
             Pay for <span style={{ color: "#0038FF", fontWeight: 700 }}>results</span>, not access.{" "} <br />
             <span style={{ fontWeight: 700 }}>One credit = one verified contact</span><br />
-            Buy more, <span style={{ color: "#0038FF", fontWeight: 700 }}>spend less per contact</span> <br />
             <span style={{ fontWeight: 700 }}>No contracts. No surprises.</span>{" "}
             <span style={{ color: "#0038FF", fontWeight: 800 }}>Ever.</span>
           </p>
@@ -493,9 +376,6 @@ export default function Pricing() {
             </Link>
           </div>
         </m.div>
-
-        {/* ── Volume Discount Animated Tiers ── */}
-        <VolumeTiers />
 
         {/* ── Guarantees ── */}
         <m.div

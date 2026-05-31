@@ -12,6 +12,7 @@ import {
   PayPalButtons,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
+import { UNIT_DOLLARS, DRAFT_DOLLARS } from "@/lib/pricing";
 
 /* ─── Types ─────────────────────────────────────────────────── */
 type ContactType = "phone" | "email" | "both";
@@ -26,9 +27,9 @@ interface WizardState {
   emailDraft:  boolean;
 }
 
-/* ─── Pricing ────────────────────────────────────────────────── */
-const PRICE: Record<ContactType, number> = { phone: 1.00, email: 0.20, both: 1.20 };
-const DRAFT_PRICE = 1.00;
+/* ─── Pricing (canonical source: lib/pricing) ─────────────────── */
+const PRICE = UNIT_DOLLARS;
+const DRAFT_PRICE = DRAFT_DOLLARS;
 
 /* ─── URL helpers ────────────────────────────────────────────── */
 const LI_RE = /linkedin\.com\/in\//i;
@@ -279,7 +280,7 @@ function StepContactType({
   }[] = [
     { type: "phone", icon: Phone,  label: "Mobile Numbers",  sub: "Direct-dial verified numbers",    price: "$1.00 / contact", tag: "Most accurate" },
     { type: "email", icon: Mail,   label: "Email Addresses", sub: "Verified work & personal emails", price: "$0.20 / contact"                       },
-    { type: "both",  icon: Layers, label: "Email + Phone",   sub: "Full contact profile",            price: "$1.20 / contact", tag: "Best value"    },
+    { type: "both",  icon: Layers, label: "Email + Phone",   sub: "Full contact profile",            price: "$1.08 / contact", tag: "Best value"    },
   ];
 
   return (

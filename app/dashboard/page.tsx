@@ -13,7 +13,7 @@ type Order = {
   id:           string;
   contact_type: "email" | "phone" | "both";
   quantity:     number;
-  status:       "pending" | "processing" | "delivered" | "failed" | "refunded";
+  status:       "pending" | "processing" | "completed" | "failed" | "refunded";
   created_at:   string;
   amount_paid:  number;
 };
@@ -46,7 +46,7 @@ export default async function DashboardPage() {
 
   const totalOrders     = orders.length;
   const pendingOrders   = orders.filter((o) => o.status === "pending" || o.status === "processing").length;
-  const deliveredOrders = orders.filter((o) => o.status === "delivered").length;
+  const deliveredOrders = orders.filter((o) => o.status === "completed").length;
   const recentOrders    = orders.slice(0, 5);
 
   return (

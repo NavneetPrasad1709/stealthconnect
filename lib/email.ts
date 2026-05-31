@@ -5,10 +5,23 @@ import TeamNotification   from "@/emails/TeamNotification";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM         = process.env.EMAIL_FROM     ?? "StealthConnect AI <onboarding@resend.dev>";
+// FP-05: no unverified-sender fallback. EMAIL_FROM must be a verified Resend domain
+// sender in production; the previous "onboarding@resend.dev" default failed SPF/DKIM
+// and landed in spam. assertFrom() throws if unset — callers catch it and record a
+// pending_alert rather than silently sending from a bad address.
+const FROM         = process.env.EMAIL_FROM;
 const TEAM         = process.env.TEAM_EMAIL     ?? "support@stealthconnect.ai";
 const APP          = process.env.NEXT_PUBLIC_APP_URL ?? "https://stealthconnect.ai";
 const SUPPORT      = process.env.SUPPORT_EMAIL  ?? "support@stealthconnect.ai";
+
+function assertFrom(): string {
+  if (!FROM) {
+    throw new Error(
+      'EMAIL_FROM is not configured — set a verified Resend domain sender, e.g. "StealthConnect AI <orders@stealthconnect.ai>".'
+    );
+  }
+  return FROM;
+}
 
 /* ── Shared payload type ────────────────────────────────────── */
 export interface OrderEmailData {
@@ -42,7 +55,7 @@ export async function sendOrderConfirmation(data: OrderEmailData) {
   );
 
   return resend.emails.send({
-    from:    FROM,
+    from:    assertFrom(),
     to:      data.userEmail,
     subject: `✅ Order #${shortId} Received — Results in 30 Minutes`,
     html,
@@ -70,7 +83,7 @@ export async function sendTeamNotification(data: OrderEmailData) {
   );
 
   return resend.emails.send({
-    from:    FROM,
+    from:    assertFrom(),
     to:      TEAM,
     subject: `🔔 New Order #${shortId} — Action Required`,
     html,
