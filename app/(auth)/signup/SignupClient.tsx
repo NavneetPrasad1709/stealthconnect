@@ -6,9 +6,8 @@ import { m } from "framer-motion";
 import Link from "next/link";
 import { CheckCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { authRedirectBase } from "@/lib/site-url";
 import { SignUpPage, Testimonial } from "@/components/ui/sign-up";
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "";
 
 const testimonials: Testimonial[] = [
   {
@@ -115,7 +114,7 @@ export default function SignupClient() {
             phone: phone || null,
             linkedin_id: linkedinUrl || null,
           },
-          emailRedirectTo: `${APP_URL}/auth/callback`,
+          emailRedirectTo: `${authRedirectBase()}/auth/callback`,
         },
       });
       if (error) {
@@ -137,7 +136,7 @@ export default function SignupClient() {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
-        options: { redirectTo: `${APP_URL}/auth/callback` },
+        options: { redirectTo: `${authRedirectBase()}/auth/callback` },
       });
       if (error) {
         setError(error.message);

@@ -3,9 +3,8 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { authRedirectBase } from "@/lib/site-url";
 import { SignInPage, Testimonial } from "@/components/ui/sign-in";
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "";
 
 const testimonials: Testimonial[] = [
   {
@@ -67,7 +66,7 @@ export default function LoginClient() {
       const supabase = createClient();
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
-        options: { redirectTo: `${APP_URL}/auth/callback` },
+        options: { redirectTo: `${authRedirectBase()}/auth/callback` },
       });
       if (error) {
         setError(error.message);
