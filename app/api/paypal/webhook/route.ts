@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  adminDb, getPayPalToken, PAYPAL_BASE, fetchWithTimeout, recordPendingAlert,
+  adminDb, getProfile, getPayPalToken, PAYPAL_BASE, fetchWithTimeout, recordPendingAlert,
 } from "@/lib/admin-db";
+import { sendRefundNotification } from "@/lib/email";
 
 /**
  * PayPal webhook handler.
@@ -88,23 +89,77 @@ export async function POST(req: NextRequest) {
   const ppOrderId = resource?.supplementary_data?.related_ids?.order_id ?? resource?.id;
   const db        = adminDb();
 
+  // FP-12: unhandled event types are NOT errors — ack with 200 so PayPal stops delivering.
+  const HANDLED = new Set([
+    "PAYMENT.CAPTURE.REFUNDED",
+    "PAYMENT.CAPTURE.REVERSED",
+    "CUSTOMER.DISPUTE.CREATED",
+  ]);
+  if (!eventType || !HANDLED.has(eventType)) {
+    console.info("PayPal webhook (unhandled, acked):", eventType);
+    return NextResponse.json({ ok: true });
+  }
+
   try {
     if (eventType === "PAYMENT.CAPTURE.REFUNDED" || eventType === "PAYMENT.CAPTURE.REVERSED") {
-      if (ppOrderId) {
-        const { data } = await db
-          .from("orders")
-          .update({ status: "refunded" } as never)
-          .eq("paypal_order_id", ppOrderId as never)
-          .select("id, user_id");
+      if (!ppOrderId) {
+        // Can't correlate to an order — retrying won't help; alert + ack.
+        await recordPendingAlert({
+          reason:  `PayPal ${eventType} without a correlatable order id`,
+          details: event,
+        }).catch((e) => console.error("pending_alerts insert failed:", e));
+        return NextResponse.json({ ok: true });
+      }
 
-        const updated = (data as Array<{ id: string; user_id: string }> | null) ?? [];
-        for (const order of updated) {
+      // Idempotent: only flip orders that are NOT already refunded. The returned set
+      // tells us which rows WE changed, so a retried delivery won't double-process.
+      const { data: changed, error: upErr } = await db
+        .from("orders")
+        .update({ status: "refunded" } as never)
+        .eq("paypal_order_id", ppOrderId as never)
+        .neq("status", "refunded" as never)
+        .select("id, user_id, amount_paid");
+
+      if (upErr) throw upErr; // transient DB error → 500 below → PayPal retries safely
+
+      const rows = (changed as Array<{ id: string; user_id: string; amount_paid: number }> | null) ?? [];
+      if (rows.length === 0) {
+        // Already refunded (idempotent replay) or no matching order — nothing to do.
+        console.info("PayPal refund: no rows changed (already refunded / unknown order):", ppOrderId);
+        return NextResponse.json({ ok: true });
+      }
+
+      for (const order of rows) {
+        await recordPendingAlert({
+          order_id: order.id,
+          user_id:  order.user_id,
+          reason:   `PayPal ${eventType}`,
+          details:  event,
+        }).catch((e) => console.error("pending_alerts insert failed:", e));
+
+        // NOTE: no credit reversal — PayPal settles CASH orders (paypal_order_id set,
+        // amount_paid > 0) which never consumed credits; credit-funded orders have no
+        // PayPal webhook. We notify the customer that the refund landed instead.
+        try {
+          const profile = await getProfile(order.user_id);
+          if (profile?.email) {
+            await sendRefundNotification({
+              to:      profile.email,
+              name:    profile.full_name ?? profile.email,
+              orderId: order.id,
+              amount:  order.amount_paid,
+            });
+          }
+        } catch (e) {
+          console.error("Refund notification email failed:", e);
           await recordPendingAlert({
             order_id: order.id,
             user_id:  order.user_id,
-            reason:   `PayPal ${eventType}`,
-            details:  event,
-          }).catch((e) => console.error("pending_alerts insert failed:", e));
+            reason:   "Refund notification email failed",
+            details:  { error: String((e as Error)?.message ?? e) },
+          }).catch(() => {});
+          // Don't fail the webhook for a notification problem — the refund itself is
+          // already recorded and is idempotent on retry.
         }
       }
     } else if (eventType === "CUSTOMER.DISPUTE.CREATED") {
@@ -126,13 +181,12 @@ export async function POST(req: NextRequest) {
         reason:   "PayPal dispute opened",
         details:  event,
       });
-    } else {
-      // Other event types — ack so PayPal doesn't retry
-      console.info("PayPal webhook (unhandled):", eventType);
     }
   } catch (e) {
     console.error("PayPal webhook handler error:", e);
-    // Still 200 so PayPal doesn't endlessly retry; we logged for ops.
+    // FP-12: return non-2xx so PayPal RETRIES the delivery. The idempotency guards above
+    // (conditional status update) make retries safe — no double refunds/notifications.
+    return NextResponse.json({ error: "handler error — will retry" }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });

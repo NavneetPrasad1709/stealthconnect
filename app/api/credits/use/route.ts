@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { deductCredits, getProfile } from "@/lib/admin-db";
+import { isAllowedOrigin } from "@/lib/origin";
 
 export async function POST() {
   try {
     const h      = await headers();
+    if (!isAllowedOrigin(h)) { // SEC-M3
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
     const userId = h.get("x-user-id");
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

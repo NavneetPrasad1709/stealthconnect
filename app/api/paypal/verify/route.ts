@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { getPayPalToken, PAYPAL_BASE, fetchWithTimeout, getPayPalIntent } from "@/lib/admin-db";
 import { rateLimit } from "@/lib/rate-limit";
+import { isAllowedOrigin } from "@/lib/origin";
 
 export async function POST(req: NextRequest) {
   try {
+    if (!isAllowedOrigin(req.headers)) { // SEC-M3
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
     const h      = await headers();
     const userId = h.get("x-user-id");
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

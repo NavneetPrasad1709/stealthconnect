@@ -25,9 +25,38 @@ function validate(vars: readonly string[]) {
   }
 }
 
-// Call once at module load — server side only
-if (typeof window === "undefined") {
-  validate(requiredServer);
+/**
+ * Strongly recommended for full functionality. Missing → WARN (don't crash): the app still
+ * boots, but the dependent feature won't work. These are intentionally NOT hard-required
+ * because they legitimately vary per environment (e.g. PAYPAL_WEBHOOK_ID is set only once a
+ * PayPal webhook is registered; preview deploys may omit several).
+ */
+const recommendedServer = [
+  "NEXT_PUBLIC_APP_URL",
+  "NEXT_PUBLIC_PAYPAL_CLIENT_ID",
+  "PAYPAL_CLIENT_SECRET",
+  "PAYPAL_WEBHOOK_ID",
+  "RESEND_API_KEY",
+  "EMAIL_FROM",
+  "TEAM_EMAIL",
+  "GROQ_API_KEY",
+] as const;
+
+/**
+ * Validate server env at startup (called from instrumentation.ts). Hard-fails only on the
+ * catastrophic, always-present Supabase vars; warns on recommended ones so misconfiguration
+ * is visible in logs without crashing the deployment.
+ */
+export function validateServerEnv() {
+  validate(requiredServer); // throws if a Supabase var is missing
+  const missing = recommendedServer.filter((v) => !process.env[v]);
+  if (missing.length > 0) {
+    console.warn(
+      `[env] Missing recommended server env vars — dependent features disabled:\n${missing
+        .map((v) => `  • ${v}`)
+        .join("\n")}`
+    );
+  }
 }
 
 export const env = {

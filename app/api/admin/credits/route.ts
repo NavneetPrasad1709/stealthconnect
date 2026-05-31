@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminDb, addCredits, getProfile } from "@/lib/admin-db";
+import { isAllowedOrigin } from "@/lib/origin";
 
 export async function POST(req: NextRequest) {
+  if (!isAllowedOrigin(req.headers)) { // SEC-M3
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
   // Auth: only admins can assign credits
   const adminUserId = req.headers.get("x-user-id");
   if (!adminUserId) {

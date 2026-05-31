@@ -1,25 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
-
-/** Allow same-site submissions only (apex or www of NEXT_PUBLIC_APP_URL), plus localhost in dev. */
-function isAllowedOrigin(req: NextRequest): boolean {
-  const origin = req.headers.get("origin");
-  if (!origin) return true; // non-browser client / same-origin without an Origin header
-  try {
-    const host = new URL(origin).host.replace(/^www\./, "");
-    const allowed = new Set<string>(["localhost:3000", "localhost"]);
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL;
-    if (appUrl) allowed.add(new URL(appUrl).host.replace(/^www\./, ""));
-    return allowed.has(host);
-  } catch {
-    return false;
-  }
-}
+import { isAllowedOrigin } from "@/lib/origin";
 
 export async function POST(req: NextRequest) {
   try {
     // FP-04: block cross-site submissions + per-IP rate limit (anti-spam / Resend cost).
-    if (!isAllowedOrigin(req)) {
+    if (!isAllowedOrigin(req.headers)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
     if (!rateLimit(`contact:${clientIp(req)}`, 5, 0.02)) {

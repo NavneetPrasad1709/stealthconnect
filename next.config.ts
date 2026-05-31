@@ -78,7 +78,6 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-select",
       "@radix-ui/react-slot",
       "@radix-ui/react-switch",
-      "recharts",
       "embla-carousel-react",
       "embla-carousel-auto-scroll",
     ],

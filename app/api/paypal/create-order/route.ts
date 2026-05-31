@@ -5,6 +5,7 @@ import {
 } from "@/lib/admin-db";
 import { rateLimit } from "@/lib/rate-limit";
 import { quoteCents } from "@/lib/pricing";
+import { isAllowedOrigin } from "@/lib/origin";
 
 interface CreateOrderPayload {
   contact_type:           "email" | "phone" | "both";
@@ -16,6 +17,9 @@ const MAX_QUANTITY = 1000;
 
 export async function POST(req: NextRequest) {
   try {
+    if (!isAllowedOrigin(req.headers)) { // SEC-M3
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
     const h      = await headers();
     const userId = h.get("x-user-id");
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

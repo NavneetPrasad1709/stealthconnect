@@ -7,6 +7,7 @@ import {
 import { sendOrderConfirmation, sendTeamNotification } from "@/lib/email";
 import { rateLimit } from "@/lib/rate-limit";
 import { quoteCents } from "@/lib/pricing";
+import { isAllowedOrigin } from "@/lib/origin";
 
 interface OrderPayload {
   contact_type:          "email" | "phone" | "both";
@@ -18,8 +19,18 @@ interface OrderPayload {
   input_type?:           "single" | "csv";
 }
 
+const MAX_QUANTITY = 1000; // F-PAY-04: cap order size on both credit + PayPal paths
+
 export async function POST(req: NextRequest) {
   try {
+    // SEC-M3: reject cross-site mutations. F-PAY-04: bound request body size.
+    if (!isAllowedOrigin(req.headers)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+    if (Number(req.headers.get("content-length") ?? 0) > 256 * 1024) {
+      return NextResponse.json({ error: "Request too large" }, { status: 413 });
+    }
+
     const h      = await headers();
     const userId = h.get("x-user-id");
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -37,6 +48,9 @@ export async function POST(req: NextRequest) {
 
     if (!contact_type || !linkedin_urls?.length) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+    if (linkedin_urls.length > MAX_QUANTITY) { // F-PAY-04
+      return NextResponse.json({ error: `Too many URLs — max ${MAX_QUANTITY} per order` }, { status: 400 });
     }
     if (!["email", "phone", "both"].includes(contact_type)) {
       return NextResponse.json({ error: "Invalid contact type" }, { status: 400 });
@@ -70,7 +84,7 @@ export async function POST(req: NextRequest) {
       : quoteCents({ contactType: contact_type, qty: quantity, emailDraft: email_draft_requested });
     const paidCents = Math.round(amount_paid * 100);
 
-    if (!use_credits && Math.abs(paidCents - expectedCents) > 2) {
+    if (!use_credits && paidCents !== expectedCents) { // FP-12: exact integer-cents, no ±2¢ slack
       return NextResponse.json(
         { error: `Amount mismatch. Expected $${(expectedCents / 100).toFixed(2)}` },
         { status: 400 }
@@ -109,7 +123,7 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({ error: "Payment not completed" }, { status: 402 });
         }
         const paidAmt = parseFloat(ppOrder.purchase_units?.[0]?.amount?.value ?? "0");
-        if (Math.abs(Math.round(paidAmt * 100) - expectedCents) > 2) {
+        if (Math.round(paidAmt * 100) !== expectedCents) { // FP-12: exact integer-cents
           return NextResponse.json({ error: "Payment amount mismatch" }, { status: 402 });
         }
       } catch (e) {

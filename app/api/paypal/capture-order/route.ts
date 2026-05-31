@@ -4,6 +4,7 @@ import {
   getPayPalToken, PAYPAL_BASE, fetchWithTimeout, getPayPalIntent,
 } from "@/lib/admin-db";
 import { rateLimit } from "@/lib/rate-limit";
+import { isAllowedOrigin } from "@/lib/origin";
 
 const PAYPAL_ERROR_MSGS: Record<string, string> = {
   INSTRUMENT_DECLINED:        "Card declined — try a different payment method.",
@@ -18,6 +19,9 @@ const PAYPAL_ERROR_MSGS: Record<string, string> = {
 
 export async function POST(req: NextRequest) {
   try {
+    if (!isAllowedOrigin(req.headers)) { // SEC-M3
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
     const h      = await headers();
     const userId = h.get("x-user-id");
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -83,7 +87,7 @@ export async function POST(req: NextRequest) {
       console.error("PayPal capture: zero amount", orderID, JSON.stringify(data));
       return NextResponse.json({ error: "Captured amount invalid" }, { status: 400 });
     }
-    if (Math.abs(capturedCents - intent.expected_cents) > 2) {
+    if (capturedCents !== intent.expected_cents) { // FP-12: exact integer-cents, no ±2¢ slack
       console.error("CRITICAL: capture/intent amount mismatch", {
         orderID, expected_cents: intent.expected_cents, captured_cents: capturedCents,
       });

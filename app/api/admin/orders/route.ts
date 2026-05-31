@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminDb, getProfile } from "@/lib/admin-db";
+import { isAllowedOrigin } from "@/lib/origin";
 
 async function requireAdmin(req: NextRequest) {
   const userId = req.headers.get("x-user-id");
@@ -43,6 +44,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function PATCH(req: NextRequest) {
+  if (!isAllowedOrigin(req.headers)) { // SEC-M3
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
   if (!await requireAdmin(req)) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }

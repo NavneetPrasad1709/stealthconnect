@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { adminDb, addCredits, getProfile } from "@/lib/admin-db";
+import { isAllowedOrigin } from "@/lib/origin";
 
 interface Payload {
   target_email: string;
@@ -11,6 +12,9 @@ interface Payload {
 export async function POST(req: NextRequest) {
   try {
     const h      = await headers();
+    if (!isAllowedOrigin(h)) { // SEC-M3
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
     const userId = h.get("x-user-id");
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

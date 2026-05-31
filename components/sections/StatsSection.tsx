@@ -2,13 +2,6 @@
 
 import { Activity, Globe, Zap, ShieldCheck } from 'lucide-react'
 import DottedMap from 'dotted-map'
-import { Area, AreaChart, CartesianGrid } from 'recharts'
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from '@/components/ui/chart'
 import { SectionBadge } from '@/components/ui/SectionBadge'
 import { HeadingAccent } from '@/components/ui/HeadingAccent'
 
@@ -47,12 +40,7 @@ const MapView = () => (
   </svg>
 )
 
-// ── Chart setup ───────────────────────────────────────────────────────────────
-const chartConfig = {
-  lookups: { label: 'Verified Lookups', color: '#0038FF' },
-  emails:  { label: 'Emails Found',     color: '#6b9eff' },
-} satisfies ChartConfig
-
+// ── Chart setup (inline SVG — recharts removed, PERF-H2) ───────────────────────
 const chartData = [
   { month: 'Sep', lookups: 420,  emails: 310 },
   { month: 'Oct', lookups: 680,  emails: 520 },
@@ -64,45 +52,62 @@ const chartData = [
   { month: 'Apr', lookups: 4400, emails: 3700 },
 ]
 
-const GrowthChart = () => (
-  <ChartContainer className="aspect-auto h-72 md:h-96 w-full" config={chartConfig}>
-    <AreaChart data={chartData} margin={{ left: 0, right: 0 }}>
-      <defs>
-        <linearGradient id="fillLookups" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stopColor="#0038FF" stopOpacity={0.7} />
-          <stop offset="55%" stopColor="#0038FF" stopOpacity={0.05} />
-        </linearGradient>
-        <linearGradient id="fillEmails" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stopColor="#6b9eff" stopOpacity={0.7} />
-          <stop offset="55%" stopColor="#6b9eff" stopOpacity={0.05} />
-        </linearGradient>
-      </defs>
-      <CartesianGrid vertical={false} stroke="var(--c-border-light)" />
-      <ChartTooltip
-        cursor={false}
-        content={<ChartTooltipContent className="border-[var(--c-border-light)] text-[var(--c-heading)]" style={{ background: 'var(--c-section-card)' }} />}
-      />
-      <Area
-        strokeWidth={2}
-        dataKey="emails"
-        type="stepBefore"
-        fill="url(#fillEmails)"
-        fillOpacity={1}
-        stroke="#6b9eff"
-        stackId="a"
-      />
-      <Area
-        strokeWidth={2}
-        dataKey="lookups"
-        type="stepBefore"
-        fill="url(#fillLookups)"
-        fillOpacity={1}
-        stroke="#0038FF"
-        stackId="a"
-      />
-    </AreaChart>
-  </ChartContainer>
-)
+// Inline SVG area chart — same illustrative data, zero chart library (PERF-H2).
+const GrowthChart = () => {
+  const W = 760, H = 300, padT = 14, padB = 26
+  const max = Math.max(...chartData.map((d) => d.lookups))
+  const xAt = (i: number) => (i / (chartData.length - 1)) * W
+  const yAt = (v: number) => padT + (1 - v / max) * (H - padT - padB)
+  const line = (k: 'lookups' | 'emails') =>
+    chartData.map((d, i) => `${i ? 'L' : 'M'}${xAt(i).toFixed(1)},${yAt(d[k]).toFixed(1)}`).join(' ')
+  const area = (k: 'lookups' | 'emails') =>
+    `${line(k)} L${W},${H - padB} L0,${H - padB} Z`
+
+  return (
+    <div className="w-full px-6 md:px-10 pb-8 pt-2">
+      <div className="relative w-full h-64 md:h-80">
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          preserveAspectRatio="none"
+          className="absolute inset-0 w-full h-full"
+          role="img"
+          aria-label="Monthly verified lookups and emails found, trending upward from September to April"
+        >
+          <defs>
+            <linearGradient id="scFillLookups" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#0038FF" stopOpacity={0.45} />
+              <stop offset="100%" stopColor="#0038FF" stopOpacity={0.02} />
+            </linearGradient>
+            <linearGradient id="scFillEmails" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stopColor="#6b9eff" stopOpacity={0.4} />
+              <stop offset="100%" stopColor="#6b9eff" stopOpacity={0.02} />
+            </linearGradient>
+          </defs>
+          {[0.25, 0.5, 0.75].map((t) => (
+            <line key={t} x1={0} x2={W} y1={padT + t * (H - padT - padB)} y2={padT + t * (H - padT - padB)} stroke="var(--c-border-light)" strokeWidth={1} />
+          ))}
+          <path d={area('lookups')} fill="url(#scFillLookups)" />
+          <path d={area('emails')}  fill="url(#scFillEmails)" />
+          <path d={line('lookups')} fill="none" stroke="#0038FF" strokeWidth={2.5} vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+          <path d={line('emails')}  fill="none" stroke="#6b9eff" strokeWidth={2}   vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+        </svg>
+      </div>
+      <div className="flex justify-between mt-2 px-0.5">
+        {chartData.map((d) => (
+          <span key={d.month} className="text-[10px] md:text-[11px]" style={{ color: 'var(--c-muted)', fontFamily: FONT }}>{d.month}</span>
+        ))}
+      </div>
+      <div className="flex items-center gap-4 mt-3">
+        <span className="inline-flex items-center gap-1.5 text-[11px]" style={{ color: 'var(--c-muted)', fontFamily: FONT }}>
+          <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: '#0038FF' }} /> Verified Lookups
+        </span>
+        <span className="inline-flex items-center gap-1.5 text-[11px]" style={{ color: 'var(--c-muted)', fontFamily: FONT }}>
+          <span className="inline-block w-2.5 h-2.5 rounded-sm" style={{ background: '#6b9eff' }} /> Emails Found
+        </span>
+      </div>
+    </div>
+  )
+}
 
 const FONT = "var(--font-montserrat,'Montserrat',sans-serif)"
 
