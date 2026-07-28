@@ -34,7 +34,7 @@ const securityHeaders = [
       // Fonts
       "font-src 'self' https://fonts.gstatic.com",
       // Images: allow self, data URIs, unsplash, randomuser, PayPal, Supabase
-      "img-src 'self' data: blob: https://images.unsplash.com https://randomuser.me https://www.paypal.com https://www.sandbox.paypal.com https://lprkydvbdhhtymagdskd.supabase.co https://media.licdn.com https://avatars.githubusercontent.com",
+      "img-src 'self' data: blob: https://images.unsplash.com https://randomuser.me https://www.paypal.com https://www.sandbox.paypal.com https://vynawimljcgxjnthyhbn.supabase.co https://media.licdn.com https://avatars.githubusercontent.com",
       // Fetch/XHR: allow self, Supabase, Anthropic, PayPal, Resend
       "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.anthropic.com https://api-m.paypal.com https://api-m.sandbox.paypal.com https://api.resend.com https://accounts.google.com",
       // Frames: PayPal popup
