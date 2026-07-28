@@ -72,7 +72,29 @@
       "Bash(xargs cat *)",
       "Bash(echo \"EXIT=$?\")",
       "Bash(vercel env *)",
-      "Bash(npx vercel *)"
+      "Bash(npx vercel *)",
+      "Bash(nslookup -type=TXT resend._domainkey.mail.stealthconnect.ai)",
+      "Bash(nslookup -type=TXT send.mail.stealthconnect.ai)",
+      "Bash(nslookup -type=MX mail.stealthconnect.ai)",
+      "Bash(nslookup *)",
+      "WebFetch(domain:sketchfab.com)",
+      "Bash(awk 'NR<469 || NR>=961' D:/SConnectAI/luxury-watch/index.html)",
+      "Bash(vercel --version)",
+      "Bash(where vercel *)",
+      "Bash(npm i *)",
+      "Bash(vercel whoami *)",
+      "Bash(vercel project *)",
+      "Bash(vercel ls *)",
+      "Bash(vercel inspect *)",
+      "Bash(vercel logs *)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('app_id:', d.get\\('app_id'\\), '| token_present:', bool\\(d.get\\('access_token'\\)\\)\\)\")",
+      "Bash(vercel --prod --yes)",
+      "Bash(grep -r \"PAYPAL_MODE\\\\|PAYPAL_CLIENT_ID\" /d/SConnectAI --include=\"*.ts\" --include=\"*.tsx\" ! -path \"*/node_modules/*\" ! -path \"*/.next/*\")",
+      "Bash(grep *)",
+      "Bash(supabase --version)",
+      "Bash(npx supabase *)",
+      "Bash(psql --version)",
+      "PowerShell(git push origin main 2>&1; Write-Output \\(\"push-exit=\" + $LASTEXITCODE\\))"
     ]
   }
 }

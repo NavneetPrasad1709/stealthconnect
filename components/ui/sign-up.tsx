@@ -137,7 +137,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                 color: "rgba(255,255,255,0.9)",
                 margin: 0,
               }}>
-                Start finding<br />
+                Start finding
                 <span style={{ fontWeight: 900, color: "#fff" }}>contacts.</span>
               </h1>
             </div>

@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
+    },
+    {
+      "name": "luxury-watch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", "luxury-watch", "-p", "5180", "-c-1"],
+      "port": 5180
     }
   ]
 }
