@@ -44,7 +44,9 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
     background: "rgba(255,255,255,0.05)",
     border: "1px solid rgba(255,255,255,0.09)",
     caretColor: "var(--brand)",
-    minHeight: 52,
+    minHeight: "clamp(42px,5dvh,52px)",
+    paddingTop: "clamp(9px,1.5dvh,14px)",
+    paddingBottom: "clamp(9px,1.5dvh,14px)",
   };
   const onFocus = (e: React.FocusEvent<HTMLInputElement>) =>
     (e.currentTarget.style.borderColor = "rgba(0,56,255,0.55)");
@@ -69,7 +71,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
       style={{ background: "#000", fontFamily: F }}
     >
       {/* ── LEFT ── */}
-      <section className="flex-1 flex flex-col justify-start md:justify-center md:overflow-hidden relative">
+      <section className="flex-1 flex flex-col md:overflow-hidden relative">
 
         {/* Radial glow */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
@@ -81,8 +83,12 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
         </div>
 
         {/* Scrollable content */}
-        <div className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-10 py-6 md:py-8">
-          <div className="w-full max-w-[420px] flex flex-col gap-5 md:gap-4">
+        {/* my-auto: centers when content fits, top-aligns (no top clip) when it doesn't */}
+        <div
+          className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-10 my-auto"
+          style={{ paddingTop: "clamp(16px,3dvh,40px)", paddingBottom: "clamp(16px,3dvh,40px)" }}
+        >
+          <div className="w-full max-w-[420px] flex flex-col" style={{ gap: "clamp(10px,1.6dvh,20px)" }}>
 
             {/* Logo + back to home */}
             <div className="animate-element animate-delay-100 flex items-center justify-between">
@@ -130,15 +136,15 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
               </div>
               <h1 style={{
                 fontFamily: F,
-                fontSize: "clamp(2.4rem,8vw,3.4rem)",
+                fontSize: "min(clamp(2rem,5vw,2.75rem), 4.8dvh)",
                 fontWeight: 300,
-                lineHeight: 1.05,
+                lineHeight: 1.1,
                 letterSpacing: "-0.04em",
                 color: "rgba(255,255,255,0.9)",
                 margin: 0,
               }}>
-                Start finding<br />
-                <span style={{ fontWeight: 900, color: "#fff" }}>contacts.</span>
+                Start finding
+                <span style={{ display: "block", fontWeight: 900, color: "#fff" }}>contacts.</span>
               </h1>
             </div>
 
@@ -163,7 +169,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                 border: "1px solid rgba(255,255,255,0.1)",
                 background: "rgba(255,255,255,0.04)",
                 fontFamily: F,
-                minHeight: 52,
+                minHeight: "clamp(42px,5dvh,52px)",
                 padding: "0 20px",
               }}
               onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
@@ -269,7 +275,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                   background: "var(--brand)",
                   fontFamily: F,
                   boxShadow: "0 4px 24px rgba(0,56,255,0.35)",
-                  minHeight: 52,
+                  minHeight: "clamp(42px,5dvh,52px)",
                 }}
                 onMouseEnter={e => !disabled && (e.currentTarget.style.boxShadow = "0 6px 32px rgba(0,56,255,0.55)")}
                 onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,56,255,0.35)")}
