@@ -79,7 +79,7 @@ export default function CTA() {
           className="mb-10 max-w-sm mx-auto leading-relaxed"
           style={{ fontSize: "clamp(16px,2.5vw,20px)", color: "var(--c-heading)" }}
         >
-          Get your first contact verified free — no card required.
+          Get your first contact verified free, no card required.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -90,7 +90,7 @@ export default function CTA() {
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#0030dd")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#0038FF")}
           >
-            Start free — 1 lookup on us
+            Start free, 1 lookup on us
             <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
           </Link>
           <Link

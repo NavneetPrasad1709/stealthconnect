@@ -17,7 +17,7 @@ const SUPPORT      = process.env.SUPPORT_EMAIL  ?? "support@stealthconnect.ai";
 function assertFrom(): string {
   if (!FROM) {
     throw new Error(
-      'EMAIL_FROM is not configured — set a verified Resend domain sender, e.g. "StealthConnect AI <orders@stealthconnect.ai>".'
+      'EMAIL_FROM is not configured, set a verified Resend domain sender, e.g. "StealthConnect AI <orders@stealthconnect.ai>".'
     );
   }
   return FROM;
@@ -57,7 +57,7 @@ export async function sendOrderConfirmation(data: OrderEmailData) {
   return resend.emails.send({
     from:    assertFrom(),
     to:      data.userEmail,
-    subject: `✅ Order #${shortId} Received — Results in 30 Minutes`,
+    subject: `✅ Order #${shortId} Received - Results in 30 Minutes`,
     html,
   });
 }
@@ -85,7 +85,7 @@ export async function sendTeamNotification(data: OrderEmailData) {
   return resend.emails.send({
     from:    assertFrom(),
     to:      TEAM,
-    subject: `🔔 New Order #${shortId} — Action Required`,
+    subject: `🔔 New Order #${shortId} - Action Required`,
     html,
   });
 }
@@ -108,13 +108,13 @@ export async function sendRefundNotification(data: {
     <p style="font-size:14px;line-height:1.65;color:#bdbdbd;margin:0 0 10px">Hi ${esc(data.name)},</p>
     <p style="font-size:14px;line-height:1.65;color:#bdbdbd;margin:0 0 10px">We've refunded your payment${amountLine} for order <strong style="color:#fff">#${esc(shortId)}</strong>. The funds will return to your original payment method within a few business days, depending on your bank or PayPal.</p>
     <p style="font-size:14px;line-height:1.65;color:#bdbdbd;margin:0 0 10px">Questions? Reply to this email or reach us at <a href="mailto:${esc(SUPPORT)}" style="color:#3b82f6">${esc(SUPPORT)}</a>.</p>
-    <p style="font-size:12px;color:#777;margin:22px 0 0">— StealthConnect AI</p>
+    <p style="font-size:12px;color:#777;margin:22px 0 0">- StealthConnect AI</p>
   </div></body></html>`;
 
   return resend.emails.send({
     from:    assertFrom(),
     to:      data.to,
-    subject: `Refund processed — Order #${shortId}`,
+    subject: `Refund processed - Order #${shortId}`,
     html,
   });
 }

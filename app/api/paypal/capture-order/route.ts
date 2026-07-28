@@ -7,13 +7,13 @@ import { rateLimit } from "@/lib/rate-limit";
 import { isAllowedOrigin } from "@/lib/origin";
 
 const PAYPAL_ERROR_MSGS: Record<string, string> = {
-  INSTRUMENT_DECLINED:        "Card declined — try a different payment method.",
-  PAYER_ACTION_REQUIRED:      "Action required — re-open PayPal and confirm.",
+  INSTRUMENT_DECLINED:        "Card declined, try a different payment method.",
+  PAYER_ACTION_REQUIRED:      "Action required, re-open PayPal and confirm.",
   CARD_REFUSED:               "Card refused by issuer.",
   COMPLIANCE_VIOLATION:       "Payment blocked for compliance reasons.",
   PAYEE_BLOCKED_TRANSACTION:  "Transaction blocked.",
-  TRANSACTION_REFUSED:        "Transaction refused — try another method.",
-  AUTHORIZATION_DENIED:       "Authorization denied — try another method.",
+  TRANSACTION_REFUSED:        "Transaction refused, try another method.",
+  AUTHORIZATION_DENIED:       "Authorization denied, try another method.",
   PAYER_CANNOT_PAY:           "Payer cannot complete this payment.",
 };
 
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
         orderID, expected_cents: intent.expected_cents, captured_cents: capturedCents,
       });
       return NextResponse.json(
-        { error: "Captured amount does not match order — contact support", orderID },
+        { error: "Captured amount does not match order, contact support", orderID },
         { status: 400 }
       );
     }
@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error: isAbort
-          ? "Capture timed out — your payment may still be processing. Check your PayPal account before retrying."
+          ? "Capture timed out. Your payment may still be processing. Check your PayPal account before retrying."
           : "Failed to capture PayPal order",
       },
       { status: isAbort ? 504 : 500 }

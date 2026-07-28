@@ -344,10 +344,10 @@ export function AdminDashboard() {
                       </span>
                       <div className="min-w-0">
                         <p className="truncate font-500" style={{ color: "var(--fg)" }}>
-                          {order.profiles?.full_name ?? "—"}
+                          {order.profiles?.full_name ?? "-"}
                         </p>
                         <p className="truncate text-xs" style={{ color: "var(--fg-subtle)" }}>
-                          {order.profiles?.email ?? "—"}
+                          {order.profiles?.email ?? "-"}
                         </p>
                       </div>
                       <span className="capitalize" style={{ color: "var(--fg)" }}>
@@ -389,7 +389,7 @@ export function AdminDashboard() {
                             {order.profiles?.full_name ?? "Unknown"}
                           </p>
                           <p className="text-xs" style={{ color: "var(--fg-subtle)" }}>
-                            {order.profiles?.email ?? "—"}
+                            {order.profiles?.email ?? "-"}
                           </p>
                         </div>
                         <select

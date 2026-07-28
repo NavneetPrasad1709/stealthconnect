@@ -4,10 +4,10 @@ import { ArrowLeft, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Read StealthConnect AI's Privacy Policy — what data we collect, how we use it, your rights under GDPR and CCPA, and how to contact us about your data.",
+  description: "Read StealthConnect AI's Privacy Policy: what data we collect, how we use it, your rights under GDPR and CCPA, and how to contact us about your data.",
   alternates: { canonical: "/privacy" },
   openGraph: {
-    title: "Privacy Policy — StealthConnect AI",
+    title: "Privacy Policy | StealthConnect AI",
     description: "What data we collect, how we use it, your rights under GDPR and CCPA, and how to contact us.",
     url: "/privacy",
     type: "website",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy — StealthConnect AI",
+    title: "Privacy Policy | StealthConnect AI",
     description: "What data we collect, how we use it, and your rights under GDPR and CCPA.",
   },
 };

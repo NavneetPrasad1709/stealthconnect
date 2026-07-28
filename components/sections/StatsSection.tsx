@@ -159,7 +159,7 @@ export function StatsSection() {
                 190+ countries.
               </p>
               <p className="text-[16px] leading-relaxed" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
-                Find verified contacts behind any LinkedIn profile —
+                Find verified contacts behind any LinkedIn profile,
                 no matter where in the world they are.
               </p>
             </div>
@@ -208,7 +208,7 @@ export function StatsSection() {
               </p>
               <p className="text-[16px] leading-relaxed mb-6" style={{ fontFamily: FONT, color: 'var(--c-muted)' }}>
                 Paste a LinkedIn URL. Receive a verified email and
-                direct phone number — or you don&apos;t pay.
+                direct phone number, or you don&apos;t pay.
               </p>
             </div>
 
@@ -234,7 +234,7 @@ export function StatsSection() {
                   className="rounded-xl mb-1 p-3 text-[14px] text-white w-full sm:w-4/5 ml-auto shadow-sm"
                   style={{ background: '#0038FF', fontFamily: FONT }}
                 >
-                  <p className="font-bold mb-1.5">✓ Contact verified — ready in 28 min</p>
+                  <p className="font-bold mb-1.5">✓ Contact verified, ready in 28 min</p>
                   <p className="opacity-80">john.smith@company.com</p>
                   <p className="opacity-80">+1 (415) 555-0182</p>
                 </div>

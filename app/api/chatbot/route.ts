@@ -8,7 +8,7 @@ const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
 const MAX_MESSAGES   = 30;
 const MAX_TOTAL_CHARS = 6000;
 
-const SYSTEM = `You are the StealthConnect AI support assistant — friendly, concise, and precise.
+const SYSTEM = `You are the StealthConnect AI support assistant, friendly, concise, and precise.
 
 ONLY answer questions about these topics:
 • Pricing: Email contacts $0.20 each · Phone numbers $1.00 each · Email+Phone $1.08 each (10% bundle discount) · AI Email Draft add-on +$1.00/profile
@@ -22,7 +22,7 @@ ONLY answer questions about these topics:
 • AI Email Draft: We write a personalised cold outreach email for each profile using the contact's LinkedIn info.
 
 RULES:
-- Be helpful and warm but brief — 1–3 sentences max per reply.
+- Be helpful and warm but brief, 1-3 sentences max per reply.
 - If asked something outside these topics, say: "I can only help with questions about StealthConnect AI. For anything else, email support@stealthconnect.ai"
 - Never make up pricing, features, or policies not listed above.
 - Use plain language, no markdown formatting in responses.`;
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     // Bound conversation size to prevent runaway token cost.
     if (messages.length > MAX_MESSAGES) {
       return new Response(
-        JSON.stringify({ error: "Conversation too long — please start a new chat." }),
+        JSON.stringify({ error: "Conversation too long, please start a new chat." }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }

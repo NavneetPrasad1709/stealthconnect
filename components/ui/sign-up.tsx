@@ -69,7 +69,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
       style={{ background: "#000", fontFamily: F }}
     >
       {/* ── LEFT ── */}
-      <section className="flex-1 flex flex-col justify-start md:justify-center md:overflow-y-auto relative">
+      <section className="flex-1 flex flex-col justify-start md:justify-center md:overflow-hidden relative">
 
         {/* Radial glow */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
@@ -81,8 +81,8 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
         </div>
 
         {/* Scrollable content */}
-        <div className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-10 py-6 md:py-14">
-          <div className="w-full max-w-[420px] flex flex-col gap-5">
+        <div className="relative z-10 w-full flex justify-center px-5 sm:px-8 md:px-10 py-6 md:py-8">
+          <div className="w-full max-w-[420px] flex flex-col gap-5 md:gap-4">
 
             {/* Logo + back to home */}
             <div className="animate-element animate-delay-100 flex items-center justify-between">
@@ -125,7 +125,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
               >
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#CCFF00", display: "inline-block", flexShrink: 0 }} />
                 <span style={{ fontFamily: F, fontSize: 11, fontWeight: 700, color: "#CCFF00" }}>
-                  1 free credit — no card needed
+                  1 free credit, no card needed
                 </span>
               </div>
               <h1 style={{

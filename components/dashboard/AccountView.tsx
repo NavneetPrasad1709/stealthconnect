@@ -163,7 +163,7 @@ export function AccountView({
                 className="text-[17px] font-bold leading-tight"
                 style={{ color: "var(--fg)", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
               >
-                {profile.full_name ?? "—"}
+                {profile.full_name ?? "-"}
               </p>
               <p className="text-[12.5px] mt-0.5" style={{ color: "var(--fg-muted)" }}>
                 Member since {memberSince(profile.created_at)}
@@ -230,7 +230,7 @@ export function AccountView({
             </p>
             <p className="text-[12px] mt-1" style={{ color: "var(--fg-muted)" }}>
               {profile.credits === 0
-                ? "No credits — pay per order via PayPal"
+                ? "No credits, pay per order via PayPal"
                 : `${profile.credits} credit${profile.credits !== 1 ? "s" : ""} available · never expire`}
             </p>
           </div>

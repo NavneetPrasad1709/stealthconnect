@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import LoginClient from "./LoginClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Sign In — StealthConnect AI" },
+  title: { absolute: "Sign In | StealthConnect AI" },
   description:
     "Sign in to your StealthConnect AI account to look up verified LinkedIn contacts and manage your credits.",
   alternates: { canonical: "/login" },

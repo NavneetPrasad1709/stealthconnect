@@ -4,10 +4,10 @@ import { ArrowLeft, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "StealthConnect AI Terms of Service — acceptable use, credits and billing, data accuracy, governing law, and your rights as a user of our B2B contact enrichment platform.",
+  description: "StealthConnect AI Terms of Service: acceptable use, credits and billing, data accuracy, governing law, and your rights as a user of our B2B contact enrichment platform.",
   alternates: { canonical: "/terms" },
   openGraph: {
-    title: "Terms of Service — StealthConnect AI",
+    title: "Terms of Service | StealthConnect AI",
     description: "Acceptable use, credits and billing, data accuracy, governing law, and your rights as a user.",
     url: "/terms",
     type: "website",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms of Service — StealthConnect AI",
+    title: "Terms of Service | StealthConnect AI",
     description: "Acceptable use, credits and billing, data accuracy, and your rights as a user.",
   },
 };
@@ -27,7 +27,7 @@ const sections = [
   },
   {
     title: "2. Service Description",
-    body: `StealthConnect AI provides a contact enrichment service that retrieves verified email addresses and phone numbers associated with LinkedIn profiles. Results are provided on a pay-per-result basis — you are only charged for successfully verified contacts.`,
+    body: `StealthConnect AI provides a contact enrichment service that retrieves verified email addresses and phone numbers associated with LinkedIn profiles. Results are provided on a pay-per-result basis. You are only charged for successfully verified contacts.`,
   },
   {
     title: "3. Credits & Billing",
@@ -59,7 +59,7 @@ const sections = [
   },
   {
     title: "10. Governing Law",
-    body: `These terms are governed by the laws of [JURISDICTION — to be confirmed by counsel, e.g. "the State of Delaware, United States"]. Any dispute arising under these terms shall be resolved through binding arbitration seated in [ARBITRATION SEAT], administered under the rules of [ARBITRAL BODY], unless prohibited by applicable law. Nothing herein prevents either party from seeking injunctive relief in a court of competent jurisdiction.`,
+    body: `These terms are governed by the laws of [JURISDICTION, to be confirmed by counsel, e.g. "the State of Delaware, United States"]. Any dispute arising under these terms shall be resolved through binding arbitration seated in [ARBITRATION SEAT], administered under the rules of [ARBITRAL BODY], unless prohibited by applicable law. Nothing herein prevents either party from seeking injunctive relief in a court of competent jurisdiction.`,
   },
   {
     title: "11. Changes",

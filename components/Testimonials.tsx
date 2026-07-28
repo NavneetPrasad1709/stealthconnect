@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
     role: "SDR Lead, Northwind",
   },
   {
-    text: "As a recruiter, direct-dial numbers are gold. $1 per verified mobile is absurd value compared to what I was paying before. No contracts, no minimums — just results.",
+    text: "As a recruiter, direct-dial numbers are gold. $1 per verified mobile is absurd value compared to what I was paying before. No contracts, no minimums, just results.",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150",
     name: "Saman Malik",
     role: "Senior Recruiter",
@@ -60,7 +60,7 @@ const testimonials: Testimonial[] = [
     role: "RevOps Manager",
   },
   {
-    text: "Signed up, pasted 12 URLs, paid $8, had everything in 22 minutes. This is how sales tools should work — no demos, no annual contracts, just answers.",
+    text: "Signed up, pasted 12 URLs, paid $8, had everything in 22 minutes. This is how sales tools should work: no demos, no annual contracts, just answers.",
     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=150&h=150",
     name: "Hassan Ali",
     role: "Account Executive",

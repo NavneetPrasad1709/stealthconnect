@@ -9,11 +9,11 @@ import { HeadingAccent } from "@/components/ui/HeadingAccent";
 const FAQS = [
   {
     q: "How do you find verified contacts from a LinkedIn URL?",
-    a: "We cross-reference the LinkedIn profile against multiple proprietary data sources, professional registries, and real-time verification APIs. Every result is deliverability-tested before it reaches you — we never serve guessed or pattern-matched data.",
+    a: "We cross-reference the LinkedIn profile against multiple proprietary data sources, professional registries, and real-time verification APIs. Every result is deliverability-tested before it reaches you. We never serve guessed or pattern-matched data.",
   },
   {
     q: "What counts as a 'verified' contact?",
-    a: "For emails, we confirm deliverability via SMTP handshake before charging. For phone numbers, we validate against live carrier records. If our system can't verify a contact to our 97.2% accuracy standard, you are not charged — period.",
+    a: "For emails, we confirm deliverability via SMTP handshake before charging. For phone numbers, we validate against live carrier records. If our system can't verify a contact to our 97.2% accuracy standard, you are not charged, period.",
   },
   {
     q: "How long does a lookup actually take?",
@@ -21,15 +21,15 @@ const FAQS = [
   },
   {
     q: "Do I need a subscription or monthly commitment?",
-    a: "No. StealthConnect AI is strictly pay-per-result. $0.20 per verified email, $1.00 per direct phone number. Credits you purchase never expire. You can buy 1 or 10,000 — there is no minimum, no plan, no contract.",
+    a: "No. StealthConnect AI is strictly pay-per-result. $0.20 per verified email, $1.00 per direct phone number. Credits you purchase never expire. You can buy 1 or 10,000. There is no minimum, no plan, no contract.",
   },
   {
     q: "What's included in the free first lookup?",
-    a: "When you create an account, we credit your wallet with 1 free lookup (email or phone — your choice). No credit card required to sign up. The free lookup is identical in quality to paid results — no watermarks, no partial data.",
+    a: "When you create an account, we credit your wallet with 1 free lookup (email or phone, your choice). No credit card required to sign up. The free lookup is identical in quality to paid results, no watermarks, no partial data.",
   },
   {
     q: "Is this legal and GDPR / CCPA compliant?",
-    a: "Yes. We only surface business contact information that professionals have made publicly available for professional contact purposes — consistent with GDPR's legitimate interest basis and CCPA B2B exemptions. We do not scrape private messages, connections lists, or any non-public LinkedIn data.",
+    a: "Yes. We only surface business contact information that professionals have made publicly available for professional contact purposes, consistent with GDPR's legitimate interest basis and CCPA B2B exemptions. We do not scrape private messages, connections lists, or any non-public LinkedIn data.",
   },
   {
     q: "What if you can't find a contact for a profile I submitted?",

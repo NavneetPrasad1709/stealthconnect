@@ -5,7 +5,7 @@ import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Contact StealthConnect AI — reach our support team at support@stealthconnect.ai, or enquire about enterprise pricing and partnerships.",
+  description: "Contact StealthConnect AI. Reach our support team at support@stealthconnect.ai, or enquire about enterprise pricing and partnerships.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact StealthConnect AI",

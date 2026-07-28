@@ -21,7 +21,7 @@ import { sendRefundNotification } from "@/lib/email";
 export async function POST(req: NextRequest) {
   const webhookId = process.env.PAYPAL_WEBHOOK_ID;
   if (!webhookId) {
-    console.error("PAYPAL_WEBHOOK_ID not set — webhook disabled");
+    console.error("PAYPAL_WEBHOOK_ID not set, webhook disabled");
     return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
   }
 
@@ -186,7 +186,7 @@ export async function POST(req: NextRequest) {
     console.error("PayPal webhook handler error:", e);
     // FP-12: return non-2xx so PayPal RETRIES the delivery. The idempotency guards above
     // (conditional status update) make retries safe — no double refunds/notifications.
-    return NextResponse.json({ error: "handler error — will retry" }, { status: 500 });
+    return NextResponse.json({ error: "handler error, will retry" }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });

@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     /* ── Verify caller is admin ────────────────────────────────── */
     const caller = await getProfile(userId);
     if (!caller || caller.role !== "admin") {
-      return NextResponse.json({ error: "Forbidden — admin only" }, { status: 403 });
+      return NextResponse.json({ error: "Forbidden, admin only" }, { status: 403 });
     }
 
     const body = await req.json() as Payload;

@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
         purchase_units: [
           {
             amount: { currency_code: "USD", value: amount },
-            description: "StealthConnect AI — Contact Lookup",
+            description: "StealthConnect AI | Contact Lookup",
           },
         ],
         application_context: {
@@ -99,8 +99,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           error: isMissingTable
-            ? "Server not fully configured (paypal_intents table missing) — run migration 004 in Supabase."
-            : "Could not start payment session — please retry.",
+            ? "Server not fully configured (paypal_intents table missing), run migration 004 in Supabase."
+            : "Could not start payment session, please retry.",
           detail: errMsg,
         },
         { status: 500 }

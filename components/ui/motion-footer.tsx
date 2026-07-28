@@ -339,7 +339,7 @@ export default function CinematicFooter() {
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  Start Free — 1 Lookup
+                  Start Free, 1 Lookup
                 </MagneticButton>
                 <MagneticButton
                   as={Link}
@@ -380,7 +380,7 @@ export default function CinematicFooter() {
                   className="text-lg leading-relaxed mb-6"
                   style={{ color: "white", fontFamily: "var(--font-montserrat,'Montserrat',sans-serif)" }}
                 >
-                  Verified LinkedIn contacts in 30 minutes. Pay only per result — no subscriptions.
+                  Verified LinkedIn contacts in 30 minutes. Pay only per result, no subscriptions.
                 </p>
               </div>
 

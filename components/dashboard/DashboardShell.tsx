@@ -344,7 +344,7 @@ function SidebarInner({
             ? "1 free credit available"
             : credits > 1
             ? `${credits} credits available`
-            : "No credits — top up"}
+            : "No credits, top up"}
         </p>
       </div>
 

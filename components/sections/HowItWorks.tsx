@@ -386,7 +386,7 @@ export default function HowItWorks() {
     {
       number: "01",
       title: "Paste a LinkedIn URL",
-      subtitle: "Any public or private profile — no extension needed",
+      subtitle: "Any public or private profile, no extension needed",
       delay: T_CARD_1,
       visual: <Step1Visual phase={phase} />,
     },
@@ -400,7 +400,7 @@ export default function HowItWorks() {
     {
       number: "03",
       title: "Contact delivered",
-      subtitle: "Pay only on success — avg. delivery in 28 minutes",
+      subtitle: "Pay only on success, avg. delivery in 28 minutes",
       delay: T_CARD_3,
       visual: <Step3Visual phase={phase} />,
     },

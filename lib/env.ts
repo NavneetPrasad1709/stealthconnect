@@ -52,7 +52,7 @@ export function validateServerEnv() {
   const missing = recommendedServer.filter((v) => !process.env[v]);
   if (missing.length > 0) {
     console.warn(
-      `[env] Missing recommended server env vars — dependent features disabled:\n${missing
+      `[env] Missing recommended server env vars, dependent features disabled:\n${missing
         .map((v) => `  • ${v}`)
         .join("\n")}`
     );

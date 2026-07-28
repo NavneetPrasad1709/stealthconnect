@@ -25,11 +25,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://www.stealthconnect.ai"),
   title: {
-    default: "StealthConnect AI — LinkedIn Contact Finder",
+    default: "StealthConnect AI | LinkedIn Contact Finder",
     template: "%s | StealthConnect AI",
   },
   description:
-    "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes. Pay only per result — no subscription, no contracts.",
+    "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes. Pay only per result, no subscription, no contracts.",
   authors: [{ name: "StealthConnect AI" }],
   creator: "StealthConnect AI",
   publisher: "StealthConnect AI",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "StealthConnect AI — LinkedIn Contact Finder",
+    title: "StealthConnect AI | LinkedIn Contact Finder",
     description:
       "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes. Pay only per result.",
     type: "website",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "StealthConnect AI — LinkedIn Contact Finder",
+    title: "StealthConnect AI | LinkedIn Contact Finder",
     description:
       "Find verified emails and direct phone numbers behind any LinkedIn profile in 30 minutes.",
   },

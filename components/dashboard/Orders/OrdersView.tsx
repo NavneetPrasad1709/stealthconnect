@@ -579,7 +579,7 @@ function Pagination({ page, total, count, perPage, onChange }: {
   return (
     <div className="mt-5 flex items-center justify-between flex-wrap gap-3">
       <span className="text-[12.5px]" style={{ color: "var(--fg-subtle)" }}>
-        {start}–{end} of {count}
+        {start}-{end} of {count}
       </span>
 
       <div className="flex items-center gap-1.5">

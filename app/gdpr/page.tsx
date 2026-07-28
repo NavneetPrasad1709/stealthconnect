@@ -4,10 +4,10 @@ import { ArrowLeft, Zap, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "GDPR Compliance",
-  description: "StealthConnect AI's GDPR approach — legal basis for processing, your data rights (access, erasure, portability), how to file a request, and our contact for privacy matters.",
+  description: "StealthConnect AI's GDPR approach: legal basis for processing, your data rights (access, erasure, portability), how to file a request, and our contact for privacy matters.",
   alternates: { canonical: "/gdpr" },
   openGraph: {
-    title: "GDPR Compliance — StealthConnect AI",
+    title: "GDPR Compliance | StealthConnect AI",
     description: "Legal basis for processing, your data rights, and how to file a GDPR request.",
     url: "/gdpr",
     type: "website",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GDPR Compliance — StealthConnect AI",
+    title: "GDPR Compliance | StealthConnect AI",
     description: "Your data rights and how to file a GDPR request.",
   },
 };

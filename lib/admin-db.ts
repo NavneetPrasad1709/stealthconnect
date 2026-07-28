@@ -55,7 +55,7 @@ export async function deductCredits(userId: string, amount: number): Promise<boo
   if (/deduct_credit/i.test(rpcMsg) && /(does not exist|could not find|pgrst202|function)/i.test(rpcMsg)) {
     await recordPendingAlert({
       user_id: userId,
-      reason:  "deduct_credit RPC missing — apply migration 004 (credit deductions are on the fallback path)",
+      reason:  "deduct_credit RPC missing, apply migration 004 (credit deductions are on the fallback path)",
       details: { error: rpcMsg },
     }).catch((e) => console.error("pending_alerts insert failed:", e));
   }

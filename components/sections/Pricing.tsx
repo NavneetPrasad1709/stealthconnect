@@ -160,7 +160,7 @@ function ProductCard({ card, index, active, onSelect }: {
           border: `1px solid ${active ? "#0038FF" : "var(--c-border-light)"}`,
         }}
       >
-        {active ? "Selected — see estimate ↓" : "Calculate price"}
+        {active ? "Selected, see estimate ↓" : "Calculate price"}
       </button>
     </m.div>
   );

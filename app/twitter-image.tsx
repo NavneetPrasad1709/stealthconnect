@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "StealthConnect AI — Find Verified LinkedIn Contacts in 30 Minutes";
+export const alt = "StealthConnect AI | Find Verified LinkedIn Contacts in 30 Minutes";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -69,7 +69,7 @@ export default function TwitterImage() {
               maxWidth: 980,
             }}
           >
-            Paste any LinkedIn URL — get a verified email and direct phone number. Pay only per result.
+            Paste any LinkedIn URL, get a verified email and direct phone number. Pay only per result.
           </div>
         </div>
 

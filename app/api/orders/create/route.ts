@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
     if (linkedin_urls.length > MAX_QUANTITY) { // F-PAY-04
-      return NextResponse.json({ error: `Too many URLs — max ${MAX_QUANTITY} per order` }, { status: 400 });
+      return NextResponse.json({ error: `Too many URLs, max ${MAX_QUANTITY} per order` }, { status: 400 });
     }
     if (!["email", "phone", "both"].includes(contact_type)) {
       return NextResponse.json({ error: "Invalid contact type" }, { status: 400 });
@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
         intent.expected_cents !== expectedCents
       ) {
         console.error("Order rejected: intent params do not match request", { paypal_order_id, intent, body });
-        return NextResponse.json({ error: "Order details changed since payment — please retry" }, { status: 400 });
+        return NextResponse.json({ error: "Order details changed since payment, please retry" }, { status: 400 });
       }
 
       try {
@@ -129,7 +129,7 @@ export async function POST(req: NextRequest) {
       } catch (e) {
         const isAbort = (e as Error)?.name === "AbortError";
         return NextResponse.json(
-          { error: isAbort ? "Payment verification timed out — retry shortly" : "Could not verify payment" },
+          { error: isAbort ? "Payment verification timed out, retry shortly" : "Could not verify payment" },
           { status: 502 }
         );
       }

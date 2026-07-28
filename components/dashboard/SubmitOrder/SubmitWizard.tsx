@@ -676,7 +676,7 @@ function StepAddons({
 
       {!emailDraft && (
         <p className="text-[12px] mt-5 text-center" style={{ color: "var(--fg-subtle)" }}>
-          No add-ons — skip to continue.
+          No add-ons, skip to continue.
         </p>
       )}
     </div>
@@ -813,7 +813,7 @@ function StepSummary({
       // All retries failed. Payment is captured but order is not saved.
       // Server-side orphan alert has already fired; show user a support ref.
       setPayErr(
-        `${lastError}. Your payment was received — please contact support with PayPal reference: ${data.orderID}`
+        `${lastError}. Your payment was received, please contact support with PayPal reference: ${data.orderID}`
       );
     } catch (e) {
       setPayErr((e as Error).message);
@@ -957,7 +957,7 @@ function StepSummary({
           onError={(e) => {
             const msg = (e as { message?: string } | undefined)?.message;
             // Don't overwrite a more specific error already set by createPayPalOrder
-            setPayErr((prev) => prev ?? (msg ? `PayPal: ${msg}` : "PayPal error — please try again."));
+            setPayErr((prev) => prev ?? (msg ? `PayPal: ${msg}` : "PayPal error, please try again."));
           }}
         />
       )}

@@ -206,7 +206,7 @@ export default function Hero() {
               className="w-full flex flex-col items-center space-y-0 md:space-y-1 mb-8 m-0"
               aria-label="Find verified LinkedIn contacts in 30 minutes"
             >
-              <span className="sr-only">Find verified LinkedIn contacts in 30 minutes — </span>
+              <span className="sr-only">Find verified LinkedIn contacts in 30 minutes. </span>
 
               {/* LOOKING FOR */}
               <m.span

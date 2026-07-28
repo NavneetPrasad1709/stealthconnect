@@ -31,7 +31,7 @@ const TESTIMONIALS: Testimonial[] = [
     company: "B2B Growth Agency",
   },
   {
-    text: "97% accuracy isn't marketing fluff — I've tested it. Out of 200 emails purchased, 194 delivered. That's better than any tool we've tried.",
+    text: "97% accuracy isn't marketing fluff. I've tested it. Out of 200 emails purchased, 194 delivered. That's better than any tool we've tried.",
     initials: "MW",
     color: "#0e7490",
     name: "Marcus W.",
@@ -71,7 +71,7 @@ const TESTIMONIALS: Testimonial[] = [
     company: "Customer Success Platform",
   },
   {
-    text: "We use StealthConnect for enterprise contact research. Direct mobiles for Fortune 500 decision-makers — delivered in under 30 minutes. Unreal.",
+    text: "We use StealthConnect for enterprise contact research. Direct mobiles for Fortune 500 decision-makers, delivered in under 30 minutes. Unreal.",
     initials: "TH",
     color: "#1d4ed8",
     name: "Tom H.",
@@ -211,7 +211,7 @@ export default function Testimonials() {
             className="leading-relaxed"
             style={{ fontSize: "clamp(16px,2.5vw,20px)", color: "var(--c-heading)" }}
           >
-            Real results from real people — recruiters, founders, researchers, and more.
+            Real results from real people: recruiters, founders, researchers, and more.
           </p>
         </div>
 
