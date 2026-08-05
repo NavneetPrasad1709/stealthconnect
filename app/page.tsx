@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import Navbar from "@/components/Navbar";
 import HowItWorks from "@/components/sections/HowItWorks";
 import { LazyOnView } from "@/components/LazyOnView";
+import { HashScrollFix } from "@/components/HashScrollFix";
 
 const ph = (h: number) => () => <div style={{ minHeight: h, background: "var(--c-section-bg)" }} />;
 const phAlt = (h: number) => () => <div style={{ minHeight: h, background: "var(--c-section-bg-alt)" }} />;
@@ -120,6 +121,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="min-h-screen" style={{ background: "var(--bg)" }}>
+        <HashScrollFix />
         <Navbar />
         <Hero />
         <HowItWorks />
