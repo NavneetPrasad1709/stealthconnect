@@ -7,6 +7,9 @@ type Props = {
   rootMargin?: string;
   minHeight?: number;
   once?: boolean;
+  /* Anchor id lives on the wrapper (always in the DOM) so /#hash links
+     work even before the lazy section has mounted. */
+  id?: string;
 };
 
 export function LazyOnView({
@@ -14,6 +17,7 @@ export function LazyOnView({
   rootMargin = "300px 0px",
   minHeight = 400,
   once = true,
+  id,
 }: Props) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -40,7 +44,11 @@ export function LazyOnView({
   }, [shown, once, rootMargin]);
 
   return (
-    <div ref={ref} style={shown ? undefined : { minHeight }}>
+    <div
+      ref={ref}
+      id={id}
+      style={{ scrollMarginTop: id ? 80 : undefined, ...(shown ? {} : { minHeight }) }}
+    >
       {shown ? children : null}
     </div>
   );

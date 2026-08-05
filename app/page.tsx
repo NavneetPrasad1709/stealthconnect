@@ -125,9 +125,9 @@ export default function HomePage() {
         <HowItWorks />
         <Features />
         <LazyOnView minHeight={600}><StatsSection /></LazyOnView>
-        <LazyOnView minHeight={600}><Pricing /></LazyOnView>
-        <LazyOnView minHeight={500}><Testimonials /></LazyOnView>
-        <LazyOnView minHeight={500}><FAQ /></LazyOnView>
+        <LazyOnView id="pricing" minHeight={600}><Pricing /></LazyOnView>
+        <LazyOnView id="testimonials" minHeight={500}><Testimonials /></LazyOnView>
+        <LazyOnView id="faq" minHeight={500}><FAQ /></LazyOnView>
         <LazyOnView minHeight={400}><FinalCTA /></LazyOnView>
         <LazyOnView minHeight={300}><CinematicFooter /></LazyOnView>
       </main>

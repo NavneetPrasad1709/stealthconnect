@@ -176,7 +176,6 @@ function TestimonialsColumn({
 export default function Testimonials() {
   return (
     <section
-      id="testimonials"
       aria-labelledby="testimonials-heading"
       className="relative overflow-hidden py-14 md:py-24"
       style={{ background: "var(--c-section-bg)" }}

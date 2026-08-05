@@ -188,7 +188,7 @@ export default function Pricing() {
   };
 
   return (
-    <section id="pricing" className="py-14 md:py-24" style={{ background: "var(--c-section-bg-alt)", scrollMarginTop: "80px" }}>
+    <section className="py-14 md:py-24" style={{ background: "var(--c-section-bg-alt)" }}>
       <div className="max-w-[1120px] mx-auto px-5 md:px-8">
 
         {/* ── Header ── */}

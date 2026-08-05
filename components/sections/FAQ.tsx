@@ -110,7 +110,6 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 export default function FAQ() {
   return (
     <section
-      id="faq"
       className="py-14 md:py-24"
       style={{ background: "var(--c-section-bg)" }}
     >
